@@ -5,7 +5,8 @@
   "description": "",
   "main": "./src/index.js",
   "scripts": {
-    "start": "nodemon --inspect ./src/index.js",
+    
+    "start": "nodemon --inspect ./src/index.js",  
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "node-sass --watch src/resource/scss/app.scss --o src/public/css/app.scss"
   },
@@ -24,7 +25,8 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.5.4",
     "mongoose-delete": "^0.5.4",
-    "mongoose-slug-generator": "^1.0.4"
+    "mongoose-slug-generator": "^1.0.4",
+    "prettier": "^2.8.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
