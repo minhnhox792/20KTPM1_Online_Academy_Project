@@ -14,17 +14,16 @@
 
 <body>
     <div class="app">
-         <div class="container-fluid">
+        <div class="container-fluid" style="z-index: 10; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
             <div class="row">
-
-
                 {{>header}}
             </div>
         </div>
-        <div class="container-lg">
+        <div class="container-lg" style=""  >
             {{{body}}}
+            
         </div>
-        <footer>
+        <footer style="margin-top: 50px;">
             {{>footer}}
 
         </footer>
@@ -40,3 +39,5 @@
 
 </body>
 </html>
+
+
