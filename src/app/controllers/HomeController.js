@@ -1,7 +1,10 @@
-class NewsController {
-  index(req, res) {
-    res.render('home');
-  }
+const HomeController = {
+  index: (req, res) => {
+      res.render("home")
+  },
+ 
+
 }
 
-export default new NewsController();
+
+export default HomeController;
