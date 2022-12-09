@@ -1,22 +1,29 @@
 {{>main-carousel}}
 <div class="container" style="margin-top:100px">
-    <p id="title-tabs">A broad selection of courses</p>
+  
+    <p id="title-tabs" >A broad selection of courses</p>
     <p id="title-tabs-detail">Choose from 213,000 online video courses with new additions published every month</p>
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-        <li><a data-toggle="tab"  href="#menu1">Menu 1</a></li>
-        <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-        <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+  
+    <ul class="nav nav-tabs justify-content-center">
+        <li class="active" href="#home"><a data-toggle="tab" href="#home" >Home</a></li>
+        <li><a data-toggle="tab"  href="#menu1" style="padding-left: 50px;">Web</a></li>
+        <li><a data-toggle="tab" href="#menu2" style="padding-left: 50px;">Mobile</a></li>
     </ul>
    <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-        <p id="title-tabs-detail-nametabs" style="    font-size: 20px ;font-weight: 600;">Build websites and applications with Web Development</p>
-        <p id="title-tabs-detail-nametabs-detail" style="   font-size: 13px ;font-weight: 400;" >The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on.</p>
+    <div id="home" class="tab-pane fade">
+        <div style="margin-bottom: -20px;" class="pt-4">
+            <p id="title-tabs-detail-nametabs" style="font-size: 20px ;font-weight: 600; margin-bottom: 0">Build websites and applications with Web Development</p>
+        </div>
         {{>multi-carousel}}
     </div>
-    <div id="menu1" class="tab-pane fade">
-       {{>multi-carousel}}
+
+       <div id="menu1" class="tab-pane fade">
+        <div style="margin-bottom: -20px;" class="pt-4">
+            <p id="title-tabs-detail-nametabs" style="font-size: 20px ;font-weight: 600; margin-bottom: 0">Build websites and applications with Web Development</p>
+        </div>
+        {{>multi-carousel}}
     </div>
+
     <div id="menu2" class="tab-pane fade">
        {{>multi-carousel}}
     </div>
@@ -25,13 +32,32 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+    <p id="title-tabs" style="padding-left: 70px;" >Top 4 outstanding courses of the week</p>
+    {{>topCoursesInWeek}}
+</div>
+
 </div>
 
 <style>
     .nav nav-tabs{
         color: red;
     }
+    li a.active{
+        color: black;
+        font-weight: 800;
+        font-size: 23px;
+    }
+    a{
+        color:black;
+    }
+    a:hover{
+        text-decoration: none;
+        color:black;
+    }
 #title-tabs{
+    
     font-size: 25px;
     font-weight: 800;
 },
@@ -49,3 +75,5 @@
 }
 
 </style>
+
+
