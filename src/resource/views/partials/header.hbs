@@ -9,19 +9,34 @@
       
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle small-form" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle hidden-list" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Categories
         </a>
         <div class="dropdown-menu IT-Menu form-control" aria-labelledby="navbarDropdown" >
-        <a class="dropdown-item" href="#">IT <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
+        <a class="dropdown-item hidden-list" href="#">IT <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
 
         </a>
-           <ul class="dropdown-menu dropdown-submenu">
-            <li>
-              <a class="dropdown-item" href="#">Lập trình ứng dụng Web</a>
+           <ul class="dropdown-menu dropdown-submenu menu-responsive">
+            <li class="dropdown-menu-item">
+              <a class="dropdown-item hover-list" href="#">Lập trình ứng dụng Web
+              </a>
+                <div class="list-group dropdown-submenu show-list">
+                    <a href="#" class="list-group-item list-group-item-action">ReactJS</a>
+                    <a href="#" class="list-group-item list-group-item-action">NodeJS</a>
+                    <a href="#" class="list-group-item list-group-item-action">Bootstrap 5</a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">VueJS</a>
+                </div>
             </li>
-            <li>
-              <a class="dropdown-item" href="#">Lập trình ứng dụng di động</a>
+            <li  class="dropdown-menu-item">
+              <a class="dropdown-item hover-list-mobile" href="#">Lập trình ứng dụng di động
+              </a>
+                 <div class="list-group dropdown-submenu show-list-mobile">
+                  <a href="#" class="list-group-item list-group-item-action">React Native</a>
+                  <a href="#" class="list-group-item list-group-item-action">NodeJS</a>
+                  <a href="#" class="list-group-item list-group-item-action">Taiwind</a>
+                  <a href="#" class="list-group-item list-group-item-action disabled">Android Studio</a>
+              </div>
+              
             </li>
           
           </ul>
@@ -64,28 +79,63 @@
       position: relative;
     }
     .dropdown-menu .dropdown-submenu-second{
-      
       display:none;
     }
     .dropdown-menu .dropdown-submenu {
       display: none;
       position: absolute;
       left: 100%;
-      top: -4px;
+      top: -3px;
     }
     .dropdown-menu .dropdown-submenu-left {
       right: 100%;
       left: auto;
     }
-    .IT-Menu:hover > .dropdown-submenu {
+    .IT-Menu:hover > .dropdown-submenu{
       display: block;
     }
-    @media screen and (max-width:  1000px){
+    
+    .show-list{
+      top: -15px !important;
+      display: none; 
+      position: absolute;
+    }
+    .show-list-mobile{
+      top: -40px !important;
+      display: none; 
+      position: absolute;
+    }
+    .hover-list:hover{ 
+      background-color: red; 
+    }
+    .hover-list-mobile:hover{ 
+      background-color: blue; 
+    }
+    .hover-list {
+      position: relative;
+
+    }
+
+    .dropdown-menu-item:hover > .show-list{
+      display: block !important;
+      padding-top: 6px;
+      width: 80%;
+    } 
+
+    .dropdown-menu-item:hover > .show-list-mobile{
+      display: block !important;
+      top: 0;
+      right: 0; 
+      width: 80%;
+  
+    }  
+
+    @media screen and (max-width:  1005px){
        .form-control{
           width: 300px !important;
        }
        .small-form{
-           width: 300px !important;
+           width: 100px !important;
        }
        .IT-Menu:hover {
           display: block;
@@ -94,9 +144,7 @@
           background-color: white !important;
           border-color: white;
        }
-       .dropdown-menu .dropdown-submenu-second{
-        
-        }
+       
         .dropdown-menu .dropdown-submenu {
           display: none;
           position: relative;
@@ -104,6 +152,12 @@
         }
         .IT-Menu:hover {
           height: 50px;
+        }
+        .menu-responsive{
+          height: 82px;
+        }
+        .hidden-list{
+          display:none;
         }
     }
 </style> 

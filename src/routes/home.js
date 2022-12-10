@@ -3,6 +3,6 @@ import homeController from '../app/controllers/HomeController.js';
 
 const router = express.Router();
 
-router.use('/', homeController.index);
+router.get('/', homeController.index);
 
 export default router;
