@@ -15,6 +15,9 @@ const port = 5000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/admin/teacher', express.static(path.join(__dirname, 'public')));
+app.use('/admin/student', express.static(path.join(__dirname, 'public')));
+app.use('/admin/course', express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 
