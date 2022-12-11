@@ -10,9 +10,11 @@ import methodOverride from "method-override";
 import * as dotenv from "dotenv";
 import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 5000;
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 
@@ -20,12 +22,11 @@ db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use('/public', express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(methodOverride("_method"));
-app.use(morgan("combined"));
+// app.use(morgan("combined"));
 
 app.engine(
   "hbs",

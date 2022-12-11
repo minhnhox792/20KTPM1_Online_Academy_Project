@@ -1,45 +1,46 @@
 {{>main-carousel}}
 <div class="" style="margin-top:100px">
-    <p id="title-tabs">A broad selection of courses</p>
-    <p id="title-tabs-detail">Choose from 213,000 online video courses with new additions published every month</p>
+  <p id="title-tabs">A broad selection of courses</p>
+  <p id="title-tabs-detail">Choose from 213,000 online video courses with new additions published every month</p>
 
-    <ul class="nav nav-tabs justify-content-center">
-        <li><a data-toggle="tab" href="#home" class="active">Home</a></li>
-        <li><a data-toggle="tab" href="#menu1" style="padding-left: 50px;">Web</a></li>
-        <li><a data-toggle="tab" href="#menu2" style="padding-left: 50px;">Mobile</a></li>
-    </ul>
-    <div class=" border border-dark" style="height: 620px;">
-        <div class="tab-content " style="margin: 20px;font-weight:600;font-size: 18px;">
-            <div id="home" class="tab-pane active  ">
-                <div style="margin-bottom: -20px;font-weight:700;font-size: 18px;" class="pt-4">
-                   <div style="height: 100px;">
-                    <p id="title-tabs-detail-nametabs"
-                        style="font-size: 18px font-weight:700;font-size: 18px;;font-weight: 600; margin-left: 70px">
-                        Build websites and applications with Web Development</p>
-                    <p id="title-tabs-detail-nametabs-content"
-                        style="font-size: 14px ;font-weight: 400; margin-left: 70px">Buildwebsites and applications with
-                        Web Development</p>
-                    </div>
-                </div>
-                {{>multi-carousel}}
-            </div>
-
-            <div id="menu1" class="tab-pane fade">
-                <div style="margin-bottom: -20px;font-weight:700;font-size: 18px;" class="pt-4">
-                    <p id="title-tabs-detail-nametabs"
-                        style="font-size: 18px font-weight:700;font-size: 18px;;font-weight: 600; margin-bottom: 0">
-                        Build
-                        websites and applications with Web Development</p>
-                </div>
-                {{>multi-carousel}}
-            </div>
-
-            <div id="menu2" class="tab-pane fade">
-                {{>multi-carousel}}
-            </div>
-
+  <ul class="nav nav-tabs justify-content-center">
+    <li><a data-toggle="tab" href="#home" class="active">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1" style="padding-left: 50px;">Web</a></li>
+    <li><a data-toggle="tab" href="#menu2" style="padding-left: 50px;">Mobile</a></li>
+  </ul>
+  <div class=" border border-dark" style="height: 620px;">
+    <div class="tab-content " style="margin: 20px;font-weight:600;font-size: 18px;">
+      <div id="home" class="tab-pane active  ">
+        <div style="margin-bottom: -20px;font-weight:700;font-size: 18px;" class="pt-4">
+          <div style="height: 100px;">
+            <p id="title-tabs-detail-nametabs"
+               style="font-size: 18px font-weight:700;font-size: 18px;;font-weight: 600; margin-left: 70px">
+              Build websites and applications with Web Development</p>
+            <p id="title-tabs-detail-nametabs-content" style="font-size: 14px ;font-weight: 400; margin-left: 70px">
+              Buildwebsites and applications
+              with
+              Web Development</p>
+          </div>
         </div>
+        {{>multi-carousel}}
+      </div>
+
+      <div id="menu1" class="tab-pane fade">
+        <div style="margin-bottom: -20px;font-weight:700;font-size: 18px;" class="pt-4">
+          <p id="title-tabs-detail-nametabs"
+             style="font-size: 18px font-weight:700;font-size: 18px;;font-weight: 600; margin-bottom: 0">
+            Build
+            websites and applications with Web Development</p>
+        </div>
+        {{>multi-carousel}}
+      </div>
+
+      <div id="menu2" class="tab-pane fade">
+        {{>multi-carousel}}
+      </div>
+
     </div>
+  </div>
 </div>
 {{!-- <div class="container-fluid d-flex justify-content-center "
     style="margin-top:100px;background-color: gray;height: 100px;">
@@ -74,73 +75,73 @@
 
 
 <div class="container">
-    {{>topCoursesInWeek}}
+  {{>topCoursesInWeek}}
 </div>
 {{>listCatery}}
 <div class="container">
-    {{>multi-carousel}}
+  {{>multi-carousel}}
 </div>
 
 <div class="container">
-    {{>multi-carousel}}
+  {{>multi-carousel}}
 </div>
 
 <div class="container">
-    {{>multi-carousel}}
+  {{>multi-carousel}}
 </div>
 
 <style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 18px;
-        font-weight: 700;
-        font-size: 18px;
-    }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    font-size: 18px;
+  }
 
-    .nav nav-tabs {
-        color: red;
-    }
+  .nav nav-tabs {
+    color: red;
+  }
 
-    li a.active {
-        color: orange;
-       
-        
-    }
+  li a.active {
+    color: orange;
 
-    a {
-        color: black;
-    }
 
-    a:hover {
-        text-decoration: none;
-        color: black;
-    }
+  }
 
-    #title-tabs {
+  a {
+    color: black;
+  }
 
-        font-size: 25px;
-        font-weight: 800;
-    }
+  a:hover {
+    text-decoration: none;
+    color: black;
+  }
 
-    ,
-    #title-tabs-detail {
-        font-size: 16px;
-        font-weight: 400;
-    }
+  #title-tabs {
 
-    ,
-    #title-tabs-detail-nametabs {
-        font-size: 18px;
-        font-weight: 700;
-        font-size: 18px;
-        font-weight: 600;
-    }
+    font-size: 25px;
+    font-weight: 800;
+  }
 
-    ,
-    #title-tabs-detail-nametabs-detail {
-        font-size: 16px;
-        font-weight: 400;
-    }
+  ,
+  #title-tabs-detail {
+    font-size: 16px;
+    font-weight: 400;
+  }
 
-    ,
+  ,
+  #title-tabs-detail-nametabs {
+    font-size: 18px;
+    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  ,
+  #title-tabs-detail-nametabs-detail {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  ,
 </style>
