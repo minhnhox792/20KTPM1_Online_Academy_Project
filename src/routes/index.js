@@ -1,10 +1,10 @@
 import homeRouter from './home.js';
 import courseRouter from './course.js';
 import myCoursesRouter from './my-courses.js';
-import dashboardAdminRouter from './dashboard.admin.js';
-import teacherAdminRouter from './teacher.admin.js';
-import studentAdminRouter from './student.admin.js';
-import courseAdminRouter from './course.admin.js';
+import dashboardAdminRouter from './admin/dashboard.admin.js';
+import teacherAdminRouter from './admin/teacher.admin.js';
+import studentAdminRouter from './admin/student.admin.js';
+import courseAdminRouter from './admin/course.admin.js';
 
 const route = (app) => {
   app.use('/', homeRouter);
