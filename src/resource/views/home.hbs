@@ -1,4 +1,4 @@
-{{>main-carousel}}
+{{>home/main-carousel}}
 <div class="" style="margin-top:100px">
   <div>
     <p id="title-tabs">A broad selection of courses</p>
@@ -24,7 +24,7 @@
                 Web Development</p>
             </div>
           </div>
-          {{>multi-carousel}}
+          {{>home/multi-carousel tit = "COURSES"}}
         </div>
 
         <div id="menu1" class="tab-pane fade">
@@ -34,11 +34,11 @@
               Build
               websites and applications with Web Development</p>
           </div>
-          {{>multi-carousel}}
+          {{>home/multi-carousel}}
         </div>
 
         <div id="menu2" class="tab-pane fade">
-          {{>multi-carousel}}
+          {{>home/multi-carousel}}
         </div>
 
       </div>
@@ -77,20 +77,18 @@
 
 
 <div class="container">
-  {{>topCoursesInWeek}}
-</div>
-{{>listCatery}}
-<div class="container">
-  {{>multi-carousel}}
+  {{>home/topCoursesInWeek tit= "Top 4 the most popular courses"}}
 </div>
 
 <div class="container">
-  {{>multi-carousel}}
+  {{>home/multi-carousel tit= "Top 10 the highest viewed courses"}}
 </div>
 
 <div class="container">
-  {{>multi-carousel}}
+  {{>home/multi-carousel tit= "Top 10 lastest courses"}}
 </div>
+
+
 
 <style>
   body {

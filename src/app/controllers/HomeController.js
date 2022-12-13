@@ -1,5 +1,6 @@
 import Course from '../models/Courses.js'
 const HomeController = {
+  
   index: (req, res) => {
       Course.find({}, (err, courses) => {
         if(!err){
