@@ -9,9 +9,11 @@ import bodyParser from "body-parser";
 import methodOverride from "method-override";
 import * as dotenv from "dotenv";
 import { fileURLToPath } from "url";
+import connect_database from './config/db/index.js';
+
 
 const app = express();
-const port = 5000;
+const port = 3000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -21,7 +23,7 @@ app.use('/admin/course', express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 
-db.connect();
+connect_database();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
