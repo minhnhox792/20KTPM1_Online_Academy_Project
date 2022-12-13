@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const Course = new Schema({
-  name: { type: String , maxLength: 50},
-  category: {type : String, maxLength: 50},
-  teacher: {type: String, maxLength: 50},
+  name: { type: String , maxLength: 50, required: true},
+  category: {type : String, maxLength: 50,required: true},
+  teacher: {type: String, maxLength: 50,required: true},
   numberStudentRate: {type : Number},
-  description: { type: String,  maxLength: 100},
-  price: {type: Number},
+  description: { type: String,  maxLength: 100, required: true},
+  price: {type: Number,required: true},
   discount: {type: Number},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
