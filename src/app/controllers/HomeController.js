@@ -1,7 +1,14 @@
 
 const HomeController = {
+  
   index: (req, res) => {
-      res.render("home")
+      res.render("home", {
+        tute:"122321",
+        course: {
+          name: "abc",
+          price: 100,
+        }
+      })
   },
 }
 
