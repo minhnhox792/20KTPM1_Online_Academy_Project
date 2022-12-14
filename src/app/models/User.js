@@ -7,12 +7,12 @@ const User = new Schema({
   username:{
     type: String, required: true, minLength: 6, maxLength:50, unique: true
   },
-  email: {type: String, required: true, minLength: 6, maxLength:50, unique: true},
-  password:{type: String, required: true,},
-  admin:{
-    type: Boolean,default: false
-  }
- 
+    email: {type: String, required: true, minLength: 6, maxLength:50, unique: true},
+    password:{type: String, required: true,},
+    role:{
+      type: String, default: "Student"
+    }
+  
 }, {timestamps: true}); 
 
 

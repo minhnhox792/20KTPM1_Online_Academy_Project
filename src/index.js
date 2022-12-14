@@ -23,7 +23,7 @@ app.use('/admin/course', express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 
-connect_database();
+// connect_database();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
