@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import mongoose_delete from 'mongoose-delete';
+import mongoose from "mongoose";
+import mongoose_delete from "mongoose-delete";
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
@@ -51,4 +51,4 @@ const Course = new Schema({
 //   overrideMethods: 'all',
 // });
 
-export default mongoose.model('Course', Course);
+export default mongoose.model("Course", Course);

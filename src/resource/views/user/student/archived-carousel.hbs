@@ -206,12 +206,29 @@
 	.carousel-control-next:hover {
 		background-color: #ffc000;
 	}
-	 @media screen and (max-width:  1000px){
-		.col-sm-6{
+
+	@media screen and (max-width: 1000px) {
+		.col-sm-6 {
 			padding-top: 50px !important;
 		}
-	 }
+	}
+
+	.orange-btn {
+		color: #000;
+		background-color: orange;
+		border-color: orange;
+		border-right-color: white;
+	}
+
+	.orange-btn:hover {
+		font-weight: bolder;
+		color: black !important;
+		background-color: orange;
+		border-color: orange;
+		border-right-color: white;
+	}
 </style>
+
 <script>
 	$(document).ready(function () {
 		$(".wish-icon i").click(function () {
@@ -222,176 +239,150 @@
 </head>
 
 <body>
+	<ul class="nav nav-tabs justify-content-center">
+		<li><a href="/my-courses/learning" class="btn orange-btn btn-primary">Tất cả khóa học</a></li>
+		<li><a href="/my-courses/lists" class="btn orange-btn btn-primary">Danh
+				sách của tôi</a></li>
+		<li><a href="/my-courses/watchlist" class="btn orange-btn btn-primary">Danh
+				sách yêu thích</a></li>
+		<li><a href="/my-courses/archived" class="btn orange-btn btn-primary active">Đã
+				lưu trữ</a></li>
+	</ul>
+
 	<div class="container-xl">
 		<div class="row">
-			<div class="col-md-12">	
-				
+			<div class="col-md-12">
+
 				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-					<p id="title-tabs" style="top: 0; left:0;">{{tit}}</p>
+					<p id="title-tabs" style="top: 0; left:0; font-size: 40px;">Đã
+						lưu trữ</p>
+
 					<!-- Carousel indicators -->
 					<ol class="carousel-indicators">
-						{{!-- Thay #myCarousel bằng một ID riêng biệt  --}}
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						<li data-target="#myCarousel" data-slide-to="2"></li>
+						{{!-- Thay #myCarousel bằng một ID riêng biệt --}}
+						<li data-target="#slide1" data-slide-to="0" class="active"></li>
+						<li data-target="#slide2" data-slide-to="1"></li>
 					</ol>
+
 					<!-- Wrapper for carousel items -->
 					<div class="carousel-inner">
 						<div class="item carousel-item active">
 							<div class="row">
-								{{#each data}}
-								<div class="col-sm-6 col-lg-3 h-100" >
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_f0b606abb6d19089febc9faeeba5bc05/nodejs-development-services.png"
-												class="img-fluid" alt="">
-										</div>
-										<div class="thumb-content">
-											<h4>{{this.name}}</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>${{this.price}}</strike> <b>${{this.discount}}</b></p>
-											<a href="#" class="btn btn-primary">Add to Cart</a>
-										</div>
-									</div>
-								</div>
-								{{/each}}
-	
-								
-				
-							</div>
-						</div>
-						<div class="item carousel-item">
-							<div class="row">
 								<div class="col-sm-6 col-lg-3 h-100">
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
 										<div class="img-box">
-											<img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_f0b606abb6d19089febc9faeeba5bc05/nodejs-development-services.png"
-												class="img-fluid" alt="Play Station">
+											<img src="https://bizflyportal.mediacdn.vn/bizflyportal/640/2427/2021/06/23/20/37/wor16244338629619.jpeg"
+												class="img-fluid" alt="Web development">
 										</div>
+
 										<div class="thumb-content">
-											<h4>Sony Play Station</h4>
-											<p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<a href="#" class="btn btn-primary">Add to Cart</a>
+											<h4>Web development</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
 										</div>
 									</div>
 								</div>
+
 								<div class="col-sm-6 col-lg-3 h-100">
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
 										<div class="img-box">
-											<img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_f0b606abb6d19089febc9faeeba5bc05/nodejs-development-services.png"
-												class="img-fluid" alt="Macbook">
+											<img src="https://fdp.edu.vn/wp-content/uploads/2021/02/lap-trinh-vien-java.jpg"
+												class="img-fluid" alt="Java development">
 										</div>
+
 										<div class="thumb-content">
-											<h4>Macbook Pro</h4>
-											<p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-												</ul>
-											</div>
-											<a href="#" class="btn btn-primary">Add to Cart</a>
+											<h4>Java development</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
 										</div>
 									</div>
 								</div>
+
 								<div class="col-sm-6 col-lg-3 h-100">
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
 										<div class="img-box">
-											<img src="/examples/images/products/speaker.jpg" class="img-fluid"
-												alt="Speaker">
+											<img src="https://www.techrepublic.com/wp-content/uploads/2018/12/5.jpg"
+												class="img-fluid" alt="Python language">
 										</div>
+
 										<div class="thumb-content">
-											<h4>Bose Speaker</h4>
-											<p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<a href="#" class="btn btn-primary">Add to Cart</a>
+											<h4>Python</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
 										</div>
 									</div>
 								</div>
+
 								<div class="col-sm-6 col-lg-3 h-100">
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
 										<div class="img-box">
-											<img src="/examples/images/products/galaxy.jpg" class="img-fluid"
-												alt="Galaxy">
+											<img src="https://play-lh.googleusercontent.com/85WnuKkqDY4gf6tndeL4_Ng5vgRk7PTfmpI4vHMIosyq6XQ7ZGDXNtYG2s0b09kJMw"
+												class="img-fluid" alt="HTML 5 logo">
 										</div>
+
 										<div class="thumb-content">
-											<h4>Samsung Galaxy S8</h4>
-											<p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<a href="#" class="btn btn-primary">Add to Cart</a>
+											<h4>HTML 5</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+
 						<div class="item carousel-item">
 							<div class="row">
 								<div class="col-sm-6 col-lg-3 h-100">
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
 										<div class="img-box">
-											<img src="/examples/images/products/iphone.jpg" class="img-fluid"
-												alt="iPhone">
+											<img src="https://yt3.ggpht.com/h0n8phylgeZKuMlGmcPhkOM8rkV1IHTr5oumqZL581iQCSeMeFrnmYB69a69RQAQoVqgxM5ENX8=s900-c-k-c0x00ffffff-no-rj"
+												class="img-fluid" alt="Data stuctures and Algorithms" />
 										</div>
+
 										<div class="thumb-content">
-											<h4>Apple iPhone</h4>
-											<p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<a href="#" class="btn btn-primary">Add to Cart</a>
+											<h4>Data stuctures and Algorith</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
 										</div>
 									</div>
 								</div>
 
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
 
+										<div class="img-box">
+											<img src="https://img.freepik.com/free-vector/chalkboard-with-math-elements_1411-88.jpg"
+												class="img-fluid" alt="Math">
+										</div>
+
+										<div class="thumb-content">
+											<h4>Math</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
+										<div class="img-box">
+											<img src="https://images.theconversation.com/files/191827/original/file-20171025-25516-g7rtyl.jpg?ixlib=rb-1.1.0&rect=0%2C70%2C7875%2C5667&q=45&auto=format&w=926&fit=clip"
+												class="img-fluid" alt="Physics">
+										</div>
+
+										<div class="thumb-content">
+											<h4>Physics</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

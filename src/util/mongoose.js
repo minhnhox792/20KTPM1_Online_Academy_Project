@@ -1,6 +1,8 @@
-export const multipleMongooseToOject = (DBarray) => {
-  return DBarray.map((e) => e.toObject());
-};
-export const mongooseToOject = (DBarray) => {
-  return DBarray ? DBarray.toObject() : DBarray;
+export default {
+  multipleMongooseToOject: (DBarray) => {
+    return DBarray.map((e) => e.toObject());
+  },
+  mongooseToOject: (DBarray) => {
+    return DBarray ? DBarray.toObject() : DBarray;
+  },
 };

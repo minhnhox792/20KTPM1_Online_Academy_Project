@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 import connect_database from './config/db/index.js';
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use('/', express.static(path.join(__dirname, 'public')));

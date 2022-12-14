@@ -1,14 +1,11 @@
 import Course from '../../models/Courses.js';
-import {
-  mongooseToOject,
-  multipleMongooseToOject,
-} from '../../../util/mongoose.js';
+import objectFormat from '../../../util/mongoose.js';
 
 const CourseController = {
   all: (req, res, next) => {
     Course.find({})
       .then((courses) => {
-        courses = multipleMongooseToOject(courses);
+        courses = objectFormat.multipleMongooseToOject(courses);
         res.render('admin/courses/all', { layout: 'admin', courses });
       })
       .catch(next);
@@ -22,7 +19,7 @@ const CourseController = {
   about: (req, res, next) => {
     Course.findById(req.params.id)
       .then((course) => {
-        course = mongooseToOject(course);
+        course = objectFormat.mongooseToOject(course);
         res.render('admin/courses/about', { layout: 'admin', course });
       })
       .catch(next);
