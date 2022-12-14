@@ -1,6 +1,17 @@
+import Course from '../../models/Courses.js';
+import {
+  mongooseToOject,
+  multipleMongooseToOject,
+} from '../../../util/mongoose.js';
+
 const CourseController = {
-  all: (req, res) => {
-    res.render('admin/courses/all', { layout: 'admin' });
+  all: (req, res, next) => {
+    Course.find({})
+      .then((courses) => {
+        courses = multipleMongooseToOject(courses);
+        res.render('admin/courses/all', { layout: 'admin', courses });
+      })
+      .catch(next);
   },
   add: (req, res) => {
     res.render('admin/courses/add', { layout: 'admin' });
@@ -8,10 +19,14 @@ const CourseController = {
   edit: (req, res) => {
     res.render('admin/courses/edit', { layout: 'admin' });
   },
-  about: (req, res) => {
-    res.render('admin/courses/about', { layout: 'admin' });
+  about: (req, res, next) => {
+    Course.findById(req.params.id)
+      .then((course) => {
+        course = mongooseToOject(course);
+        res.render('admin/courses/about', { layout: 'admin', course });
+      })
+      .catch(next);
   },
 };
 
 export default CourseController;
-

@@ -1,3 +1,5 @@
+import User from '../../models/User.js';
+
 const StudentController = {
   all: (req, res) => {
     res.render('admin/students/all', { layout: 'admin' });
@@ -10,8 +12,7 @@ const StudentController = {
   },
   profile: (req, res) => {
     res.render('admin/students/profile', { layout: 'admin' });
-  }
+  },
 };
 
 export default StudentController;
-

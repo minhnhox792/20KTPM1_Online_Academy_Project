@@ -1,3 +1,5 @@
+import User from '../../models/User.js';
+
 const TeacherController = {
   all: (req, res) => {
     res.render('admin/teachers/all', { layout: 'admin' });
@@ -14,4 +16,3 @@ const TeacherController = {
 };
 
 export default TeacherController;
-

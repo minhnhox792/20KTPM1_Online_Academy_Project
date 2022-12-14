@@ -1,16 +1,15 @@
-import express from "express";
-import morgan from "morgan";
-import expressHbs, { engine } from "express-handlebars";
-import path, { dirname } from "path";
-import cookieParser from "cookie-parser";
-import route from "./routes/index.js";
-import db from "./config/db/index.js";
-import bodyParser from "body-parser";
-import methodOverride from "method-override";
-import * as dotenv from "dotenv";
-import { fileURLToPath } from "url";
+import express from 'express';
+import morgan from 'morgan';
+import expressHbs, { engine } from 'express-handlebars';
+import path, { dirname } from 'path';
+import cookieParser from 'cookie-parser';
+import route from './routes/index.js';
+import db from './config/db/index.js';
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+import * as dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
 import connect_database from './config/db/index.js';
-
 
 const app = express();
 const port = 3000;
@@ -20,23 +19,24 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/admin/teacher', express.static(path.join(__dirname, 'public')));
 app.use('/admin/student', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course', express.static(path.join(__dirname, 'public')));
+app.use('/admin/course/about', express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 
-// connect_database();
+connect_database();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
 // app.use(morgan("combined"));
 
 app.engine(
-  "hbs",
+  'hbs',
   engine({
-    extname: ".hbs",
+    extname: '.hbs',
     helpers: {
       sum: (a, b) => a + b,
     },
@@ -44,12 +44,12 @@ app.engine(
 );
 const hbs = expressHbs.create({});
 
-hbs.handlebars.registerHelper("ifEquals", function (arg1, arg2, options) {
+hbs.handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
   return arg1 == arg2 ? options.fn(this) : options.inverse(this);
 });
 
-app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "resource", "views"));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'resource', 'views'));
 
 route(app);
 
