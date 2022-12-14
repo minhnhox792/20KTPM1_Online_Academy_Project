@@ -1,0 +1,402 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<style>
+	body {
+		background: #e2eaef;
+		font-family: "Open Sans", sans-serif;
+	}
+
+	h2 {
+		color: #000;
+		font-size: 26px;
+		font-weight: 300;
+		text-align: center;
+		text-transform: uppercase;
+		position: relative;
+		margin: 30px 0 60px;
+	}
+
+	h2::after {
+		content: "";
+		width: 100px;
+		position: absolute;
+		margin: 0 auto;
+		height: 4px;
+		border-radius: 1px;
+		background: #453f40;
+		left: 0;
+		right: 0;
+		bottom: -20px;
+	}
+
+	.carousel {
+		margin: 50px auto;
+		padding: 0 70px;
+	}
+
+	.carousel .item {
+		color: #747d89;
+		min-height: 325px;
+		text-align: center;
+		overflow: hidden;
+	}
+
+	.carousel .thumb-wrapper {
+		padding: 25px 15px;
+		background: #fff;
+		border-radius: 6px;
+		text-align: center;
+		position: relative;
+		box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	}
+
+	.carousel .item .img-box {
+		height: 120px;
+		margin-bottom: 20px;
+		width: 100%;
+		position: relative;
+	}
+
+	.carousel .item img {
+		max-width: 100%;
+		max-height: 100%;
+		display: inline-block;
+		position: absolute;
+		bottom: 0;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+	}
+
+	.carousel .item h4 {
+		font-size: 18px;
+	}
+
+	.carousel .item h4,
+	.carousel .item p,
+	.carousel .item ul {
+		margin-bottom: 5px;
+	}
+
+	.carousel .thumb-content .btn {
+		color: #453f40;
+		font-size: 11px;
+		text-transform: uppercase;
+		font-weight: bold;
+		background: none;
+		border: 1px solid #453f40;
+
+		padding: 6px 14px;
+		margin-top: 5px;
+		line-height: 16px;
+		border-radius: 20px;
+	}
+
+	.carousel .thumb-content .btn:hover,
+	.carousel .thumb-content .btn:focus {
+		color: #fff;
+		background: #453f40;
+		box-shadow: none;
+	}
+
+	.carousel .thumb-content .btn i {
+		font-size: 14px;
+		font-weight: bold;
+		margin-left: 5px;
+	}
+
+	.carousel .item-price {
+		font-size: 13px;
+		padding: 2px 0;
+	}
+
+	.carousel .item-price strike {
+		opacity: 0.7;
+		margin-right: 5px;
+	}
+
+	.carousel-control-prev,
+	.carousel-control-next {
+		height: 40px;
+		width: 40px;
+		background: #453f40;
+		margin: auto 10px;
+		border-radius: 4px;
+		opacity: 0.8;
+	}
+
+	.carousel-control-prev:hover,
+	.carousel-control-next:hover {
+		background: #ffc000;
+		opacity: 1;
+	}
+
+	.carousel-control-prev i,
+	.carousel-control-next i {
+		font-size: 36px;
+		position: absolute;
+		top: 50%;
+		display: inline-block;
+		margin: -19px 0 0 0;
+		z-index: 5;
+		left: 0;
+		right: 0;
+		color: #fff;
+		text-shadow: none;
+		font-weight: bold;
+	}
+
+	.carousel-control-prev i {
+		margin-left: -2px;
+	}
+
+	.carousel-control-next i {
+		margin-right: -4px;
+	}
+
+	.carousel-indicators {
+		bottom: -50px;
+	}
+
+	.carousel-indicators li,
+	.carousel-indicators li.active {
+		width: 10px;
+		height: 10px;
+		margin: 4px;
+		border-radius: 50%;
+		border: none;
+	}
+
+	.carousel-indicators li {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	.carousel-indicators li.active {
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	.carousel .wish-icon {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		z-index: 99;
+		cursor: pointer;
+		font-size: 16px;
+		color: #abb0b8;
+	}
+
+	.carousel .wish-icon .fa-heart {
+		color: #ff6161;
+	}
+
+	.star-rating li {
+		padding: 0;
+	}
+
+	.star-rating i {
+		font-size: 14px;
+		color: #ffc000;
+	}
+
+	.carousel-control-prev:hover {
+		background-color: #ffc000;
+	}
+
+	.carousel-control-next:hover {
+		background-color: #ffc000;
+	}
+
+	@media screen and (max-width: 1000px) {
+		.col-sm-6 {
+			padding-top: 50px !important;
+		}
+	}
+
+	.orange-btn {
+		color: #000;
+		background-color: orange;
+		border-color: orange;
+		border-right-color: white;
+	}
+
+	.orange-btn:hover {
+		font-weight: bolder;
+		color: black !important;
+		background-color: orange;
+		border-color: orange;
+		border-right-color: white;
+	}
+</style>
+
+<script>
+	$(document).ready(function () {
+		$(".wish-icon i").click(function () {
+			$(this).toggleClass("fa-heart fa-heart-o");
+		});
+	});	
+</script>
+</head>
+
+<body>
+	<ul class="nav nav-tabs justify-content-center">
+		<li><a href="/my-courses/learning" class="btn orange-btn btn-primary">Tất cả khóa học</a></li>
+		<li><a href="/my-courses/lists" class="btn orange-btn btn-primary">Danh
+				sách của tôi</a></li>
+		<li><a href="/my-courses/watchlist" class="btn orange-btn btn-primary active">Danh
+				sách yêu thích</a></li>
+		<li><a href="/my-courses/archived" class="btn orange-btn btn-primary">Đã
+				lưu trữ</a></li>
+	</ul>
+
+	<div class="container-xl">
+		<div class="row">
+			<div class="col-md-12">
+
+				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+					<p id="title-tabs" style="top: 0; left:0; font-size: 40px;">Danh
+						sách yêu thích</p>
+
+					<!-- Carousel indicators -->
+					<ol class="carousel-indicators">
+						{{!-- Thay #myCarousel bằng một ID riêng biệt --}}
+						<li data-target="#slide1" data-slide-to="0" class="active"></li>
+						<li data-target="#slide2" data-slide-to="1"></li>
+					</ol>
+
+					<!-- Wrapper for carousel items -->
+					<div class="carousel-inner">
+						<div class="item carousel-item active">
+							<div class="row">
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
+										<div class="img-box">
+											<img src="https://bizflyportal.mediacdn.vn/bizflyportal/640/2427/2021/06/23/20/37/wor16244338629619.jpeg"
+												class="img-fluid" alt="Web development">
+										</div>
+
+										<div class="thumb-content">
+											<h4>Web development</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
+										<div class="img-box">
+											<img src="https://fdp.edu.vn/wp-content/uploads/2021/02/lap-trinh-vien-java.jpg"
+												class="img-fluid" alt="Java development">
+										</div>
+
+										<div class="thumb-content">
+											<h4>Java development</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
+										<div class="img-box">
+											<img src="https://www.techrepublic.com/wp-content/uploads/2018/12/5.jpg"
+												class="img-fluid" alt="Python language">
+										</div>
+
+										<div class="thumb-content">
+											<h4>Python</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
+										<div class="img-box">
+											<img src="https://play-lh.googleusercontent.com/85WnuKkqDY4gf6tndeL4_Ng5vgRk7PTfmpI4vHMIosyq6XQ7ZGDXNtYG2s0b09kJMw"
+												class="img-fluid" alt="HTML 5 logo">
+										</div>
+
+										<div class="thumb-content">
+											<h4>HTML 5</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="item carousel-item">
+							<div class="row">
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
+										<div class="img-box">
+											<img src="https://yt3.ggpht.com/h0n8phylgeZKuMlGmcPhkOM8rkV1IHTr5oumqZL581iQCSeMeFrnmYB69a69RQAQoVqgxM5ENX8=s900-c-k-c0x00ffffff-no-rj"
+												class="img-fluid" alt="Data stuctures and Algorithms" />
+										</div>
+
+										<div class="thumb-content">
+											<h4>Data stuctures and Algorith</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
+										<div class="img-box">
+											<img src="https://img.freepik.com/free-vector/chalkboard-with-math-elements_1411-88.jpg"
+												class="img-fluid" alt="Math">
+										</div>
+
+										<div class="thumb-content">
+											<h4>Math</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6 col-lg-3 h-100">
+									<div class="thumb-wrapper">
+										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+
+										<div class="img-box">
+											<img src="https://images.theconversation.com/files/191827/original/file-20171025-25516-g7rtyl.jpg?ixlib=rb-1.1.0&rect=0%2C70%2C7875%2C5667&q=45&auto=format&w=926&fit=clip"
+												class="img-fluid" alt="Physics">
+										</div>
+
+										<div class="thumb-content">
+											<h4>Physics</h4>
+											<a href="#" class="btn btn-primary">Countinue learning</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Carousel controls -->
+					<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+						<i class="fa fa-angle-left"></i>
+					</a>
+					<a class="carousel-control-next" href="#myCarousel" data-slide="next">
+						<i class="fa fa-angle-right"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
