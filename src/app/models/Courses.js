@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
-import mongoose_delete from "mongoose-delete";
+import mongoose from 'mongoose';
+import mongoose_delete from 'mongoose-delete';
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
+const date = new Date();
 
 const Course = new Schema({
   title: {
@@ -35,13 +36,21 @@ const Course = new Schema({
   discount: {
     type: Number,
   },
+  image: {
+    type: String,
+    required: true,
+  },
+  timeLength: {
+    type: Number,
+    default: date.getTime(),
+  },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: date.now,
   },
   updatedAt: {
     type: Date,
-    default: Date.now,
+    default: date.now,
   },
 });
 
@@ -51,4 +60,4 @@ const Course = new Schema({
 //   overrideMethods: 'all',
 // });
 
-export default mongoose.model("Course", Course);
+export default mongoose.model('Course', Course);

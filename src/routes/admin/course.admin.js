@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/all', courseController.all);
 router.get('/add', courseController.add);
+router.post('/store', courseController.store);
 router.get('/edit', courseController.edit);
 router.get('/about/:id', courseController.about);
 

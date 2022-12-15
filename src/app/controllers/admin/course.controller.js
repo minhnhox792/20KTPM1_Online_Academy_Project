@@ -10,8 +10,18 @@ const CourseController = {
       })
       .catch(next);
   },
-  add: (req, res) => {
+  add: (req, res, next) => {
     res.render('admin/courses/add', { layout: 'admin' });
+  },
+  store: (req, res, next) => {
+    const formData = req.body;
+    const course = new Course(formData);
+    course
+      .save()
+      .then(() => {
+        res.render('admin/courses/store', { layout: 'admin' });
+      })
+      .catch(next);
   },
   edit: (req, res) => {
     res.render('admin/courses/edit', { layout: 'admin' });

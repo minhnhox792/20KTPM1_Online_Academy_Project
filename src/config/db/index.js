@@ -5,7 +5,7 @@ dotenv.config();
 
 export default async () => {
   try {
-    await mongoose.connect(process.env.DB, {
+    await mongoose.connect(process.env.MONGO, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
