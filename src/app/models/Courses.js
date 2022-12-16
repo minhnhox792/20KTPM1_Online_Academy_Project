@@ -6,7 +6,7 @@ const ObjectId = Schema.ObjectId;
 const date = new Date();
 
 const Course = new Schema({
-  title: {
+  name: {
     type: String,
     maxLength: 50,
     required: true,
@@ -23,11 +23,15 @@ const Course = new Schema({
   },
   numberStudentRate: {
     type: Number,
+    default: 0,
   },
-  description: {
+  shortDesc: {
     type: String,
-    maxLength: 100,
-    required: true,
+    maxLength: 400,
+  },
+  fullDesc: {
+    type: String,
+    maxLength: 1000,
   },
   price: {
     type: Number,
@@ -35,10 +39,23 @@ const Course = new Schema({
   },
   discount: {
     type: Number,
+    default: 0,
   },
   image: {
     type: String,
     required: true,
+  },
+  overview: {
+    type: String,
+  },
+  basicCode: {
+    type: String,
+  },
+  advancedCode: {
+    type: String,
+  },
+  masterCode: {
+    type: String,
   },
   timeLength: {
     type: Number,
@@ -46,11 +63,11 @@ const Course = new Schema({
   },
   createdAt: {
     type: Date,
-    default: date.now,
+    default: Date.now(),
   },
   updatedAt: {
     type: Date,
-    default: date.now,
+    default: Date.now(),
   },
 });
 

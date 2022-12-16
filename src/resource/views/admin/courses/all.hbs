@@ -19,11 +19,11 @@
 
     <div class="row">
       {{#each courses}}
-        <div class="col-xl-3 col-xxl-4 col-lg-4 col-md-6 col-sm-6">
+        <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-6 col-sm-6">
           <div class="card">
             <img class="img-fluid" src="{{this.img}}" alt="">
             <div class="card-body">
-              <h4>{{this.title}}</h4>
+              <h4>{{this.name}}</h4>
               <ul class="list-group mb-3 list-group-flush">
                 <li class="list-group-item px-0 border-top-0 d-flex justify-content-between">
                   <span class="mb-0 text-muted">Rate: </span>
@@ -48,12 +48,69 @@
                   <strong>{{this.price}}</strong>
                 </li>
               </ul>
-              <a href="/admin/course/about/{{this._id}}" class="btn btn-primary">Read More</a>
+              <div class="d-flex justify-content-between">
+                <a href="/admin/course/about/{{this._id}}" class="btn btn-primary">
+                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                  Detail
+                </a>
+                <a href="/admin/course/edit/{{this._id}}" class="btn btn-primary">
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  Edit
+                </a>
+                <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}"
+                  data-target="#delete-course">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  Delete
+                </a>
+              </div>
             </div>
           </div>
         </div>
       {{/each}}
     </div>
-
   </div>
 </div>
+
+{{!-- Confirm delete course --}}
+
+<div class="modal" tabindex="-1" id="delete-course">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you want to delete ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to detele this course ?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-delete-course" type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete Form --}}
+<form name="delete-course-form" method="post"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var courseId = 0;
+    var deleteForm = document.forms['delete-course-form'];
+    var btnDeteleCourse = document.getElementById('btn-delete-course');
+     
+    $('#delete-course').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      courseId = button.data('id');
+      
+    });
+
+    btnDeteleCourse.onclick = () => {
+      deleteForm.action = '/admin/course/' + courseId + '?_method=DELETE';
+      deleteForm.submit();
+    };
+  });
+</script>
