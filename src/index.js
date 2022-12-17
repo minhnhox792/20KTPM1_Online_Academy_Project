@@ -36,13 +36,13 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-<<<<<<< Updated upstream
-app.use(methodOverride('_method'));
-// app.use(morgan("combined"));
-=======
-app.use(methodOverride("_method"));
-app.use(morgan("combined"));
->>>>>>> Stashed changes
+// <<<<<<< Updated upstream
+// // app.use(methodOverride('_method'));
+// // // app.use(morgan("combined"));
+// // =======
+// // app.use(methodOverride("_method"));
+// // app.use(morgan("combined"));
+// >>>>>>> Stashed changes
 
 app.engine(
   'hbs',

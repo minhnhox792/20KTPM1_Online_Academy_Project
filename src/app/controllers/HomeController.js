@@ -1,7 +1,6 @@
 import Course from '../models/Courses.js';
 import ultil from '../../util/mongoose.js';
 const HomeController = {
-<<<<<<< Updated upstream
   index: async (req, res) => {
     Course.find({}).then((courses) => {
       const top_view = courses.sort((a, b) => a.view - b.view);
@@ -10,23 +9,6 @@ const HomeController = {
       const top_date = courses.sort((a, b) => a.createdAt - b.createdAt);
 
       const data_topDate = ultil.multipleMongooseToOject(top_date.slice(0, 10));
-=======
-  
-  index: (req, res) => {
-    Course.find({}, (err, courses) => {
-        if(!err){
-          console.log(courses)
-        }
-        else{
-          return res.status(400).json({
-            error: 'ERROR !'
-          })
-        }
-      })
-      res.render("home")
-  },
-}
->>>>>>> Stashed changes
 
       res.render('home', {
         data_topView,

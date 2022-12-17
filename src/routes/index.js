@@ -7,7 +7,6 @@ import studentAdminRouter from "./admin/student.admin.js";
 import courseAdminRouter from "./admin/course.admin.js";
 import userRouter from "./user/auth.js";
 const route = (app) => {
-<<<<<<< Updated upstream
   app.use("/", homeRouter);
   app.use("/user", userRouter);
   app.use("/my-courses", myCoursesRouter);
@@ -16,17 +15,6 @@ const route = (app) => {
   app.use("/admin/lecturer", teacherAdminRouter);
   app.use("/admin/student", studentAdminRouter);
   app.use("/admin/course", courseAdminRouter);
-=======
-  app.use('/', homeRouter);
-  app.use('/user', userRouter)
-  app.use('/my-courses', myCoursesRouter);
-  app.use('/course', courseRouter);
-  app.use('/admin', dashboardAdminRouter);
-  app.use('/admin/teacher', teacherAdminRouter);
-  app.use('/admin/student', studentAdminRouter);
-  app.use('/admin/course', courseAdminRouter);
-  
->>>>>>> Stashed changes
 };
 
 export default route;

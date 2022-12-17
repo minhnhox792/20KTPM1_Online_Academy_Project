@@ -24,27 +24,26 @@
                 Web Development</p>
             </div>
           </div>
-          {{>home/multi-carousel tit = "COURSES"}}
+          {{>home/cardList tit = "COURSES"}}
         </div>
 
-        <div id="menu1" class="tab-pane fade">
+        {{!-- <div id="menu1" class="tab-pane fade">
           <div style="margin-bottom: -20px;font-weight:700;font-size: 18px;" class="pt-4">
             <p id="title-tabs-detail-nametabs"
               style="font-size: 18px font-weight:700;font-size: 18px;;font-weight: 600; margin-bottom: 0">
               Build
               websites and applications with Web Development</p>
           </div>
-          {{>home/multi-carousel}}
-        </div>
 
-        <div id="menu2" class="tab-pane fade">
-          {{>home/multi-carousel}}
-        </div>
+        </div> --}}
+
+
 
       </div>
     </div>
   </div>
-  <div class="container-fluid d-flex justify-content-center " style="margin-top:100px;background-color: gray; position: relative; left: -10%; width: 100vw">
+  <div class="container-fluid d-flex justify-content-center "
+    style="margin-top:100px;background-color: gray; position: relative; left: -10%; width: 100vw">
     <div class="d-flex justify-content-center" style="width: 1800px">
       <div class="row justify-content-md-center">
         <div class="col col-lg-4 " ;>
@@ -88,7 +87,7 @@
   {{>home/multi-carousel tit= "Top 10 lastest courses" data = this.data_topDate}}
 </div>
 
-
+{{>home/listCatery}}
 
 <style>
   body {
