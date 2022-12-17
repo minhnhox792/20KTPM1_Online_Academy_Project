@@ -26,4 +26,8 @@ const User = new Schema(
   { timestamps: true }
 );
 
+<<<<<<< Updated upstream
 export default mongoose.model('User', User);
+=======
+export default mongoose.model('courses', User); 
+>>>>>>> Stashed changes

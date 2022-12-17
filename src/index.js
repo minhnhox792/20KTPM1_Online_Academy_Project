@@ -21,6 +21,11 @@ app.use('/admin/student', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course/about', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course/edit', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course', express.static(path.join(__dirname, 'public')));
+app.use('/css', express.static(path.join(__dirname, 'public/assets/css')));
+app.use('/images', express.static(path.join(__dirname, 'public/assets/images'))); 
+app.use('/vendor', express.static(path.join(__dirname, 'public/vendors/vendor-video'))); 
+app.use('/js', express.static(path.join(__dirname, 'assets/js'))); 
+
 
 dotenv.config();
 
@@ -31,8 +36,13 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+<<<<<<< Updated upstream
 app.use(methodOverride('_method'));
 // app.use(morgan("combined"));
+=======
+app.use(methodOverride("_method"));
+app.use(morgan("combined"));
+>>>>>>> Stashed changes
 
 app.engine(
   'hbs',
