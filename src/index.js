@@ -4,12 +4,12 @@ import expressHbs, { engine } from 'express-handlebars';
 import path, { dirname } from 'path';
 import cookieParser from 'cookie-parser';
 import route from './routes/index.js';
-import db from './config/db/index.js';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import * as dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import connect_database from './config/db/index.js';
+import multer from 'multer';
 
 const app = express();
 const port = 5000;
@@ -17,10 +17,40 @@ const port = 5000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/admin/lecturer', express.static(path.join(__dirname, 'public')));
+app.use('/admin/lecturer/profile', express.static(path.join(__dirname, 'public')));
+app.use('/admin/lecturer/edit', express.static(path.join(__dirname, 'public')));
 app.use('/admin/student', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course/about', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course/edit', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course', express.static(path.join(__dirname, 'public')));
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'src/public/images/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpeg' ||
+    file.mimetype === 'image/jpg'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+app.use(
+  multer({
+    storage: storage,
+    fileFilter: fileFilter,
+  }).single('image')
+);
 
 dotenv.config();
 

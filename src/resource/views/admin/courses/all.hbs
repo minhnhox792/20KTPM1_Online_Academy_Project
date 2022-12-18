@@ -1,27 +1,23 @@
 <div class="content-body">
   <!-- row -->
   <div class="container-fluid">
-
-    <div class="row page-titles mx-0">
+    <div class="row page-titles mx-0 d-flex justify-content-between">
       <div class="col-sm-6 p-md-0">
         <div class="welcome-text">
           <h4>All Courses</h4>
         </div>
       </div>
-      <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active"><a href="javascript:void(0);">Courses</a></li>
-          <li class="breadcrumb-item active"><a href="javascript:void(0);">All Courses</a></li>
-        </ol>
-      </div>
+      <a href="/admin/course/add" class="btn btn-outline-primary">
+        <i class="fa fa-plus"></i>
+        Add course
+      </a>
     </div>
 
     <div class="row">
       {{#each courses}}
         <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-6 col-sm-6">
           <div class="card">
-            <img class="img-fluid" src="{{this.img}}" alt="">
+            <img class="img-fluid" src="{{this.image}}" alt="">
             <div class="card-body">
               <h4>{{this.name}}</h4>
               <ul class="list-group mb-3 list-group-flush">
@@ -101,11 +97,11 @@
     var courseId = 0;
     var deleteForm = document.forms['delete-course-form'];
     var btnDeteleCourse = document.getElementById('btn-delete-course');
-     
+
     $('#delete-course').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
       courseId = button.data('id');
-      
+
     });
 
     btnDeteleCourse.onclick = () => {

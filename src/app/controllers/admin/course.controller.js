@@ -16,7 +16,21 @@ const CourseController = {
     res.render('admin/courses/add', { layout: 'admin' });
   },
   storeAdd: (req, res, next) => {
+    const image = req.file;
+    if (!image) {
+      return res.status(422).render('admin/courses/add', {
+        layout: 'admin',
+        pageTitle: 'Admin',
+        path: '/admin/course/add',
+        editing: false,
+        hasError: true,
+        errorMessage: 'Attached file is not an image.',
+        validationErrors: [],
+      });
+    }
     const formData = req.body;
+    const temp = req.file.path;
+    formData.image = temp.replace(/src\\public/g, '');
     const course = new Course(formData);
     course
       .save()
@@ -36,7 +50,21 @@ const CourseController = {
       .catch(next);
   },
   storeEdit: (req, res, next) => {
+    const image = req.file;
+    if (!image) {
+      return res.status(422).render('admin/courses/edit', {
+        layout: 'admin',
+        pageTitle: 'Admin',
+        path: `/admin/course/edit/{req.params.id}`,
+        editing: false,
+        hasError: true,
+        errorMessage: 'Attached file is not an image.',
+        validationErrors: [],
+      });
+    }
     const formData = req.body;
+    const temp = req.file.path;
+    formData.image = temp.replace(/src\\public/g, '');
     formData.updatedAt = Date.now();
     Course.updateOne({ _id: req.params.id }, formData)
       .then(() => {
