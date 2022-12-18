@@ -12,13 +12,18 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
     "bootstrap-icons": "^1.10.2",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "ember-truth-helpers": "^3.1.1",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
+    "express-handlebars-sections": "^1.0.1",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
@@ -28,7 +33,10 @@
     "mongoose-slug-generator": "^1.0.4",
     "multer": "^1.4.5-lts.1",
     "node-sass": "^8.0.0",
-    "prettier": "^2.8.0"
+    "nodemailer": "^6.8.0",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "prettier": "^2.8.0",
+    "session": "^0.1.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

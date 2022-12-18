@@ -1,7 +1,9 @@
 
 const courseController = {
     registerCourse: (req, res) => {
-        res.render("course");
+        res.render("course",{
+            layout: 'test',
+          });
     },
   }
   
