@@ -10,9 +10,13 @@ import methodOverride from 'method-override';
 import * as dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import connect_database from './config/db/index.js';
+import hbs_section from 'express-handlebars-sections'
+import flash from 'connect-flash'
+import session from'express-session'
+import nodemailer from "nodemailer";
 
 const app = express();
-const port = 5000;
+const port = 3000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -25,6 +29,11 @@ app.use('/css', express.static(path.join(__dirname, 'public/assets/css')));
 app.use('/images', express.static(path.join(__dirname, 'public/assets/images'))); 
 app.use('/vendor', express.static(path.join(__dirname, 'public/vendors/vendor-video'))); 
 app.use('/js', express.static(path.join(__dirname, 'assets/js'))); 
+app.use(session({ cookie: { maxAge: 60000 }, 
+  secret: 'woot',
+  resave: false, 
+  saveUninitialized: false}));
+dotenv.config();
 
 
 dotenv.config();
@@ -36,13 +45,12 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-// <<<<<<< Updated upstream
-// // app.use(methodOverride('_method'));
-// // // app.use(morgan("combined"));
-// // =======
-// // app.use(methodOverride("_method"));
-// // app.use(morgan("combined"));
-// >>>>>>> Stashed changes
+app.use(flash());
+
+
+app.use(methodOverride("_method"));
+app.use(morgan("combined"));
+
 
 app.engine(
   'hbs',

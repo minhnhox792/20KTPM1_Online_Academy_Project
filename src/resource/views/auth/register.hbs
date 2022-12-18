@@ -15,7 +15,7 @@
 
 <body>
  
-
+<form action="" method="post" id = "frmRegister" novalidate>
 
 <div class="container">
     <div class="row py-5 mt-4 align-items-center">
@@ -38,7 +38,7 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input id="username" type="text" name="username" placeholder="Username" class="form-control bg-white border-left-0 border-md">
+                        <input id="username" type="text" name="username" placeholder="Username" class="form-control bg-white border-left-0 border-md" autofocus>
                     </div>
 
                     <div class="input-group col-lg-12 mb-4">
@@ -47,7 +47,7 @@
                                 <i class="fa-solid fa-signature"></i>
                             </span>
                         </div>
-                        <input id="Fullname" type="text" name="Fullname" placeholder="Fullname" class="form-control bg-white border-left-0 border-md">
+                        <input id="fullname" type="text" name="fullname" placeholder="Fullname" class="form-control bg-white border-left-0 border-md">
                     </div>
                 
                     <!-- Email Address -->
@@ -60,37 +60,10 @@
                         <input id="email" type="email" name="email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
                     </div>
 
-                    <!-- Phone Number -->
-                    {{!-- <div class="input-group col-lg-12 mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-white px-4 border-md border-right-0">
-                                <i class="fa fa-phone-square text-muted"></i>
-                            </span>
-                        </div>
-                        <select id="countryCode" name="countryCode" style="max-width: 80px" class="custom-select form-control bg-white border-left-0 border-md h-100 font-weight-bold text-muted">
-                            <option value="">+12</option>
-                            <option value="">+10</option>
-                            <option value="">+15</option>
-                            <option value="">+18</option>
-                        </select>
-                        <input id="phoneNumber" type="tel" name="phone" placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3">
-                    </div>. --}}
+                   
 
 
-                    <!-- Job -->
-                    <div class="input-group col-lg-12 mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-white px-4 border-md border-right-0">
-                               <i class="fa-sharp fa-solid fa-circle-check"></i>
-                            </span>
-                        </div>
-                        <select id="job" name="jobtitle" class="form-control custom-select bg-white border-left-0 border-md">
-                            <option value="">Choose your job</option>
-                            <option value="">Teacher</option>
-                            <option value="">Student</option>
-                          
-                        </select>
-                    </div>
+                   
 
                     <!-- Password -->
                     <div class="input-group col-lg-6 mb-4">
@@ -109,14 +82,20 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input id="passwordConfirmation" type="text" name="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
+                        <input id="passwordConfirmation" type="password" name="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
                     </div>
-
+                    {{#if errorMessage}}
+                      <div class="form-group col-lg-12 mx-auto mb-0">
+                        <div class="alert alert-danger text-center" role="alert">
+                        {{this.errorMessage}}
+                        </div>
+                    </div>
+                    {{/if}}
                     <!-- Submit Button -->
+                    
                     <div class="form-group col-lg-12 mx-auto mb-0">
-                        <a href="#" class="btn btn-primary btn-block py-2">
-                            <span class="font-weight-bold">Create your account</span>
-                        </a>
+                        <button type="submit" class="btn btn-outline-primary" style="width: 100%;">Register</button>
+
                     </div>
 
                     <!-- Divider Text -->
@@ -148,7 +127,7 @@
         </div>
     </div>
 </div>
-
+</form>
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -191,7 +170,30 @@ select.form-control {
     $('input, select').on('blur', function () {
         $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
     });
+    function IsEmail(email) {
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!regex.test(email)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    {{!-- $('#frmRegister').on('submit', (e) => {
+        
+
+        const username = $('#username').val()
+        if(username.length <= 6){
+            alert('Invalid username')
+            return
+        }
+         const email = $('#email').val()
+         console(email)
+        $('frmRegister').off('submit').submit();
+    }) --}}
 });
+
+
+
 </script>
 
 
