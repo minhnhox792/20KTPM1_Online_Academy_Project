@@ -27,20 +27,19 @@ const User = new Schema(
     },
     education: {
       type: String,
-      required: true,
       maxLength: 100,
     },
     phone: {
       type: String,
-      required: true,
+     
     },
     dateOfBirth: {
       type: Date,
-      required: true,
+     
     },
     image: {
       type: String,
-      required: true,
+     
     },
     role: {
       type: String,
