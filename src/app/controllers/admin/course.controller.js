@@ -1,5 +1,6 @@
 import Course from '../../models/Courses.js';
 import objectFormat from '../../../util/mongoose.js';
+import moment from 'moment';
 
 const CourseController = {
   all: (req, res, next) => {
@@ -76,7 +77,14 @@ const CourseController = {
     Course.findById(req.params.id)
       .then((course) => {
         course = objectFormat.mongooseToOject(course);
-        res.render('admin/courses/about', { layout: 'admin', course });
+        const create = course.createdAt.toISOString().split('T')[0];
+        const createdAt = moment(create, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        course.createdAt = createdAt;
+
+        const update = course.updatedAt.toISOString().split('T')[0];
+        const updatedAt = moment(update, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        course.updatedAt = updatedAt;
+        res.render('admin/courses/about', { layout: 'admin', course: course });
       })
       .catch(next);
   },

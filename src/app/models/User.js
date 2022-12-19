@@ -31,15 +31,12 @@ const User = new Schema(
     },
     phone: {
       type: String,
-     
     },
     dateOfBirth: {
       type: Date,
-     
     },
     image: {
       type: String,
-     
     },
     role: {
       type: String,

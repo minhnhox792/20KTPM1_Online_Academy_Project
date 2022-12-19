@@ -79,7 +79,7 @@ app.use(flash());
 
 
 app.use(methodOverride("_method"));
-app.use(morgan("combined"));
+// app.use(morgan("combined"));
 
 
 app.engine(

@@ -1,5 +1,6 @@
 import User from '../../models/User.js';
 import objectFormat from '../../../util/mongoose.js';
+import moment from 'moment';
 
 const LecturerController = {
   all: (req, res, next) => {
@@ -94,9 +95,13 @@ const LecturerController = {
   profile: (req, res, next) => {
     User.findById(req.params.id)
       .then((lecturer) => {
+        lecturer = objectFormat.mongooseToOject(lecturer);
+        const temp = lecturer.dateOfBirth.toISOString().split('T')[0];
+        const dob = moment(temp, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        lecturer.dateOfBirth = dob;
         res.render('admin/lecturers/profile', {
           layout: 'admin',
-          lecturer: objectFormat.mongooseToOject(lecturer),
+          lecturer: lecturer,
         });
       })
       .catch(next);
