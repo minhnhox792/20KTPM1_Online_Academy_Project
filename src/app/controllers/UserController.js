@@ -165,7 +165,10 @@ const userController = {
                 req.session.userOTP = session_username;
 
                 user.save();
-                otp_info.save();
+                UserOTP.deleteMany({ username: session_username }).then(() => {
+                  otp_info.save();
+                })
+                
                 return res.redirect("verifyOTP");
               }
             });
