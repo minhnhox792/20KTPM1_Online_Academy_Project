@@ -36,7 +36,16 @@ app.use(session({ cookie: { maxAge: 60000 },
   resave: false, 
   saveUninitialized: false}));
 dotenv.config();
-
+app.use(function  (req, res, next){
+  console.log("1111111111111")
+  console.log(req.session.auth)
+  if(typeof (req.session.auth) ==='undefined'){
+    console.log("222222222")
+     req.session.auth=false;
+  }
+  console.log(req.session.auth)
+  next();
+})
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

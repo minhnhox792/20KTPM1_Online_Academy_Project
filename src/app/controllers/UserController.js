@@ -24,19 +24,25 @@ const userController = {
 
   handlLogin: async (req, res) => {
     try {
-      if (!req.body.username) {
+      if (!req.body.username || !req.body.password) {
         return res.render("auth/login", {
           layout: false,
-          err_mess: "Username is empty !!!",
+          err_mess: "Username or Password is empty !!!",
         });
       }
+      
       const a = await User.findOne({ username: req.body.username });
-      if (!a) return res.redirect("login");
-      if (a.password !== req.body.password)
-        return res.redirect("login", {
-          err_mess: "Invalid Username or Password",
+      console.log(a)
+      if (!a || a.password !== req.body.password)
+        return res.render("auth/login", {
+          layout: false,
+          err_mess: "Invalid Username or Password !!!",
         });
-      return res.send("Success");
+        // req.session.auth = true;
+        req.session.role = a.role;
+        req.session._id= a.id;
+        console.log(req.session.auth)
+      return res.render("home");
     } catch (err) {
       console.log(err);
       return res.redirect("login");
