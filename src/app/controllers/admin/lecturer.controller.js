@@ -20,10 +20,10 @@ const LecturerController = {
     const image = req.file;
     const formData = req.body;
     if (!image) {
-      return res.status(422).render('admin/lecturers/edit', {
+      return res.status(422).render('admin/lecturers/add', {
         layout: 'admin',
         pageTitle: 'Admin',
-        path: `/admin/lecturer/edit/{req.params.id}`,
+        path: `/admin/lecturer/add`,
         editing: false,
         hasError: true,
         errorMessage: 'Attached file is not an image.',
@@ -36,10 +36,10 @@ const LecturerController = {
         lecturer.username == formData.username ||
         lecturer.email == formData.email
       ) {
-        return res.status(422).render('admin/lecturers/edit', {
+        return res.status(422).render('admin/lecturers/add', {
           layout: 'admin',
           pageTitle: 'Admin',
-          path: `/admin/lecturer/edit/{req.params.id}`,
+          path: `/admin/lecturer/add`,
           editing: false,
           hasError: true,
           errorMessage: 'Attached file is not an image.',
@@ -50,6 +50,7 @@ const LecturerController = {
     const temp = req.file.path;
     formData.image = temp.replace(/src\\public/g, '');
     formData.role = 'Lecturer';
+    formData.username = formData.username.replace(/ /g, '');
     const lecturer = new User(formData);
     lecturer
       .save()
@@ -58,13 +59,15 @@ const LecturerController = {
       })
       .catch(next);
   },
-
   edit: (req, res, next) => {
     User.findById(req.params.id)
       .then((lecturer) => {
+        lecturer = objectFormat.mongooseToOject(lecturer);
+        const temp = lecturer.dateOfBirth.toISOString().split('T')[0];
+        lecturer.dateOfBirth = temp;
         res.render('admin/lecturers/edit', {
           layout: 'admin',
-          lecturer: objectFormat.mongooseToOject(lecturer),
+          lecturer: lecturer,
         });
       })
       .catch(next);
@@ -72,18 +75,20 @@ const LecturerController = {
   storeEdit: (req, res, next) => {
     const image = req.file;
     if (!image) {
-      return res.status(422).render('admin/lecturers/add', {
+      return res.status(422).render('admin/lecturers/edit', {
         layout: 'admin',
         pageTitle: 'Admin',
         path: `/admin/lecturer/edit/{req.params.id}`,
         editing: false,
         hasError: true,
+        lecturer: req.body,
         errorMessage: 'Attached file is not an image.',
         validationErrors: [],
       });
     }
     const formData = req.body;
     const temp = req.file.path;
+    formData.username = formData.username.replace(/ /g, '');
     formData.image = temp.replace(/src\\public/g, '');
     formData.updatedAt = Date.now();
     User.updateOne({ _id: req.params.id }, formData)

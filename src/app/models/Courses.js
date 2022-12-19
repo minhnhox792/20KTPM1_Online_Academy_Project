@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import mongoose_delete from 'mongoose-delete';
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+const ObjectId = Schema.Types.ObjectId;
 const date = new Date();
 
 const Course = new Schema({
@@ -46,20 +46,53 @@ const Course = new Schema({
     required: true,
   },
   overview: {
-    type: String,
+    type: [
+      {
+        type: ObjectId,
+        ref: 'Chapter',
+      },
+    ],
+    default: [],
   },
   basicCode: {
-    type: String,
+    type: [
+      {
+        type: ObjectId,
+        ref: 'Chapter',
+      },
+    ],
+    default: [],
   },
   advancedCode: {
-    type: String,
+    type: [
+      {
+        type: ObjectId,
+        ref: 'Chapter',
+      },
+    ],
+    default: [],
   },
   masterCode: {
-    type: String,
+    type: [
+      {
+        type: ObjectId,
+        ref: 'Chapter',
+      },
+    ],
+    default: [],
   },
   timeLength: {
     type: Number,
     default: date.getTime(),
+  },
+  studentList: {
+    type: [
+      {
+        type: ObjectId,
+        ref: 'User',
+      },
+    ],
+    default: [],
   },
   createdAt: {
     type: Date,

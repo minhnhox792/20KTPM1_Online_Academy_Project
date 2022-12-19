@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId
 
 const User = new Schema(
   {
@@ -41,6 +42,15 @@ const User = new Schema(
     role: {
       type: String,
       default: 'Student',
+    },
+    courseList: {
+      type: [
+        {
+          type: ObjectId,
+          ref: 'Course',
+        },
+      ],
+      default: [],
     },
     createdAt: {
       type: Date,
