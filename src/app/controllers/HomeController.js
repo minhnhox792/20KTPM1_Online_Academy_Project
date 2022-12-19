@@ -9,10 +9,10 @@ const HomeController = {
       const top_date = courses.sort((a, b) => a.createdAt - b.createdAt);
 
       const data_topDate = ultil.multipleMongooseToOject(top_date.slice(0, 10));
-
       res.render('home', {
         data_topView,
         data_topDate,
+        auth : req.session.auth,
       });
     });
     // const items =[

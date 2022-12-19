@@ -31,21 +31,35 @@ const userController = {
         });
       }
       
-      const a = await User.findOne({ username: req.body.username });
-      console.log(a)
-      if (!a || a.password !== req.body.password)
+      const UserInput = await User.findOne({ username: req.body.username });
+ 
+      const checkpass=bcrypt.compare(UserInput.password, req.body.password)
+      if (!UserInput ||checkpass===false)
         return res.render("auth/login", {
           layout: false,
           err_mess: "Invalid Username or Password !!!",
         });
-        // req.session.auth = true;
-        req.session.role = a.role;
-        req.session._id= a.id;
-        console.log(req.session.auth)
-      return res.render("home");
+        req.session.auth = true;
+        req.session.role = UserInput.role;
+        req.session._id= UserInput.id;
+      return res.redirect("/");
     } catch (err) {
       console.log(err);
       return res.redirect("login");
+    }
+  },
+  handleLogout: async(req,res)=>{
+    try{
+        req.session.auth = false;
+        req.session.role = null;
+        req.session._id= null;
+        const url = req.headers.referer || '/';
+        console.log(url)
+        res.redirect("/");
+    }
+    catch{
+      console.log(err);
+      return res.redirect("home");
     }
   },
   register: (req, res) => {

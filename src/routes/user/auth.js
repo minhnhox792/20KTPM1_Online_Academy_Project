@@ -10,4 +10,5 @@ router.post('/login',userController.handlLogin)
 router.post('/register', check('email').isEmail().withMessage('Please enter a valid email !') , userController.solveRegister)
 router.get('/verifyOTP', userController.getverifyOTP)
 router.post('/verifyOTP',userController.compareOTP)
+router.post('/logout',userController.handleLogout)
 export default router;
