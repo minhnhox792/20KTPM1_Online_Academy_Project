@@ -3,11 +3,51 @@
         <div class="card bg-light mb-3">
             <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
             <ul class="list-group category_block">
-                <li class="list-group-item " ><a href="http://localhost:3000/category/view/IT">IT</a></li>
-                <li class="list-group-item"><a href="http://localhost:3000/category/view/Design">Deisgn</a></li>
-                <li class="list-group-item"><a href="http://localhost:3000/category/view/Economic">Economic</a></li>
-                <li class="list-group-item"><a href="http://localhost:3000/category/view/Financial">Financial</a></li>
-                <li class="list-group-item"><a href="http://localhost:3000/category/view/Marketing">Marketing</a></li>
+                {{#ifEquals active 'IT'}}
+                      <li class="list-group-item active" ><a href="http://localhost:3000/category/view/IT" style="color: white;">IT</a> 
+                     
+                      <label class = "text-center justify-content-center"style="float: right;
+                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;">{{this.length}}</label>
+                  
+                    </li>
+                {{else}}
+            
+                     <li class="list-group-item" ><a href="http://localhost:3000/category/view/IT">IT</a> </li>
+                {{/ifEquals}}
+
+                 {{#ifEquals active 'Design'}}
+                      <li class="list-group-item active" ><a href="http://localhost:3000/category/view/Design" style="color: white;">Design</a> <label class = "text-center justify-content-center"style="float: right;
+                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;">{{this.length}}</label></li>
+                {{else}}
+            
+                     <li class="list-group-item" ><a href="http://localhost:3000/category/view/Design">Design</a> </li>
+                {{/ifEquals}}
+                 {{#ifEquals active 'Economic'}}
+                     <li class="list-group-item active" ><a href="http://localhost:3000/category/view/Economic" style="color: white;">Economic</a> <label class = "text-center justify-content-center"style="float: right;
+                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;">{{this.length}}</label></li>
+                {{else}}
+            
+                     <li class="list-group-item" ><a href="http://localhost:3000/category/view/Economic">Economic</a> </li>
+                {{/ifEquals}}
+                {{#ifEquals active 'Financial'}}
+                       <li class="list-group-item active" ><a href="http://localhost:3000/category/view/Financial" style="color: white;">Financial</a> <label class = "text-center justify-content-center"style="float: right;
+                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;">{{this.length}}</label></li>
+                {{else}}
+                     <li class="list-group-item" ><a href="http://localhost:3000/category/view/Financial">Financial</a></li>
+                {{/ifEquals}}
+                {{#ifEquals active 'Marketing'}}
+                       <li class="list-group-item active" ><a href="http://localhost:3000/category/view/Marketing" style="color: white;">Marketing</a> <label class = "text-center justify-content-center"style="float: right;
+                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;">{{this.length}}</label></li>
+                {{else}}
+            
+                     <li class="list-group-item" ><a href="http://localhost:3000/category/view/Marketing">Marketing</a> </li>
+                {{/ifEquals}}
+
+
+
+
+
+      
 
             </ul>
         </div>
@@ -15,209 +55,34 @@
     </div>
     <div class="col">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 mt-5">
-                <div class="card">
-                    <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title"><a href="product.html" title="View Product"
-                                style="font-weight: bold;">Tiêu đề</a></h4>
-                        <p class="card-text text-muted">Lecturer: Nguyễn Minh Khoa</p>
-                        <p class="card-text text-muted">Category: Design</p>
-                        <div class="d-flex">
-                            <div class="d-flex justify-content-around" style="justify-content: space-between !important; width: 100%;">
-                                <div class="d-flex">
-                                    <p class="font-weight-bold"
-                                        style="color: #B4690E; margin-right: 5px; padding-top: 2px;">4.3</p>
-
-                                    <div class="ratings">
-
-                                        <i class="fa fa-star rating-color"></i>
-
-                                    </div>
-                                    <h5 class="review-count text-muted" style="padding-top: 5px;">(1,703)</h5>
-                                </div>
-
-                                <div class=" d-flex">
-                                    <p style="font-weight: bold; ">99.00 $
-                                        <del class="text-muted" style="color: white; font-size: 14px;">99.00 $</del>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p class="btn btn-danger btn-block"
-                                    style="font-weight: bold; background-color: #e75e8d">Like
-                                </p>
-
-                            </div>
-                            <div class="col">
-                                <a href="#" class="btn btn-success btn-block" id="Btbuy" style="font-weight: bold;">Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 mt-5">
-                <div class="card">
-                    <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title"><a href="product.html" title="View Product"
-                                style="font-weight: bold;">Tiêu đề</a></h4>
-                        <p class="card-text text-muted">Lecturer: Nguyễn Minh Khoa</p>
-                        <p class="card-text text-muted">Category: Design</p>
-                        <div class="d-flex">
-                            <div class="d-flex justify-content-around" style="justify-content: space-between !important; width: 100%;">
-                                <div class="d-flex">
-                                    <p class="font-weight-bold"
-                                        style="color: #B4690E; margin-right: 5px; padding-top: 2px;">4.3</p>
-
-                                    <div class="ratings">
-
-                                        <i class="fa fa-star rating-color"></i>
-
-                                    </div>
-                                    <h5 class="review-count text-muted" style="padding-top: 5px;">(1,703)</h5>
-                                </div>
-
-                                <div class=" d-flex">
-                                    <p style="font-weight: bold; ">99.00 $
-                                        <del class="text-muted" style="color: white; font-size: 14px;">99.00 $</del>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p class="btn btn-danger btn-block"
-                                    style="font-weight: bold; background-color: #e75e8d">Like
-                                </p>
-
-                            </div>
-                            <div class="col">
-                                <a href="#" class="btn btn-success btn-block" id="Btbuy" style="font-weight: bold;">Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 mt-5">
-                <div class="card">
-                    <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title"><a href="product.html" title="View Product"
-                                style="font-weight: bold;">Tiêu đề</a></h4>
-                        <p class="card-text text-muted">Lecturer: Nguyễn Minh Khoa</p>
-                        <p class="card-text text-muted">Category: Design</p>
-                        <div class="d-flex">
-                            <div class="d-flex justify-content-around" style="justify-content: space-between !important; width: 100%;">
-                                <div class="d-flex">
-                                    <p class="font-weight-bold"
-                                        style="color: #B4690E; margin-right: 5px; padding-top: 2px;">4.3</p>
-
-                                    <div class="ratings">
-
-                                        <i class="fa fa-star rating-color"></i>
-
-                                    </div>
-                                    <h5 class="review-count text-muted" style="padding-top: 5px;">(1,703)</h5>
-                                </div>
-
-                                <div class=" d-flex">
-                                    <p style="font-weight: bold; ">99.00 $
-                                        <del class="text-muted" style="color: white; font-size: 14px;">99.00 $</del>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p class="btn btn-danger btn-block"
-                                    style="font-weight: bold; background-color: #e75e8d">Like
-                                </p>
-
-                            </div>
-                            <div class="col">
-                                <a href="#" class="btn btn-success btn-block" id="Btbuy" style="font-weight: bold;">Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 mt-5">
-                <div class="card">
-                    <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title"><a href="product.html" title="View Product"
-                                style="font-weight: bold;">Tiêu đề</a></h4>
-                        <p class="card-text text-muted">Lecturer: Nguyễn Minh Khoa</p>
-                        <p class="card-text text-muted">Category: Design</p>
-                        <div class="d-flex">
-                            <div class="d-flex justify-content-around" style="justify-content: space-between !important; width: 100%;">
-                                <div class="d-flex">
-                                    <p class="font-weight-bold"
-                                        style="color: #B4690E; margin-right: 5px; padding-top: 2px;">4.3</p>
-
-                                    <div class="ratings">
-
-                                        <i class="fa fa-star rating-color"></i>
-
-                                    </div>
-                                    <h5 class="review-count text-muted" style="padding-top: 5px;">(1,703)</h5>
-                                </div>
-
-                                <div class=" d-flex">
-                                    <p style="font-weight: bold; ">99.00 $
-                                        <del class="text-muted" style="color: white; font-size: 14px;">99.00 $</del>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p class="btn btn-danger btn-block"
-                                    style="font-weight: bold; background-color: #e75e8d">Like
-                                </p>
-
-                            </div>
-                            <div class="col">
-                                <a href="#" class="btn btn-success btn-block" id="Btbuy" style="font-weight: bold;">Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
             
-             <div class="col-12 col-md-6 col-lg-4 mt-5">
+            {{#each data}}
+            
+            <div class="col-12 col-md-6 col-lg-4 mt-5">
                 <div class="card">
                     <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title"><a href="product.html" title="View Product"
-                                style="font-weight: bold;">Tiêu đề</a></h4>
-                        <p class="card-text text-muted">Lecturer: Nguyễn Minh Khoa</p>
-                        <p class="card-text text-muted">Category: Design</p>
+                                style="font-weight: bold;">{{this.name}}</a></h4>
+                        <p class="card-text text-muted">Lecturer: {{this.lecturer}}</p>
+                        <p class="card-text text-muted">Category: {{this.category}}</p>
                         <div class="d-flex">
                             <div class="d-flex justify-content-around" style="justify-content: space-between !important; width: 100%;">
                                 <div class="d-flex">
                                     <p class="font-weight-bold"
-                                        style="color: #B4690E; margin-right: 5px; padding-top: 2px;">4.3</p>
+                                        style="color: #B4690E; margin-right: 5px; padding-top: 2px;">{{this.rating}}</p>
 
                                     <div class="ratings">
 
                                         <i class="fa fa-star rating-color"></i>
 
                                     </div>
-                                    <h5 class="review-count text-muted" style="padding-top: 5px;">(1,703)</h5>
+                                    <h5 class="review-count text-muted" style="padding-top: 5px;">({{format_number this.numberStudentRate}})</h5>
                                 </div>
 
                                 <div class=" d-flex">
-                                    <p style="font-weight: bold; ">99.00 $
-                                        <del class="text-muted" style="color: white; font-size: 14px;">99.00 $</del>
+                                    <p style="font-weight: bold; ">{{format_number this.price}}
+                                        <del class="text-muted" style="color: white; font-size: 14px;">{{format_number this.discount}}</del>
                                     </p>
                                 </div>
                             </div>
@@ -237,51 +102,9 @@
                     </div>
                 </div>
             </div>
-             <div class="col-12 col-md-6 col-lg-4 mt-5">
-                <div class="card">
-                    <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title"><a href="product.html" title="View Product"
-                                style="font-weight: bold;">Tiêu đề</a></h4>
-                        <p class="card-text text-muted">Lecturer: Nguyễn Minh Khoa</p>
-                        <p class="card-text text-muted">Category: Design</p>
-                        <div class="d-flex">
-                            <div class="d-flex justify-content-around" style="justify-content: space-between !important; width: 100%;">
-                                <div class="d-flex">
-                                    <p class="font-weight-bold"
-                                        style="color: #B4690E; margin-right: 5px; padding-top: 2px;">4.3</p>
-
-                                    <div class="ratings">
-
-                                        <i class="fa fa-star rating-color"></i>
-
-                                    </div>
-                                    <h5 class="review-count text-muted" style="padding-top: 5px;">(1,703)</h5>
-                                </div>
-
-                                <div class=" d-flex">
-                                    <p style="font-weight: bold; ">99.00 $
-                                        <del class="text-muted" style="color: white; font-size: 14px;">99.00 $</del>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p class="btn btn-danger btn-block"
-                                    style="font-weight: bold; background-color: #e75e8d">Like
-                                </p>
-
-                            </div>
-                            <div class="col">
-                                <a href="#" class="btn btn-success btn-block" id="Btbuy" style="font-weight: bold;">Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
+            {{/each}}
+            {{#if (compareZero length)}}
+                <div class="col-12">
                 <nav aria-label="...">
                     <ul class="pagination" style="float: right;">
                         <li class="page-item ">
@@ -299,7 +122,9 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </div> 
+            {{/if}}
+           
         </div>
     </div>
 

@@ -14,6 +14,7 @@ import hbs_section from 'express-handlebars-sections'
 import flash from 'connect-flash'
 import session from'express-session'
 import nodemailer from "nodemailer";
+import numeral from 'numeral'
 
 const app = express();
 const port = 3000;
@@ -37,13 +38,9 @@ app.use(session({ cookie: { maxAge: 60000 },
   saveUninitialized: false}));
 dotenv.config();
 app.use(function  (req, res, next){
-  console.log("1111111111111")
-  console.log(req.session.auth)
   if(typeof (req.session.auth) ==='undefined'){
-    console.log("222222222")
      req.session.auth=false;
   }
-  console.log(req.session.auth)
   next();
 })
 
@@ -98,12 +95,29 @@ app.engine(
     helpers: {
       sum: (a, b) => a + b,
     },
-  })
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+    },
+  }),
+  // expressHbs({
+  //   defaultLayout: "main",
+  //   runtimeOptions: {
+  //     allowProtoPropertiesByDefault: true,
+  //     allowProtoMethodsByDefault: true,
+  //   },
+  // })
 );
 const hbs = expressHbs.create({});
 
 hbs.handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
   return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+});
+hbs.handlebars.registerHelper('compareZero', function (arg1) {
+  return arg1 !== 0
+});
+hbs.handlebars.registerHelper('format_number', function(num) {
+  return numeral(num).format('0,0') + '$';
 });
 
 app.set('view engine', 'hbs');

@@ -21,6 +21,9 @@ const Course = new Schema({
     maxLength: 50,
     required: true,
   },
+  rating: {
+    type: Number
+  },
   numberStudentRate: {
     type: Number,
     default: 0,

@@ -44,7 +44,6 @@ const userController = {
         req.session._id= UserInput.id;
       return res.redirect("/");
     } catch (err) {
-      console.log(err);
       return res.redirect("login");
     }
   },
@@ -54,11 +53,10 @@ const userController = {
         req.session.role = null;
         req.session._id= null;
         const url = req.headers.referer || '/';
-        console.log(url)
+       
         res.redirect("/");
     }
     catch{
-      console.log(err);
       return res.redirect("home");
     }
   },
@@ -89,13 +87,12 @@ const userController = {
   compareOTP: (req, res) => {
     const OTP = req.body.verifyOTP;
     const username = req.session.userOTP;
-    console.log(222222222222);
-    console.log("Now username is: ", username);
+
     UserOTP.findOne({ username: username }).then((result) => {
-      //console.log(result)
+     
       if (result === null) {
         req.flash("error", "OTP number is not exist !");
-        //console.log("OTP number is not exist !")
+        
         return res.redirect("verifyOTP");
       } else {
         if (OTP == result.otp) {
@@ -103,7 +100,7 @@ const userController = {
             { username: username },
             { $set: { verified: true } }
           ).then((data) => {
-            console.log(data);
+           
             return res.redirect("login");
           });
         } else {
@@ -161,7 +158,6 @@ const userController = {
               <br><h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
               <h3>Please back to verify tab and enter this OTP number into verify input !</h3>`,
             };
-            console.log(5435353, info_mail);
             transporter.sendMail(info_mail).then((mess) => {
               if (!mess) {
                 console.log("Failed");
