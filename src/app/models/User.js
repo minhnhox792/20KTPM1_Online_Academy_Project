@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
-const ObjectId = Schema.Types.ObjectId
+const ObjectId = Schema.Types.ObjectId;
 
 const User = new Schema(
   {
@@ -29,6 +29,10 @@ const User = new Schema(
     education: {
       type: String,
       maxLength: 100,
+    },
+    about: {
+      type: String,
+      default: '',
     },
     phone: {
       type: String,
