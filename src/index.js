@@ -116,9 +116,19 @@ hbs.handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
 hbs.handlebars.registerHelper('compareZero', function (arg1) {
   return arg1 !== 0
 });
+hbs.handlebars.registerHelper('comparePage', function (arg1, arg2) {
+  return arg1 !== arg2
+});
+hbs.handlebars.registerHelper('compareCurPage', function (last, cur, next) {
+  return (last !== cur && next !== last)
+});
+hbs.handlebars.registerHelper('compareOne', function (arg1) {
+  return arg1 !== 1
+});
 hbs.handlebars.registerHelper('format_number', function(num) {
   return numeral(num).format('0,0') + '$';
 });
+
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource', 'views'));
