@@ -8,16 +8,23 @@ import courseAdminRouter from "./admin/course.admin.js";
 import categoryRouter from "./category.js";
 
 import userRouter from "./user/auth.js";
-const route = (app) => {
-  app.use("/", homeRouter);
-  app.use("/user", userRouter);
-  app.use("/my-courses", myCoursesRouter);
-  app.use("/course", courseRouter);
-  app.use("/admin", dashboardAdminRouter);
-  app.use("/admin/lecturer", lecturerAdminRouter);
-  app.use("/admin/student", studentAdminRouter);
-  app.use("/admin/course", courseAdminRouter);
-  app.use("/category",categoryRouter);
-};
 
-export default route;
+export default function (app){
+  app.use(async function (req, res, next) {
+    if (typeof req.session.auth === 'undefined') {
+      req.session.auth = false;
+    }
+    res.locals.auth = req.session.auth;
+    app.use("/", homeRouter);
+    app.use("/user", userRouter);
+    app.use("/my-courses", myCoursesRouter);
+    app.use("/course", courseRouter);
+    app.use("/admin", dashboardAdminRouter);
+    app.use("/admin/lecturer", lecturerAdminRouter);
+    app.use("/admin/student", studentAdminRouter);
+    app.use("/admin/course", courseAdminRouter);
+    app.use("/category",categoryRouter);
+
+    next();
+  });
+}

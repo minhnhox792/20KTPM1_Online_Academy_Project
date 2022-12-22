@@ -12,7 +12,6 @@ const HomeController = {
       res.render('home', {
         data_topView,
         data_topDate,
-        auth : req.session.auth,
       });
     });
   },

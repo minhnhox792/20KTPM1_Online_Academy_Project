@@ -22,7 +22,6 @@ const categoryController = {
       .then(data => {
         console.log(data)
         res.render("category/viewCourse", {
-          auth: req.session.auth,
           data: data,
           active: req.params.id,
           length: totalItems,

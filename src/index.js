@@ -37,12 +37,6 @@ app.use(session({ cookie: { maxAge: 60000 },
   resave: false, 
   saveUninitialized: false}));
 dotenv.config();
-app.use(function  (req, res, next){
-  if(typeof (req.session.auth) ==='undefined'){
-     req.session.auth=false;
-  }
-  next();
-})
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -128,8 +122,12 @@ hbs.handlebars.registerHelper('compareOne', function (arg1) {
 hbs.handlebars.registerHelper('format_number', function(num) {
   return numeral(num).format('0,0') + '$';
 });
-
-
+hbs.handlebars.registerHelper('format_date',function(data){
+  return data.toLocaleDateString("en-US");
+});
+hbs.handlebars.registerHelper('cal_discount',function(price, discount){
+  return price-(price*discount/100);
+});
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource', 'views'));
 

@@ -24,6 +24,7 @@ const userController = {
 
   handlLogin: async (req, res) => {
     try {
+      console.log(req.headers.referrer)
       if (!req.body.username || !req.body.password) {
         return res.render("auth/login", {
           layout: false,
@@ -31,18 +32,33 @@ const userController = {
         });
       }
       
-      const UserInput = await User.findOne({ username: req.body.username });
- 
-      const checkpass=bcrypt.compare(UserInput.password, req.body.password)
-      if (!UserInput ||checkpass===false)
+      const UserInput = await User.findOne({ username: req.body.username })
+      if (!UserInput)
         return res.render("auth/login", {
           layout: false,
           err_mess: "Invalid Username or Password !!!",
         });
-        req.session.auth = true;
-        req.session.role = UserInput.role;
-        req.session._id= UserInput.id;
-      return res.redirect("/");
+      bcrypt.compare(req.body.password, UserInput.password, (err, data) => {
+        //if error than throw error
+        if (err) throw err
+
+        //if both match than you can do anything
+        if (data) {
+          req.session.auth = true;
+          req.session.role = UserInput.role;
+          req.session._id= UserInput._id;
+  
+          // if(typeof req.session.retUrl === 'undefined'){
+          //   res.redirect('/')
+          // }
+         return res.redirect('/');
+        } else {
+          return res.render("auth/login", {
+            layout: false,
+            err_mess: "Invalid Username or Password !!!",
+          })
+        }
+        });
     } catch (err) {
       return res.redirect("login");
     }
@@ -53,8 +69,7 @@ const userController = {
         req.session.role = null;
         req.session._id= null;
         const url = req.headers.referer || '/';
-       
-        res.redirect("/");
+        res.redirect(url);
     }
     catch{
       return res.redirect("home");
