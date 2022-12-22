@@ -17,12 +17,12 @@ const Course = new Schema({
     required: true,
   },
   lecturer: {
-    type: String,
-    maxLength: 50,
+    type: ObjectId,
     required: true,
+    ref: 'User',
   },
   rating: {
-    type: Number
+    type: Number,
   },
   numberStudentRate: {
     type: Number,
