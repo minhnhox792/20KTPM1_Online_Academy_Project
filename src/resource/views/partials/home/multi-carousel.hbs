@@ -226,7 +226,7 @@
 		<div class="row">
 			<div class="col-md-12">	
 				
-				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+				<div id="list" class="carousel slide" data-ride="carousel" data-interval="0">
 					<p id="title-tabs" style="top: 0; left:0;">{{tit}}</p>
 					<!-- Carousel indicators -->
 					<ol class="carousel-indicators">
@@ -239,7 +239,7 @@
 					<div class="carousel-inner">
 						<div class="item carousel-item active">
 							<div class="row">
-								{{#each data}}
+								{{#each data1}}
 								<div class="col-sm-6 col-lg-3 h-100" >
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
@@ -258,7 +258,7 @@
 													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 												</ul>
 											</div>
-											<p class="item-price"><strike>${{this.price}}</strike> <b>${{this.discount}}</b></p>
+											<p class="item-price"><strike>${{format_number this.price}}</strike> <b>${{format_number this.discount}}</b></p>
 											<a href="#" class="btn btn-primary">Add to Cart</a>
 										</div>
 									</div>
@@ -271,40 +271,16 @@
 						</div>
 						<div class="item carousel-item">
 							<div class="row">
-								
-								<div class="col-sm-6 col-lg-3 h-100">
+								{{#each data2}}
+								<div class="col-sm-6 col-lg-3 h-100" >
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
 										<div class="img-box">
 											<img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_f0b606abb6d19089febc9faeeba5bc05/nodejs-development-services.png"
-												class="img-fluid" alt="Macbook">
+												class="img-fluid" alt="">
 										</div>
 										<div class="thumb-content">
-											<h4>Macbook Pro</h4>
-											<p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-												</ul>
-											</div>
-											<a href="#" class="btn btn-primary">Add to Cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 col-lg-3 h-100">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="/examples/images/products/speaker.jpg" class="img-fluid"
-												alt="Speaker">
-										</div>
-										<div class="thumb-content">
-											<h4>Bose Speaker</h4>
-											<p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
+											<h4>{{this.name}}</h4>
 											<div class="star-rating">
 												<ul class="list-inline">
 													<li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -314,47 +290,26 @@
 													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 												</ul>
 											</div>
+											<p class="item-price"><strike>${{format_number this.price}}</strike> <b>${{format_number this.discount}}</b></p>
 											<a href="#" class="btn btn-primary">Add to Cart</a>
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-6 col-lg-3 h-100">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="/examples/images/products/galaxy.jpg" class="img-fluid"
-												alt="Galaxy">
-										</div>
-										<div class="thumb-content">
-											<h4>Samsung Galaxy S8</h4>
-											<p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<a href="#" class="btn btn-primary">Add to Cart</a>
-										</div>
-									</div>
-								</div>
+								{{/each}}
 							</div>
-						</div>
+						</div> 
 						<div class="item carousel-item">
 							<div class="row">
-								<div class="col-sm-6 col-lg-3 h-100">
+								{{#each data3}}
+								<div class="col-sm-6 col-lg-3 h-100" >
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
 										<div class="img-box">
-											<img src="/examples/images/products/iphone.jpg" class="img-fluid"
-												alt="iPhone">
+											<img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_f0b606abb6d19089febc9faeeba5bc05/nodejs-development-services.png"
+												class="img-fluid" alt="">
 										</div>
 										<div class="thumb-content">
-											<h4>Apple iPhone</h4>
-											<p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
+											<h4>{{this.name}}</h4>
 											<div class="star-rating">
 												<ul class="list-inline">
 													<li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -364,14 +319,14 @@
 													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 												</ul>
 											</div>
+											<p class="item-price"><strike>${{format_number this.price}}</strike> <b>${{format_number this.discount}}</b></p>
 											<a href="#" class="btn btn-primary">Add to Cart</a>
 										</div>
 									</div>
 								</div>
-
-
+								{{/each}}
 							</div>
-						</div>
+						</div> 
 					</div>
 					<!-- Carousel controls -->
 					<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
