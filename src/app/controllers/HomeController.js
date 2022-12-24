@@ -55,7 +55,7 @@ const HomeController = {
       list_topView1 = ultil.filter(list_topView1)
       list_topView2 = ultil.filter(list_topView2)
       list_topView3 = ultil.filter(list_topView3)
-      res.render('home', {
+      return res.render('home', {
         list_topView1,
         list_topView2,
         list_topView3,
