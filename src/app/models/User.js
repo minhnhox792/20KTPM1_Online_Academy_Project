@@ -4,6 +4,14 @@ const ObjectId = Schema.Types.ObjectId;
 
 const User = new Schema(
   {
+    name: {
+      type: String,
+      required: true,
+    },
+    actived: {
+      type: Boolean,
+      default: false,
+    },
     username: {
       type: String,
       required: true,
