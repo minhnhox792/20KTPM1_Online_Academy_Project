@@ -7,7 +7,8 @@ import studentAdminRouter from "./admin/student.admin.js";
 import courseAdminRouter from "./admin/course.admin.js";
 import categoryRouter from "./category.js";
 import errorRouter from "./error.js";
-import userRouter from "./user/auth.js";
+import userRouter from "./user/auth.js"; 
+import searchRouter from "./search.js"
 
 export default function (app){
   app.use(async function (req, res, next) {
@@ -25,6 +26,7 @@ export default function (app){
     app.use("/admin/course", courseAdminRouter);
     app.use("/category",categoryRouter);
     app.use("/error", errorRouter);
+    app.use("/search", searchRouter);
     
     app.use((req,res,next) => {
       return res.render('error/404' , {
