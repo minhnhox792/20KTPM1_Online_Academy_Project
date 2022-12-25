@@ -16,6 +16,7 @@ export default function (app){
       req.session.auth = false;
     }
     res.locals.auth = req.session.auth;
+    res.locals.userInfo = req.session.userInfo;
     app.use("/", homeRouter);
     app.use("/user", userRouter);
     app.use("/my-courses", myCoursesRouter);

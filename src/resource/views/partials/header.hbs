@@ -116,8 +116,9 @@
     </ul>
 
     <form class="form-inline my-2 my-lg-0 d-flex" style="width: 800px;" method="get" action="/search">
+    
       <input class="form-control mr-sm-2" type="search" placeholder="Search" name="searchInput"  aria-label="Search" style="width: 600px">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px;">Search</button>
+      <button class="btn btn-primary" type="submit" style="margin-left: 10px;"><i class="fa fa-search"></i></button>
     </form>
     <ul class="navbar-nav">
 
@@ -131,11 +132,23 @@
 
       </li>
       {{else}}
-      <form action="/user/logout" method="post" id="frmlogout"></form>
-      <li class="nav-item active">
-        <a href="javascript: $('#frmlogout').submit()" class="btn btn-warning" type="submit">Logout</a>
-
-      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Welcome, <b>{{userInfo.username}}</b>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/account/profile">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              Profile
+            </a>
+            <div class="dropdown-divider"></div>
+            <form id="frmlogout" action="/account/logout" method="post"></form>
+            <a class="dropdown-item" href="javascript: $('#frmlogout').submit()">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+              Logout
+            </a>
+          </div>
+        </li>
       {{/ifEquals}}
 
 

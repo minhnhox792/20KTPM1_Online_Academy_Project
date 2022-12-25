@@ -118,8 +118,7 @@ const userController = {
         if (data) {
           
           req.session.auth = true;
-          req.session.role = UserInput.role;
-          req.session._id= UserInput._id;
+          req.session.userInfo=UserInput
   
           // if(typeof req.session.retUrl === 'undefined'){
           //   res.redirect('/')
@@ -140,8 +139,7 @@ const userController = {
     try{
       console.log("Go log out")
         req.session.auth = false;
-        req.session.role = null;
-        req.session._id= null;
+        req.session.userInfo=null;
         const url = req.headers.referer || '/';
         res.redirect(url);
     }
