@@ -33,7 +33,6 @@ export default function (app){
     });
     
     app.use((err, req, res, next) => {
-      console.log("go hereeeeeeee")
       return res.render('error/500' , {
         layout: false
       })

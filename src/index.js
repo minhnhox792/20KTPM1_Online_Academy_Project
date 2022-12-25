@@ -15,7 +15,7 @@ import flash from 'connect-flash'
 import session from'express-session'
 import nodemailer from "nodemailer";
 import numeral from 'numeral'
-
+import asyncErrors from 'express-async-errors'
 const app = express();
 const port = 3000;
 
