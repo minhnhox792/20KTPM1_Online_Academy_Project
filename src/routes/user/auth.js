@@ -11,4 +11,8 @@ router.post('/register', check('email').isEmail().withMessage('Please enter a va
 router.get('/verifyOTP', userController.getverifyOTP)
 router.post('/verifyOTP',userController.compareOTP)
 router.post('/logout',userController.handleLogout)
+
+router.get('/changePassword',userController.renderChangePassword)
+router.post('/changePassword',userController.changePassword)
+
 export default router;

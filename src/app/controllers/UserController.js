@@ -16,6 +16,79 @@ const transporter = nodemailer.createTransport(
 );
 
 const userController = {
+
+  renderChangePassword: (req, res) => {
+    let message = req.flash("error");
+    if (message.length > 0) {
+      message = message[0];
+    } else {
+      message = null;
+    }
+    res.render("auth/changePassword" , {
+      error: message
+    })
+  },
+  changePassword: async (req, res) => {
+    try{
+      const data = req.body
+    
+      console.log("Data: ", data)
+      const id_user = req.session._id
+      console.log("Id user: ", id_user)
+      const result = await User.findOne({_id : id_user})
+
+      bcrypt.compare(req.body.current, result.password, (err, dt) => {
+        
+        if (err) {
+          throw new Error('Failed')
+        }
+        if (dt) {
+         
+          
+          if(data.current === data.new){
+            req.flash("error", "Please input a new password !");
+            
+            return res.redirect("/user/changePassword");
+          }
+          if(data.new !== data.confirm){
+            req.flash("error", "New password and confirm password is not match, please check again!");
+            
+            return res.redirect("/user/changePassword");
+          }
+          const salt = bcrypt.genSaltSync(10);
+
+          const hashPass = bcrypt.hashSync(data.new, salt);
+          console.log("password hash: ", hashPass)
+          User.updateOne(
+            { _id: id_user },
+            { $set: { password: hashPass } }
+          )
+          .then(kq =>{
+            if(!kq){
+              console.log("Updated fail")
+              req.flash("error", "Failed, please try again!");
+            
+              return res.redirect("/user/changePassword");
+            }
+            else{
+              console.log("success")
+              return res.redirect("/");
+            }
+          })
+          
+         
+        } else {
+          req.flash("error", "Currrent password is invalid!");
+          return res.redirect("/user/changePassword");
+        }
+      })
+    }
+    catch{
+
+    }
+  },
+
+
   login: (req, res) => {
     res.render("auth/login", {
       layout: false,
@@ -39,11 +112,11 @@ const userController = {
           err_mess: "Invalid Username or Password !!!",
         });
       bcrypt.compare(req.body.password, UserInput.password, (err, data) => {
-        //if error than throw error
         if (err) throw err
 
         //if both match than you can do anything
         if (data) {
+          
           req.session.auth = true;
           req.session.role = UserInput.role;
           req.session._id= UserInput._id;
@@ -65,6 +138,7 @@ const userController = {
   },
   handleLogout: async(req,res)=>{
     try{
+      console.log("Go log out")
         req.session.auth = false;
         req.session.role = null;
         req.session._id= null;

@@ -11,6 +11,12 @@ const User = new Schema(
       maxLength: 50,
       unique: true,
     },
+    fullname: {
+      type: String,
+      required: true,
+      minLength: 6,
+      maxLength: 50,
+    },
     email: {
       type: String,
       required: true,
@@ -21,6 +27,8 @@ const User = new Schema(
     password: {
       type: String,
       required: true,
+      minLength: 6,
+      maxLength: 500,
     },
     gender: {
       type: String,
