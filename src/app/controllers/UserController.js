@@ -33,7 +33,7 @@ const userController = {
       const data = req.body
     
       console.log("Data: ", data)
-      const id_user = req.session._id
+      const id_user = req.session.userInfo._id
       console.log("Id user: ", id_user)
       const result = await User.findOne({_id : id_user})
 
@@ -123,6 +123,7 @@ const userController = {
           // if(typeof req.session.retUrl === 'undefined'){
           //   res.redirect('/')
           // }
+          console.log(req.session.userInfo)
          return res.redirect('/');
         } else {
           return res.render("auth/login", {
@@ -143,7 +144,8 @@ const userController = {
         const url = req.headers.referer || '/';
         res.redirect(url);
     }
-    catch{
+    catch(err){
+      console.log(err)
       return res.redirect("home");
     }
   },
