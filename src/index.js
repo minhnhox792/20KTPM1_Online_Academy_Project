@@ -89,6 +89,7 @@ app.engine(
     helpers: {
       sum: (a, b) => a + b,
     },
+    section: hbs_section(),
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
       allowProtoMethodsByDefault: true,

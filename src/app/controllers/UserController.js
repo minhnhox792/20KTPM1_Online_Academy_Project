@@ -6,6 +6,9 @@ import nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
 import sendgridTransport from "nodemailer-sendgrid-transport";
 import { request } from "express";
+import util from '../../util/mongoose.js'
+import moment from 'moment';
+
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
@@ -123,7 +126,6 @@ const userController = {
           // if(typeof req.session.retUrl === 'undefined'){
           //   res.redirect('/')
           // }
-          console.log(req.session.userInfo)
          return res.redirect('/');
         } else {
           return res.render("auth/login", {
@@ -142,10 +144,9 @@ const userController = {
         req.session.auth = false;
         req.session.userInfo=null;
         const url = req.headers.referer || '/';
-        res.redirect(url);
+        res.redirect(url); 
     }
-    catch(err){
-      console.log(err)
+    catch{
       return res.redirect("home");
     }
   },
@@ -281,6 +282,66 @@ const userController = {
         });
       }
     });
+  },
+
+
+  renderProfile: async(req,res)=>{
+    const user = req.session.userInfo
+    if(!user){
+      return res.redirect('/user/login')
+    }
+    let data = await User.findOne({_id : user._id})
+
+    const day_format = moment(data.dateOfBirth).format('DD/MM/YYYY').toString()
+    const day_joined= moment(data.createdAt).format('DD/MM/YYYY').toString()
+
+    res.render("user/profile", {
+      data: data,
+      day_format: day_format,
+      day_joined: day_joined
+    })
+  },
+  updateProfile: async(req,res)=>{
+    try{
+      const user = req.session.userInfo
+      if(!user){
+        return res.redirect('/user/login')
+      }
+
+      const data = req.body
+    
+      console.log("New data: ", data)
+      const new_date = util.reFormatDate(data.dob)
+      console.log("New date is : ", new_date)
+      User.updateOne(
+        { _id: user._id },
+        { $set: {
+          fullname: req.body.fullname,
+          phone: req.body.phone,
+          gender: req.body.gender,
+          about: req.body.about,
+          dateOfBirth: new_date
+         } }
+      )
+      .then(result => {
+        console.log(result)
+        if(!result){
+          return res.redirect('/')
+        }
+        else{
+          console.log("Done")
+          return res.redirect('/user/profile')
+        }
+      })
+    }
+  
+   
+    
+    catch{
+
+    }
+
+    
   },
 };
 

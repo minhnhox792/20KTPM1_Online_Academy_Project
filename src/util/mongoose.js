@@ -10,5 +10,15 @@ export default {
       return x !== undefined;
     });
     return arr;
+  },
+  dateFormat: (input) => {
+    var datePart = input.match(/\d+/g),
+    year = datePart[0], // get only two digits
+    month = datePart[1], day = datePart[2];
+    return day+'/'+month+'/'+year;
+  },
+  reFormatDate: (s) =>{
+    var b = s.split(/\D/);
+   return b.reverse().join('-');
   }
 };

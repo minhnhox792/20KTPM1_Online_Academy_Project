@@ -1,5 +1,5 @@
 import express from 'express';
-import userController from '../../app/controllers/UserController.js';
+import userController from '../app/controllers/UserController.js';
 import {check} from 'express-validator/check/index.js'
 
 const router = express.Router();
@@ -14,5 +14,7 @@ router.post('/logout',userController.handleLogout)
 
 router.get('/changePassword',userController.renderChangePassword)
 router.post('/changePassword',userController.changePassword)
+router.get('/profile', userController.renderProfile);
+router.post('/profile', userController.updateProfile);
 
 export default router;

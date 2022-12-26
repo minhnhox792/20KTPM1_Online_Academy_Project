@@ -132,14 +132,20 @@
 
       </li>
       {{else}}
+    
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-            Welcome, <b>{{userInfo.username}}</b>
+            Welcome, <b style="font-family: Times New Roman;">{{userInfo.fullname}}</b>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="/user/profile">
               <i class="fa fa-user" aria-hidden="true"></i>
               Profile
+            </a>
+             <a class="dropdown-item" href="/user/changePassword" style="position: relative;">
+              <i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size: 17px; left:18px; position:absolute;"></i>
+
+              <span style="margin-left : 18px;">Change password</span>
             </a>
             <div class="dropdown-divider"></div>
             <form id="frmlogout" action="/user/logout" method="post"></form>
