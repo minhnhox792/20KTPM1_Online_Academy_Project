@@ -134,6 +134,12 @@ hbs.handlebars.registerHelper('format_date',function(data){
 hbs.handlebars.registerHelper('cal_discount',function(price, discount){
   return price-(price*discount/100);
 });
+hbs.handlebars.registerHelper('math_add',function(num1, num2){
+  return num1+num2;
+});
+hbs.handlebars.registerHelper('math_compare',function(num1, num2){
+  return num1<num2;
+});
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource', 'views'));
 

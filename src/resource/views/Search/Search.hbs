@@ -1,16 +1,11 @@
-{{!-- <ul>
-    {{#each searchData}}
-    <li>Name: {{this.name}}</li>
-    <li>Category: {{this.category}}</li>
-    <li>Number student rate: {{this.numberStudentRate}}</li>
-    <li>Price:{{ this.price}}</li>
-    <li>Created at:{{ this.createdAt}}</li>
-    {{/each}}
-</ul> --}}
+
 
 <div class="container-fluid" style="margin-top: 50px;">
 <div class="row">
   <!-- BEGIN SEARCH RESULT -->
+  {{#if searchData}}
+   
+ 
   <div class="col-md-12">
     <div class="grid search">
       <div class="grid-body">
@@ -19,24 +14,17 @@
           <div class="col-md-2">
         
             <hr>
-            
+            <form action="search/postCourse" method="post" id="checkbox">
             <!-- BEGIN FILTER BY CATEGORY -->
             <h4>By category:</h4>
             <div class="checkbox">
-              <label><input type="checkbox" class="icheck"> Application</label>
+              
+                <label><input type="checkbox" id="checkboxname" name="checkboxname"> Application </label>
+                <label><input type="checkbox" id="checkboxcategory" name="checkboxcategory"> Design</label>
+            
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="icheck"> Design</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="icheck"> Desktop</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="icheck"> Management</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" class="icheck"> Mobile</label>
-            </div>
+           
+
             
             <!-- END FILTER BY PRICE -->
           </div>
@@ -49,7 +37,7 @@
              
             </div>
             <!-- END SEARCH INPUT -->
-            <p >Showing all results matching "web development"</p>
+            <p >Showing all results matching "{{this.dataInput}}"</p>
             
             <div class="padding"></div>
             
@@ -60,17 +48,36 @@
                     <div class="dropdown">
                       <div style="height:80px;width:200px">
                         <p style="height: 15px;font-size:17px;">Order by</p>
-                        <select class="form-select" aria-label="Default select example" style="border: 0 !important;height:50px;width:200px">
-                          <option selected value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                        <select  aria-label="Default select example" name="orderby" id="orderby" style="border: 0 !important;height:50px;width:200px">
+                          {{#if orderby}}
+                             {{#ifEquals orderby "0"}}
+                              <option  selected value="0">Most Relevant</option>
+                              <option value="price 1">Highest Rating</option>
+                              <option  value="price -1">Lowest Price</option>
+                              {{/ifEquals}}
+                              {{#ifEquals orderby "1"}}
+                              <option   value="0">Most Relevant</option>
+                              <option selected value="price 1">Highest Rating</option>
+                              <option  value="price -1">Lowest Price</option>
+                              {{/ifEquals}}
+                              {{#ifEquals orderby "-1"}}
+                              <option   value="0">Most Relevant</option>
+                              <option value="price 1">Highest Rating</option>
+                              <option  selected value="price -1">Lowest Price</option>
+                              {{/ifEquals}}
+                          {{else}}
+                               <option  selected value="0">Most Relevant</option>
+                              <option value="price 1">Highest Rating</option>
+                              <option  value="price -1">Lowest Price</option>
+                          {{/if}}
+                         
                         </select>
                       </div>
                     </div>
                 </div>
               </div>
               <!-- END ORDER RESULT -->
-              
+                </form>
               <div class="col-md-6 text-right" style="margin-top:20px ;">
                 <div class="btn-group">
                   <button type="button" class="btn btn-default active"><i class="fa fa-list"></i></button>
@@ -80,21 +87,23 @@
             </div>
             
             <!-- BEGIN TABLE RESULT -->
+             {{#each searchData}}
             <div class="table-responsive">
               <table class="table table-hover">
                 <tbody>
                 <tr>
-                  <td class="number text-center">1</td>
+                
                   <td class="image"><img src="https://via.placeholder.com/400x300/FF8C00" alt=""></td>
                   <td class="product">
-                    <strong>100 day of code: the complete python pro bootstrap for 2023</strong>
-                    <br>This is the product description. This make project so easy and beautiful
+                    <strong> {{this.name}}</strong>
+                    <br>This is the product description. This make project so easy and beautiful {{this.category}}
                     <p style="font-size: 15px;font-weight: 500;margin-bottom:0">This is Lecture</p> 
-                    <span style="color: #f39c12;"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                    <span style="color: #f39c12;">{{this.numberStudentRate}}<i class="fa fa-star"></i></span>
                   </td>
-                  <td style="font-weight: 700;color:red">350000</td>
+                  <td style="font-weight: 700;color:red">{{format_number this.price}}</td>
                   
                 </tr>
+                 {{/each}}
                
               </tbody></table>
             </div>
@@ -108,10 +117,20 @@
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
+              
+              {{#if (math_compare 1 pageNumber) }}
+              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber={{math_add pageNumber -1}}">{{math_add pageNumber -1}}</a></li>
+              <li class="page-item active"><a class="page-link" href="search?searchInput=python&pageNumber={{pageNumber}}">{{pageNumber}}</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber={{math_add pageNumber 1}}">{{math_add pageNumber 1}}</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber={{math_add pageNumber 2}}">{{math_add pageNumber 2}}</a></li>
+              {{else}}
+              <li class="page-item active"><a class="page-link" href="search?searchInput=python&pageNumber=1">1</a></li>
+              <li class="page-item "><a class="page-link" href="search?searchInput=python&pageNumber=2">2</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber=3">3</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber=4">4</a></li>
+              {{/if}}
+              
+           
                 <a class="page-link" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
@@ -125,6 +144,19 @@
       </div>
     </div>
   </div>
+   {{else}}
+    <div class="col-md-12" style="margin-top: 100px;margin-bottom:100px">
+      <div class="grid search">
+        <div class="grid-body">
+          <strong> Sorry, we couldn't find any results </strong><br>
+          Try adjusting your search.
+          <li>Make sure all words are spelled correctly</li>
+          <li>Try different search terms</li>
+          <li>Try more general search terms</li>
+        </div>
+      </div>
+    </div>
+  {{/if}}
   <!-- END SEARCH RESULT -->
 </div>
 </div>
@@ -193,8 +225,26 @@ p{
 }
 </style>
 
-<script type="text/javascript">
+<script >
+const checkbox = document.getElementById('checkbox')
+const ncheck = document.getElementById('checkboxname')
+const ccheck=document.getElementById('checkboxcategory')
+const orderby=document.getElementById('orderby')
+
+ccheck.checked=JSON.parse( {{{ccheck}}})
+ncheck.checked=JSON.parse({{{ncheck}}})
+
+ccheck.addEventListener('change', (event) => {
+    checkbox.submit();
+})
+ncheck.addEventListener('change', (event) => {
+    checkbox.submit();
+})
+orderby.addEventListener("change", function() {
+   checkbox.submit();
+});
 
 </script>
+
 </body>
 </html>

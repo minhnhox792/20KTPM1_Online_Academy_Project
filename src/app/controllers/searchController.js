@@ -1,34 +1,99 @@
+import { render } from "node-sass"
 import Courses from "../models/Courses.js"
-
+const keyWord = {
+    boxName : "",
+    boxCate : "",
+    orderBy : "",
+}
+let dataInput
+let ncheck 
+let ccheck
+const nPerPage=1
 const searchController = {
     searchHandle: async (req, res) => {
         try {
-            const dataInput = req.query.searchInput
-            const searchData = await Courses.find(
-                // { $text: { $search: dataInput, $caseSensitive: true } }
+           dataInput= req.query.searchInput || ""
+           //console.log(req.query.page)
+           const pageNumber=req.query.pageNumber -"0"
+           console.log(pageNumber)
+            let searchData = null
+            console.log(keyWord)
+            
+            if(keyWord.boxName==="on"&&keyWord.boxCate==="on"){
+                ncheck=true,
+                ccheck=true,
+                searchData = await Courses.find(
+                    { $text: { $search: dataInput } }
+               ).sort({ [keyWord.orderBy[0]] : keyWord.orderBy[1]-"0" })
+               .skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0)
+               .limit(nPerPage)
+            }
+            else if(keyWord.boxName==="on"){
+                ncheck=true,
+                ccheck=false,
+                searchData = await Courses.find(
+                    { name: { $regex: dataInput, $options: "$i" } }
+                ).sort({ [keyWord.orderBy[0]] : keyWord.orderBy[1]-"0"})
+                .skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0)
+                .limit(nPerPage)
+            }
+           else if(keyWord.boxCate==="on"){
+                ccheck=true,
+                ncheck=false,
+                searchData = await Courses.find(
                 { category: { $regex: dataInput, $options: "$i" } }
-            ).sort({ "createdAt": 1 })
-            return res.render("Search/Search", {
-                searchData
-            })
+            ).sort({ [keyWord.orderBy[0]] : keyWord.orderBy[1]-"0" })
+            .skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0)
+            .limit(nPerPage)
+           }
+           else{
+            ncheck=false
+            ccheck=false
+            console.log("here")
+            searchData = await Courses.find(
+                 { $text: { $search: dataInput} }
+            ).sort({ [keyWord.orderBy[0]] : keyWord.orderBy[1]-"0" })
+            .skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0)
+            .limit(nPerPage)
+        }
+        return res.render("Search/Search", {
+            dataInput,
+            searchData,
+            ncheck:JSON.stringify(ncheck),
+            ccheck:JSON.stringify(ccheck),
+            orderby:keyWord.orderBy[1],
+            pageNumber
+        })
         } catch (err) {
             console.log("Err: ", err)
             return res.send(err)
         }
     },
     pagination: async (req, res) => { 
-        // /courses?page=5
-    //    const totalPage = await Courses.count()
+        // /courses?page=
         const pageNumber = req.query.page // 5
-        const nPerPage = 10;
+        const nPerPage = await Courses.count()
         const pageData =  Courses.find()
-            .skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0)
-            .limit(nPerPage)
+           
         
         
         return pageData;
 
-    }
+    },
+    postCourse:async(req,res)=>{
+        try{
+        console.log("ovooo")
+        console.log(req.body)
+        keyWord.boxCate=req.body.checkboxcategory
+        keyWord.boxName = req.body.checkboxname
+        keyWord.orderBy = req.body?.orderby.split(" ") 
+       return res.redirect(`/search?searchInput=${dataInput}&pageNumber=1`)
+      
+        }catch{
+          console.log("Err from getNameCourse")
+          return res.redirect("home")
+        }
+      },
 }
 
 export default searchController

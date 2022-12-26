@@ -150,6 +150,7 @@ const userController = {
       return res.redirect("home");
     }
   },
+ 
   register: (req, res) => {
     let message = req.flash("error");
     if (message.length > 0) {
