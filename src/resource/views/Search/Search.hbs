@@ -19,8 +19,8 @@
             <h4>By category:</h4>
             <div class="checkbox">
               
-                <label><input type="checkbox" id="checkboxname" name="checkboxname"> Application </label>
-                <label><input type="checkbox" id="checkboxcategory" name="checkboxcategory"> Design</label>
+                <label><input type="checkbox" id="checkboxname" name="checkboxname"> Name </label><br>
+                <label><input type="checkbox" id="checkboxcategory" name="checkboxcategory"> Category</label>
             
             </div>
            
@@ -52,23 +52,23 @@
                           {{#if orderby}}
                              {{#ifEquals orderby "0"}}
                               <option  selected value="0">Most Relevant</option>
-                              <option value="price 1">Highest Rating</option>
-                              <option  value="price -1">Lowest Price</option>
-                              {{/ifEquals}}
-                              {{#ifEquals orderby "1"}}
-                              <option   value="0">Most Relevant</option>
-                              <option selected value="price 1">Highest Rating</option>
-                              <option  value="price -1">Lowest Price</option>
+                              <option value="numberStudentRate -1">Highest Rating</option>
+                              <option  value="price 1">Lowest Price</option>
                               {{/ifEquals}}
                               {{#ifEquals orderby "-1"}}
                               <option   value="0">Most Relevant</option>
-                              <option value="price 1">Highest Rating</option>
-                              <option  selected value="price -1">Lowest Price</option>
+                              <option selected value="numberStudentRate -1">Highest Rating</option>
+                              <option  value="price 1">Lowest Price</option>
+                              {{/ifEquals}}
+                              {{#ifEquals orderby "1"}}
+                              <option   value="0">Most Relevant</option>
+                              <option value="numberStudentRate -1">Highest Rating</option>
+                              <option  selected value="price 1">Lowest Price</option>
                               {{/ifEquals}}
                           {{else}}
                                <option  selected value="0">Most Relevant</option>
-                              <option value="price 1">Highest Rating</option>
-                              <option  value="price -1">Lowest Price</option>
+                              <option value="numberStudentRate -1">Highest Rating</option>
+                              <option  value="price 1">Lowest Price</option>
                           {{/if}}
                          
                         </select>
