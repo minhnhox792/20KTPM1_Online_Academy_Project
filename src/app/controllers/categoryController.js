@@ -1,6 +1,6 @@
 import Course from '../models/Courses.js';
 import ultil from '../../util/mongoose.js';
-const ITEM_PER_PAGE = 1
+const ITEM_PER_PAGE = 3
 const categoryController = {
     view: (req, res) => {
       const category = req.params.id

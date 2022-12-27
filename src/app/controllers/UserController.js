@@ -6,9 +6,11 @@ import nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
 import sendgridTransport from "nodemailer-sendgrid-transport";
 import { request } from "express";
-import util from '../../util/mongoose.js'
-import moment from 'moment';
-import Course from "../models/Courses.js"
+import util from "../../util/mongoose.js";
+import moment from "moment";
+import Course from "../models/Courses.js";
+const ITEM_PER_PAGE = 4;
+
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
@@ -19,7 +21,6 @@ const transporter = nodemailer.createTransport(
 );
 
 const userController = {
-
   renderChangePassword: (req, res) => {
     let message = req.flash("error");
     if (message.length > 0) {
@@ -27,35 +28,35 @@ const userController = {
     } else {
       message = null;
     }
-    res.render("auth/changePassword" , {
-      error: message
-    })
+    res.render("auth/changePassword", {
+      error: message,
+    });
   },
   changePassword: async (req, res) => {
-    try{
-      const data = req.body
-    
-      console.log("Data: ", data)
-      const id_user = req.session.userInfo._id
-      console.log("Id user: ", id_user)
-      const result = await User.findOne({_id : id_user})
+    try {
+      const data = req.body;
+
+      console.log("Data: ", data);
+      const id_user = req.session.userInfo._id;
+      console.log("Id user: ", id_user);
+      const result = await User.findOne({ _id: id_user });
 
       bcrypt.compare(req.body.current, result.password, (err, dt) => {
-        
         if (err) {
-          throw new Error('Failed')
+          throw new Error("Failed");
         }
         if (dt) {
-         
-          
-          if(data.current === data.new){
+          if (data.current === data.new) {
             req.flash("error", "Please input a new password !");
-            
+
             return res.redirect("/user/changePassword");
           }
-          if(data.new !== data.confirm){
-            req.flash("error", "New password and confirm password is not match, please check again!");
-            
+          if (data.new !== data.confirm) {
+            req.flash(
+              "error",
+              "New password and confirm password is not match, please check again!"
+            );
+
             return res.redirect("/user/changePassword");
           }
           const salt = bcrypt.genSaltSync(10);
@@ -64,30 +65,22 @@ const userController = {
           User.updateOne(
             { _id: id_user },
             { $set: { password: hashPass } }
-          )
-          .then(kq =>{
-            if(!kq){
+          ).then((kq) => {
+            if (!kq) {
               req.flash("error", "Failed, please try again!");
-            
+
               return res.redirect("/user/changePassword");
-            }
-            else{
+            } else {
               return res.redirect("/");
             }
-          })
-          
-         
+          });
         } else {
           req.flash("error", "Currrent password is invalid!");
           return res.redirect("/user/changePassword");
         }
-      })
-    }
-    catch{
-
-    }
+      });
+    } catch {}
   },
-
 
   login: (req, res) => {
     res.render("auth/login", {
@@ -97,57 +90,55 @@ const userController = {
 
   handlLogin: async (req, res) => {
     try {
-      console.log(req.headers.referrer)
+      console.log(req.headers.referrer);
       if (!req.body.username || !req.body.password) {
         return res.render("auth/login", {
           layout: false,
           err_mess: "Username or Password is empty !!!",
         });
       }
-      
-      const UserInput = await User.findOne({ username: req.body.username })
+
+      const UserInput = await User.findOne({ username: req.body.username });
       if (!UserInput)
         return res.render("auth/login", {
           layout: false,
           err_mess: "Invalid Username or Password !!!",
         });
       bcrypt.compare(req.body.password, UserInput.password, (err, data) => {
-        if (err) throw err
+        if (err) throw err;
 
         //if both match than you can do anything
         if (data) {
-          
           req.session.auth = true;
-          req.session.userInfo=UserInput
-  
+          req.session.userInfo = UserInput;
+
           // if(typeof req.session.retUrl === 'undefined'){
           //   res.redirect('/')
           // }
-         return res.redirect('/');
+          return res.redirect("/");
         } else {
           return res.render("auth/login", {
             layout: false,
             err_mess: "Invalid Username or Password !!!",
-          })
+          });
         }
-        });
+      });
     } catch (err) {
       return res.redirect("login");
     }
   },
-  handleLogout: async(req,res)=>{
-    try{
-      console.log("Go log out")
-        req.session.auth = false;
-        req.session.userInfo=null;
-        const url = req.headers.referer || '/';
-        res.redirect(url); 
-    }
-    catch{
+  handleLogout: async (req, res) => {
+    try {
+      console.log("Go log out");
+      req.session.auth = false;
+      req.session.userInfo = null;
+      const url = req.headers.referer || "/";
+      res.redirect(url);
+    } catch {
       return res.redirect("home");
     }
   },
- 
+
   register: (req, res) => {
     let message = req.flash("error");
     if (message.length > 0) {
@@ -177,10 +168,9 @@ const userController = {
     const username = req.session.userOTP;
 
     UserOTP.findOne({ username: username }).then((result) => {
-     
       if (result === null) {
         req.flash("error", "OTP number is not exist !");
-        
+
         return res.redirect("verifyOTP");
       } else {
         if (OTP == result.otp) {
@@ -188,7 +178,6 @@ const userController = {
             { username: username },
             { $set: { verified: true } }
           ).then((data) => {
-           
             return res.redirect("login");
           });
         } else {
@@ -244,7 +233,7 @@ const userController = {
             };
             transporter.sendMail(info_mail).then((mess) => {
               if (!mess) {
-                return
+                return;
               } else {
                 console.log("Email sent...", mess);
                 const user = new User({
@@ -265,8 +254,8 @@ const userController = {
                 user.save();
                 UserOTP.deleteMany({ username: session_username }).then(() => {
                   otp_info.save();
-                })
-                
+                });
+
                 return res.redirect("verifyOTP");
               }
             });
@@ -276,124 +265,285 @@ const userController = {
     });
   },
 
-
-  renderProfile: async(req,res)=>{
-    const user = req.session.userInfo
-    if(!user){
-      return res.redirect('/user/login')
+  renderProfile: async (req, res) => {
+    const user = req.session.userInfo;
+    if (!user) {
+      return res.redirect("/user/login");
     }
-    let data = await User.findOne({_id : user._id})
+    let data = await User.findOne({ _id: user._id });
 
-    const day_format = moment(data.dateOfBirth).format('DD/MM/YYYY').toString()
-    const day_joined= moment(data.createdAt).format('DD/MM/YYYY').toString()
+    const day_format = moment(data.dateOfBirth).format("DD/MM/YYYY").toString();
+    const day_joined = moment(data.createdAt).format("DD/MM/YYYY").toString();
 
     res.render("user/profile", {
       data: data,
       day_format: day_format,
-      day_joined: day_joined
-    })
+      day_joined: day_joined,
+    });
   },
-  updateProfile: async(req,res)=>{
-    try{
-      const user = req.session.userInfo
-      if(!user){
-        return res.redirect('/user/login')
+  updateProfile: async (req, res) => {
+    try {
+      const user = req.session.userInfo;
+      if (!user) {
+        return res.redirect("/user/login");
       }
 
-      const data = req.body
-    
-      console.log("New data: ", data)
-      const new_date = util.reFormatDate(data.dob)
-      console.log("New date is : ", new_date)
+      const data = req.body;
+
+      console.log("New data: ", data);
+      const new_date = util.reFormatDate(data.dob);
+      console.log("New date is : ", new_date);
       User.updateOne(
         { _id: user._id },
-        { $set: {
-          fullname: req.body.fullname,
-          phone: req.body.phone,
-          gender: req.body.gender,
-          about: req.body.about,
-          dateOfBirth: new_date
-         } }
-      )
-      .then(result => {
-        if(!result){
-          return res.redirect('/')
+        {
+          $set: {
+            fullname: req.body.fullname,
+            phone: req.body.phone,
+            gender: req.body.gender,
+            about: req.body.about,
+            dateOfBirth: new_date,
+          },
         }
-        else{
-          return res.redirect('/user/profile')
+      ).then((result) => {
+        if (!result) {
+          return res.redirect("/");
+        } else {
+          return res.redirect("/user/profile");
         }
-      })
-    }
-  
-   
-    
-    catch{
-
-    }
-
-    
+      });
+    } catch {}
   },
-  addProduct: async (req,res) =>{
-    try{
-      if(!req.session.userInfo){
-        return res.redirect('/user/login')
+  addProduct: async (req, res) => {
+    try {
+      if (!req.session.userInfo) {
+        return res.redirect("/user/login");
       }
-      const data  = req.session.userInfo
-      const id_user = data._id
-      console.log(data)
-      const user = await User.findOne({_id :id_user})
-      if(!user){
-        return res.redirect('/user/register')
+      const data = req.session.userInfo;
+      const id_user = data._id;
+      console.log(data);
+      const user = await User.findOne({ _id: id_user });
+      if (!user) {
+        return res.redirect("/user/register");
       }
-      if(user.role !== 'Student'){
-        return res.redirect('/error/500')
+      if (user.role !== "Student") {
+        return res.redirect("/error/500");
       }
       const id = req.params.id;
-      if(user.courseList.includes(id)){
-        return res.redirect("/")
+      if (user.courseList.includes(id)) {
+        return res.redirect("/");
       }
-      user.courseList.push(id)
+      user.courseList.push(id);
       const updated = await User.updateOne(
         { _id: id_user },
         { $set: { courseList: user.courseList } }
-      )
-      return res.redirect("/")
-      
-    }
-    catch{
-      return res.redirect("/error/500")
+      );
+      const course = await Course.find({ _id: id });
+      console.log(22222222, course);
+      const totalBuy = course[0].totalBuy + 1;
+      const quantityBuy = course[0].quantityBuy + 1;
+      const list = course[0].studentList;
+      console.log("First :", list);
+
+      if (!course[0].studentList.includes(id_user)) {
+        course[0].studentList.push(id_user);
+      }
+
+      console.log("After :", course[0].studentList);
+
+      const updated_course = await Course.updateOne(
+        { _id: id },
+        {
+          $set: {
+            totalBuy: totalBuy,
+            quantityBuy: quantityBuy,
+            studentList: course[0].studentList,
+          },
+        }
+      );
+      console.log("Doneeeeeeeee");
+      return res.redirect("/");
+    } catch {
+      return res.redirect("/error/500");
     }
   },
-  addFavoriteList: async (req,res) =>{
-    try{
-      if(!req.session.userInfo){
-        return res.redirect('/user/login')
+
+  addFavoriteList: async (req, res) => {
+    try {
+      if (!req.session.userInfo) {
+        return res.redirect("/user/login");
       }
-      const data  = req.session.userInfo
-      const id_user = data._id
-      console.log(data)
-      const user = await User.findOne({_id :id_user})
-      if(!user){
-        return res.redirect('/user/register')
+      const data = req.session.userInfo;
+      const id_user = data._id;
+      console.log(data);
+      const user = await User.findOne({ _id: id_user });
+      if (!user) {
+        return res.redirect("/user/register");
       }
-      if(user.role !== 'Student'){
-        return res.redirect('/error/500')
+      if (user.role !== "Student") {
+        return res.redirect("/error/500");
       }
       const id = req.params.id;
-      if(user.favoriteList.includes(id)){
-        return res.redirect("/")
+      if (user.favoriteList.includes(id)) {
+        return res.redirect("/");
       }
-      user.favoriteList.push(id)
+      user.favoriteList.push(id);
       const updated = await User.updateOne(
         { _id: id_user },
         { $set: { favoriteList: user.favoriteList } }
+      );
+      return res.redirect("/");
+    } catch {
+      return res.redirect("/error/500");
+    }
+  },
+
+  renderMyCourses: async (req, res) => {
+    try {
+      if (!req.session.userInfo) {
+        return res.redirect("/user/login");
+      }
+      const data = req.session.userInfo;
+      const id_user = data._id;
+      const data_user = await User.findOne({ _id: id_user });
+
+      const list_courses = data_user.courseList;
+      console.log(list_courses);
+
+      const courses = await Course.find({});
+
+      let new_array = [];
+      for (let value of list_courses) {
+        const result = courses.filter((item) => {
+          return item._id.toString() == value.toString();
+        });
+
+        if (result.length != 0) {
+          new_array.push(result[0]);
+        }
+      }
+
+      const page = +req.query.page || 1;
+      if (page == null) {
+        return;
+      }
+      let totalItems = new_array.length;
+
+      let page_data = util.paginate(new_array, ITEM_PER_PAGE, page);
+      res.render("user/listCourses", {
+        data: page_data,
+        length: totalItems,
+        currentPage: page,
+        hasNextPage: ITEM_PER_PAGE * page < totalItems,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalItems / ITEM_PER_PAGE),
+      });
+    } catch {
+      return res.redirect("/error/500");
+    }
+  },
+  renderMyFavoriteList: async (req, res) => {
+    try {
+      if (!req.session.userInfo) {
+        return res.redirect("/user/login");
+      }
+      const data = req.session.userInfo;
+      const id_user = data._id;
+      const data_user = await User.findOne({ _id: id_user });
+
+      const list_courses = data_user.favoriteList;
+
+      const courses = await Course.find({});
+
+      let new_array = [];
+      for (let value of list_courses) {
+        const result = courses.filter((item) => {
+          return item._id.toString() == value.toString();
+        });
+
+        if (result.length != 0) {
+          new_array.push(result[0]);
+        }
+      }
+      const page = +req.query.page || 1;
+      if (page == null) {
+        return;
+      }
+      let totalItems = new_array.length;
+
+      let page_data = util.paginate(new_array, ITEM_PER_PAGE, page);
+      res.render("user/favoriteCourses", {
+        data: page_data,
+        length: totalItems,
+        currentPage: page,
+        hasNextPage: ITEM_PER_PAGE * page < totalItems,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalItems / ITEM_PER_PAGE),
+      });
+    } catch {
+      return res.redirect("/error/500");
+    }
+  },
+
+
+  deleteCourse: async (req, res) => {
+    // try {
+      const id_course = req.params.id;
+      if(!id_course){
+        return res.redirect("/error/500");
+      }
+      console.log("Course id : " , id_course)
+
+      const data = req.session.userInfo;
+      const id_user = data._id;
+
+      const findCourse = await User.findOne({_id : id_user})
+
+      console.log("List course: ", findCourse.favoriteList)
+      const filtered = findCourse.favoriteList.filter((item) => {
+        return item.toString() != id_course.toString();
+      })
+
+      const courses = await Course.find({});
+      let new_array = [];
+      for (let value of filtered) {
+        const result = courses.filter((item) => {
+          return item._id.toString() == value.toString();
+        });
+
+        if (result.length != 0) {
+          new_array.push(result[0]);
+        }
+      }
+      console.log("After filter: ",filtered)
+      const deletecourse = await User.updateOne(
+        { _id: id_user },
+        { $set: { favoriteList: filtered } }
       )
-      return res.redirect("/")
-      
-    }
-    catch{
-      return res.redirect("/error/500")
-    }
+
+      const page = +req.query.page || 1;
+      if (page == null) {
+        return;
+      }
+      let totalItems = new_array.length;
+
+      let page_data = util.paginate(new_array, ITEM_PER_PAGE, page);
+      res.render("user/favoriteCourses", {
+        data: page_data,
+        length: totalItems,
+        currentPage: page,
+        hasNextPage: ITEM_PER_PAGE * page < totalItems,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalItems / ITEM_PER_PAGE),
+      });
+    // } catch {
+    //   return res.redirect("/error/500");
+    // }
   },
 };
 

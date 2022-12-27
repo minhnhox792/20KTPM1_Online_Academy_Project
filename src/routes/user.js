@@ -19,5 +19,9 @@ router.post('/profile', userController.updateProfile);
 
 router.post('/buyProduct/:id', userController.addProduct)
 router.post('/favoriteList/:id', userController.addFavoriteList)
+router.get('/myCourse', userController.renderMyCourses)
+
+router.get('/myFavoriteList', userController.renderMyFavoriteList)
+router.post('/myFavoriteList/:id', userController.deleteCourse)
 
 export default router;

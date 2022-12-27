@@ -111,6 +111,10 @@ const Course = new Schema({
   },
   quantityBuy:{
     type: Number,
+  },
+  totalBuy:{
+    type: Number,
+    default: 0
   }
 });
 

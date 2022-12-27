@@ -33,11 +33,11 @@ export default function (app){
       })
     });
     
-    app.use((err, req, res, next) => {
-      return res.render('error/500' , {
-        layout: false
-      })
-    })
+    // app.use((err, req, res, next) => {
+    //   return res.render('error/500' , {
+    //     layout: false
+    //   })
+    // })
 
 
 
