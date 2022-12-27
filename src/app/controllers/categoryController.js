@@ -8,7 +8,6 @@ const categoryController = {
       if(page == null){
         return;
       }
-      console.log("page: ", page)
       let totalItems;
       Course.find({category: category})
       .count()
@@ -20,7 +19,6 @@ const categoryController = {
       })
      
       .then(data => {
-        console.log(data)
         res.render("category/viewCourse", {
           data: data,
           active: req.params.id,

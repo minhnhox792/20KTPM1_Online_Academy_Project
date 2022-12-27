@@ -17,4 +17,5 @@ router.post('/changePassword',userController.changePassword)
 router.get('/profile', userController.renderProfile);
 router.post('/profile', userController.updateProfile);
 
+router.post('/buyProduct/:id', userController.addProduct)
 export default router;

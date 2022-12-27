@@ -8,7 +8,7 @@ import sendgridTransport from "nodemailer-sendgrid-transport";
 import { request } from "express";
 import util from '../../util/mongoose.js'
 import moment from 'moment';
-
+import Course from "../models/Courses.js"
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
@@ -61,20 +61,17 @@ const userController = {
           const salt = bcrypt.genSaltSync(10);
 
           const hashPass = bcrypt.hashSync(data.new, salt);
-          console.log("password hash: ", hashPass)
           User.updateOne(
             { _id: id_user },
             { $set: { password: hashPass } }
           )
           .then(kq =>{
             if(!kq){
-              console.log("Updated fail")
               req.flash("error", "Failed, please try again!");
             
               return res.redirect("/user/changePassword");
             }
             else{
-              console.log("success")
               return res.redirect("/");
             }
           })
@@ -211,7 +208,6 @@ const userController = {
       });
     }
     User.findOne({ username: req.body.username }).then((result) => {
-      //console.log("Find by username: ", result);
       if (result !== null) {
         req.flash(
           "error",
@@ -219,9 +215,7 @@ const userController = {
         );
         return res.redirect("register");
       } else {
-        //console.log(222222);
         User.findOne({ email: req.body.email }).then((data) => {
-          //console.log(33333);
           if (data !== null) {
             req.flash(
               "error",
@@ -229,7 +223,6 @@ const userController = {
             );
             return res.redirect("register");
           } else {
-            //console.log(4444);
             if (req.body.password !== req.body.passwordConfirmation) {
               req.flash(
                 "error",
@@ -251,8 +244,7 @@ const userController = {
             };
             transporter.sendMail(info_mail).then((mess) => {
               if (!mess) {
-                console.log("Failed");
-                console.log("go here");
+                return
               } else {
                 console.log("Email sent...", mess);
                 const user = new User({
@@ -268,7 +260,6 @@ const userController = {
                   otp: otp,
                 });
                 const session_username = req.body.username;
-                console.log(session_username);
                 req.session.userOTP = session_username;
 
                 user.save();
@@ -325,12 +316,10 @@ const userController = {
          } }
       )
       .then(result => {
-        console.log(result)
         if(!result){
           return res.redirect('/')
         }
         else{
-          console.log("Done")
           return res.redirect('/user/profile')
         }
       })
@@ -343,6 +332,37 @@ const userController = {
     }
 
     
+  },
+  addProduct: async (req,res) =>{
+    try{
+      if(!req.session.userInfo){
+        return res.redirect('/user/login')
+      }
+      const data  = req.session.userInfo
+      const id_user = data._id
+      console.log(data)
+      const user = await User.findOne({_id :id_user})
+      if(!user){
+        return res.redirect('/user/register')
+      }
+      if(user.role !== 'Student'){
+        return res.redirect('/error/500')
+      }
+      const id = req.params.id;
+      if(user.courseList.includes(id)){
+        return res.redirect("/")
+      }
+      user.courseList.push(id)
+      const updated = await User.updateOne(
+        { _id: id_user },
+        { $set: { courseList: user.courseList } }
+      )
+      return res.redirect("/")
+      
+    }
+    catch{
+      return res.redirect("/error/500")
+    }
   },
 };
 

@@ -79,14 +79,14 @@ const HomeController = {
         if(database.length != 0){
 
           const topCategory = database.sort((a, b) => b.totalBuy - a.totalBuy).slice(0,4)
-          console.log(topCategory)
+        
           return res.render('home', {
-            list_topView1,
-            list_topView2,
-            list_topView3,
-            list_topDate1,
-            list_topDate2,
-            list_topDate3,
+            list_topView1: ultil.getId(list_topView1),
+            list_topView2: ultil.getId(list_topView2),
+            list_topView3: ultil.getId(list_topView3),
+            list_topDate1: ultil.getId(list_topDate1),
+            list_topDate2: ultil.getId(list_topDate2),
+            list_topDate3: ultil.getId(list_topDate3),
             data_viewWeekly,
             topCategory
           });

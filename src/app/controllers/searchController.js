@@ -13,11 +13,8 @@ const searchController = {
     searchHandle: async (req, res) => {
         try {
            dataInput= req.query.searchInput || ""
-           //console.log(req.query.page)
            const pageNumber=req.query.pageNumber -"0"
-           console.log(pageNumber)
             let searchData = null
-            console.log(keyWord)
             
             if(keyWord.boxName==="on"&&keyWord.boxCate==="on"){
                 ncheck=true,
@@ -49,7 +46,6 @@ const searchController = {
            else{
             ncheck=false
             ccheck=false
-            console.log("here")
             searchData = await Courses.find(
                  { $text: { $search: dataInput} }
             ).sort({ [keyWord.orderBy[0]] : keyWord.orderBy[1]-"0" })
@@ -82,15 +78,12 @@ const searchController = {
     },
     postCourse:async(req,res)=>{
         try{
-        console.log("ovooo")
-        console.log(req.body)
         keyWord.boxCate=req.body.checkboxcategory
         keyWord.boxName = req.body.checkboxname
         keyWord.orderBy = req.body?.orderby.split(" ") 
        return res.redirect(`/search?searchInput=${dataInput}&pageNumber=1`)
       
         }catch{
-          console.log("Err from getNameCourse")
           return res.redirect("home")
         }
       },

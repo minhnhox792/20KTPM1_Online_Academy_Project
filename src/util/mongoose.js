@@ -20,5 +20,14 @@ export default {
   reFormatDate: (s) =>{
     var b = s.split(/\D/);
    return b.reverse().join('-');
+  },
+  getId: (s) =>{
+    let new_array = []
+    for(var value of s){
+      value._id = value._id.toString()
+      new_array.push(value)
+    }
+
+    return new_array
   }
 };
