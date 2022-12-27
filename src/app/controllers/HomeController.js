@@ -4,13 +4,17 @@ import moment from 'moment';
 const HomeController = {
   
   index: async (req, res) => {
+    let pageNumber=req.query.pageNumber || 1
+    const data_caro = await Course.find().skip(pageNumber > 0 ? ((pageNumber - 1) * 4) : 0)
+    .limit(4)
+    const top4 = await Course.find().sort(({ viewWeekly: -1 }))
+    .limit(4)
     Course.find({}).then((courses) => {
       const top_viewWeekly = courses.sort((a, b) => b.viewWeekly - a.viewWeekly);
       const data_viewWeekly = ultil.multipleMongooseToOject(top_viewWeekly.slice(0, 4));
       const top_view = courses.sort((a, b) => b.view - a.view);
       const data_topView = ultil.multipleMongooseToOject(top_view.slice(0, 10));
-
-      const top_date = courses.sort((a, b) => b.createdAt - a.createdAt);
+      const top_date = courses.sort((a, b) => a.createdAt - b.createdAt);
       const data_topDate = ultil.multipleMongooseToOject(top_date.slice(0, 10));
       let list_topDate1 = [];
       let list_topDate2 = [];
@@ -88,8 +92,11 @@ const HomeController = {
             list_topDate2,
             list_topDate3,
             data_viewWeekly,
-            topCategory
-          });
+            topCategory,
+            top4,
+            pageNumber:pageNumber-"0",
+            data_caro,
+              });
         }
       })
 

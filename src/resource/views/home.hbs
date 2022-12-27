@@ -24,7 +24,8 @@
                 Web Development</p>
             </div>
           </div>
-          {{>home/cardList tit = "COURSES"}}
+        
+          {{>home/cardList tit = "COURSES" data_caro=data_caro}}
         </div>
 
         {{!-- <div id="menu1" class="tab-pane fade">
@@ -75,16 +76,16 @@
 </div>
 
 
-<div class="container">
-  {{>home/topCoursesInWeek tit= "Top 4 the most popular courses" data = this.data_viewWeekly}}
+<div class="container-fluid" >
+  {{>home/topCoursesInWeek id="popular" tit= "Top 4 the most popular courses" data=top4 }}
+</div>
+
+<div class="container-xl" >
+  {{>home/multi-carousel id="highest" tit= "Top 10 the Highest viewed courses" data1 = this.list_topView1 data2 = this.list_topView2 data3 = this.list_topView3 }}
 </div>
 
 <div class="container">
-  {{>home/multi-carousel tit= "Top 10 the highest viewed courses" data1 = this.list_topView1 data2 = this.list_topView2 data3 = this.list_topView3}}
-</div>
-
-<div class="container">
-  {{>home/multi-carousel tit= "Top 10 lastest courses" data1 = this.list_topDate1 data2 = this.list_topDate2 data3 = this.list_topDate3}}
+  {{>home/multi-carousel id="newest" tit= "Top 10 Newest courses" data1 = this.list_topDate1 data2 = this.list_topDate2 data3 = this.list_topDate3 }}
 </div>
 
 {{>home/listCatery data = topCategory}}
