@@ -105,6 +105,13 @@ const Course = new Schema({
     type: Date,
     default: Date.now(),
   },
+
+  viewWeekly:{
+    type: Number,
+  },
+  quantityBuy:{
+    type: Number,
+  }
 });
 
 

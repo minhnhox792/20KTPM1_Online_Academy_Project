@@ -76,7 +76,7 @@
 
 
 <div class="container">
-  {{>home/topCoursesInWeek tit= "Top 4 the most popular courses"}}
+  {{>home/topCoursesInWeek tit= "Top 4 the most popular courses" data = this.data_viewWeekly}}
 </div>
 
 <div class="container">
@@ -87,7 +87,7 @@
   {{>home/multi-carousel tit= "Top 10 lastest courses" data1 = this.list_topDate1 data2 = this.list_topDate2 data3 = this.list_topDate3}}
 </div>
 
-{{>home/listCatery}}
+{{>home/listCatery data = topCategory}}
 <style>
   body {
     font-family: Arial, Helvetica, sans-serif;

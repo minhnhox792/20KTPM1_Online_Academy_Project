@@ -1,14 +1,16 @@
 import Course from '../models/Courses.js';
 import ultil from '../../util/mongoose.js';
+import moment from 'moment';
 const HomeController = {
   
   index: async (req, res) => {
     Course.find({}).then((courses) => {
-      const top_view = courses.sort((a, b) => a.view - b.view);
+      const top_viewWeekly = courses.sort((a, b) => b.viewWeekly - a.viewWeekly);
+      const data_viewWeekly = ultil.multipleMongooseToOject(top_viewWeekly.slice(0, 4));
+      const top_view = courses.sort((a, b) => b.view - a.view);
       const data_topView = ultil.multipleMongooseToOject(top_view.slice(0, 10));
 
-      const top_date = courses.sort((a, b) => a.createdAt - b.createdAt);
-
+      const top_date = courses.sort((a, b) => b.createdAt - a.createdAt);
       const data_topDate = ultil.multipleMongooseToOject(top_date.slice(0, 10));
       let list_topDate1 = [];
       let list_topDate2 = [];
@@ -55,14 +57,44 @@ const HomeController = {
       list_topView1 = ultil.filter(list_topView1)
       list_topView2 = ultil.filter(list_topView2)
       list_topView3 = ultil.filter(list_topView3)
-      return res.render('home', {
-        list_topView1,
-        list_topView2,
-        list_topView3,
-        list_topDate1,
-        list_topDate2,
-        list_topDate3
-      });
+
+
+      Course.aggregate(
+        [
+          {
+            $group: {
+              _id: '$category',
+
+              totalBuy: {
+               
+                $sum: 
+                  { '$toInt': '$quantityBuy' }
+                
+              }
+            }
+          }
+        ]
+      )
+      .then(database =>{
+        if(database.length != 0){
+
+          const topCategory = database.sort((a, b) => b.totalBuy - a.totalBuy).slice(0,4)
+          console.log(topCategory)
+          return res.render('home', {
+            list_topView1,
+            list_topView2,
+            list_topView3,
+            list_topDate1,
+            list_topDate2,
+            list_topDate3,
+            data_viewWeekly,
+            topCategory
+          });
+        }
+      })
+
+
+    
     });
   },
 };

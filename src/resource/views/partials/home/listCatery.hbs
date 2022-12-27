@@ -7,35 +7,15 @@
             <!-- Grid row -->
             <div class="container-fluid">
                 <div class="row" >
+                    {{#each data}}
                     <div class="col" style="height: 300px;width: 250px; ">
                         <a href="">
                         <img src="https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg?fbclid=IwAR1RV5j8qz5orm3KOIRP2ClQvzHvNXMH99ciIEak-SXyhEKOs_UD1R05VHQ"
                             alt="" style="height: 250px;width: 250px;">
-                        <p>Cateloty</p>
+                        <p>{{this._id}}</p>
                         </a>
                     </div>
-                    <div class="col" style="height: 300px; ">
-                        <a href="">
-                        <img src="https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg?fbclid=IwAR1RV5j8qz5orm3KOIRP2ClQvzHvNXMH99ciIEak-SXyhEKOs_UD1R05VHQ"
-                            alt="" style="height: 250px;width: 250px;">
-                        <p>Cateloty</p>
-                        </a>
-                    </div>
-                    <div class="col" style="height: 300px; ">
-                        <a href="">
-                        <img src="https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg?fbclid=IwAR1RV5j8qz5orm3KOIRP2ClQvzHvNXMH99ciIEak-SXyhEKOs_UD1R05VHQ"
-                            alt="" style="height: 250px;width: 250px;">
-                        <p>Cateloty</p>
-                        </a>
-                    </div>
-                    <div class="col" style="height: 300px; ">
-                        <a href="">
-                        <img src="https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg?fbclid=IwAR1RV5j8qz5orm3KOIRP2ClQvzHvNXMH99ciIEak-SXyhEKOs_UD1R05VHQ"
-                            alt="" style="height: 250px;width: 250px;">
-                        <p>Cateloty</p>
-                        </a>
-                    </div>
-
+                    {{/each}}
                 </div>
             </div>
             <!-- Grid row -->
