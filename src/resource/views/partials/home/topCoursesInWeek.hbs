@@ -257,8 +257,12 @@
 											</div>
 											<p class="item-price"><strike>${{format_number this.price}}</strike> <b>${{format_number this.discount}}</b></p>
 											<div class="d-flex justify-content-around">
-											<a href="#" class="btn btn-primary" style="height: 40px;">Buy</a>
-											<a href="#" class="btn btn-primary" style="height: 40px;">Like</a>
+											<form action="/user/buyProduct/{{this._id}}" method="post">
+												<a href="javascript:;" onclick="parentNode.submit();"  class="btn btn-primary" style="height: 40px;">Buy</a>
+											</form>	
+											<form action="/user/favoriteList/{{this._id}}" method="post">
+												<a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary" style="height: 40px;">Like</a>
+											</form>
 											</div>
 										</div>
 									</div>

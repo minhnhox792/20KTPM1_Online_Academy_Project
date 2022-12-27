@@ -18,4 +18,6 @@ router.get('/profile', userController.renderProfile);
 router.post('/profile', userController.updateProfile);
 
 router.post('/buyProduct/:id', userController.addProduct)
+router.post('/favoriteList/:id', userController.addFavoriteList)
+
 export default router;

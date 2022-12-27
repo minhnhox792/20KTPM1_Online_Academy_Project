@@ -72,6 +72,15 @@ const User = new Schema(
       ],
       default: [],
     },
+    favoriteList: {
+      type: [
+        {
+          type: ObjectId,
+          ref: 'Course',
+        },
+      ],
+      default: [],
+    },
     createdAt: {
       type: Date,
       default: Date.now(),

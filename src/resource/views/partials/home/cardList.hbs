@@ -109,8 +109,12 @@
 
           <p class="card-text">{{format_number this.price}}</p>
             <div class="d-flex justify-content-around">
-											<a href="#" class="btn btn-primary" style="height: 40px;border:0;">Buy</a>
-											<a href="#" class="btn btn-primary" style="height: 40px;border:0;">Like</a>
+											<form action="/user/buyProduct/{{this._id}}" method="post">
+												<a href="javascript:;" onclick="parentNode.submit();"  class="btn btn-primary" style="height: 40px; border:0;">Buy</a>
+											</form>	
+											<form action="/user/favoriteList/{{this._id}}" method="post">
+												<a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary" style="height: 40px; border:0;">Like</a>
+											</form>
 						</div>
         </div>
       </div>

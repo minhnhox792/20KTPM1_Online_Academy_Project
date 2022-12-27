@@ -364,6 +364,37 @@ const userController = {
       return res.redirect("/error/500")
     }
   },
+  addFavoriteList: async (req,res) =>{
+    try{
+      if(!req.session.userInfo){
+        return res.redirect('/user/login')
+      }
+      const data  = req.session.userInfo
+      const id_user = data._id
+      console.log(data)
+      const user = await User.findOne({_id :id_user})
+      if(!user){
+        return res.redirect('/user/register')
+      }
+      if(user.role !== 'Student'){
+        return res.redirect('/error/500')
+      }
+      const id = req.params.id;
+      if(user.favoriteList.includes(id)){
+        return res.redirect("/")
+      }
+      user.favoriteList.push(id)
+      const updated = await User.updateOne(
+        { _id: id_user },
+        { $set: { favoriteList: user.favoriteList } }
+      )
+      return res.redirect("/")
+      
+    }
+    catch{
+      return res.redirect("/error/500")
+    }
+  },
 };
 
 export default userController;
