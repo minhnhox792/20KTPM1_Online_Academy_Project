@@ -20,6 +20,7 @@ const transporter = nodemailer.createTransport(
   })
 );
 
+
 const userController = {
   renderChangePassword: (req, res) => {
     let message = req.flash("error");
@@ -545,6 +546,24 @@ const userController = {
     //   return res.redirect("/error/500");
     // }
   },
+  loginWithGoogle: (req,res) =>{
+    
+      try{
+        console.log(111111111111111)
+        
+        if(!req.user){
+          return res.redirect("/user/login")
+        }
+        req.session.auth = true;
+        req.session.userInfo = req.user;
+        return res.redirect('/')
+      }
+      catch{
+
+      }
+  }
+ 
+ 
 };
 
 export default userController;

@@ -16,6 +16,9 @@ import session from'express-session'
 import nodemailer from "nodemailer";
 import numeral from 'numeral'
 import asyncErrors from 'express-async-errors'
+import passport from 'passport';
+
+
 const app = express();
 const port = 3000;
 
@@ -83,6 +86,8 @@ app.use(cookieParser());
 app.use(flash());
 
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(methodOverride("_method"));
 // app.use(morgan("combined"));
 
@@ -142,6 +147,11 @@ hbs.handlebars.registerHelper('math_compare',function(num1, num2){
 });
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource', 'views'));
+
+
+
+
+
 
 route(app);
 

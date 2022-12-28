@@ -4,10 +4,6 @@ const ObjectId = Schema.Types.ObjectId;
 
 const User = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
     actived: {
       type: Boolean,
       default: false,
@@ -90,6 +86,9 @@ const User = new Schema(
       default: Date.now(),
     },
     verified: { type: Boolean, default: false },
+    googleId: {
+      type: String, default: ''
+    }
   },
   { timestamps: true }
 );
