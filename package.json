@@ -42,6 +42,7 @@
     "passport": "^0.6.0",
     "passport-google-oauth2": "^0.2.0",
     "prettier": "^2.8.0",
+    "randomstring": "^1.2.3",
     "session": "^0.1.0"
   },
   "devDependencies": {

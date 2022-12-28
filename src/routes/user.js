@@ -34,4 +34,7 @@ router.post("/myFavoriteList/:id", userController.deleteCourse);
 router.get("/google", passport.authenticate("google", {scope: ["profile", "email"],}));
 router.get("/google/callback", passport.authenticate("google", {failureRedirect:'/error/500'}), userController.loginWithGoogle);
 
+router.get("/reset", userController.getReset)
+router.post("/reset", userController.postReset)
+
 export default router;

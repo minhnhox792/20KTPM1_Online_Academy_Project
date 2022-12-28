@@ -5,10 +5,12 @@ import UserOTP from "../models/UserOTP.js";
 import nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
 import sendgridTransport from "nodemailer-sendgrid-transport";
-import { request } from "express";
+import { request, response } from "express";
 import util from "../../util/mongoose.js";
 import moment from "moment";
 import Course from "../models/Courses.js";
+import randomstring from"randomstring"
+
 const ITEM_PER_PAGE = 4;
 
 const transporter = nodemailer.createTransport(
@@ -561,6 +563,78 @@ const userController = {
       catch{
 
       }
+  },
+  getReset: (req,res) =>{
+    
+    try{
+      let message = req.flash("error");
+      if (message.length > 0) {
+        message = message[0];
+      } else {
+        message = null;
+      }
+      res.render("auth/reset", {
+        error: message,
+      });
+  
+    }
+    catch{
+
+    }
+  },
+  postReset: async (req,res) => {
+    try{
+      const user_mail = req.body.email
+      const findUser = await User.findOne({email: user_mail})
+      if(!findUser){
+        req.flash("error", "Email not in any account, please go to register !")
+        return res.redirect('/user/reset')
+      }
+      console.log(findUser)
+
+
+      const new_password = randomstring.generate({
+        length: 12,
+        charset: 'alphabetic'
+      });
+
+      console.log("Newwwwwwwwww: ", new_password)
+      const salt = bcrypt.genSaltSync(10);
+
+      const hashPass = bcrypt.hashSync(new_password, salt);
+      const info_mail = {
+        from: "dangminh7122002@gmail.com",
+        to: req.body.email,
+        subject: "Reset Your Password",
+        html: `<h2>Your new password is:</h2>
+        <br><h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${new_password}</h2>
+        <h3>Please change the password we provide to your personal password !</h3>`,
+      };
+      transporter.sendMail(info_mail).then((mess) => {
+        if (!mess) {
+          return;
+        } else {
+          console.log("Email sent...", mess);
+          
+
+          User.updateOne(
+            { email: user_mail },
+            { $set: { password: hashPass } }
+          )
+          .then(kq => {
+            if(!kq){
+              return res.redirect("/error/500")
+            }
+            console.log("Updated...............")
+            return res.redirect('/user/login')
+          })
+          
+        }
+      })
+    }
+    catch{
+
+    }
   }
  
  
