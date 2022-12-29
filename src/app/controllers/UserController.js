@@ -102,6 +102,7 @@ const userController = {
       }
 
       const UserInput = await User.findOne({ username: req.body.username });
+      console.log(UserInput)
       if (!UserInput)
         return res.render("auth/login", {
           layout: false,
@@ -283,11 +284,16 @@ const userController = {
     } else {
       message = null;
     }
-    res.render("user/profile", {
+    let courses
+    if(user.role=="Lecturer"){
+      courses=await Course.find({lecturer:user._id})
+    }
+    return res.render("user/profile", {
       data: data,
       day_format: day_format,
       day_joined: day_joined,
-      error: message
+      error: message,
+      courses
     });
   },
   updateProfile: async (req, res) => {

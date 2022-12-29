@@ -1,16 +1,21 @@
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-<form action="" method="post">
-  <div class="col mt-5" >
-    <div class="row">
-      <div class="col mb-3">
+<div class="col mt-5">
+  <div class="row">
+    <div class="col mb-3">
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" onclick="myFunction()">Edit</button>
+      </div>
+      <form action="" method="post">
         <div class="card">
           <div class="card-body">
             <div class="e-profile">
               <div class="row">
                 <div class="col-12 col-sm-auto mb-3">
                   <div class="mx-auto" style="width: 140px;">
-                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                    <div class="d-flex justify-content-center align-items-center rounded"
+                      style="height: 140px; background-color: rgb(233, 236, 239);">
                       <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
                     </div>
                   </div>
@@ -44,13 +49,15 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Full Name</label>
-                              <input class="form-control" type="text" name="fullname" placeholder="John Smith" value="{{data.fullname}}">
+                              <input class="form-control" type="text" name="fullname" placeholder="John Smith"
+                                value="{{data.fullname}}" readonly id="name">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
                               <label>Username</label>
-                              <input class="form-control" type="text" name="username" placeholder="johnny.s" value="{{data.username}}"readonly>
+                              <input class="form-control" type="text" name="username" placeholder="johnny.s"
+                                value="{{data.username}}" readonly>
                             </div>
                           </div>
                         </div>
@@ -58,41 +65,43 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Phone</label>
-                              <input class="form-control" type="text" name="phone" placeholder="John Smith" value="{{data.phone}}">
+                              <input class="form-control" type="text" name="phone" placeholder="John Smith"
+                                value="{{data.phone}}" readonly id="phone">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
                               <label>Gender</label>
-                               <select class="custom-select" id="gender2" name = "gender" >
-                                 {{#if data.gender}}
-                                     {{#ifEquals data.gender "Male"}}
-                                        <option selected value = "Male">{{data.gender}}</option>
-                                        <option value="Female">Female</option>
+                              <select class="custom-select" id="gender2" name="gender">
+                                {{#if data.gender}}
+                                {{#ifEquals data.gender "Male"}}
+                                <option selected value="Male">{{data.gender}}</option>
+                                <option value="Female">Female</option>
 
-                                      {{else}}
-                                      <option selected value = "Female">{{data.gender}}</option>
-                                      <option value="Male">Male</option>
-                                      {{/ifEquals}}
-                                  {{else}}
-                                    <option selected value = "Choose your gender">Choose your gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                {{else}}
+                                <option selected value="Female">{{data.gender}}</option>
+                                <option value="Male">Male</option>
+                                {{/ifEquals}}
+                                {{else}}
+                                <option selected value="Choose your gender">Choose your gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
 
-                                 {{/if}}
-                               
-                            {{!-- <option selected>{{data.gender}}</option>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option> --}}
-                          </select>   
-                                              </div>
+                                {{/if}}
+
+                                {{!-- <option selected>{{data.gender}}</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option> --}}
+                              </select>
+                            </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
                               <label>Date of Birth</label>
-                              <input class="form-control" type="text" placeholder="user@example.com" id = "dob" value = "{{day_format}}" name = "dob">
+                              <input class="form-control" type="text" placeholder="user@example.com" id="dob"
+                                value="{{day_format}}" name="dob" readonly id="date">
                             </div>
                           </div>
                         </div>
@@ -100,7 +109,8 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Email</label>
-                              <input class="form-control" type="text" placeholder="user@example.com" name = "email" value = "{{data.email}}" readonly>
+                              <input class="form-control" type="text" placeholder="user@example.com" name="email"
+                                value="{{data.email}}" readonly id="email">
                             </div>
                           </div>
                         </div>
@@ -108,17 +118,19 @@
                           <div class="col mb-3">
                             <div class="form-group">
                               <label>About</label>
-                              <textarea class="form-control" rows="5" placeholder="My Bio" name = "about" id="description" >{{data.about}}</textarea>
+                              <textarea class="form-control" rows="5" placeholder="My Bio" name="about"
+                                id="description">{{{data.about}}}</textarea>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                   
+
                     {{#if error}}
-                     <div class="row">
+                    <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <div class="alert alert-danger justify-content-center text-center" role="alert" style="width: 100%;">
+                        <div class="alert alert-danger justify-content-center text-center" role="alert"
+                          style="width: 100%;">
                           {{this.error}}
                         </div>
                       </div>
@@ -130,42 +142,64 @@
                       </div>
                     </div>
                   </form>
-
                 </div>
               </div>
+              <div class="row">
+                {{#each courses}}
+                <div class="col-lg-3 col-sm-12 col-md-6">
+                  <div class="card">
+                    <img src={{this.image}} style="height: 20vh;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{this.name}}</h5>
+
+                      {{!-- <li style="list-style: none;">{{this.lecturer}}</li> --}}
+                      <li class="list-inline-item" style="font-size: 15px;color:gold">{{this.numberStudentRate}}<i
+                          class="fa fa-star"></i></li>
+
+                      <p class="card-text">{{format_number this.price}}</p>
+                    
+                    </div>
+                  </div>
+                </div>
+                 {{/each}}
+              </div>
+             
             </div>
           </div>
-        </div>
-      </div>
-
-      
+      </form>
     </div>
-
   </div>
-</div>
-</div>
-</form>
-    <script src="https://cdn.tiny.cloud/1/o3spvyeq6r5oshe6dzh63yc88hs5ct8m2gixynrik46shp7r/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+
+</div>
+
+</div>
+</div>
+</div>
+<script src="https://cdn.tiny.cloud/1/o3spvyeq6r5oshe6dzh63yc88hs5ct8m2gixynrik46shp7r/tinymce/5/tinymce.min.js"
+  referrerpolicy="origin"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script>
   $('#dob').datetimepicker({
     timepicker: false,
     format: 'd/m/Y',
-
-    
   });
-</script>
- <script>
-       
-          tinymce.init({
-          selector: '#description',
-          plugins: 'paste image link autolink lists table media',
-          menubar: false,
-          toolbar: [
-            'undo redo | bold italic underline strikethrough | numlist bullist| alignleft aligncenter alignright |forecolor backcolor| table link image media'
-          ]
-      });
-        
+  function myFunction() {
+    document.getElementById("name").readOnly = false;
+    document.getElementById("phone").readOnly = false;
+    document.getElementById("email").readOnly = false;
+    document.getElementById("date").readOnly = false;
+  }
+  tinymce.init({
+    selector: '#description',
+    plugins: 'paste image link autolink lists table media',
+    menubar: false,
+    toolbar: [
+      'undo redo | bold italic underline strikethrough | numlist bullist| alignleft aligncenter alignright |forecolor backcolor| table link image media'
+    ]
+  });
+
 </script>

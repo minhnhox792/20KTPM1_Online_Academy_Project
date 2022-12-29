@@ -65,17 +65,6 @@ const searchController = {
             return res.send(err)
         }
     },
-    pagination: async (req, res) => { 
-        // /courses?page=
-        const pageNumber = req.query.page // 5
-        const nPerPage = await Courses.count()
-        const pageData =  Courses.find()
-           
-        
-        
-        return pageData;
-
-    },
     postCourse:async(req,res)=>{
         try{
         keyWord.boxCate=req.body.checkboxcategory
