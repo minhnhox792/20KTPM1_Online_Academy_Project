@@ -277,11 +277,17 @@ const userController = {
 
     const day_format = moment(data.dateOfBirth).format("DD/MM/YYYY").toString();
     const day_joined = moment(data.createdAt).format("DD/MM/YYYY").toString();
-
+    let message = req.flash("error");
+    if (message.length > 0) {
+      message = message[0];
+    } else {
+      message = null;
+    }
     res.render("user/profile", {
       data: data,
       day_format: day_format,
       day_joined: day_joined,
+      error: message
     });
   },
   updateProfile: async (req, res) => {
@@ -292,6 +298,10 @@ const userController = {
       }
 
       const data = req.body;
+      if(req.body.gender == "Choose your gender"){
+        req.flash("error", "Please choose your gender !")
+        return res.redirect('/user/profile')
+      }
 
       console.log("New data: ", data);
       const new_date = util.reFormatDate(data.dob);

@@ -3,7 +3,7 @@ import userController from "../app/controllers/UserController.js";
 import { check } from "express-validator/check/index.js";
 import passport from "passport";
 import google from "../util/google.js"
-
+import middleware from "../app/controllers/middleware/authMiddleware.js"
 const router = express.Router();
 google(passport)
 
@@ -19,17 +19,17 @@ router.get("/verifyOTP", userController.getverifyOTP);
 router.post("/verifyOTP", userController.compareOTP);
 router.post("/logout", userController.handleLogout);
 
-router.get("/changePassword", userController.renderChangePassword);
-router.post("/changePassword", userController.changePassword);
-router.get("/profile", userController.renderProfile);
-router.post("/profile", userController.updateProfile);
+router.get("/changePassword", middleware.isAuthenticated ,userController.renderChangePassword);
+router.post("/changePassword", middleware.isAuthenticated, userController.changePassword);
+router.get("/profile", middleware.isAuthenticated, userController.renderProfile);
+router.post("/profile",  middleware.isAuthenticated, userController.updateProfile);
 
-router.post("/buyProduct/:id", userController.addProduct);
-router.post("/favoriteList/:id", userController.addFavoriteList);
-router.get("/myCourse", userController.renderMyCourses);
+router.post("/buyProduct/:id", middleware.isAuthenticated, userController.addProduct);
+router.post("/favoriteList/:id", middleware.isAuthenticated,  userController.addFavoriteList);
+router.get("/myCourse", middleware.isAuthenticated, userController.renderMyCourses);
 
-router.get("/myFavoriteList", userController.renderMyFavoriteList);
-router.post("/myFavoriteList/:id", userController.deleteCourse);
+router.get("/myFavoriteList", middleware.isAuthenticated, userController.renderMyFavoriteList);
+router.post("/myFavoriteList/:id", middleware.isAuthenticated, userController.deleteCourse);
 
 router.get("/google", passport.authenticate("google", {scope: ["profile", "email"],}));
 router.get("/google/callback", passport.authenticate("google", {failureRedirect:'/error/500'}), userController.loginWithGoogle);
