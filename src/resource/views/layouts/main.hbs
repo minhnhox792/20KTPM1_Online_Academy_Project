@@ -118,13 +118,16 @@
             mybutton.style.display = "none";
         }
     }
-    function topFunction() {
-        document.body.scrollTop = 500;
-        document.documentElement.scrollTop = 500;
-    }
-    {{!-- function move(x) {
-        window.scrollTo({ left: 0, top: x, behavior: "smooth" });
+    {{!-- function topFunction() {
+        document.body.scrollTop = 1000;
+        document.documentElement.scrollTop = 1000;
     } --}}
+    function move(x) {
+        window.scrollTo({ left: 0, top: x, behavior: "smooth" });
+    }
+     function moveCaro(x) {
+        window.scrollTo({ left: 0, top: x });
+    }
 
 </script>
 

@@ -46,8 +46,10 @@ https://templatemo.com/tm-579-cyborg-gaming
               <div class="main-profile " style="background-color: #E2EAEF;">
                 <div class="row">
                   <div class="col-lg-4">
-                    <img src="/images/profile.jpg" alt=""
+                    <div  style="border-top-left-radius: 23px;border-top-right-radius:23px ;height: 25vh;background-color: white;">
+                    <img src={{course.image}} alt=""
                       style="border-top-left-radius: 23px;border-top-right-radius:23px">
+                    </div>
                     <div class="main-info header-text d-flex justify-content-center"
                       style="background-color: #e75e8d;border-bottom-left-radius:23px;border-bottom-right-radius: 23px;">
                       <p class="item-price" style="margin-top: 10px;"> <b
@@ -61,9 +63,17 @@ https://templatemo.com/tm-579-cyborg-gaming
 
                       <h4 style="color: black;font-weight: 700;">{{course.name}}</h4>
                       <p>{{course.shortDesc}}</p>
-                      <div class="main-border-button">
-                        <a href="#">Buy Now</a>
+                      {{#if isBuy}}
+                         <div class="main-border-button">
+                        <a href="" style="pointer-events: none;">You purchased this course</a>
                       </div>
+                      {{else}}
+                       <div class="main-border-button">
+                        <a href="#" disabled>Buy Now</a>
+                      </div>
+                      {{/if}}
+                     
+                      
                     </div>
                   </div>
                   <div class="col-lg-4 align-self-center">
@@ -75,7 +85,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                         <span>{{course.numberStudentRate}}<i class="fa fa-star"></i></span>
                         {{/ifEquals}}
                       </li>
-                      <li>Participants: <span>16.777</span></li>
+                      <li>Participants: <span>{{partcipantd}}</span></li>
                       <li>Last updated: <span>{{format_date course.updatedAt}}</span></li>
                       <li>Clips: <span>29</span></li>
                     </ul>
@@ -201,11 +211,11 @@ https://templatemo.com/tm-579-cyborg-gaming
                   {{#each top5courses}}
                   <div class="col-lg col-sm-6">
                     <div class="item">
+                        <a href="/course/{{this._id}}">
                       <div class="">
-                        <a href="">
                           <img src={{this.image}} alt="" style="border-radius: 23px;height:10vh">
-                        </a>
                       </div>
+                        </a>
                       <h4 style="color: #e75e8d;height:30px;font-weight:600">{{this.name}}</h4>
                       <div class="down-content">
                         <span>{{this.numberStudentRate}}<i class="fa fa-star"></i></span>
