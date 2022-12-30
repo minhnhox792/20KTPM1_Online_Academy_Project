@@ -8,21 +8,9 @@ const Chapter = new Schema({
     type: String,
     required: true,
   },
-  description: {
+  filename: {
     type: String,
     required: true,
-  },
-  preview: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now(),
   },
 });
 

@@ -8,7 +8,7 @@ import categoryRouter from "./category.js";
 import errorRouter from "./error.js";
 import userRouter from "./user.js"; 
 import searchRouter from "./search.js"
-
+import chappterRouter from  "./Chappter.js"
 export default function (app){
   app.use(async function (req, res, next) {
     if (typeof req.session.auth === 'undefined') {
@@ -26,6 +26,7 @@ export default function (app){
     app.use("/category",categoryRouter);
     app.use("/error", errorRouter);
     app.use("/search", searchRouter);
+    app.use("/uploads", chappterRouter);
     
     app.use((req,res,next) => {
       return res.render('error/404' , {
