@@ -115,6 +115,30 @@ const Course = new Schema({
   totalBuy:{
     type: Number,
     default: 0
+  },
+  comment:{
+    type:[
+      {
+        _id:{ 
+          type: ObjectId,
+          ref:'User', 
+        },
+        name:{
+          type:String,
+          maxLength:100,
+        },
+        content:{
+          type:String,
+          maxLength: 1000,
+        },
+        rating:{
+          type:Number,
+          required: true,
+        },
+      },
+    ],
+    default: [],
+    
   }
 });
 
