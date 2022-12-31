@@ -18,10 +18,12 @@
         </a>
         <div class="dropdown-menu IT-Menu form-control" aria-labelledby="navbarDropdown"
           style="height: 594px; width: 200px; position:absolute; right: 50px;">
-          <a class="dropdown-item" href="#" style="font-weight: bold;">
-            IT <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
+          {{#each all_category}}
+          <a class="dropdown-item" href="/category/view/{{this.name}}" style="font-weight: bold;">
+            {{this.name}} <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
           </a>
-          <a class="dropdown-item" href="#" style="font-weight: bold;">
+          {{/each}}
+          {{!-- <a class="dropdown-item" href="#" style="font-weight: bold;">
             Design <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
           </a>
           <a class="dropdown-item hidden-list" href="#" style="font-weight: bold;">
@@ -32,7 +34,7 @@
           </a>
           <a class="dropdown-item hidden-list" href="#" style="font-weight: bold;">
             Development <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
-          </a>
+          </a> --}}
           <ul class="dropdown-menu dropdown-submenu menu-responsive"
             style="height: 594px; width: 200px; border-left: 1px solid #CED4DA;">
             <li class="dropdown-menu-item" style="border-left: 1px solid #CED4DA;">

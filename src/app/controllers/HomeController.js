@@ -1,9 +1,11 @@
 import Course from '../models/Courses.js';
 import ultil from '../../util/mongoose.js';
+import Category from '../models/Category.js';
 import moment from 'moment';
 const HomeController = {
   
   index: async (req, res) => {
+    const all_category = await Category.find({})
     let pageNumber=req.query.pageNumber || 1
     const data_caro = await Course.find().skip(pageNumber > 0 ? ((pageNumber - 1) * 4) : 0)
     .limit(4)
@@ -16,6 +18,7 @@ const HomeController = {
       const data_topView = ultil.multipleMongooseToOject(top_view.slice(0, 10));
       const top_date = courses.sort((a, b) => a.createdAt - b.createdAt);
       const data_topDate = ultil.multipleMongooseToOject(top_date.slice(0, 10));
+      
       let list_topDate1 = [];
       let list_topDate2 = [];
       let list_topDate3 = [];
@@ -96,12 +99,10 @@ const HomeController = {
             top4,
             pageNumber:pageNumber-"0",
             data_caro,
+            all_category
               });
         }
       })
-
-
-    
     });
   },
 };

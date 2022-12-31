@@ -16,6 +16,7 @@ const Category = new Schema({
         ref: 'SubCategory',
       },
     ],
+    default: []
   },
 });
 

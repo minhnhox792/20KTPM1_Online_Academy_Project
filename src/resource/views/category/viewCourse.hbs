@@ -6,7 +6,7 @@
         ></i>
         Categories</div>
       <ul class="list-group category_block">
-        {{#ifEquals active "IT"}}
+        {{!-- {{#ifEquals active "IT"}}
           <li class="list-group-item active"><a
               href="http://localhost:3000/category/view/IT"
               style="color: white;"
@@ -92,8 +92,28 @@
               href="http://localhost:3000/category/view/Marketing"
             >Marketing</a>
           </li>
-        {{/ifEquals}}
+        {{/ifEquals}} --}}
+        {{#each all_category}}
+              
+             {{#ifEquals ../active this.name}}
+                
+                <li class="list-group-item active"><a
+                    href="http://localhost:3000/category/view/{{this.name}}"
+                    style="color: white;"
+                  >{{this.name}}</a>
+                  <label
+                    class="text-center justify-content-center"
+                    style="float: right;
+                          background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;"
+                  >{{../length}}</label></li>
+                {{else}}
 
+                <li class="list-group-item"><a
+                    href="http://localhost:3000/category/view/{{this.name}}"
+                  >{{this.name}}</a>
+                </li>
+              {{/ifEquals}} 
+        {{/each}}
       </ul>
     </div>
 

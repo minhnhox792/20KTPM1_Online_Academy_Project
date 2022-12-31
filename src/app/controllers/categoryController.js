@@ -1,9 +1,10 @@
 import Course from '../models/Courses.js';
 import ultil from '../../util/mongoose.js';
+import Category from '../models/Category.js';
 const ITEM_PER_PAGE = 3
 const categoryController = {
     view: async (req, res) => {
-    
+      const all_category = await Category.find({})
       const category = req.params.id
       const page = +req.query.page || 1;
       if(page == null){
@@ -29,7 +30,8 @@ const categoryController = {
           hasPreviousPage: page > 1,
           nextPage: page + 1,
           previousPage: page - 1,
-          lastPage: Math.ceil(totalItems/ITEM_PER_PAGE)
+          lastPage: Math.ceil(totalItems/ITEM_PER_PAGE),
+          all_category: all_category
 
         });
       })
