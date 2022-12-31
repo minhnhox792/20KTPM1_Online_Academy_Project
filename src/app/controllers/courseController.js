@@ -1,5 +1,16 @@
 import Course from '../models/Courses.js';
 import User from '../models/User.js';
+
+// crack
+// Oh no - Đoạn code đã bị block
+// 100k to UNLOCK 
+// MOMO 0783877917 
+// GIẢM GIÁ NGAY HÔM NAY 
+//hacker lỏd
+
+// mp3 và mp4 xài chung 1 thư viện
+
+
 const courseController = {
   registerCourse: (req, res) => {
     Course.findById(req.params.id, async function (err, docs) {
