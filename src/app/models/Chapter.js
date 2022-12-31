@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.Types.ObjectId;
 
-const Chapter = new Schema({
+const chapter = new Schema({
   title: {
     type: String,
     required: true,
@@ -14,4 +13,4 @@ const Chapter = new Schema({
   },
 });
 
-export default mongoose.model('Chapter', Chapter);
+export default mongoose.model('chapter', chapter);

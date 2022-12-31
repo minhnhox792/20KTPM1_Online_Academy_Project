@@ -396,8 +396,8 @@ const userController = {
       );
       console.log("Doneeeeeeeee");
       return res.redirect("/");
-    } catch {
-      return res.redirect("/error/500");
+    } catch(err) {
+      return res.send(err)
     }
   },
 

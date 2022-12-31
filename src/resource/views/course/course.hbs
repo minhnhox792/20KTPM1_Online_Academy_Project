@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.7/plyr.css" />
+
   <!--
 
 TemplateMo 579 Cyborg Gaming
@@ -32,7 +34,8 @@ https://templatemo.com/tm-579-cyborg-gaming
 </head>
 
 <body style="background-color: #E2EAEF;width: 100vw;">
-
+  <div class="container">
+  </div>
   <div class="container-fluid" style="width:80%">
     <div class="row">
       <div class="col-lg-12">
@@ -69,7 +72,16 @@ https://templatemo.com/tm-579-cyborg-gaming
                       </div>
                       {{else}}
                       <div class="main-border-button">
-                        <a href="#" disabled>Buy Now</a>
+                        <form action="/user/buyProduct/{{course._id}}" method="post">
+                          {{#ifEquals auth true}}
+                          <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
+                            style="height: 5vh;">Buy Now</a>
+                          {{else}}
+                          <a href="/user/login"  style="height: 5vh;">Buy Now</a>
+                          {{/ifEquals}}
+                        </form>
+
+
                       </div>
                       {{/if}}
 
@@ -87,7 +99,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                       </li>
                       <li>Participants: <span>{{partcipantd}}</span></li>
                       <li>Last updated: <span>{{format_date course.updatedAt}}</span></li>
-                      <li>Clips: <span>29</span></li>
+                      <li>Category: <span>{{course.category}}</span></li>
                     </ul>
                   </div>
                 </div>
@@ -97,16 +109,30 @@ https://templatemo.com/tm-579-cyborg-gaming
                     <div class="accordion" id="accordionExample">
                       <div class="accordion-item ">
                         <h2 class="accordion-header" id="headingOne">
-                          <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                            style="background-color: #272727;color:#E2EAEF">
-                            Over View
-                          </button>
+                         
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                              style="background-color: #272727;color:#E2EAEF">
+                              OVER VIEW
+                            </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                           data-bs-parent="#accordionExample">
                           <div class="accordion-body">
-                            this is over view
+                            <table class="table">
+                              <thead>
+                              </thead>
+                              <tbody>
+                                {{#each overview}}
+                                <tr>
+                                  <td>{{this.title}}</td>
+                                  <td style="width: 20px;"><a href="/course/pathVideo?fileid={{this.filename}}"><i
+                                        class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px"></a></i>
+                                  </td>
+                                </tr>
+                                {{/each}}
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
@@ -115,7 +141,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
                             style="background-color: #272727;color:#E2EAEF">
-                            <strong>This is the second item's accordion body.</strong>
+                            BASIC CODE
                           </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -125,11 +151,23 @@ https://templatemo.com/tm-579-cyborg-gaming
                               <thead>
                               </thead>
                               <tbody>
+                                {{#each basicCode}}
                                 <tr>
-                                  <td>Otto</td>
-                                  <td style="width: 20px;"><a href=""><i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:30px"></a></i></td>
+                                  <td>{{this.title}}</td>
+                                  <td style="width: 20px;">
+                                    {{#if isBuy}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}">
+                                      {{else}}
+                                      <a href="/course/pathVideo?fileid={{this.filename}}"
+                                        style="pointer-events: none;">
+                                        {{/if}}
+
+                                        <i class="fa-solid fa-circle-play disab"
+                                          style="color: #e75e8d;font-size:40px"></a></i>
+                                  </td>
                                 </tr>
-                                
+                                {{/each}}
+
                               </tbody>
                             </table>
                           </div>
@@ -140,18 +178,33 @@ https://templatemo.com/tm-579-cyborg-gaming
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
                             style="background-color: #272727;color:#E2EAEF">
-                            Basic Code
+                            ADVANCED CODE
                           </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                           data-bs-parent="#accordionExample">
                           <div class="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until
-                            the collapse plugin adds the appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the showing and hiding via CSS
-                            transitions. You can modify any of this with custom CSS or overriding our default variables.
-                            It's also worth noting that just about any HTML can go within the
-                            <code>.accordion-body</code>, though the transition does limit overflow.
+                            <table class="table">
+                              <thead>
+                              </thead>
+                              <tbody>
+                                {{#each advancedCode}}
+                                <tr>
+                                  <td>{{this.title}}</td>
+                                  <td style="width: 20px;">
+                                    {{#if isBuy}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}">
+                                      {{else}}
+                                      <a href="/course/pathVideo?fileid={{this.filename}}"
+                                        style="pointer-events: none;">
+                                        {{/if}}<i class="fa-solid fa-circle-play"
+                                          style="color: #e75e8d;font-size:40px"></a></i>
+                                  </td>
+                                </tr>
+                                {{/each}}
+
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
@@ -160,38 +213,31 @@ https://templatemo.com/tm-579-cyborg-gaming
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"
                             style="background-color: #272727;color:#E2EAEF">
-                            Advance Code
+                            MASTER CODE
                           </button>
                         </h2>
                         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
                           data-bs-parent="#accordionExample">
                           <div class="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until
-                            the collapse plugin adds the appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the showing and hiding via CSS
-                            transitions. You can modify any of this with custom CSS or overriding our default variables.
-                            It's also worth noting that just about any HTML can go within the
-                            <code>.accordion-body</code>, though the transition does limit overflow.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingSix">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix"
-                            style="background-color: #272727;color:#E2EAEF">
-                            Master Code
-                          </button>
-                        </h2>
-                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                          data-bs-parent="#accordionExample">
-                          <div class="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                            collapse plugin adds the appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the showing and hiding via CSS
-                            transitions. You can modify any of this with custom CSS or overriding our default variables.
-                            It's also worth noting that just about any HTML can go within the
-                            <code>.accordion-body</code>, though the transition does limit overflow.
+                            <table class="table">
+                              <thead>
+                              </thead>
+                              <tbody>
+                                {{#each masterCode}}
+                                <tr>
+                                  <td>{{this.title}}</td>
+                                  <td style="width: 20px;"> {{#if isBuy}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}" >
+                                    {{else}}  
+                                    <a href="/course/pathVideo?fileid={{this.filename}}" style="pointer-events: none;" >  
+                                    {{/if}}<i
+                                        class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px"></a></i>
+                                  </td>
+                                </tr>
+                                {{/each}}
+
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
@@ -398,6 +444,14 @@ https://templatemo.com/tm-579-cyborg-gaming
 
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->
+<script src="path/to/plyr.js"></script>
+<script>
+  const player = new Plyr('#player');
+  player.volume = 0.5;
+  player.fullscreen.active = true
+</script>
+<script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
+
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -406,8 +460,18 @@ https://templatemo.com/tm-579-cyborg-gaming
 <script src="/js/tabs.js"></script>
 <script src="/js/popup.js"></script>
 <script src="/js/custom.js"></script>
+<script src="path/to/plyr.js"></script>
+<script>
+  x = 0;
+  function myFunction() {
+    document.getElementById("demo").innerHTML = x += 1;
+  }
 
-
+  y = 0;
+  function mySecondFunction() {
+    document.getElementById("demo2").innerHTML = y += 1;
+  }
+</script>
 <script>
 
   //-------------------JUST FOR INSTRUCTOR :v------------------------------------
@@ -433,6 +497,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 </script>
 
 </body>
+
 <style>
   .accordion-button::after {
     height: 0;

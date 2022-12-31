@@ -1,13 +1,7 @@
 import Course from '../models/Courses.js';
 import User from '../models/User.js';
-
-// crack
-// Oh no - Đoạn code đã bị block
-// 100k to UNLOCK 
-// MOMO 0783877917 
-// GIẢM GIÁ NGAY HÔM NAY 
-//hacker lỏd
-
+import Chapter from '../models/Chapter.js';
+import uploadsFiles from '../models/uploads.files.js';
 // mp3 và mp4 xài chung 1 thư viện
 
 
@@ -21,6 +15,12 @@ const courseController = {
         const top5courses = await Course.find().sort(({ studentList: -1 }))
           .limit(5)
         const lec = await User.findOne({ _id: docs.lecturer })
+        // console.log(docs.overview)
+        const overview = await Chapter.find({_id:docs.overview})
+        const basicCode = await Chapter.find({_id:docs.basicCode})
+        const advancedCode = await Chapter.find({_id:docs.advancedCode})
+        const masterCode = await Chapter.find({_id:docs.masterCode})
+        
         const data = req.session.userInfo || []
         let isBuy = false
         try{
@@ -46,9 +46,21 @@ const courseController = {
           lec,
           isBuy,
           partcipantd: docs.studentList.length,
+          overview,
+          basicCode,
+          advancedCode,
+          masterCode,
+          
         });
       }
     });
+  },
+  pathVideo: async(req,res)=>{
+      let navigation=req.query.fileid
+      let filevideo = await uploadsFiles.findOne({_id:navigation})
+      let filename= filevideo.filename
+      console.log(filename)
+      return res.redirect('/video/'+filename)
   },
   commentCourse: async (req, res) => {
     console.log("gooooooooooooo")
