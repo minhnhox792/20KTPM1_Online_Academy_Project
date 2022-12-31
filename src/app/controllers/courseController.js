@@ -20,15 +20,14 @@ const courseController = {
         const basicCode = await Chapter.find({_id:docs.basicCode})
         const advancedCode = await Chapter.find({_id:docs.advancedCode})
         const masterCode = await Chapter.find({_id:docs.masterCode})
-        
         const data = req.session.userInfo || []
         let isBuy = false
         try{
           for (let cou of data.courseList) {
             if (String(cou) === String(req.params.id)) {
               isBuy = true
-              
             }
+            console.log(is)
           }
         } catch{
           

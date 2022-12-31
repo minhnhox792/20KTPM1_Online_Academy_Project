@@ -15,6 +15,10 @@ export default function (app) {
     if (typeof req.session.auth === 'undefined') {
       req.session.auth = false;
     }
+    if (req.session.auth === false && req.headers.referer!=="http://localhost:3000/user/login") {
+      req.session.retUrl =  req.headers.referer;
+      console.log(req.headers.referer)
+    }
     res.locals.auth = req.session.auth;
     res.locals.userInfo = req.session.userInfo;
     app.use('/', homeRouter);

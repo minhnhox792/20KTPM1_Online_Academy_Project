@@ -119,7 +119,10 @@ const userController = {
           // if(typeof req.session.retUrl === 'undefined'){
           //   res.redirect('/')
           // }
-          return res.redirect("/");
+
+          const url = req.session.retUrl || '/';
+          // console.log(url)
+          return res.redirect(url);
         } else {
           return res.render("auth/login", {
             layout: false,
@@ -396,8 +399,8 @@ const userController = {
       );
       console.log("Doneeeeeeeee");
       return res.redirect("/");
-    } catch(err) {
-      return res.send(err)
+    } catch {
+      return res.redirect("/error/500");
     }
   },
 

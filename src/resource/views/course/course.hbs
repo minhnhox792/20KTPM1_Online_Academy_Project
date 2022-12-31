@@ -72,14 +72,16 @@ https://templatemo.com/tm-579-cyborg-gaming
                       </div>
                       {{else}}
                       <div class="main-border-button">
-                        <form action="/user/buyProduct/{{course._id}}" method="post">
+                       
                           {{#ifEquals auth true}}
-                          <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
-                            style="height: 5vh;">Buy Now</a>
+                           <form action="http://localhost:3000/user/buyProduct/{{course._id}}" method="post"></form>
+                              <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
+                                style="height: 5vh;">Buy Now</a>
+                             </form>
                           {{else}}
-                          <a href="/user/login"  style="height: 5vh;">Buy Now</a>
+                          <a href="/user/login" style="height: 5vh;">Buy Now</a>
                           {{/ifEquals}}
-                        </form>
+                       
 
 
                       </div>
@@ -109,12 +111,12 @@ https://templatemo.com/tm-579-cyborg-gaming
                     <div class="accordion" id="accordionExample">
                       <div class="accordion-item ">
                         <h2 class="accordion-header" id="headingOne">
-                         
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                              style="background-color: #272727;color:#E2EAEF">
-                              OVER VIEW
-                            </button>
+
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                            style="background-color: #272727;color:#E2EAEF">
+                            OVER VIEW
+                          </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                           data-bs-parent="#accordionExample">
@@ -155,15 +157,15 @@ https://templatemo.com/tm-579-cyborg-gaming
                                 <tr>
                                   <td>{{this.title}}</td>
                                   <td style="width: 20px;">
-                                    {{#if isBuy}}
+                                    {{#if ../isBuy}}
                                     <a href="/course/pathVideo?fileid={{this.filename}}">
                                       {{else}}
                                       <a href="/course/pathVideo?fileid={{this.filename}}"
                                         style="pointer-events: none;">
                                         {{/if}}
 
-                                        <i class="fa-solid fa-circle-play disab"
-                                          style="color: #e75e8d;font-size:40px"></a></i>
+                                        <i class="fa-solid fa-circle-play"
+                                          style="color: #e75e8d;font-size:40px"></i></a>
                                   </td>
                                 </tr>
                                 {{/each}}
@@ -192,13 +194,15 @@ https://templatemo.com/tm-579-cyborg-gaming
                                 <tr>
                                   <td>{{this.title}}</td>
                                   <td style="width: 20px;">
-                                    {{#if isBuy}}
-                                    <a href="/course/pathVideo?fileid={{this.filename}}">
-                                      {{else}}
-                                      <a href="/course/pathVideo?fileid={{this.filename}}"
-                                        style="pointer-events: none;">
-                                        {{/if}}<i class="fa-solid fa-circle-play"
-                                          style="color: #e75e8d;font-size:40px"></a></i>
+                                    {{#if ../isBuy}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}"><i
+                                        class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px"></i></a>
+                                    {{else}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}"
+                                      style="pointer-events: none;"><i class="fa-solid fa-circle-play"
+                                        style="color: #e75e8d;font-size:40px"></i></a>
+                                    {{/if}}
+
                                   </td>
                                 </tr>
                                 {{/each}}
@@ -226,12 +230,17 @@ https://templatemo.com/tm-579-cyborg-gaming
                                 {{#each masterCode}}
                                 <tr>
                                   <td>{{this.title}}</td>
-                                  <td style="width: 20px;"> {{#if isBuy}}
-                                    <a href="/course/pathVideo?fileid={{this.filename}}" >
-                                    {{else}}  
-                                    <a href="/course/pathVideo?fileid={{this.filename}}" style="pointer-events: none;" >  
-                                    {{/if}}<i
-                                        class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px"></a></i>
+                                  <td style="width: 20px;">
+                                    {{#if ../isBuy}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}">
+                                    <i class="fa-solid fa-circle-play"
+                                          style="color: #e75e8d;font-size:40px"></a></i>
+                                      {{else}}
+                                      <a href="/course/pathVideo?fileid={{this.filename}}"
+                                        style="pointer-events: none;">
+                                        <i class="fa-solid fa-circle-play"
+                                          style="color: #e75e8d;font-size:40px"></a></i>
+                                        {{/if}}
                                   </td>
                                 </tr>
                                 {{/each}}
@@ -336,7 +345,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                   <div class="clips">
                     <div class="content" style="margin: 30px;">
                       <div class="d-flex">
-                        <img src="/images/clip-02.jpg" alt="" class="comment-img" />
+                        <img src={{this.image}} alt="" class="comment-img" />
                         <div style="margin-left: 30px;">
                           <li>{{this.name}}</li>
                           <li>{{this.rating}}<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
@@ -368,7 +377,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                       <div class="clips">
                         <div class="content" style="margin: 30px;">
                           <div class="d-flex">
-                            <img src="/images/clip-02.jpg" alt="" class="comment-img" />
+                            <img src={{this.image}} alt="" class="comment-img" />
                             <div style="margin-left: 30px;">
                               <li>{{this.name}}</li>
                               <li>{{this.rating}}<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
@@ -386,7 +395,8 @@ https://templatemo.com/tm-579-cyborg-gaming
                 </div>
               </div>
             </div>
-            {{#if userdata}}
+
+            {{#if isBuy}}
             {{!-- Start comment --}}
             <div class="d-flex justify-content-center">
               <div class="card w-100">
