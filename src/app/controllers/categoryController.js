@@ -2,7 +2,8 @@ import Course from '../models/Courses.js';
 import ultil from '../../util/mongoose.js';
 const ITEM_PER_PAGE = 3
 const categoryController = {
-    view: (req, res) => {
+    view: async (req, res) => {
+    
       const category = req.params.id
       const page = +req.query.page || 1;
       if(page == null){

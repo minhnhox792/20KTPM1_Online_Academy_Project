@@ -177,10 +177,16 @@ const userController = {
 
         return res.redirect("verifyOTP");
       } else {
+        var now = moment();
+        var date = moment(result.expiresAt)
+        if(now > date){
+          req.flash("error", "OTP is out of date, please register again !");
+          return res.redirect("verifyOTP");
+        }
         if (OTP == result.otp) {
           User.updateOne(
             { username: username },
-            { $set: { verified: true } }
+            { $set: { verified: true, actived: true } }
           ).then((data) => {
             return res.redirect("login");
           });
@@ -248,9 +254,18 @@ const userController = {
                   role: req.body.jobtitle,
                   verified: false,
                 });
+                const start = Date.now();
+                var startdate = moment(start);
+                var returned_endate = moment(startdate).add(2, 'hours'); 
+                var format_end = returned_endate.format('YYYY-MM-DD HH:mm:ss')
+                var format_start = startdate.format('YYYY-MM-DD HH:mm:ss')
+
+
                 const otp_info = new UserOTP({
                   username: req.body.username,
                   otp: otp,
+                  createdAt: format_start,
+                  expiresAt: format_end
                 });
                 const session_username = req.body.username;
                 req.session.userOTP = session_username;
