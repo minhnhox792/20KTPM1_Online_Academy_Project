@@ -95,12 +95,12 @@
         {{/ifEquals}} --}}
         {{#each all_category}}
               
-             {{#ifEquals ../active this.name}}
+             {{#ifEquals ../active this.category}}
                 
                 <li class="list-group-item active"><a
-                    href="http://localhost:3000/category/view/{{this.name}}"
+                    href="http://localhost:3000/category/view/{{this.category}}"
                     style="color: white;"
-                  >{{this.name}}</a>
+                  >{{this.category}}</a>
                   <label
                     class="text-center justify-content-center"
                     style="float: right;
@@ -109,8 +109,8 @@
                 {{else}}
 
                 <li class="list-group-item"><a
-                    href="http://localhost:3000/category/view/{{this.name}}"
-                  >{{this.name}}</a>
+                    href="http://localhost:3000/category/view/{{this.category}}"
+                  >{{this.category}}</a>
                 </li>
               {{/ifEquals}} 
         {{/each}}

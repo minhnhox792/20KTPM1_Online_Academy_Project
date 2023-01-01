@@ -19,9 +19,12 @@
         <div class="dropdown-menu IT-Menu form-control" aria-labelledby="navbarDropdown"
           style="height: 594px; width: 200px; position:absolute; right: 50px;">
           {{#each all_category}}
-          <a class="dropdown-item" href="/category/view/{{this.name}}" style="font-weight: bold;">
-            {{this.name}} <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
-          </a>
+          <div class = "d-flex " style="width: 100%;" id = "hover">
+            <a class="dropdown-item" href="/category/view/{{this.category}}" style="font-weight: bold; width: 90%;">
+              {{this.category}} 
+            </a>
+            <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-right: 7px; width: 10%; padding-top: 7px;"></i>
+            </div>
           {{/each}}
           {{!-- <a class="dropdown-item" href="#" style="font-weight: bold;">
             Design <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
@@ -174,6 +177,9 @@
   </div>
 </nav>
 <style>
+  #hover:hover {
+    background-color: #E9ECEF;
+  }
   .list-group-item {
     width: 100%;
   }
