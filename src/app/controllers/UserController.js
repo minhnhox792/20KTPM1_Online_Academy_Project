@@ -354,7 +354,6 @@ const userController = {
       }
       const data = req.session.userInfo;
       const id_user = data._id;
-      console.log(data);
       const user = await User.findOne({ _id: id_user });
       if (!user) {
         return res.redirect("/user/register");
@@ -383,7 +382,6 @@ const userController = {
       }
 
       console.log("After :", course[0].studentList);
-
       const updated_course = await Course.updateOne(
         { _id: id },
         {
