@@ -3,7 +3,9 @@ import courseController from '../app/controllers/courseController.js';
 
 const router = express.Router();
 
-router.get('/:id', courseController.registerCourse);
 router.post('/comment',courseController.commentCourse)
-// router.get('/video',courseController.videoCourse)
+router.get('/pathVideo',courseController.pathVideo)
+router.get('/:id', courseController.registerCourse);
+
+
 export default router;

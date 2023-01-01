@@ -9,11 +9,15 @@ import categoryRouter from './category.js';
 import errorRouter from './error.js';
 import userRouter from './user.js';
 import searchRouter from './search.js';
-import chappterRouter from './Chappter.js';
+import chapterRouter from './chapter.js';
 export default function (app) {
   app.use(async function (req, res, next) {
     if (typeof req.session.auth === 'undefined') {
       req.session.auth = false;
+    }
+    if (req.session.auth === false && req.headers.referer!=="http://localhost:3000/user/login") {
+      req.session.retUrl =  req.headers.referer;
+      console.log(req.headers.referer)
     }
     res.locals.auth = req.session.auth;
     res.locals.userInfo = req.session.userInfo;
@@ -28,7 +32,7 @@ export default function (app) {
     app.use('/category', categoryRouter);
     app.use('/error', errorRouter);
     app.use('/search', searchRouter);
-    app.use('/uploads', chappterRouter);
+    app.use('/video', chapterRouter);
 
     app.use((req, res, next) => {
       return res.render('error/404', {

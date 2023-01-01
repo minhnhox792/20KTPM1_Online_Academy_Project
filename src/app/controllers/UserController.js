@@ -119,7 +119,10 @@ const userController = {
           // if(typeof req.session.retUrl === 'undefined'){
           //   res.redirect('/')
           // }
-          return res.redirect("/");
+
+          const url = req.session.retUrl || '/';
+          // console.log(url)
+          return res.redirect(url);
         } else {
           return res.render("auth/login", {
             layout: false,

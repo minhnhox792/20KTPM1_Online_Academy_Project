@@ -52,7 +52,7 @@ const Course = new Schema({
     type: [
       {
         type: ObjectId,
-        ref: 'Chapter',
+        ref: 'chapter',
       },
     ],
     default: [],
@@ -61,7 +61,7 @@ const Course = new Schema({
     type: [
       {
         type: ObjectId,
-        ref: 'Chapter',
+        ref: 'chapter',
       },
     ],
     default: [],
@@ -70,7 +70,7 @@ const Course = new Schema({
     type: [
       {
         type: ObjectId,
-        ref: 'Chapter',
+        ref: 'chapter',
       },
     ],
     default: [],
@@ -79,7 +79,7 @@ const Course = new Schema({
     type: [
       {
         type: ObjectId,
-        ref: 'Chapter',
+        ref: 'chapter',
       },
     ],
     default: [],
