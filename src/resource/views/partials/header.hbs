@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light"
   style="box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; width: 100%;">
   <a class="navbar-brand" href="/"><i class="fa-solid fa-house"
-      style="color: orange; padding-right: 10px;"></i>Academic</a>
+      style="color: #F082AC; padding-right: 10px;"></i>Academic</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -122,17 +122,17 @@
     <form class="form-inline my-2 my-lg-0 d-flex" style="width: 800px;" method="get" action="/search">
     
       <input class="form-control mr-sm-2" type="search" placeholder="Search" name="searchInput"  aria-label="Search" style="width: 600px">
-      <button class="btn btn-primary" type="submit" style="margin-left: 10px;"><i class="fa fa-search"></i></button>
+      <button class="button-1" type="submit" role="button" style="margin-left: 10px;"><i class="fa fa-search"></i></button>
     </form>
     <ul class="navbar-nav">
 
       {{#ifEquals this.auth false}}
       <li class="nav-item active" style="margin-right: 30px;" id = "btn">
-        <a href="/user/login" class="btn btn-warning btn-cus" type="submit">Login</a>
+        <a href="/user/login"class="button-1" role="button">Login</a>
 
       </li>
       <li class="nav-item active">
-        <a href="/user/register" class="btn btn-warning" type="submit">Register</a>
+        <a href="/user/register" class="button-1" role="button">Register</a>
 
       </li>
       {{else}}
@@ -177,6 +177,65 @@
   </div>
 </nav>
 <style>
+
+
+/* CSS */
+.button-1 {
+  background-color: #e75e8d;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-1:hover{
+  background-color: #eec8d6;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #e94e84;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.button-1:focus {
+  background-color: #F082AC;
+}
   #hover:hover {
     background-color: #E9ECEF;
   }

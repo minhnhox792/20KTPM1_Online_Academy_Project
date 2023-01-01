@@ -96,8 +96,8 @@
                   <td class="image"><img src="https://via.placeholder.com/400x300/FF8C00" alt=""></td>
                   <td class="product">
                     <strong> {{this.name}}</strong>
-                    <br>This is the product description. This make project so easy and beautiful {{this.category}}
-                    <p style="font-size: 15px;font-weight: 500;margin-bottom:0">This is Lecture {{this.lecturer}}</p> 
+                    <br>{{this.category}}
+                    <p style="font-size: 15px;font-weight: 500;margin-bottom:0">{{this.shortDesc}}</p> 
                     <span style="color: #f39c12;">{{this.numberStudentRate}}<i class="fa fa-star"></i></span>
                   </td>
                   <td style="font-weight: 700;color:red">{{format_number this.price}}</td>
@@ -134,25 +134,25 @@
     <nav aria-label="Page navigation example" class="d-flex justify-content-center w-100">
             <ul class="pagination">
               <li class="page-item">
-                <a class="page-link" href="search?searchInput=python&pageNumber={{math_add pageNumber -1}}" aria-label="Previous">
+                <a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
               
               {{#if (math_compare 1 pageNumber) }}
-              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber={{math_add pageNumber -1}}">{{math_add pageNumber -1}}</a></li>
-              <li class="page-item active"><a class="page-link" href="search?searchInput=python&pageNumber={{pageNumber}}">{{pageNumber}}</a></li>
-              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber={{math_add pageNumber 1}}">{{math_add pageNumber 1}}</a></li>
-              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber={{math_add pageNumber 2}}">{{math_add pageNumber 2}}</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}">{{math_add pageNumber -1}}</a></li>
+              <li class="page-item active"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{pageNumber}}">{{pageNumber}}</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}">{{math_add pageNumber 1}}</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 2}}">{{math_add pageNumber 2}}</a></li>
               {{else}}
-              <li class="page-item active"><a class="page-link" href="search?searchInput=python&pageNumber=1">1</a></li>
-              <li class="page-item "><a class="page-link" href="search?searchInput=python&pageNumber=2">2</a></li>
-              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber=3">3</a></li>
-              <li class="page-item"><a class="page-link" href="search?searchInput=python&pageNumber=4">4</a></li>
+              <li class="page-item active"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=1">1</a></li>
+              <li class="page-item "><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=2">2</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=3">3</a></li>
+              <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=4">4</a></li>
               {{/if}}
               
            
-                <a class="page-link" href="search?searchInput=python&pageNumber={{math_add pageNumber 1}}" aria-label="Next">
+                <a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>

@@ -99,7 +99,8 @@ const HomeController = {
             top4,
             pageNumber:pageNumber-"0",
             data_caro,
-            all_category
+            all_category,
+            auth:req.session.auth,
               });
         }
       })

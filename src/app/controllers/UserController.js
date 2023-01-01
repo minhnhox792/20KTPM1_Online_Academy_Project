@@ -366,7 +366,8 @@ const userController = {
       }
       const id = req.params.id;
       if (user.courseList.includes(id)) {
-        return res.redirect("/");
+        const url = req.headers.referer || "/";
+        return res.redirect(url);
       }
       user.courseList.push(id);
       const updated = await User.updateOne(
@@ -397,7 +398,8 @@ const userController = {
       );
       console.log("Doneeeeeeeee");
       return res.redirect("/");
-    } catch {
+    } catch(err){
+      console.log(err)
       return res.redirect("/error/500");
     }
   },

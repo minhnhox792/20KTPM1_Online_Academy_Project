@@ -7,9 +7,11 @@ import uploadsFiles from '../models/uploads.files.js';
 
 const courseController = {
   registerCourse: (req, res) => {
-    Course.findById(req.params.id, async function (err, docs) {
+   
+    let ID=req.params.id
+    Course.findById(ID, async function (err, docs) {
       if (err) {
-        console.log(err);
+        console.log(err)
       }
       else {
         const top5courses = await Course.find().sort(({ studentList: -1 }))
@@ -21,18 +23,18 @@ const courseController = {
         const advancedCode = await Chapter.find({_id:docs.advancedCode})
         const masterCode = await Chapter.find({_id:docs.masterCode})
         const data = req.session.userInfo || []
+        const courseList = await User.findOne({_id:data._id})
         let isBuy = false
         try{
-          for (let cou of data.courseList) {
+          for (let cou of courseList.courseList) {
             if (String(cou) === String(req.params.id)) {
               isBuy = true
             }
-            console.log(is)
           }
         } catch{
           
         }
-        
+        console.log(isBuy)
         let smallDataComment = []
         smallDataComment.push(docs.comment[0])
         smallDataComment.push(docs.comment[1])
@@ -49,7 +51,6 @@ const courseController = {
           basicCode,
           advancedCode,
           masterCode,
-          
         });
       }
     });
@@ -58,7 +59,6 @@ const courseController = {
       let navigation=req.query.fileid
       let filevideo = await uploadsFiles.findOne({_id:navigation})
       let filename= filevideo.filename
-      console.log(filename)
       return res.redirect('/video/'+filename)
   },
   commentCourse: async (req, res) => {

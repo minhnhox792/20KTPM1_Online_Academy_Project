@@ -33,13 +33,5 @@ const chapterController = {
             gfs.openDownloadStreamByName(req.params.filename).pipe(res)
         })
     },
-    renderVideo : async(req,res) => {
-        
-        return res.render("/course/video",{
-            idvideo:c
-        })
-
-        
-    }
 }
 export default chapterController
