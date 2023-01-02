@@ -21,6 +21,11 @@ const Course = new Schema({
     required: true,
     ref: 'User',
   },
+  nameLecturer: {
+    type: String,
+    require: true,
+    default : ''
+  },
   rating: {
     type: Number,
   },
