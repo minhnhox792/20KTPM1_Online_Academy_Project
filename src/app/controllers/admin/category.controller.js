@@ -1,4 +1,5 @@
 import Category from '../../models/Category.js';
+import Course from '../../models/Courses.js';
 import objectFormat from '../../../util/mongoose.js';
 
 const CategoryController = {
@@ -20,7 +21,15 @@ const CategoryController = {
         res.redirect('/admin/category/all');
       })
       .catch(() => {
-        res.redirect('/admin/category/all');
+        Category.find({})
+          .then((categories) => {
+            res.render('admin/categories/all', {
+              layout: 'admin',
+              categories: objectFormat.multipleMongooseToOject(categories),
+              error: 'Element already exists',
+            });
+          })
+          .catch(next);
       });
   },
   edit: (req, res, next) => {
@@ -33,11 +42,33 @@ const CategoryController = {
       });
   },
   delete: (req, res, next) => {
-    Category.deleteOne({ _id: req.params.id })
-      .then(() => {
-        res.redirect('back');
-      })
-      .catch(next);
+    let flag = 1;
+    Category.findById(req.params.id).then((category) => {
+      Course.find({}).then((courses) => {
+        courses = objectFormat.multipleMongooseToOject(courses);
+        courses.map((course) => {
+          if (course.mainCategory == category.category) {
+            flag = 0;
+            Category.find({})
+              .then((categories) => {
+                return res.render('admin/categories/all', {
+                  layout: 'admin',
+                  categories: objectFormat.multipleMongooseToOject(categories),
+                  error: 'This category is used. Can not delete',
+                });
+              })
+              .catch(next);
+          }
+        });
+        if (flag == 1) {
+          Category.deleteOne({ _id: req.params.id })
+            .then(() => {
+              res.redirect('back');
+            })
+            .catch(next);
+        }
+      });
+    });
   },
   addSub: (req, res, next) => {
     Category.findById(req.params.id)
@@ -50,27 +81,55 @@ const CategoryController = {
             res.redirect('/admin/category/all');
           })
           .catch(() => {
-            res.redirect('/admin/category/all');
+            Category.find({})
+              .then((categories) => {
+                res.render('admin/categories/all', {
+                  layout: 'admin',
+                  categories: objectFormat.multipleMongooseToOject(categories),
+                  error: 'Element already exists',
+                });
+              })
+              .catch(next);
           });
       })
       .catch(next);
   },
   deleteSub: (req, res, next) => {
-    Category.findById(req.params.id)
-      .then((category) => {
-        category = objectFormat.mongooseToOject(category);
-        const index = category.subCategories.indexOf(req.params.slug);
-        category.subCategories.splice(index, 1);
+    let flag = 1;
+    Course.find({}).then((courses) => {
+      courses = objectFormat.multipleMongooseToOject(courses);
+      courses.map((course) => {
+        if (course.category == req.params.slug) {
+          flag = 0;
+          Category.find({})
+            .then((categories) => {
+              return res.render('admin/categories/all', {
+                layout: 'admin',
+                categories: objectFormat.multipleMongooseToOject(categories),
+                error: 'This category is used. Can not delete',
+              });
+            })
+            .catch(next);
+        }
+      });
+      if (flag == 1) {
+        Category.findById(req.params.id)
+          .then((category) => {
+            category = objectFormat.mongooseToOject(category);
+            const index = category.subCategories.indexOf(req.params.slug);
+            category.subCategories.splice(index, 1);
 
-        Category.updateOne({ _id: req.params.id }, category)
-          .then(() => {
-            res.redirect('/admin/category/all');
+            Category.updateOne({ _id: req.params.id }, category)
+              .then(() => {
+                res.redirect('/admin/category/all');
+              })
+              .catch(() => {
+                res.redirect('/admin/category/all');
+              });
           })
-          .catch(() => {
-            res.redirect('/admin/category/all');
-          });
-      })
-      .catch(next);
+          .catch(next);
+      }
+    });
   },
 };
 

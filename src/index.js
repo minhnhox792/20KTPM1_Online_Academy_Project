@@ -9,7 +9,7 @@ import methodOverride from 'method-override';
 import * as dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import connect_database from './config/db/index.js';
-// import multer from 'multer';
+import multer from 'multer';
 import hbs_section from 'express-handlebars-sections'
 import flash from 'connect-flash'
 import session from'express-session'
@@ -36,9 +36,8 @@ app.use('/admin/course/about', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course/edit', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course', express.static(path.join(__dirname, 'public')));
 
-app.use('/admin/category/about', express.static(path.join(__dirname, 'public')));
-app.use('/admin/category/edit', express.static(path.join(__dirname, 'public')));
 app.use('/admin/category', express.static(path.join(__dirname, 'public')));
+app.use('/admin/category/:id', express.static(path.join(__dirname, 'public')));
 
 app.use('/css', express.static(path.join(__dirname, 'public/assets/css')));
 app.use('/images', express.static(path.join(__dirname, 'public/assets/images'))); 
@@ -50,33 +49,33 @@ app.use(session({ cookie: { maxAge: 60000 },
   saveUninitialized: false}));
 dotenv.config();
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'src/public/images/');
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
-//   },
-// });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'src/public/images/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
+  },
+});
 
-// const fileFilter = (req, file, cb) => {
-//   if (
-//     file.mimetype === 'image/png' ||
-//     file.mimetype === 'image/jpeg' ||
-//     file.mimetype === 'image/jpg'
-//   ) {
-//     cb(null, true);
-//   } else {
-//     cb(null, false);
-//   }
-// };
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpeg' ||
+    file.mimetype === 'image/jpg'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
 
-// app.use(
-//   multer({
-//     storage: storage,
-//     fileFilter: fileFilter,
-//   }).single('image')
-// );
+app.use(
+  multer({
+    storage: storage,
+    fileFilter: fileFilter,
+  }).single('image')
+);
 
 dotenv.config();
 

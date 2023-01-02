@@ -5,7 +5,7 @@
     <div class="row page-titles mx-0">
       <div class="col-sm-6 p-md-0">
         <div class="welcome-text">
-          <h4>Edit Professor</h4>
+          <h4>Edit Lecturer</h4>
         </div>
       </div>
     </div>
@@ -28,20 +28,14 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
+                    <label class="form-label">Fullname</label>
+                    <input type="text" class="form-control" name="fullname" value="{{lecturer.fullname}}" required>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
                     <label class="form-label">Email</label>
                     <input type="text" class="form-control" name="email" value="{{lecturer.email}}" required>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" required>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -73,11 +67,17 @@
                     <input type="text" class="form-control" name="education" value="{{lecturer.education}}" required>
                   </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group fallback w-100">
                     <label class="form-label d-block">Lecturer Image</label>
                     <input type="file" class="dropify" data-default-file="" name="image" accept="image/*"
                       value="{{lecturer.image}}" required>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label class="form-label">About me</label>
+                    <textarea name="about" class="form-control" id="" cols="" rows="10">{{lecturer.about}}</textarea>
                   </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">

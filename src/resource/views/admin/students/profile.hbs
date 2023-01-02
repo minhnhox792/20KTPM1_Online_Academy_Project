@@ -2,7 +2,7 @@
   <!-- row -->
   <div class="container-fluid">
 
-    <div class="row page-titles mx-0">
+    <div class="row page-titles mx-0 d-flex justify-content-between">
       <div class="col-sm-6 p-md-0">
         <div class="welcome-text">
           <h4>Student Profile</h4>
@@ -31,10 +31,7 @@
           </div>
           <div class="col-lg-12">
             <div class="card">
-              <div class="card-header">
-                <h2 class="card-title">About me</h2>
-              </div>
-              <div class="card-body pb-0">
+              <div class="card-body">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex px-0 justify-content-between">
                     <strong>Gender</strong>
@@ -70,6 +67,15 @@
                       </div>
                       <div class="row mb-4">
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                          <h5 class="f-w-500">Fullname <span class="pull-right">:</span>
+                          </h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                          <span>{{lecturer.fullname}}</span>
+                        </div>
+                      </div>
+                      <div class="row mb-4">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                           <h5 class="f-w-500">Email <span class="pull-right">:</span>
                           </h5>
                         </div>
@@ -96,9 +102,10 @@
                       </div>
                       <div class="row mb-4">
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                          <h5 class="f-w-500">Year Experience <span class="pull-right">:</span></h5>
+                          <h5 class="f-w-500">About me <span class="pull-right">:</span></h5>
                         </div>
-                        <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>07 Year Experiences</span>
+                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                          <span>{{student.about}}</span>
                         </div>
                       </div>
                     </div>

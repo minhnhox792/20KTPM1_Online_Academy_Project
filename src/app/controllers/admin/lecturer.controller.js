@@ -1,6 +1,7 @@
 import User from '../../models/User.js';
 import objectFormat from '../../../util/mongoose.js';
 import moment from 'moment';
+import bcrypt from 'bcryptjs';
 
 const LecturerController = {
   all: (req, res, next) => {
@@ -19,15 +20,14 @@ const LecturerController = {
   storeAdd: async (req, res, next) => {
     const image = req.file;
     const formData = req.body;
+    const temp = req.file.path;
+    formData.image = temp.replace(/src\\public/g, '');
+    formData.role = 'Lecturer';
+    formData.username = formData.username.replace(/ /g, '');
     if (!image) {
-      return res.status(422).render('admin/lecturers/add', {
+      return res.render('admin/lecturers/add', {
         layout: 'admin',
-        pageTitle: 'Admin',
-        path: `/admin/lecturer/add`,
-        editing: false,
-        hasError: true,
-        errorMessage: 'Attached file is not an image.',
-        validationErrors: [],
+        error: 'Image not found',
       });
     }
     const lecturers = await User.find({});
@@ -36,21 +36,16 @@ const LecturerController = {
         lecturer.username == formData.username ||
         lecturer.email == formData.email
       ) {
-        return res.status(422).render('admin/lecturers/add', {
+        return res.render('admin/lecturers/add', {
           layout: 'admin',
-          pageTitle: 'Admin',
-          path: `/admin/lecturer/add`,
-          editing: false,
-          hasError: true,
-          errorMessage: 'Attached file is not an image.',
-          validationErrors: [],
+          error: 'Username/Email already exists',
         });
       }
     });
-    const temp = req.file.path;
-    formData.image = temp.replace(/src\\public/g, '');
-    formData.role = 'Lecturer';
-    formData.username = formData.username.replace(/ /g, '');
+    const rawPassword = formData.password;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(rawPassword, salt);
+    formData.password = hash;
     const lecturer = new User(formData);
     lecturer
       .save()
@@ -72,18 +67,12 @@ const LecturerController = {
       })
       .catch(next);
   },
-  storeEdit: (req, res, next) => {
+  storeEdit: async (req, res, next) => {
     const image = req.file;
     if (!image) {
-      return res.status(422).render('admin/lecturers/edit', {
-        layout: 'admin',
-        pageTitle: 'Admin',
-        path: `/admin/lecturer/edit/{req.params.id}`,
-        editing: false,
-        hasError: true,
-        lecturer: req.body,
-        errorMessage: 'Attached file is not an image.',
-        validationErrors: [],
+      return res.render("admin/lecturers/all", {
+        layout: "admin",
+        error: "Image not found",
       });
     }
     const formData = req.body;
@@ -95,7 +84,17 @@ const LecturerController = {
       .then(() => {
         res.redirect('/admin/lecturer/all');
       })
-      .catch(next);
+      .catch(() => {
+        User.find({ role: 'Lecturer' })
+          .then((lecturers) => {
+            res.render('admin/lecturers/all', {
+              layout: 'admin',
+              lecturers: objectFormat.multipleMongooseToOject(lecturers),
+              error: 'Username/Email already exists',
+            });
+          })
+          .catch(next);
+      });
   },
   profile: (req, res, next) => {
     User.findById(req.params.id)
