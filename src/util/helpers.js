@@ -19,6 +19,9 @@ export default function helpers(hbs) {
   hbs.handlebars.registerHelper("format_number", function (num) {
     return numeral(num).format("0,0") + "$";
   });
+  hbs.handlebars.registerHelper("format_typeNumber", function (num) {
+    return numeral(num).format("0,0");
+  });
   hbs.handlebars.registerHelper("format_date", function (data) {
     return data.toLocaleDateString("en-US");
   });
