@@ -13,6 +13,10 @@ const Course = new Schema({
   },
   category: {
     type: String,
+    required: true,
+  },
+  maincategory: {
+    type: String,
     maxLength: 50,
     required: true,
   },
