@@ -352,6 +352,7 @@ const userController = {
   },
   addProduct: async (req, res) => {
     try {
+      const url = req.headers.referer || "/";
       if (!req.session.userInfo) {
         return res.redirect("/user/login");
       }
@@ -366,7 +367,7 @@ const userController = {
       }
       const id = req.params.id;
       if (user.courseList.includes(id)) {
-        const url = req.headers.referer || "/";
+      
         return res.redirect(url);
       }
       user.courseList.push(id);
@@ -375,7 +376,6 @@ const userController = {
         { $set: { courseList: user.courseList } }
       );
       const course = await Course.find({ _id: id });
-      console.log(22222222, course);
       const totalBuy = course[0].totalBuy + 1;
       const quantityBuy = course[0].quantityBuy + 1;
       const list = course[0].studentList;
@@ -397,7 +397,7 @@ const userController = {
         }
       );
       console.log("Doneeeeeeeee");
-      return res.redirect("/");
+      return res.redirect(url);
     } catch(err){
       console.log(err)
       return res.redirect("/error/500");

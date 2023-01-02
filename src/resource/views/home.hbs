@@ -24,8 +24,8 @@
                 Web Development</p>
             </div>
           </div>
-        
-          {{>home/cardList tit = "COURSES" data_caro=data_caro}}
+      
+          {{>home/cardList tit = "COURSES" data_caro=data_caro auth=auth }}
         </div>
 
         {{!-- <div id="menu1" class="tab-pane fade">
@@ -77,18 +77,20 @@
 
 
 <div class="container-fluid" >
-  {{>home/topCoursesInWeek id="popular" tit= "Top 4 the most popular courses" data=top4 }}
+  {{>home/topCoursesInWeek id="popular" tit= "Top 4 the most popular courses" data=top4 auth = auth}}
 </div>
 
 <div class="container-xl" >
-  {{>home/multi-carousel id="highest" tit= "Top 10 the Highest viewed courses" data1 = this.list_topView1 data2 = this.list_topView2 data3 = this.list_topView3 }}
+  {{>home/multi-carousel id="highest" tit= "Top 10 the Highest viewed courses" data1 = this.list_topView1 data2 = this.list_topView2 data3 = this.list_topView3 auth = auth }}
 </div>
 
 <div class="container">
-  {{>home/multi-carousel id="newest" tit= "Top 10 Newest courses" data1 = this.list_topDate1 data2 = this.list_topDate2 data3 = this.list_topDate3 }}
+  {{>home/multi-carousel id="newest" tit= "Top 10 Newest courses" data1 = this.list_topDate1 data2 = this.list_topDate2 data3 = this.list_topDate3 auth = auth }}
 </div>
 
 {{>home/listCatery data = topCategory}}
+
+
 <style>
   body {
     font-family: Arial, Helvetica, sans-serif;

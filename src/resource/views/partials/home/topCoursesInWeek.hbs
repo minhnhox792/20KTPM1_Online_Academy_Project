@@ -262,7 +262,7 @@
 											<b>${{format_number (cal_discount this.price this.discount)}}</b>
 										</p>
 										<div class="d-flex justify-content-around">
-											{{#if auth}}
+											{{#if ../auth}}
 
 											<form action="/user/buyProduct/{{this._id}}" method="post">
 												<a href="javascript:;" onclick="parentNode.submit();"

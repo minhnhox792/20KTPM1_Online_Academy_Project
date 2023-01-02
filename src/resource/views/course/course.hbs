@@ -60,6 +60,7 @@
 
                       <h4 style="color: black;font-weight: 700;">{{course.name}}</h4>
                       <p>{{course.shortDesc}}</p>
+                      <code>{{lec.fullname}}</code>
                       {{#if isBuy}}
                       <div class="main-border-button">
                         <a href="" style="pointer-events: none;">You purchased this course</a>
@@ -248,7 +249,33 @@
             </div>
           </div>
           <!-- ***** Banner End ***** -->
-
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="clips">
+                <div class="col-lg-12">
+                  <div class="heading-section">
+                    <h4><em style="color: black;text-decoration: none;">Description</em></h4>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                
+                  <div class="instructor-item">
+                    <img src="/images/clip-02.jpg" alt="" class="instructor-img" />
+                   
+                  </div>
+                  <div class="instructor-paraphraph show">
+                    <p style="color: #000;">
+                      {{{course.fullDesc}}}
+                    </p>
+                  </div>
+                  <span class="instructor-btn show-less-btn " onclick="showLessInstructorContent()">Show less <i
+                      class="fa-solid fa-chevron-up"></i></span>
+                  <span class="instructor-btn show-more-btn" onclick="showMoreInstructorContent()">Show more <i
+                      class="fa-solid fa-chevron-down"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- ***** Gaming Library Start ***** -->
           <div class="row">
             <div class="col-lg-12">
@@ -294,40 +321,19 @@
                   <span class="instructor-introduce">{{lec.fullname}}</span>
                   <div class="instructor-item">
                     <img src="/images/clip-02.jpg" alt="" class="instructor-img" />
-                    <ul>
-                      <li style="display: flex; align-item: center; gap: 8px; margin: 8px 0;">
-                        <i class="fa-solid fa-star" style="font-size: 14px; margin: auto; text-align: center;"></i>
-                        <p style="margin-bottom: 0; color: #000; font-size: 15px; font-weight: 500"> <span
-                            style="color: #e75e8d; font-weight: bold">4.3</span> Instruction Rating</p>
-                      </li>
-                      <li style="display: flex; align-item: center; gap: 8px;margin: 8px 0;">
-                        <i class="fa-solid fa-star" style="font-size: 14px; margin: auto; text-align: center;"></i>
-                        <p style="margin-bottom: 0; color: #000; font-size: 15px; font-weight: 500"><span
-                            style="color: #e75e8d; font-weight: bold">76,231</span> Review </p>
-                      </li>
-                      <li style="display: flex; align-item: center; gap: 8px; margin: 8px 0;">
-                        <i class="fa-solid fa-star" style="font-size: 14px; margin: auto; text-align: center;"></i>
-                        <p style="margin-bottom: 0; color: #000; font-size: 15px; font-weight: 500"><span
-                            style="color: #e75e8d; font-weight: bold">950,123</span> Students</p>
-                      </li>
-                    </ul>
+                   
                   </div>
-                  <div class="instructor-paraphraph show">
+                  <div class="">
                     <p style="color: #000;">
                       {{{lec.about}}}
                     </p>
-                  </div>
-                  <span class="instructor-btn show-less-btn " onclick="showLessInstructorContent()">Show less <i
-                      class="fa-solid fa-chevron-up"></i></span>
-                  <span class="instructor-btn show-more-btn" onclick="showMoreInstructorContent()">Show more <i
-                      class="fa-solid fa-chevron-down"></i></span>
-                </div>
+                
               </div>
             </div>
           </div>
           {{!-- End intro --}}
           <div>
-
+            <code style="font-size: 30px;">COMMENT</code>
             <div>
               <div class="row">
                 {{#each smallComment}}
@@ -362,13 +368,13 @@
                 <div class="modal-content">
                   <div class="row">
                     <h3 style="color:#e75e8d;margin: 20px;">Comment Of Student</h3>
-                    {{!-- {{#each course.comment}}
+                   {{#each course.comment}}
                     {{#if this.name}}
                     <div class="col-sm-5 col-md-6">
                       <div class="clips">
                         <div class="content" style="margin: 30px;">
                           <div class="d-flex">
-                            <img src={{this.image}} alt="" class="comment-img" />
+                      
                             <div style="margin-left: 30px;">
                               <li>{{this.name}}</li>
                               <li>{{this.rating}}<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
@@ -381,7 +387,7 @@
                       </div>
                     </div>
                     {{/if}}
-                    {{/each}} --}}
+                    {{/each}} 
                   </div>
                 </div>
               </div>
