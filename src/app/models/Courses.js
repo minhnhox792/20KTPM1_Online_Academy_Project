@@ -28,7 +28,7 @@ const Course = new Schema({
   nameLecturer: {
     type: String,
     require: true,
-    default : ''
+    default: '',
   },
   rating: {
     type: Number,
@@ -115,42 +115,44 @@ const Course = new Schema({
     default: Date.now(),
   },
 
-  viewWeekly:{
+  viewWeekly: {
     type: Number,
   },
-  quantityBuy:{
+  quantityBuy: {
     type: Number,
   },
-  totalBuy:{
+  totalBuy: {
     type: Number,
-    default: 0
+    default: 0,
   },
-  comment:{
-    type:[
+  comment: {
+    type: [
       {
-        _id:{ 
+        _id: {
           type: ObjectId,
-          ref:'User', 
+          ref: 'User',
         },
-        name:{
-          type:String,
-          maxLength:100,
+        name: {
+          type: String,
+          maxLength: 100,
         },
-        content:{
-          type:String,
+        content: {
+          type: String,
           maxLength: 1000,
         },
-        rating:{
-          type:Number,
+        rating: {
+          type: Number,
           required: true,
         },
       },
     ],
     default: [],
-    
-  }
+  },
+  isAdd: {
+    type: Boolean,
+    default: false,
+  },
 });
-
 
 // Course.plugin(mongoose_delete);
 // Course.plugin(mongoose_delete, {

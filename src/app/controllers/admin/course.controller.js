@@ -33,12 +33,12 @@ const CourseController = {
   storeAdd: (req, res, next) => {
     const image = req.file;
     if (!image) {
-      User.find({ role: 'Lecturer' })
-        .then((lecturers) => {
-          return res.render('admin/courses/add', {
+      Course.find({})
+        .then((courses) => {
+          res.render('admin/courses/all', {
             layout: 'admin',
-            categories: objectFormat.multipleMongooseToOject(categories),
-            lecturers: objectFormat.multipleMongooseToOject(lecturers),
+            courses: objectFormat.multipleMongooseToOject(courses),
+            error: 'Image not found',
           });
         })
         .catch(next);
@@ -55,7 +55,22 @@ const CourseController = {
       course
         .save()
         .then(() => {
-          res.redirect('/admin/course/all');
+          Course.findOne({ lecturer: e._id, isAdd: false })
+            .then((course) => {
+              course = objectFormat.mongooseToOject(course);
+              course.isAdd = true;
+              e.courseList.push(course._id);
+              Course.updateOne({ _id: course._id }, course)
+                .then(() => {
+                  User.updateOne({ _id: e._id }, e)
+                    .then(() => {
+                      res.redirect('/admin/course/all');
+                    })
+                    .catch(next);
+                })
+                .catch(next);
+            })
+            .catch(next);
         })
         .catch(next);
     });
@@ -63,35 +78,78 @@ const CourseController = {
   edit: (req, res, next) => {
     Course.findById(req.params.id)
       .then((course) => {
-        res.render('admin/courses/edit', {
-          layout: 'admin',
-          course: objectFormat.mongooseToOject(course),
-        });
+        Category.find({})
+          .then((categories) => {
+            User.find({ role: 'Lecturer' })
+              .then((lecturers) => {
+                res.render('admin/courses/edit', {
+                  layout: 'admin',
+                  course: objectFormat.mongooseToOject(course),
+                  categories: objectFormat.multipleMongooseToOject(categories),
+                  lecturers: objectFormat.multipleMongooseToOject(lecturers),
+                });
+              })
+              .catch(next);
+          })
+          .catch(next);
       })
       .catch(next);
   },
   storeEdit: (req, res, next) => {
     const image = req.file;
     if (!image) {
-      return res.status(422).render('admin/courses/edit', {
-        layout: 'admin',
-        pageTitle: 'Admin',
-        path: `/admin/course/edit/{req.params.id}`,
-        editing: false,
-        hasError: true,
-        errorMessage: 'Attached file is not an image.',
-        validationErrors: [],
-      });
+      Course.find({})
+        .then((courses) => {
+          res.render('admin/courses/all', {
+            layout: 'admin',
+            courses: objectFormat.multipleMongooseToOject(courses),
+            error: 'Image not found',
+          });
+        })
+        .catch(next);
     }
     const formData = req.body;
     const temp = req.file.path;
     formData.image = temp.replace(/src\\public/g, '');
     formData.updatedAt = Date.now();
-    Course.updateOne({ _id: req.params.id }, formData)
-      .then(() => {
-        res.redirect('/admin/course/all');
-      })
-      .catch(next);
+    const category = formData.category.split('-');
+    formData.category = category[0];
+    formData.mainCategory = category[1];
+    Course.findOne({ _id: req.params.id }).then((course) => {
+      if (course.lecturer == formData.lecturer) {
+        Course.updateOne({ _id: req.params.id }, formData)
+          .then(() => {
+            res.redirect('/admin/course/all');
+          })
+          .catch(next);
+      } else {
+        User.findOne({ _id: course.lecturer })
+          .then((lecturer) => {
+            const index = lecturer.courseList.indexOf(req.params.id);
+            lecturer.courseList.splice(index, 1);
+            User.updateOne({ _id: course.lecturer }, lecturer)
+              .then(() => {
+                User.findById(formData.lecturer)
+                  .then((lecturer) => {
+                    formData.nameLecturer = lecturer.fullname;
+                    lecturer.courseList.push(req.params.id);
+                    Course.updateOne({ _id: req.params.id }, formData)
+                      .then(() => {
+                        User.updateOne({ _id: lecturer._id }, lecturer)
+                          .then(() => {
+                            res.redirect('/admin/course/all');
+                          })
+                          .catch(next);
+                      })
+                      .catch(next);
+                  })
+                  .catch(next);
+              })
+              .catch(next);
+          })
+          .catch(next);
+      }
+    });
   },
   about: (req, res, next) => {
     Course.findById(req.params.id)
@@ -109,11 +167,21 @@ const CourseController = {
       .catch(next);
   },
   delete: (req, res, next) => {
-    Course.deleteOne({ _id: req.params.id })
-      .then(() => {
-        res.redirect('back');
-      })
-      .catch(next);
+    Course.findById(req.params.id).then((course) => {
+      User.findById(course.lecturer).then((lecturer) => {
+        const index = lecturer.courseList.indexOf(course._id);
+        lecturer.courseList.splice(index, 1);
+        User.updateOne({ _id: lecturer._id }, lecturer)
+          .then(() => {
+            Course.deleteOne({ _id: req.params.id })
+              .then(() => {
+                res.redirect('back');
+              })
+              .catch(next);
+          })
+          .catch(next);
+      });
+    });
   },
 };
 

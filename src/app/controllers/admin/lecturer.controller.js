@@ -70,9 +70,9 @@ const LecturerController = {
   storeEdit: async (req, res, next) => {
     const image = req.file;
     if (!image) {
-      return res.render("admin/lecturers/all", {
-        layout: "admin",
-        error: "Image not found",
+      return res.render('admin/lecturers/all', {
+        layout: 'admin',
+        error: 'Image not found',
       });
     }
     const formData = req.body;
@@ -111,11 +111,25 @@ const LecturerController = {
       .catch(next);
   },
   delete: (req, res, next) => {
-    User.deleteOne({ _id: req.params.id })
-      .then(() => {
-        res.redirect('back');
-      })
-      .catch(next);
+    User.findById(req.params.id).then((lecturer) => {
+      if (lecturer.courseList.length > 0) {
+        User.find({ role: 'Lecturer' })
+          .then((lecturers) => {
+            res.render('admin/lecturers/all', {
+              layout: 'admin',
+              lecturers: objectFormat.multipleMongooseToOject(lecturers),
+              error: 'The lecturer has (a) course(s). Can not delete',
+            });
+          })
+          .catch(next);
+      } else {
+        User.deleteOne({ _id: req.params.id })
+          .then(() => {
+            res.redirect('back');
+          })
+          .catch(next);
+      }
+    });
   },
 };
 

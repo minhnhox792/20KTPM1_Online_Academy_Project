@@ -28,40 +28,13 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label class="form-label">Category</label>
-                    <select id="mySelect" class="form-control" name="category">
-                      <option value="HTML" {{#ifEquals course.category "HTML" }} selected {{/ifEquals}}>
-                        HTML
-                      </option>
-                      <option value="CSS" {{#ifEquals course.category "CSS" }} selected {{/ifEquals}}>
-                        CSS
-                      </option>
-                      <option value="JavaScript" {{#ifEquals course.category "JavaScript" }} selected {{/ifEquals}}>
-                        JavaScript
-                      </option>
-                      <option value="Angular" {{#ifEquals course.category "Angular" }} selected {{/ifEquals}}>
-                        Angular
-                      </option>
-                      <option value="React" {{#ifEquals course.category "React" }} selected {{/ifEquals}}>
-                        React
-                      </option>
-                      <option value="Vue.js" {{#ifEquals course.category "Vue.js" }} selected {{/ifEquals}}>
-                        Vue.js
-                      </option>
-                      <option value="Ruby" {{#ifEquals course.category "Ruby" }} selected {{/ifEquals}}>
-                        Ruby
-                      </option>
-                      <option value="PHP" {{#ifEquals course.category "PHP" }} selected {{/ifEquals}}>
-                        PHP
-                      </option>
-                      <option value="ASP.NET" {{#ifEquals course.category "ASP.NET" }} selected {{/ifEquals}}>
-                        ASP.NET
-                      </option>
-                      <option value="Python" {{#ifEquals course.category "Python" }} selected {{/ifEquals}}>
-                        Python
-                      </option>
-                      <option value="MySQL" {{#ifEquals course.category "MySQL" }} selected {{/ifEquals}}>
-                        MySQL
-                      </option>
+                    <select class="form-control" name="category">
+                      {{#each categories}}
+                        {{#each this.subCategories}}
+                          <option value="{{this}}-{{../this.category}}" {{#ifEquals ../../course.category this }}
+                            selected {{/ifEquals}}>{{this}} ({{../this.category}})</option>
+                        {{/each}}
+                      {{/each}}
                     </select>
                   </div>
                 </div>
@@ -86,31 +59,12 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label class="form-label">Lecturer Name</label>
-                    <input type="text" class="form-control" name="lecturer" value="{{course.lecturer}}" required>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label class="form-label">Overview</label>
-                    <input type="text" class="form-control" name="overview" value="{{course.overview}}">
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label class="form-label">Basic Code</label>
-                    <input type="text" class="form-control" name="basicCode" value="{{course.basicCode}}">
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label class="form-label">Advanced Code</label>
-                    <input type="text" class="form-control" name="advancedCode" value="{{course.advancedCode}}">
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label class="form-label">Master Code</label>
-                    <input type="text" class="form-control" name="masterCode" value="{{course.masterCode}}">
+                    <select name="lecturer" class="form-control">
+                      {{#each lecturers}}
+                        <option value="{{this._id}}" {{#ifEquals ../course.nameLecturer
+                          this.fullname}}selected{{/ifEquals}}>{{this.fullname}}</option>
+                      {{/each}}
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -119,7 +73,7 @@
                     <input type="text" class="form-control" name="discount" value="{{course.discount}}">
                   </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group fallback w-100">
                     <label class="form-label d-block">Course Image</label>
                     <input type="file" class="dropify" data-default-file="" name="image" accept="image/*" required>
