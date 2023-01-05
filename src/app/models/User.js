@@ -88,6 +88,10 @@ const User = new Schema(
     verified: { type: Boolean, default: false },
     googleId: {
       type: String, default: ''
+    },
+    facebookId:{
+      type: String,
+      default: ''
     }
   },
   { timestamps: true }

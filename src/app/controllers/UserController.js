@@ -592,12 +592,29 @@ const userController = {
         }
         req.session.auth = true;
         req.session.userInfo = req.user;
+        console.log(req.user)
         return res.redirect('/')
       }
       catch{
 
       }
   },
+  loginWithFacebook: async (req,res) =>{
+    
+    try{
+      
+      if(!req.user){
+        return res.redirect("/user/login")
+      }
+      req.session.auth = true;
+      req.session.userInfo = req.user;
+      console.log(req.user, 2222222222)
+      return res.redirect('/')
+    }
+    catch{
+
+    }
+},
   getReset: (req,res) =>{
     
     try{

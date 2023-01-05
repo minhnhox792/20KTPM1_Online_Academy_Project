@@ -4,7 +4,10 @@ import { check } from "express-validator/check/index.js";
 import passport from "passport";
 import google from "../util/google.js"
 import middleware from "../app/controllers/middleware/authMiddleware.js"
+import facebook from "../util/facebook.js";
 const router = express.Router();
+
+facebook(passport)
 google(passport)
 
 router.get("/login", userController.login);
@@ -36,5 +39,10 @@ router.get("/google/callback", passport.authenticate("google", {failureRedirect:
 
 router.get("/reset", userController.getReset)
 router.post("/reset", userController.postReset)
+
+router.get('/facebook', passport.authenticate('facebook', {
+  scope: ['email']
+}));
+router.get("/facebook/callback", passport.authenticate("facebook" , {failureRedirect:'/error/500'}), userController.loginWithFacebook);
 
 export default router;
