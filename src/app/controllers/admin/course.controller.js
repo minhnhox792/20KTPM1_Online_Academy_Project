@@ -114,7 +114,7 @@ const CourseController = {
     formData.updatedAt = Date.now();
     const category = formData.category.split('-');
     formData.category = category[0];
-    formData.mainCategory = category[1];
+    formData.maincategory = category[1];
     Course.findOne({ _id: req.params.id }).then((course) => {
       if (course.lecturer == formData.lecturer) {
         Course.updateOne({ _id: req.params.id }, formData)

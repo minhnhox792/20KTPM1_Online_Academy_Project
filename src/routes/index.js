@@ -5,6 +5,7 @@ import lecturerAdminRouter from './admin/lecturer.admin.js';
 import studentAdminRouter from './admin/student.admin.js';
 import courseAdminRouter from './admin/course.admin.js';
 import categoryAdminRouter from './admin/category.admin.js';
+import chapterAdminRouter from './admin/chapter.admin.js';
 import categoryRouter from './category.js';
 import errorRouter from './error.js';
 import userRouter from './user.js';
@@ -27,6 +28,7 @@ export default function (app) {
     app.use('/admin/lecturer', lecturerAdminRouter);
     app.use('/admin/student', studentAdminRouter);
     app.use('/admin/course', courseAdminRouter);
+    app.use('/admin/course/about/:id', chapterAdminRouter);
     app.use('/admin/category', categoryAdminRouter);
     app.use('/category', categoryRouter);
     app.use('/error', errorRouter);
