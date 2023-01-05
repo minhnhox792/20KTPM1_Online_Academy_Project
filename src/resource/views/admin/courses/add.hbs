@@ -53,7 +53,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
                     <label class="form-label">Full Description</label>
-                    <textarea class="form-control" rows="5" name="fullDesc"></textarea>
+                    <textarea id="full-description" class="form-control" rows="5" name="fullDesc"></textarea>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -96,3 +96,17 @@
     </div>
   </div>
 </div>
+
+<script src="https://cdn.tiny.cloud/1/o3spvyeq6r5oshe6dzh63yc88hs5ct8m2gixynrik46shp7r/tinymce/5/tinymce.min.js"
+  referrerpolicy="origin"></script>
+
+<script>
+  tinymce.init({
+    selector: '#full-description',
+    plugins: 'paste image link autolink lists table media',
+    menubar: false,
+    toolbar: [
+      'undo redo | bold italic underline strikethrough | numlist bullist| alignleft aligncenter alignright |forecolor backcolor| table link image media'
+    ]
+  });
+</script>

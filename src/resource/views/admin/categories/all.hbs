@@ -80,7 +80,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button id="btn-add-cetegory" type="button" class="btn btn-primary">Add category</button>
+        <button id="btn-add-category" type="button" class="btn btn-primary">Add category</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -89,7 +89,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    var btnAddCategory = document.getElementById('btn-add-cetegory');
+    var btnAddCategory = document.getElementById('btn-add-category');
     var addCategoryForm = document.forms['add-category-form']
     btnAddCategory.onclick = () => {
       addCategoryForm.action = '/admin/category/all';

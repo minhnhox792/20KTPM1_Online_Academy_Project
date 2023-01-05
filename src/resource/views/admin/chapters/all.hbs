@@ -11,7 +11,7 @@
           <h4>Chapter List</h4>
         </div>
       </div>
-      <a href="" class="btn btn-primary">
+      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#add-chapter">
         <i class="fa fa-plus" aria-hidden="true"></i>
         Add Chapter
       </a>
@@ -41,6 +41,47 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
+
+<!-- Add Chapter -->
+
+<div class="modal fade" id="add-chapter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new chapter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="add-chapter-form" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="chapter-name" class="col-form-label">Title:</label>
+            <input name="title" type="text" class="form-control" id="chapter-name" required>
+            <label for="video-file" class="col-form-label">Video file:</label>
+            <input name="file" type="file" id="video-file" class="form-control" accept="video/*" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-add-chapter" type="button" class="btn btn-primary">Add chapter</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var btnAddChapter = document.getElementById('btn-add-chapter');
+    console.log(btnAddChapter);
+    var addChapterForm = document.forms['add-chapter-form'];
+    btnAddChapter.onclick = () => {
+      addChapterForm.action = '/admin/course/about/63b6d5e6756d07f63602d982/overview';
+      addChapterForm.submit();
+    }
+  })
+</script>
