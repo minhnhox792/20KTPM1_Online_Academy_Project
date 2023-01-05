@@ -10,7 +10,7 @@ import util from "../../util/mongoose.js";
 import moment from "moment";
 import Course from "../models/Courses.js";
 import randomstring from"randomstring"
-
+import Category from '../models/Category.js'
 const ITEM_PER_PAGE = 4;
 
 const transporter = nodemailer.createTransport(
@@ -323,7 +323,8 @@ const userController = {
 
       const data = req.body;
       if(req.body.gender == "Choose your gender"){
-        req.flash("error", "Please choose your gender !")
+        req.flash("error", "Please choose your gender !") 
+        
         return res.redirect('/user/profile')
       }
 
@@ -685,6 +686,19 @@ const userController = {
     }
     catch{
 
+    }
+  },
+  requestCourse: async (req,res) => {
+    try{
+      const category = req.query.category; 
+      console.log("Category: ", category)
+      const data = await Category.findOne({category: category})  
+      console.log("Data: ", data)
+      return res.status(200).json(data)
+    }
+    catch(err){
+      return res.status(500).json(err)
+      // return res.redirect('/error/500')
     }
   }
  

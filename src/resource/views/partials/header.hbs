@@ -19,94 +19,22 @@
         <div class="dropdown-menu IT-Menu form-control" aria-labelledby="navbarDropdown"
           style="height: 594px; width: 200px; position:absolute; right: 50px;">
           {{#each all_category}}
-          <div class = "d-flex " style="width: 100%;" id = "hover">
-            <a class="dropdown-item" href="/category/view/{{this.category}}" style="font-weight: bold; width: 90%;">
+          <div class = "d-flex " style="width: 100%;" id = "hover" onmouseover="hoverFunc(event)" >
+            <a class="dropdown-item"  href="/category/view/{{this.category}}" style="font-weight: bold; width: 90%;" id = "btn-hover">
               {{this.category}} 
             </a>
-            <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-right: 7px; width: 10%; padding-top: 7px;"></i>
-            </div>
+           
+          
+           <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-right: 7px; width: 10%; padding-top: 7px;"></i>
+          </div>
           {{/each}}
-         
           <ul class="dropdown-menu dropdown-submenu menu-responsive"
-            style="height: 594px; width: 200px; border-left: 1px solid #CED4DA;">
-            <li class="dropdown-menu-item" style="border-left: 1px solid #CED4DA;">
-              <a class="dropdown-item hover-list" href="#" style="font-weight: bold;">Web
-
-                <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
-              </a>
-
-              <div class="list-group dropdown-submenu show-list" style="height: 300px; width: 200px;">
-                {{!-- {{#each all_category}}
-                  {{#each this.subCategories}}
-                       <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; border-top: 1px solid #CED4DA; ">{{this}}</a>
-                  {{/each}}
-                {{/each}} --}}
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; border-top: 1px solid #CED4DA; ">ReactJS</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; ">Bootstrap 5</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
-
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-              </div>
-            </li>
-            <li class="dropdown-menu-item" style="height: 500px;">
-              <a class="dropdown-item hover-list-mobile" href="#" style="font-weight: bold;">Mobile
-                <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-top: 5px;"></i>
-
-              </a>
-              <div class="list-group dropdown-submenu show-list-mobile" style="height: 300px; width: 200px;">
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white; border-left: 1px solid #CED4DA; border-top: 1px solid #CED4DA; ">React
-                  Native</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">NodeJS</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-
-                <a href="#" class="list-group-item list-group-item-action"
-                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
-              </div>
-
-            </li>
-
+              style="height: 594px; width: 200px; border: 1px solid #CED4DA; color: black">
+          
           </ul>
-          <ul class="dropdown-menu dropdown-submenu-second">
-            <li>
-              <a class="dropdown-item" href="#">Lập trình ứng dụng Web</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Lập trình ứng dụng di động</a>
-            </li>
-
-          </ul>
+           
+         
+         
 
         </div>
 
@@ -175,6 +103,12 @@
 
 
 /* CSS */
+#btn-hover:active{
+  background-color:  #146EBE !important;
+}
+#hover:active{
+  background-color: #146EBE !important;
+}
 .button-1 {
   background-color: #e75e8d;
   border-radius: 8px;
@@ -243,11 +177,11 @@
   }
 
   .dropdown-menu .dropdown-submenu-second {
-    display: none;
+    display: block;
   }
 
   .dropdown-menu .dropdown-submenu {
-    display: none;
+    display: block;
     position: absolute;
     left: 100%;
     top: -3px;
@@ -338,3 +272,59 @@
     }
   }
 </style>
+<script>
+  
+
+  function hoverFunc(event) {
+    const category = event.target.innerText 
+    const categoryLevel2 = document.querySelector('.dropdown-submenu')
+  
+    fetch(`http://localhost:3000/user/requestCourse?category=${category}`, {
+         method: 'GET',  
+         mode: 'cors', 
+      })
+      .then((res) => res.json())
+      .then(data => { 
+        const htmls =  data?.subCategories.map((item) => { 
+          return `
+            <li class="dropdown-menu-item" style="border-left: 1px solid #CED4DA;">
+              <a class="dropdown-item hover-list" href="#" style="font-weight: bold; color:black;">${item}
+              </a>
+            </li>
+        `
+        }).join('')         
+        if (htmls) categoryLevel2.innerHTML = htmls
+      }) 
+
+}
+
+
+        
+
+</script>
+
+
+
+{{!-- <div class="list-group dropdown-submenu show-list" style="height: 300px; width: 200px;">
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; border-top: 1px solid #CED4DA; ">ReactJS</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; ">Bootstrap 5</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white; border-left: 1px solid #CED4DA; ">NodeJS</a>
+
+                <a href="#" class="list-group-item list-group-item-action"
+                  style="border-color: white;border-left: 1px solid #CED4DA">Taiwind</a>
+              </div> --}}

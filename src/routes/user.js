@@ -45,4 +45,5 @@ router.get('/facebook', passport.authenticate('facebook', {
 }));
 router.get("/facebook/callback", passport.authenticate("facebook" , {failureRedirect:'/error/500'}), userController.loginWithFacebook);
 
+router.get('/requestCourse', userController.requestCourse)
 export default router;
