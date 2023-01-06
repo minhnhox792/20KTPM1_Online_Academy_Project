@@ -45,15 +45,33 @@ connect.once('open', () => {
   })
 })
 var type = upload.single('recfile');
-// postman 
-router.post('/', type, (req, res, next) => {
+router.post('/video', type, (req, res, next) => {
   console.log("POST VIDEO")
   console.log(req.file.id)
   const newchapter = new chapter({
     title: req.body.title,
     filename: req.file.id,
   })
-
+  
+  newchapter.save()
+    .then((chapter) => {
+      return res.status(200).json({
+        chapter,
+        message: "Upload video successfully !"
+      })
+    })
+    .catch(err => {
+      return res.status(500).json(err)
+    })
+})
+router.post('/image', type, (req, res, next) => {
+  console.log("POST VIDEO")
+  console.log(req.file.id)
+  const newchapter = new chapter({
+    title: req.body.title,
+    filename: req.file.id,
+  })
+  
   newchapter.save()
     .then((chapter) => {
       return res.status(200).json({

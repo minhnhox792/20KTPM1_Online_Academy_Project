@@ -8,7 +8,7 @@ const keyWord = {
 let dataInput
 let ncheck 
 let ccheck
-const nPerPage=1
+const nPerPage=3
 const searchController = {
     searchHandle: async (req, res) => {
         try {
@@ -52,6 +52,10 @@ const searchController = {
             .skip(pageNumber > 0 ? ((pageNumber - 1) * nPerPage) : 0)
             .limit(nPerPage)
         }
+        searchData = searchData.map((value) => {
+            value.participant = value.studentList.length
+            return value
+        })
         return res.render("Search/Search", {
             dataInput,
             searchData,

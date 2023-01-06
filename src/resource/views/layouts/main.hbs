@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div class="app">
+    <div class="app" style="background-color: #F5F6FD; overflow: hidden">
                     <button onclick="move(0)" id="myBtn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                     fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -26,14 +26,14 @@
 
         <div class="container-fluid" style="z-index: 10; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
             <div class="row">
-                {{>header}}
+            {{>header}}
             </div>
         </div>
 
-        <div class="container-fluid" style="width:85%;margin: auto"  >
+        <div class="container-fluid" style="width:85%;margin: auto; "  >
             {{{body}}}
         </div>
-        <footer style="margin-top: 50px;">
+        <footer >
             {{>footer}}
 
         </footer>
@@ -50,40 +50,11 @@
 </html>
 
 <style>
-    {{!-- :root {
-    --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
-    } --}}
+   
     body {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 20px;
     }
-    {{!-- .card {
-    background: white;
-   
-    color: black;
-    margin-bottom: 2rem;
-  }
-
-  .btn {
-    border: 5px solid;
-    border-image-slice: 1;
-    background: var(--gradient) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    border-image-source: var(--gradient) !important;
-    text-decoration: none;
-    transition: all .4s ease;
-  }
-
-  .btn:hover,
-  .btn:focus {
-    background: var(--gradient) !important;
-    -webkit-background-clip: none !important;
-    -webkit-text-fill-color: #fff !important;
-    border: 5px solid #fff !important;
-    box-shadow: #222 1px 0 10px;
-    text-decoration: underline;
-  } --}}
     #myBtn {
         display: none;
         position: fixed;

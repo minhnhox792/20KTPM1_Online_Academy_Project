@@ -5,7 +5,7 @@ import moment from 'moment';
 const HomeController = {
   
   index: async (req, res) => {
-    const all_category = await Category.find({})
+    // const all_category = await Category.find({})
     let pageNumber=req.query.pageNumber || 1
     const data_caro = await Course.find().skip(pageNumber > 0 ? ((pageNumber - 1) * 4) : 0)
     .limit(4)
@@ -39,7 +39,7 @@ const HomeController = {
         }
       }
       list_topDate2 = ultil.filter(list_topDate2)
-      list_topDate3 = ultil.filter(list_topDate2)
+      list_topDate3 = ultil.filter(list_topDate3)
       list_topDate1 = ultil.filter(list_topDate1)
       
       let list_topView1 = [];
@@ -65,6 +65,7 @@ const HomeController = {
       list_topView2 = ultil.filter(list_topView2)
       list_topView3 = ultil.filter(list_topView3)
 
+      console.log()
 
       Course.aggregate(
         [
@@ -99,7 +100,6 @@ const HomeController = {
             top4,
             pageNumber:pageNumber-"0",
             data_caro,
-            all_category,
             auth:req.session.auth,
               });
         }

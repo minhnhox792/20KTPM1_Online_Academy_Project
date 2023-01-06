@@ -1,4 +1,5 @@
 <style>
+  
   :root {
     --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
   }
@@ -9,16 +10,9 @@
 
   .card {
     background: white;
-
-      {
-        {
-        !-- border: 1px solid #dd2476;
-        --
-      }
-    }
-
     color: black;
     margin-bottom: 2rem;
+    height: 380px;
   }
 
   .btn {
@@ -92,9 +86,7 @@
   .pagination-rounded-flat {}
 
   .pagination-success .page-item.active .page-link,
-  a {
-    background: #white;
-  }
+
 
   .pagination.pagination-rounded-flat .page-item .page-link,
   a {
@@ -106,50 +98,78 @@
         --
       }
     }
-  }
+  },
+.button-primary {
+		    font-size: 16px !important;
+			background-color: transparent;
+			line-height: 32px;
+			padding: 4px 24px;
+			border-radius: 10px; 
+			color: #e75e8d;
+			font-weight: 400;
+			transition: all 0.4s ease;
+	} 
+
+	.button-primary:hover {
+		color: #fff;
+		background-color: #e75e8d;
+	}
 </style>
 
 <div class="container-fluid mt-4">
   <div class="row" style="padding-top: 50px;margin: 0 auto;">
 
-          
-    {{#each data_caro}}
-    <div class="col-lg-3 col-sm-12 col-md-6">
-      <div class="card">
-        <a href="/course/{{this._id}}">
-          <div style="height: 20vh;">
 
-        <img src={{this.image}}  class="card-img-top" alt="...">
+    {{#each data_caro}}
+    <div class="col-lg-3 col-sm-12 col-md-6" style="">
+      <div class="card" style="height: 29rem">
+        <a href="/course/{{this._id}}">
+          <div style="height: 10rem">
+
+            <img src={{this.image}} class="card-img-top" style="height: 10rem" alt="...">
           </div>
         </a>
         <div class="card-body">
-          <h5 class="card-title">{{this.name}}</h5>
-         
-          {{!-- <li style="list-style: none;">{{this.lecturer}}</li> --}}
-          <li class="list-inline-item" style="font-size: 15px;color:gold">{{this.numberStudentRate}}<i
-              class="fa fa-star"></i></li>
+          <div style="height: 13rem">
 
-          <p class="item-price"><strike>${{format_number this.price}}</strike>
-            <b>${{format_number (cal_discount this.price this.discount)}}</b>
-          </p>
-          <div class="d-flex justify-content-around">
-    
+            <h5 class="card-title"
+              style="text-overflow: ellipsis;overflow: hidden; width: 220px; height: 1.2em; white-space: nowrap; color: #e75e8d; font-weight: bold;">
+              {{this.name}}</h5>
+            <span style="font-size: 14px; font-weight: 400; opacity: 0.8;" class = "text-muted">{{this.category}}</span>
+            <li style="list-style: none;color:rgb(204, 140, 175)">{{this.nameLecturer}}</li>
+            <li style="list-style: none;" class = "text-muted">{{this.shortDesc}}</li>
+
+            <li class="list-inline-item" style="font-size: 15px; color: #747D89;">{{this.numberStudentRate}}<i
+                class="fa fa-star" style="color: #FFC000;"></i></li>
+
+            {{#if (compareZero this.discount)}}
+            <p class="item-price"><strike style="color: #9EA4AD; font-weight: none;">{{format_number
+                this.price}}</strike>
+              <b style="color: #e75e8d;">{{format_number (cal_discount this.price this.discount)}}</b>
+            </p>
+
+
+            {{else}}
+            <br>
+              <b class="item-price" style="font-size: 1.1rem; color: #e75e8d;">{{format_number this.price}}</b>
+            {{/if}}
+          </div>
+          <div class="d-flex justify-content-around" style="height: 2rem">
+
             {{#if ../auth}}
-               <form action="/user/buyProduct/{{this._id}}" method="post">
-              <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary"
-                style="height: 40px; border:0;">Buy</a>
+            <form action="/user/buyProduct/{{this._id}}" method="post">
+              <a href="javascript:;" onclick="parentNode.submit();" class="button-primary "
+                 style="height: 40px; border:0;">Buy</a>
             </form>
             <form action="/user/favoriteList/{{this._id}}" method="post">
-              <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary"
-                style="height: 40px; border:0;">Like</a>
+              <a href="javascript:;" onclick="parentNode.submit();" class="button-primary "
+                 style="height: 40px; border:0;">Like</a>
             </form>
             {{else}}
-             <a href="/user/login"  class="btn btn-primary"
-                style="height: 40px; border:0;">Buy</a>
-                 <a href="user/login"  class="btn btn-primary"
-                style="height: 40px; border:0;">Like</a>
+            <a href="/user/login" class="button-primary "  style="height: 40px; border:0;">Buy</a>
+            <a href="user/login" class="button-primary "  style="height: 40px; border:0;">Like</a>
             {{/if}}
-           
+
           </div>
         </div>
       </div>
@@ -157,8 +177,8 @@
     {{/each}}
     <div class="d-flex justify-content-center" style="float:right;width:100%;">
       <div class="col-md-4 col-sm-6 stretch-card ">
-        <div class="card" style="background-color: #e5e5e5; border-color: #e5e5e5;">
-          <div class="card-body justify-content-center text-center">
+        <div class="" style="background-color: #F5F6FD; border-color: #F5F6FD;">
+          <div class="card-body justify-content-center text-center" style="height: 0">
             <nav aria-label="Page navigation example" class="d-flex justify-content-center w-100">
               <ul class="pagination">
                 <li class="page-item">
@@ -206,3 +226,5 @@
   integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
   integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+
+

@@ -2,26 +2,16 @@
 <div class="" style="margin-top:100px">
   <div>
     <p id="title-tabs"></p>
-    <p id="title-tabs-detail">Choose from 213,000 online video courses with new additions published every month</p>
+    <p id="title-tabs-detail" style="text-align: center; font-weight: 600; color:#e75e8d ;">Choose from 213,000 online video courses with new additions published every month</p>
 
-    <ul class="nav nav-tabs justify-content-center">
-      <li><a data-toggle="tab" href="#home" class="active">Home</a></li>
-      <li><a data-toggle="tab" href="#menu1" style="padding-left: 50px;">Web</a></li>
-      <li><a data-toggle="tab" href="#menu2" style="padding-left: 50px;">Mobile</a></li>
-    </ul>
+   
 
-    <div class=" border border-dark" ; style="margin: 20px;">
+    <div class="" ; style="margin: 20px;">
       <div class="tab-content " style="margin: 20px;font-weight:600;font-size: 18px;">
         <div id="home" class="tab-pane active  ">
           <div style="margin-bottom: -20px;font-weight:700;font-size: 18px;" class="pt-4">
-            <div>
-              <p id="title-tabs-detail-nametabs"
-                style="font-size: 18px font-weight:700;font-size: 18px;;font-weight: 600; margin-left: 70px">
-                Build websites and applications with Web Development</p>
-              <p id="title-tabs-detail-nametabs-content" style="font-size: 14px ;font-weight: 400; margin-left: 70px">
-                Buildwebsites and applications
-                with
-                Web Development</p>
+            <div class = "text-center justify-content-center">
+                <h4 style="color:rgb(204, 140, 175); text-decoration: none; font-size: 22px; font-weight: 600;">Build websites and applications with Web Development</h4>
             </div>
           </div>
       
@@ -44,17 +34,17 @@
     </div>
   </div>
   <div class="container-fluid d-flex justify-content-center "
-    style="margin-top:100px;background-color: gray; position: relative; left: -10%; width: 100vw">
-    <div class="d-flex justify-content-center" style="width: 1800px">
+    style="margin-top:100px;background-color:rgb(216, 175, 202); position: relative; left: 50%; transform: translateX(-50%); width: 100vw; padding: 0 120px;">
+    <div class="d-flex justify-content-center" style="width: 100vw; display: block !important">
       <div class="row justify-content-md-center">
-        <div class="col col-lg-4 " ;>
+        <div class="col col-lg-4 ">
           <div class="d-flex justify-content-center align-items-center" style="width:400px;height:100px">
             <i class="fa-solid fa-play"></i>
             <p class="" style="margin: 20px;font-weight:700;font-size: 18px;">Choose courses taught by
               real-world experts</p>
           </div>
         </div>
-        <div class="col col-lg-4" ;style="width:200px">
+        <div class="col col-lg-4" style="width:200px">
           <div class="d-flex justify-content-center align-items-center" style="width:400px;height:100px">
             <i class="fa-solid fa-school"></i>
             <p class="" style="margin: 20px;font-weight:700;font-size: 18px;">Choose courses taught by
@@ -62,7 +52,7 @@
           </div>
 
         </div>
-        <div class="col col-lg-4" ;style="width:200px">
+        <div class="col col-lg-4" style="width:200px">
           <div class="d-flex justify-content-center align-items-center" style="width:400px;height:100px">
             <i class="fa-solid fa-mobile"></i>
             <p class="" style="margin: 20px;font-weight:700;font-size: 18px;">Learn at your own pace, with
@@ -80,7 +70,7 @@
   {{>home/topCoursesInWeek id="popular" tit= "Top 4 the most popular courses" data=top4 auth = auth}}
 </div>
 
-<div class="container-xl" >
+<div class="container-xl" style="padding-left: 0; padding-right: 0" >
   {{>home/multi-carousel id="highest" tit= "Top 10 the Highest viewed courses" data1 = this.list_topView1 data2 = this.list_topView2 data3 = this.list_topView3 auth = auth }}
 </div>
 
@@ -126,8 +116,9 @@
 
   ,
   #title-tabs-detail {
-    font-size: 16px;
-    font-weight: 400;
+    text-align: center;
+    font-weight: 600;
+    color: #007bff;
   }
 
   ,

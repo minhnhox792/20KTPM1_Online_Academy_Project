@@ -34,4 +34,14 @@ export default function helpers(hbs) {
   hbs.handlebars.registerHelper("math_compare", function (num1, num2) {
     return num1 < num2;
   });
+  hbs.handlebars.registerHelper("isBestseller", function (num1) {
+    return num1 > 10;
+  });
+  hbs.handlebars.registerHelper("new_course", function (data) {
+    const currentDate = new Date()  
+    console.log("Typeof: "+ data+ typeof(data)) 
+    const result = (currentDate.getTime() - data.getTime()) <= 60 * 60 * 1000 * 24 * 1
+    console.log("Result: ", result)
+    return result
+  });
 }

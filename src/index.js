@@ -9,7 +9,7 @@ import methodOverride from 'method-override';
 import * as dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import connect_database from './config/db/index.js';
-import multer from 'multer';
+// import multer from 'multer';
 import hbs_section from 'express-handlebars-sections'
 import flash from 'connect-flash'
 import session from'express-session'
@@ -45,20 +45,20 @@ app.use('/css', express.static(path.join(__dirname, 'public/assets/css')));
 app.use('/images', express.static(path.join(__dirname, 'public/assets/images'))); 
 app.use('/vendor', express.static(path.join(__dirname, 'public/vendors/vendor-video'))); 
 app.use('/js', express.static(path.join(__dirname, 'assets/js'))); 
-app.use(session({ cookie: { maxAge: 60000 }, 
+app.use(session({  
   secret: 'woot',
   resave: false, 
   saveUninitialized: false}));
 dotenv.config();
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'src/public/images/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'src/public/images/');
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
+//   },
+// });
 
 const fileFilter = (req, file, cb) => {
   if (
@@ -72,12 +72,12 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-app.use(
-  multer({
-    storage: storage,
-    fileFilter: fileFilter,
-  }).single('image')
-);
+// app.use(
+//   multer({
+//     storage: storage,
+//     fileFilter: fileFilter,
+//   }).single('image')
+// );
 
 dotenv.config();
 
@@ -103,6 +103,7 @@ app.engine(
     extname: '.hbs',
     helpers: {
       sum: (a, b) => a + b,
+      
     },
     section: hbs_section(),
     runtimeOptions: {
@@ -123,15 +124,7 @@ helpers(hbs)
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource', 'views'));
 
-
-
-
-
-
 route(app);
-
-
-
 
 app.listen(port, () =>
   console.log(`App listening at http://localhost:${port}`)

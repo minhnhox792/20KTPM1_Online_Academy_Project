@@ -11,16 +11,19 @@ import errorRouter from './error.js';
 import userRouter from './user.js';
 import searchRouter from './search.js';
 import chapterRouter from './chapter.js';
+import Category from '../app/models/Category.js';
 export default function (app) {
   app.use(async function (req, res, next) {
     if (typeof req.session.auth === 'undefined') {
       req.session.auth = false;
     }
-    if (req.session.auth === false && req.headers.referer!=="http://localhost:3000/user/login") {
+    if (req.session.auth === false && req.headers.referer!=="http://localhost:3000/user/login"&& req.headers.referer!=="http://localhost:3000/user/verifyOTP" ) {
       req.session.retUrl =  req.headers.referer;
     }
     res.locals.auth = req.session.auth;
     res.locals.userInfo = req.session.userInfo;
+    res.locals.all_category_header = await Category.find({})
+    // console.log(res.locals.all_category)
     app.use('/', homeRouter);
     app.use('/user', userRouter);
     app.use('/course', courseRouter);

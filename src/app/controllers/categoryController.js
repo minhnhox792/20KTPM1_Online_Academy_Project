@@ -5,7 +5,8 @@ import { response } from 'express';
 const ITEM_PER_PAGE = 3
 const categoryController = {
     view: async (req, res) => {
-      const all_category = await Category.find({})
+      const all_data = await Category.find({})
+
       const category = req.params.id
       const page = +req.query.page || 1;
       if(page == null){
@@ -32,7 +33,7 @@ const categoryController = {
           nextPage: page + 1,
           previousPage: page - 1,
           lastPage: Math.ceil(totalItems/ITEM_PER_PAGE),
-          all_category: all_category
+          all_category: all_data
 
         });
       })

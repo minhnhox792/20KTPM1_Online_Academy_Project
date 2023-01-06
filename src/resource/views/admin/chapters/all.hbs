@@ -62,7 +62,7 @@
             <label for="chapter-name" class="col-form-label">Title:</label>
             <input name="title" type="text" class="form-control" id="chapter-name" required>
             <label for="video-file" class="col-form-label">Video file:</label>
-            <input name="file" type="file" id="video-file" class="form-control" accept="video/*" required>
+            <input name="recfile" type="file" id="video-file" class="form-control" accept="video/*" required>
           </div>
         </form>
       </div>
@@ -80,7 +80,7 @@
     console.log(btnAddChapter);
     var addChapterForm = document.forms['add-chapter-form'];
     btnAddChapter.onclick = () => {
-      addChapterForm.action = '/admin/course/about/63b6d5e6756d07f63602d982/overview';
+      addChapterForm.action = 'http://localhost:3000/video';
       addChapterForm.submit();
     }
   })

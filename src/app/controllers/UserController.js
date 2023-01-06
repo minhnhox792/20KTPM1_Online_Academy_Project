@@ -324,7 +324,7 @@ const userController = {
       const data = req.body;
       if(req.body.gender == "Choose your gender"){
         req.flash("error", "Please choose your gender !") 
-        
+
         return res.redirect('/user/profile')
       }
 
@@ -467,6 +467,7 @@ const userController = {
       let totalItems = new_array.length;
 
       let page_data = util.paginate(new_array, ITEM_PER_PAGE, page);
+      console.log(111111111, page_data)
       res.render("user/listCourses", {
         data: page_data,
         length: totalItems,
@@ -511,6 +512,7 @@ const userController = {
       let totalItems = new_array.length;
 
       let page_data = util.paginate(new_array, ITEM_PER_PAGE, page);
+      console.log(111111111, page_data)
       res.render("user/favoriteCourses", {
         data: page_data,
         length: totalItems,

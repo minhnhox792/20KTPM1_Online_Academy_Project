@@ -1,4 +1,4 @@
-<!-- div/div -->
+{{!-- <!-- div/div -->
 <div class="text-center text-lg-start text-white" style=" height:60vh; padding-top: 100px;">
     <section class="" style="height: 50vh;">
         <div style="height: 30px;"></div>
@@ -21,4 +21,69 @@
             </div>
         </section>
     </div>
+</div> --}}
+
+
+
+<div class="container">
+	<div  class = "text-center justify-content-center">
+		<p class="mt-5" style="font-size: 25px;">Top categories in previous week</p>
+	</div>
+
+<div class="row">
+    {{#each data}}
+	<div class="col col-lg-4 col-md-6 col-sm-12 h-100">
+		<a href="/category/view/{{this._id}}">
+		<div class="card radius-15">
+			<div class="card-body text-center" >
+				<div class="p-4 border radius-15"  style="padding-bottom: 50px;">
+					<img style="object-fit:cover" src="https://i.ppy.sh/9e90c7d1d1128eb02a469d86029009b86629bf8b/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f464a4e53693450556341456439716d3f666f726d61743d6a7067" width="110" height="110" class="rounded-circle shadow" alt="">
+					<p class="mt-5" style="color: #E75E8D;">{{this._id}}</p>
+					<div class="list-inline contacts-social mt-3 mb-3"> <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i class="bx bxl-facebook"></i></a>
+						<a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i class="bx bxl-twitter"></i></a>
+						<a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i class="bx bxl-linkedin"></i></a>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+		</a>
+	</div>
+    {{/each}}
 </div>
+</div>
+
+<style>
+
+.btn-white {
+    background-color: #fff;
+    border-color: #e7eaf3;
+}
+.radius-15 {
+    border-radius: 15px;
+}
+.contacts-social a {
+    font-size: 16px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    background: #ffffff;
+    border: 1px solid #eeecec;
+    text-align: center;
+    border-radius: 50%;
+    color: #2b2a2a;
+}
+.bg-info {
+    background-color: #0dcaf0!important;
+}
+.bg-primary {
+    background-color: #008cff!important;
+}
+.bg-danger {
+    background-color: #fd3550!important;
+}
+.bg-warning {
+    background-color: #ffc107!important;
+}
+</style>

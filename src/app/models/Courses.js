@@ -15,11 +15,6 @@ const Course = new Schema({
     type: String,
     required: true,
   },
-  maincategory: {
-    type: String,
-    maxLength: 50,
-    required: true,
-  },
   lecturer: {
     type: ObjectId,
     required: true,
