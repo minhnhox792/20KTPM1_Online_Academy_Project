@@ -36,6 +36,46 @@ const categoryController = {
         });
       })
     },
+    subCategory: async (req, res) => {
+      const subCate = req.params.id
+      const categoryMain = await Course.findOne({ subCategory: subCate})
+      const categoryParent = categoryMain.category
+      console.log(categoryParent, 111111)
+
+      const data_cate = await Category.findOne({category: categoryParent})
+      const all_data = data_cate.subCategories
+
+      const page = +req.query.page || 1;
+      if(page == null){
+        return;
+      }
+      let totalItems;
+      Course.find({subCategory: subCate})
+      .count()
+      .then(numProducts => {
+        totalItems= numProducts
+        return Course.find({subCategory: subCate})
+        .skip((page - 1) * ITEM_PER_PAGE)
+        .limit(ITEM_PER_PAGE)
+      })
+     
+      .then(data => {
+        res.render("category/subCategory", {
+          data: data,
+          active: req.params.id,
+          length: totalItems,
+          currentPage : page,
+          hasNextPage: ITEM_PER_PAGE * page < totalItems,
+          hasPreviousPage: page > 1,
+          nextPage: page + 1,
+          previousPage: page - 1,
+          lastPage: Math.ceil(totalItems/ITEM_PER_PAGE),
+          all_category: all_data,
+          nameCategory: categoryParent
+
+        });
+      })
+    },
   }
   
   export default categoryController;

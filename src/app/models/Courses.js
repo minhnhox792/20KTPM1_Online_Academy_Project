@@ -152,6 +152,10 @@ const Course = new Schema({
     type: Boolean,
     default: false,
   },
+  subCategory: {
+    type: String,
+    default: ''
+  }
 });
 
 // Course.plugin(mongoose_delete);
