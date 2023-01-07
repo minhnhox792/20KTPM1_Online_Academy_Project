@@ -71,7 +71,10 @@
             </a>
 
             {{#ifEquals userInfo.role 'Lecturer'}}
-            
+             <a class="dropdown-item" href="/course/teacherAdd">
+              <i class="fa-solid fa-plus" style="color : #146EBE;"></i>
+              Add new course
+            </a>
             {{else}}
               <a class="dropdown-item" href="/user/myCourse">
               <i class="fa-solid fa-bookmark" style="color : #146EBE;"></i>

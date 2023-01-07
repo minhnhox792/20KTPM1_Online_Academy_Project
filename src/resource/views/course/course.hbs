@@ -62,26 +62,51 @@
                       <p>{{course.shortDesc}}</p>
                       <code>{{lec.fullname}}</code>
                       
-                      {{#if isBuy}}
-                      <div class="main-border-button">
-                        <a href="" style="pointer-events: none;">You purchased this course</a>
-                      </div>
-                      {{else}}
+                      {{!-- {{#if isBuy}}
+                        {{#ifEquals userdata.role 'Student'}} 
+                          <div class="main-border-button">
+                            <a href="" style="pointer-events: none;">You purchased this course</a>
+                          </div>
+                        {{/ifEquals}}
+                        {{else}} --}}
                       <div class="main-border-button">
 
                         {{#ifEquals auth true}}
-                        <form action="http://localhost:3000/user/buyProduct/{{course._id}}" method="post">
-                          <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
-                            style="height: 6vh;">Buy Now</a>
-                        </form>
-                        {{else}}
-                        <a href="/user/login" style="height: 5vh;">Buy Now</a>
+                          {{#ifEquals userdata.role 'Student'}} 
+                            {{#if isBuy}}
+                                <div class="main-border-button">
+                                <a href="" style="pointer-events: none;">You purchased this course</a>
+                              </div>
+                            {{else}}
+                              <form action="http://localhost:3000/user/buyProduct/{{course._id}}" method="post">
+                                <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
+                                  style="height: 6vh;">Buy Now</a>
+                              </form>
+                            {{/if}}
+                          {{else}}
+                            {{#if checkedLecture}}
+                              <div class = "d-flex">
+                                <form action="http://localhost:3000/edit/{{course._id}}" method="put" > 
+                                    <a href="javascript:;" onclick="parentNode.submit();"  style="height: 5vh;">Edit</a>  
+                                </form>
+                                <form action="http://localhost:3000/edit/{{course._id}}" method="put" > 
+                                    <a href="javascript:;" onclick="parentNode.submit();"  style="margin-left: 7px; height: 5vh;">Upload Video</a>  
+                                </form>
+                              </div>  
+                              {{!-- <form action="http://localhost:3000/edit/{{course._id}}" method="put" > 
+                                  <a href="javascript:;" onclick="parentNode.submit();"  style="height: 5vh;">Edit</a>  
+                              </form> --}}
+                            {{/if}}
                         {{/ifEquals}}
+                          
+                        
+                        
 
-
-
+                         
+                        {{/ifEquals}}  
+                        
                       </div>
-                      {{/if}}
+                      {{!-- {{/if}} --}}
 
 
                     </div>

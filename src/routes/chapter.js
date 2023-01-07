@@ -1,29 +1,36 @@
-import chapter from "../app/models/Chapter.js";
+
 import express from "express";
-import chapterController from "../app/controllers/chapterController.js";
+import chapterController from "../app/controllers/chapterController.js"; 
 import upload from "../util/upload.js";
 
-const router = express.Router()
 
-//postman 
-router.post('/', upload, (req, res, next) => {
-  console.log("POST VIDEO")
-  console.log(req.file.id)
-  const newchapter = new chapter({
-    title: req.body.title,
-    filename: req.file.id,
-  })
 
-  newchapter.save()
-    .then((chapter) => {
-      return res.status(200).json({
-        chapter,
-        message: "Upload video successfully !"
-      })
-    })
-    .catch(err => {
-      return res.status(500).json(err)
-    })
-})
-router.get('/:filename', chapterController.getVideo)
+const router = express.Router();
+
+router.put("/:id", upload, chapterController.edit)
+
+// router.put('/:id', upload, chapterController.edit);
+
+router.delete('/overview/:id/:slug', chapterController.deleteOverview);
+router.delete('/basic/:id/:slug', chapterController.deleteBasic);
+router.delete('/master/:id/:slug', chapterController.deleteMaster);
+router.delete('/advanced/:id/:slug', chapterController.deleteAdvanced);
+
+router.get('/overview/:id', chapterController.allOverview);
+router.post('/overview/:id', upload, chapterController.addOverview);
+
+router.get('/basic/:id', chapterController.allBasic);
+router.post('/basic/:id', upload, chapterController.addBasic);
+
+router.get('/master/:id', chapterController.allMaster);
+router.post('/master/:id', upload, chapterController.addMaster);
+
+router.get('/advanced/:id', chapterController.allAdvanced);
+router.post('/advanced/:id', upload, chapterController.addAdvanced); 
+
+
+router.get('/image/:filename', chapterController.imageRender);
+router.get('/video/:filename', chapterController.video);
+
+
 export default router

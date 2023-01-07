@@ -7,22 +7,40 @@
 
       <div class="col-12 col-md-4 col-lg-3 col-sm-12 mt-5">
         <a href="/course/{{this._id}}">
-          <div class="card">
-            <img class="card-img-top" src={{this.image}} alt="Card image cap"    style="height: 25vh; object-fit: cover;" />
-            <div class="card-body" style="height: 40vh;">
-              <h4 class="card-title threepoint" style="height: 10vh;font-weight: 700;font-size: 20px;"><a href="product.html"
+          <div class="card h-80">
+            <img class="card-img-top" src={{this.image}} alt="Card image cap"    style="object-fit: cover; height: 250px; width: 100%;" />
+            <div class="card-body " >
+              <div class = "d-flex justify-content-between">
+                     <h4 class="card-title threepoint" style="font-weight: 700;font-size: 20px;"><a href="product.html"
                   title="View Product" style="font-weight: bold;">{{this.name}}</a></h4>
+                   <div class="d-flex justify-content-center "
+                    style="background-color: #eceb98; width: 100px; color: #3e3e0d; line-height: 36px; padding: 2px 16px; font-size: 13px; border-radius: 5px; position: relative; top: -10px; right: -10px;">
+                    {{#if this.complete}}  
+                    <span style="font-weight: bold;">
+                      Complete
+                    </span>
 
+                    {{else}}
+                    
+                    <span class="tiktok" style="display: block; margin-right: 22px;">
+                      Incomplete
+                    </span>
+                    {{/if}}
+                  </div>
+
+
+              </div>
+             
               <p class="card-text text-muted" style="font-size: 17px;">Lecturer: {{this.nameLecturer}}</p>
               <p class="card-text text-muted" style="font-size: 17px;">Category: {{this.category}}</p>
-              <div class="d-flex justify-content-center"
+              {{!-- <div class="d-flex justify-content-center"
                     style="background-color: #eceb98; width: 100px; color: #3e3e0d;font-weight: 700,height: 3vh;font-size:15px;border-radius:5px;">
                     {{#if condition}}
                     Complete
                     {{else}}
                     Incomplete
                     {{/if}}
-                  </div>
+                  </div> --}}
               <div class="d-flex">
                 <div class="d-flex justify-content-around"
                   style="justify-content: space-between !important; width: 100%;">
@@ -208,5 +226,70 @@
       width: 350px;
       height: 1.2em;
       white-space: nowrap;
+  } 
+
+  .tiktok{
+    color: #000;
+  font-size: 14px;
+  font-family: 'Montserrat', monospace;
+  letter-spacing: 0px;
+  animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch{
+  2%,64%{
+    transform: translate(15px,0) skew(0deg);
   }
+  4%,60%{
+    transform: translate(0px,20) skew(0deg);
+  }
+  62%{
+    transform: translate(-15,0) skew(0deg);
+  }
+}
+
+.tiktok:before,
+.tiktok:after{
+  content: attr(title);
+  position: absolute;
+  left: 0;
+}
+
+.tiktok:before{
+  animation: glitchTop 1s linear infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+@keyframes glitchTop{
+  2%,64%{
+    transform: translate(2px,-2px);
+  }
+  4%,60%{
+    transform: translate(-2px,2px);
+  }
+  62%{
+    transform: translate(13px,-1px) skew(-13deg); 
+  }
+}
+
+.tiktok:after{
+  animation: glitchBotom 1.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBotom{
+  2%,64%{
+    transform: translate(-2px,0);
+  }
+  4%,60%{
+    transform: translate(-2px,0);
+  }
+  62%{
+    transform: translate(-22px,5px) skew(21deg); 
+  }
+}
+
+
 </style>

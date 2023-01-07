@@ -4,11 +4,14 @@ import Chapter from '../models/Chapter.js';
 import uploadsFiles from '../models/uploads.files.js';
 // mp3 và mp4 xài chung 1 thư viện
 
+import Category from '../models/Category.js';
+import objectFormat from '../../util/mongoose.js';
+import moment from 'moment';
 
 const courseController = {
   registerCourse: (req, res) => {
-   
-    let ID=req.params.id
+    let ID=req.params.id 
+    console.log("ID: ", ID)
     Course.findById(ID, async function (err, docs) {
       if (err) {
         console.log(err)
@@ -37,6 +40,11 @@ const courseController = {
         let smallDataComment = []
         smallDataComment.push(docs.comment[0])
         smallDataComment.push(docs.comment[1])
+        let result_checked = false
+        if(lec?._id !== null){
+          result_checked = (lec?._id == data._id)
+        }
+        console.log(111111, result_checked)
         res.render("course/course", {
           course: docs,
           course_id: req.params.id,
@@ -50,6 +58,7 @@ const courseController = {
           basicCode,
           advancedCode,
           masterCode,
+          checkedLecture: result_checked
         });
       }
     });
@@ -93,14 +102,154 @@ const courseController = {
     );
     return res.redirect("/course/" + course_id)
   },
-  videoCourse: (req, res) => {
-    try {
-      res.render("course/video")
+  edit: (req, res, next) => {
+    Course.findById(req.params.id)
+      .then((course) => {
+        Category.find({})
+          .then((categories) => {
+            User.find({ role: 'Lecturer' })
+              .then((lecturers) => {
+                res.render('course/edit', {
+                  course: objectFormat.mongooseToOject(course),
+                  categories: objectFormat.multipleMongooseToOject(categories),
+                  lecturers: objectFormat.multipleMongooseToOject(lecturers),
+                });
+              })
+              .catch(next);
+          })
+          .catch(next);
+      })
+      .catch(next);
+  },
+  storeEdit: (req, res, next) => {
+    const image = req.file;
+    if (!image) {
+      Course.find({})
+        .then((courses) => {
+          res.render('course/all', {
+            courses: objectFormat.multipleMongooseToOject(courses),
+            error: 'Image not found',
+          });
+        })
+        .catch(next);
     }
-    catch {
+    const formData = req.body;
+    const temp = req.file.path;
+    formData.image = temp.replace(/src\\public/g, '');
+    formData.updatedAt = Date.now();
+    const category = formData.category.split('-');
+    formData.subCategory = category[0];
+    formData.category = category[1];
+    Course.findOne({ _id: req.params.id }).then((course) => {
+      if (course.lecturer == formData.lecturer) {
+        Course.updateOne({ _id: req.params.id }, formData)
+          .then(() => {
+            res.redirect('/course/'+req.params.id);
+          })
+          .catch(next);
+      } else {
+        User.findOne({ _id: course.lecturer })
+          .then((lecturer) => {
+            const index = lecturer.courseList.indexOf(req.params.id);
+            lecturer.courseList.splice(index, 1);
+            User.updateOne({ _id: course.lecturer }, lecturer)
+              .then(() => {
+                User.findById(formData.lecturer)
+                  .then((lecturer) => {
+                    formData.nameLecturer = lecturer.fullname;
+                    lecturer.courseList.push(req.params.id);
+                    Course.updateOne({ _id: req.params.id }, formData)
+                      .then(() => {
+                        User.updateOne({ _id: lecturer._id }, lecturer)
+                          .then(() => {
+                            res.redirect('/course/'+req.params.id);
+                          })
+                          .catch(next);
+                      })
+                      .catch(next);
+                  })
+                  .catch(next);
+              })
+              .catch(next);
+          })
+          .catch(next);
+      }
+    });
+  },
+  about: (req, res, next) => { 
+    console.log("IDDDDDDDDDDDD: ", req.params.id)
+    Course.findById(req.params.id)
+      .then((course) => {
+        course = objectFormat.mongooseToOject(course);
+        const create = course.createdAt.toISOString().split('T')[0];
+        const createdAt = moment(create, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        course.createdAt = createdAt;
 
-    }
+        const update = course.updatedAt.toISOString().split('T')[0];
+        const updatedAt = moment(update, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        course.updatedAt = updatedAt;
+        res.render('course/about', {course: course });
+      })
+      .catch(next);
+  },
+  teacherAdd:(req,res, next) =>{  
+    Category.find({})
+      .then((categories) => {
+        User.find({ role: 'Lecturer' })
+          .then((lecturers) => {
+            res.render('course/add', {
+              categories: objectFormat.multipleMongooseToOject(categories),
+              lecturers: objectFormat.multipleMongooseToOject(lecturers),
+            });  
+          })
+          .catch(next);
+      })
+      .catch(next);
+  },
+  postAdd: (req, res, next) => {
+    const image = req.file;  
+    if (!image) {
+      Course.find({})
+        .then((courses) => {
+          res.render('course/add', {
+            layout: 'admin',
+            courses: objectFormat.multipleMongooseToOject(courses),
+            error: 'Image not found',
+          });
+        })
+        .catch(next);
+    } 
+    const formData = req.body; 
+    const temp = req.file.filename; 
+    formData.image = temp;
+    const category = formData.category.split('-');
+    formData.subCategory = category[0];
+    formData.category = category[1];
+    User.findById(formData.lecturer).then((e) => {
+      formData.nameLecturer = e.fullname;
+      const course = new Course(formData);
+      course
+        .save()
+        .then(() => {
+        Course.findOne({ lecturer: e._id, isAdd: false })
+            .then((course) => {
+              course = objectFormat.mongooseToOject(course);
+              course.isAdd = true;
+              e.courseList.push(course._id);
+              Course.updateOne({ _id: course._id }, course)
+                .then(() => {
+                  User.updateOne({ _id: e._id }, e)
+                    .then(() => {
+                      res.redirect('/');
+                    })
+                    .catch(next);
+                })
+                .catch(next);
+            })
+            .catch(next);
+        })
+        .catch(next);
+    });
   },
 }
-
 export default courseController;

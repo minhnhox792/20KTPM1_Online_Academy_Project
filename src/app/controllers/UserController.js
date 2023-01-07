@@ -324,9 +324,7 @@ const userController = {
         return res.redirect('/user/profile')
       }
 
-      console.log("New data: ", data);
       const new_date = util.reFormatDate(data.dob);
-      console.log("New date is : ", new_date);
       User.updateOne(
         { _id: user._id },
         {
@@ -376,13 +374,11 @@ const userController = {
       const totalBuy = course[0].totalBuy + 1;
       const quantityBuy = course[0].quantityBuy + 1;
       const list = course[0].studentList;
-      console.log("First :", list);
 
       if (!course[0].studentList.includes(id_user)) {
         course[0].studentList.push(id_user);
       }
 
-      console.log("After :", course[0].studentList);
       const updated_course = await Course.updateOne(
         { _id: id },
         {
@@ -393,10 +389,8 @@ const userController = {
           },
         }
       );
-      console.log("Doneeeeeeeee");
       return res.redirect(url);
     } catch(err){
-      console.log(err)
       return res.redirect("/error/500");
     }
   },
@@ -408,7 +402,6 @@ const userController = {
       }
       const data = req.session.userInfo;
       const id_user = data._id;
-      console.log(data);
       const user = await User.findOne({ _id: id_user });
       if (!user) {
         return res.redirect("/user/register");
@@ -441,7 +434,6 @@ const userController = {
       const data_user = await User.findOne({ _id: id_user });
 
       const list_courses = data_user.courseList;
-      console.log(list_courses);
 
       const courses = await Course.find({});
 
@@ -463,7 +455,6 @@ const userController = {
       let totalItems = new_array.length;
 
       let page_data = util.paginate(new_array, ITEM_PER_PAGE, page);
-      console.log(111111111, page_data)
       res.render("user/listCourses", {
         data: page_data,
         length: totalItems,
@@ -508,7 +499,6 @@ const userController = {
       let totalItems = new_array.length;
 
       let page_data = util.paginate(new_array, ITEM_PER_PAGE, page);
-      console.log(111111111, page_data)
       res.render("user/favoriteCourses", {
         data: page_data,
         length: totalItems,
@@ -531,14 +521,12 @@ const userController = {
       if(!id_course){
         return res.redirect("/error/500");
       }
-      console.log("Course id : " , id_course)
 
       const data = req.session.userInfo;
       const id_user = data._id;
 
       const findCourse = await User.findOne({_id : id_user})
 
-      console.log("List course: ", findCourse.favoriteList)
       const filtered = findCourse.favoriteList.filter((item) => {
         return item.toString() != id_course.toString();
       })
@@ -554,7 +542,6 @@ const userController = {
           new_array.push(result[0]);
         }
       }
-      console.log("After filter: ",filtered)
       const deletecourse = await User.updateOne(
         { _id: id_user },
         { $set: { favoriteList: filtered } }
@@ -584,14 +571,12 @@ const userController = {
   loginWithGoogle: (req,res) =>{
     
       try{
-        console.log(111111111111111)
         
         if(!req.user){
           return res.redirect("/user/login")
         }
         req.session.auth = true;
         req.session.userInfo = req.user;
-        console.log(req.user)
         return res.redirect('/')
       }
       catch{
@@ -607,7 +592,6 @@ const userController = {
       }
       req.session.auth = true;
       req.session.userInfo = req.user;
-      console.log(req.user, 2222222222)
       return res.redirect('/')
     }
     catch{
@@ -640,7 +624,6 @@ const userController = {
         req.flash("error", "Email not in any account, please go to register !")
         return res.redirect('/user/reset')
       }
-      console.log(findUser)
 
 
       const new_password = randomstring.generate({
@@ -648,7 +631,6 @@ const userController = {
         charset: 'alphabetic'
       });
 
-      console.log("Newwwwwwwwww: ", new_password)
       const salt = bcrypt.genSaltSync(10);
 
       const hashPass = bcrypt.hashSync(new_password, salt);
@@ -664,7 +646,6 @@ const userController = {
         if (!mess) {
           return;
         } else {
-          console.log("Email sent...", mess);
           
 
           User.updateOne(
@@ -675,7 +656,6 @@ const userController = {
             if(!kq){
               return res.redirect("/error/500")
             }
-            console.log("Updated...............")
             return res.redirect('/user/login')
           })
           
