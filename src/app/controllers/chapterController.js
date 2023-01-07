@@ -23,13 +23,13 @@ const chapterController = {
                     message: "No files available " + req.params.filename
                 })
             }
-            res.writeHead(200, {
-                'Content-Type': 'video/mp4',
-                'Accept-Ranges': 'bytes',
-                'Connection': 'Keep-Alive',
-                'Transfer-encoding': 'chunked',
-                'Content-Length': files[0].length
-            });
+            // res.writeHead(200, {
+            //     'Content-Type': 'video/mp4',
+            //     'Accept-Ranges': 'bytes',
+            //     'Connection': 'Keep-Alive',
+            //     'Transfer-encoding': 'chunked',
+            //     'Content-Length': files[0].length
+            // });
             gfs.openDownloadStreamByName(req.params.filename).pipe(res)
         })
     },
