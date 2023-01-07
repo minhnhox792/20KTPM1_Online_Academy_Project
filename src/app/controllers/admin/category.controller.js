@@ -47,10 +47,11 @@ const CategoryController = {
       Course.find({}).then((courses) => {
         courses = objectFormat.multipleMongooseToOject(courses);
         courses.map((course) => {
-          if (course.mainCategory == category.category) {
+          if (course.category == category.category) {
             flag = 0;
             Category.find({})
               .then((categories) => {
+                console.log('Hello')
                 return res.render('admin/categories/all', {
                   layout: 'admin',
                   categories: objectFormat.multipleMongooseToOject(categories),
@@ -99,7 +100,7 @@ const CategoryController = {
     Course.find({}).then((courses) => {
       courses = objectFormat.multipleMongooseToOject(courses);
       courses.map((course) => {
-        if (course.category == req.params.slug) {
+        if (course.subCategory == req.params.slug) {
           flag = 0;
           Category.find({})
             .then((categories) => {

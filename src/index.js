@@ -39,7 +39,10 @@ app.use('/admin/course', express.static(path.join(__dirname, 'public')));
 app.use('/admin/category', express.static(path.join(__dirname, 'public')));
 app.use('/admin/category/:id', express.static(path.join(__dirname, 'public')));
 
-app.use('/admin/course/about/:id', express.static(path.join(__dirname, 'public')));
+app.use('/admin/chapter/overview', express.static(path.join(__dirname, 'public')));
+app.use('/admin/chapter/basic', express.static(path.join(__dirname, 'public')));
+app.use('/admin/chapter/master', express.static(path.join(__dirname, 'public')));
+app.use('/admin/chapter/advanced', express.static(path.join(__dirname, 'public')));
 
 app.use('/css', express.static(path.join(__dirname, 'public/assets/css')));
 app.use('/images', express.static(path.join(__dirname, 'public/assets/images'))); 

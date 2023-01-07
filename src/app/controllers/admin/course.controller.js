@@ -47,15 +47,15 @@ const CourseController = {
     const temp = req.file.path;
     formData.image = temp.replace(/src\\public/g, '');
     const category = formData.category.split('-');
-    formData.category = category[0];
-    formData.mainCategory = category[1];
+    formData.subCategory = category[0];
+    formData.category = category[1];
     User.findById(formData.lecturer).then((e) => {
       formData.nameLecturer = e.fullname;
       const course = new Course(formData);
       course
         .save()
         .then(() => {
-          Course.findOne({ lecturer: e._id, isAdd: false })
+        Course.findOne({ lecturer: e._id, isAdd: false })
             .then((course) => {
               course = objectFormat.mongooseToOject(course);
               course.isAdd = true;
@@ -113,8 +113,8 @@ const CourseController = {
     formData.image = temp.replace(/src\\public/g, '');
     formData.updatedAt = Date.now();
     const category = formData.category.split('-');
-    formData.category = category[0];
-    formData.maincategory = category[1];
+    formData.subCategory = category[0];
+    formData.category = category[1];
     Course.findOne({ _id: req.params.id }).then((course) => {
       if (course.lecturer == formData.lecturer) {
         Course.updateOne({ _id: req.params.id }, formData)

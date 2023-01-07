@@ -11,35 +11,41 @@
           <h4>Chapter List</h4>
         </div>
       </div>
-      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#add-chapter">
+      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#add-chapter" data-add="{{course}}">
         <i class="fa fa-plus" aria-hidden="true"></i>
         Add Chapter
       </a>
     </div>
 
     <div class="row">
-      <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-6 col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h4>Chapter Title</h4>
-            <div class="list-group mb-3 list-group-flush">
-              <video width="100%" height="100%" controls>
-                <source src="https://www.youtube.com/watch?v=58xKTGxmeHI" type="video/*">
-              </video>
-            </div>
-            <div class="d-flex justify-content-between">
-              <a href="" class="btn btn-primary">
-                <i class="fa fa-edit" aria-hidden="true"></i>
-                Edit
-              </a>
-              <a href="" class="btn btn-danger">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                Delete
-              </a>
+      {{#each chapterList}}
+
+        <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-6 col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5>{{this.title}}</h5>
+              <div class="list-group mb-3 list-group-flush">
+                <a class="btn btn-outline-primary" href="/admin/chapter/video/{{this.filename}}">
+                  <i class="fa fa-circle-play" style="color: #e75e8d; font-size: 40px"></i>
+                  Play Video
+                </a>
+              </div>
+              <div class="d-flex justify-content-between">
+                <a href="" class="btn btn-primary" data-edit="{{this.id}}" data-toggle="modal"
+                  data-target="#edit-chapter">
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  Edit
+                </a>
+                <a href="" class="btn btn-danger" data-toggle="modal" data-target="#delete-chapter"
+                  data-delete="{{this.id}}" data-course="{{../course}}">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  Delete
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      {{/each}}
     </div>
 
   </div>
@@ -76,12 +82,107 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    let courseId = 'course';
     var btnAddChapter = document.getElementById('btn-add-chapter');
-    console.log(btnAddChapter);
     var addChapterForm = document.forms['add-chapter-form'];
+    $('#add-chapter').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      courseId = button.data('add');
+    })
     btnAddChapter.onclick = () => {
-      addChapterForm.action = 'http://localhost:3000/video';
+      addChapterForm.action = '/admin/chapter/' + courseId;
       addChapterForm.submit();
+    }
+  })
+</script>
+
+<!-- Edit Video -->
+
+<div class="modal fade" id="edit-chapter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit chapter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="edit-chapter-form" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="chapter-name" class="col-form-label">Title:</label>
+            <input name="title" type="text" class="form-control" id="chapter-name" required>
+            <label for="video-file" class="col-form-label">Video file:</label>
+            <input name="recfile" type="file" id="video-file" class="form-control" accept="video/*" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-edit-chapter" type="button" class="btn btn-primary">Save change</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let chapterId = 'course';
+    var btnEditChapter = document.getElementById('btn-edit-chapter');
+    var editChapterForm = document.forms['edit-chapter-form'];
+    $('#edit-chapter').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      chapterId = button.data('edit');
+    })
+    btnEditChapter.onclick = () => {
+      editChapterForm.action = '/admin/chapter/' + chapterId + '?_method=PUT';
+      editChapterForm.submit();
+    }
+  })
+</script>
+
+<!-- Delete Chapter -->
+
+<div class="modal" tabindex="-1" id="delete-chapter">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you want to delete ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to detele this chapter ?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-delete-chapter" type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete Form --}}
+<form name="delete-chapter-form" method="post"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let courseId = 'course';
+    let chapterId = 'chapter';
+    var btnDeleteChapter = document.getElementById('btn-delete-chapter');
+    var deleteChapterForm = document.forms['delete-chapter-form'];
+
+    $('#delete-chapter').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      chapterId = button.data('delete');
+      courseId = button.data('course');
+
+    });
+    btnDeleteChapter.onclick = () => {
+      deleteChapterForm.action = '/admin/chapter/' + courseId + '/' + chapterId + '?_method=DELETE';
+      deleteChapterForm.submit();
     }
   })
 </script>

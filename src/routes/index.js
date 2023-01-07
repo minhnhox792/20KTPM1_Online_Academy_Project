@@ -31,8 +31,8 @@ export default function (app) {
     app.use('/admin/lecturer', lecturerAdminRouter);
     app.use('/admin/student', studentAdminRouter);
     app.use('/admin/course', courseAdminRouter);
-    app.use('/admin/course/about/:id', chapterAdminRouter);
     app.use('/admin/category', categoryAdminRouter);
+    app.use('/admin/chapter', chapterAdminRouter);
     app.use('/category', categoryRouter);
     app.use('/error', errorRouter);
     app.use('/search', searchRouter);

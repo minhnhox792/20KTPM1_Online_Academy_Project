@@ -92,7 +92,11 @@ const User = new Schema(
     facebookId:{
       type: String,
       default: ''
-    }
+    },
+    isDisable: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
