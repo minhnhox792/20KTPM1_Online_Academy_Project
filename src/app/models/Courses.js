@@ -109,12 +109,13 @@ const Course = new Schema({
     type: Date,
     default: Date.now(),
   },
-
   viewWeekly: {
     type: Number,
+    default: 0,
   },
   quantityBuy: {
     type: Number,
+    default: 0,
   },
   totalBuy: {
     type: Number,
@@ -147,9 +148,17 @@ const Course = new Schema({
     type: Boolean,
     default: false,
   },
+  complete:{
+    type: Boolean,
+    default: false,
+  },
   subCategory: {
     type: String,
     default: ''
+  },
+  isDisable:{
+    type: Boolean,
+    default: false,
   }
 });
 

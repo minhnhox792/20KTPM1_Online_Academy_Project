@@ -34,7 +34,6 @@ const courseController = {
         } catch{
           
         }
-        console.log(isBuy)
         let smallDataComment = []
         smallDataComment.push(docs.comment[0])
         smallDataComment.push(docs.comment[1])
@@ -62,7 +61,6 @@ const courseController = {
       return res.redirect('/video/'+filename)
   },
   commentCourse: async (req, res) => {
-    console.log("gooooooooooooo")
     const content = req.body.content || []
     const course_id = req.query.course_id
     const rating = req.body.rating || 0
@@ -76,7 +74,6 @@ const courseController = {
     }
     if (rating !== 0) {
       const Total = ((course.comment.length * course.numberStudentRate) + (rating - '0')) / (course.comment.length + 1)
-      console.log(Total)
       await Course.updateOne(
         { _id: course_id },
         { $set: { numberStudentRate: Total } }

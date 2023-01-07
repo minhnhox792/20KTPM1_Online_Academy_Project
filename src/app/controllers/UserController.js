@@ -39,9 +39,7 @@ const userController = {
     try {
       const data = req.body;
 
-      console.log("Data: ", data);
       const id_user = req.session.userInfo._id;
-      console.log("Id user: ", id_user);
       const result = await User.findOne({ _id: id_user });
 
       bcrypt.compare(req.body.current, result.password, (err, dt) => {
@@ -93,7 +91,6 @@ const userController = {
 
   handlLogin: async (req, res) => {
     try {
-      console.log(req.headers.referrer);
       if (!req.body.username || !req.body.password) {
         return res.render("auth/login", {
           layout: false,
@@ -102,7 +99,6 @@ const userController = {
       }
 
       const UserInput = await User.findOne({ username: req.body.username });
-      console.log(UserInput)
       if (!UserInput)
         return res.render("auth/login", {
           layout: false,
@@ -693,9 +689,7 @@ const userController = {
   requestCourse: async (req,res) => {
     try{
       const category = req.query.category; 
-      console.log("Category: ", category)
       const data = await Category.findOne({category: category})  
-      console.log("Data: ", data)
       return res.status(200).json(data)
     }
     catch(err){

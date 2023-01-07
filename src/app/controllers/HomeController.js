@@ -7,11 +7,14 @@ const HomeController = {
   index: async (req, res) => {
     // const all_category = await Category.find({})
     let pageNumber=req.query.pageNumber || 1
-    const data_caro = await Course.find().skip(pageNumber > 0 ? ((pageNumber - 1) * 4) : 0)
-    .limit(4)
-    const top4 = await Course.find().sort(({ viewWeekly: -1 }))
-    .limit(4)
-    Course.find({}).then((courses) => {
+    const data_caro = await Course.find({isDisable: false}).skip(pageNumber > 0 ? ((pageNumber - 1) * 4) : 0).limit(4)
+   
+    const top4 = await Course.find({isDisable: false}).sort(({ viewWeekly: -1 })).limit(4)
+    Course.find({}).then((courses) => { 
+      courses = courses.filter((obj) => {
+        return obj.isDisable === false
+      }) 
+     
       const top_viewWeekly = courses.sort((a, b) => b.viewWeekly - a.viewWeekly);
       const data_viewWeekly = ultil.multipleMongooseToOject(top_viewWeekly.slice(0, 4));
       const top_view = courses.sort((a, b) => b.view - a.view);
@@ -65,7 +68,6 @@ const HomeController = {
       list_topView2 = ultil.filter(list_topView2)
       list_topView3 = ultil.filter(list_topView3)
 
-      console.log()
 
       Course.aggregate(
         [
@@ -86,7 +88,7 @@ const HomeController = {
       .then(database =>{
         if(database.length != 0){
 
-          const topCategory = database.sort((a, b) => b.totalBuy - a.totalBuy).slice(0,4)
+          const topCategory = database.sort((a, b) => b.totalBuy - a.totalBuy).slice(0,5)
     
           return res.render('home', {
             list_topView1: ultil.getId(list_topView1),

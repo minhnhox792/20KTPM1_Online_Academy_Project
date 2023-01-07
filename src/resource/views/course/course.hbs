@@ -71,7 +71,7 @@
                         {{#ifEquals auth true}}
                         <form action="http://localhost:3000/user/buyProduct/{{course._id}}" method="post">
                           <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
-                            style="height: 5vh;">Buy Now</a>
+                            style="height: 6vh;">Buy Now</a>
                         </form>
                         {{else}}
                         <a href="/user/login" style="height: 5vh;">Buy Now</a>
@@ -97,6 +97,14 @@
                       <li>Participants: <span>{{partcipantd}}</span></li>
                       <li>Last updated: <span>{{format_date course.updatedAt}}</span></li>
                       <li>Category: <span>{{course.category}}</span></li>
+                      <li>Status: 
+                        <span>
+                          {{#if course.complete}}
+                           Complete
+                          {{else}}
+                           Incomplete
+                          {{/if}}
+                      </span></li>
                     </ul>
                   </div>
                 </div>

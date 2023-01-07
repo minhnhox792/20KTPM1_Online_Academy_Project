@@ -129,10 +129,10 @@
       {{#each data}}
 
         <div class="col-12 col-md-6 col-lg-4 mt-5">
-          <div class="card">
+          <div class="card h-100">
             <img
               class="card-img-top"
-              src="https://dummyimage.com/600x400/55595c/fff"
+              src="{{this.image}}"
               alt="Card image cap"
             />
             <div class="card-body">
@@ -166,12 +166,20 @@
                   </div>
 
                   <div class="d-flex">
-                    <p style="font-weight: bold; ">{{format_number this.price}}
+                    {{#if (compareZero this.discount)}}
+                     <p style="font-weight: bold; ">{{format_number this.price}}
                       <del
                         class="text-muted"
                         style="color: white; font-size: 14px;"
                       >{{format_number this.discount}}</del>
                     </p>
+                    {{else}}
+                   
+
+                    <p style="font-weight: bold;"
+                        style="color: black; font-size: 14px;">{{format_number this.price}}
+                    </p>
+                    {{/if}}
                   </div>
                 </div>
 

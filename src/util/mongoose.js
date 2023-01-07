@@ -6,7 +6,7 @@ export default {
     return DBarray ? DBarray.toObject() : DBarray;
   },
   filter: (arr) => {
-    arr = arr.filter(function(x) {
+    arr = arr.filter(function(x) { 
       return x !== undefined;
     });
     return arr;

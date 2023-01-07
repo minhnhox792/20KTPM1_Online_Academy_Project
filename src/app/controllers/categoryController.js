@@ -13,7 +13,7 @@ const categoryController = {
         return;
       }
       let totalItems;
-      Course.find({category: category})
+      Course.find({category: category, isDisable: false})
       .count()
       .then(numProducts => {
         totalItems= numProducts
@@ -23,6 +23,7 @@ const categoryController = {
       })
      
       .then(data => {
+
         res.render("category/viewCourse", {
           data: data,
           active: req.params.id,
@@ -85,13 +86,11 @@ const categoryController = {
     requestSubcatory: async (req, res) => {
       try{
         const parentCategory = req.params.id
-        console.log("Parenttttttt: " , parentCategory)
         const data_cate = await Category.findOne({category: parentCategory})
         if(!data_cate){
           return res.redirect('/')
         }
         const all_data = data_cate.subCategories
-        console.log("Dataaaaaaaaaaaaaaaaaa: " , all_data)
         const subCate = all_data[0]
        
        

@@ -258,7 +258,7 @@
 					<div class="carousel-inner">
 						<div class="item carousel-item active">
 							<div class="row">
-								{{#each data1}}
+								{{#each data1}} 
 								<div class="col-sm-10 col-lg-3">
 									<div class="thumb-wrapper" style="border-bottom: 1px solid #E8E8EF">
 										<a href="/course/{{this._id}}">
@@ -270,13 +270,12 @@
 										<div class="thumb-content">
 											<div class = "text-center justify-content-center">
 												<h5 class="card-title " style="margin-left: 15px;font-weight: bold;color: #e75e8d;; text-overflow: ellipsis;overflow: hidden; text-align: center; padding: 0 15px ;width: 220px; height: 1.2em; white-space: nowrap;">
-                      {{this.name}}</h5>
+                      							{{this.name}}</h5>
 											</div>
 											
 					  						<span style="font-size: 14px; font-weight: 400; opacity: 0.8; color: #000" class = "text-muted">{{this.category}}</span>
 											<br>
 					  						<span style="font-size: 14px; font-weight: 400; font-weight: bold; color:rgb(204, 140, 175)">{{this.nameLecturer}}</span>
-											<span style="color:blue;">{{this.nameLecturer}}</span>
 											<div class="star-rating">
 												<div class="list-inline">
 													{{!-- <li>{{this.lecturer}}</li> --}}
@@ -294,7 +293,7 @@
 											{{else}}
 											<b class="item-price" style="font-size: 0.9rem; color: #e75e8d;">{{format_number this.price}}</b>
 											{{/if}}
-											<div class="d-flex justify-content-around" style="margin-top: 20px">
+											<div class="d-flex justify-content-around" style="margin-top: 0">
 												{{#if ../auth}}
 
 												<form action="/user/buyProduct/{{this._id}}" method="post">
