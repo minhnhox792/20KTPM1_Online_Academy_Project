@@ -25,29 +25,37 @@ const ChapterController = {
     const chapterList = [];
     Course.findById(req.params.id)
       .then((course) => {
-        course.overview.map((chapterId) => {
-          Chapter.findById(chapterId)
-            .then((chapter) => {
-              uploadsFiles
-                .findById(chapter.filename)
-                .then((uploads) => {
-                  chapterList.push({
-                    id: chapter._id,
-                    title: chapter.title,
-                    filename: uploads.filename,
-                  });
-                  if (chapterList.length == course.overview.length) {
-                    res.render('admin/chapters/all', {
-                      layout: 'admin',
-                      chapterList: chapterList,
-                      course: 'overview/' + req.params.id,
+        if (course.overview.length === 0) {
+          res.render('admin/chapters/all', {
+            layout: 'admin',
+            chapterList: chapterList,
+            course: 'overview/' + req.params.id,
+          });
+        } else {
+          course.overview.map((chapterId) => {
+            Chapter.findById(chapterId)
+              .then((chapter) => {
+                uploadsFiles
+                  .findById(chapter.filename)
+                  .then((uploads) => {
+                    chapterList.push({
+                      id: chapter._id,
+                      title: chapter.title,
+                      filename: uploads.filename,
                     });
-                  }
-                })
-                .catch(next);
-            })
-            .catch(next);
-        });
+                    if (chapterList.length == course.overview.length) {
+                      res.render('admin/chapters/all', {
+                        layout: 'admin',
+                        chapterList: chapterList,
+                        course: 'overview/' + req.params.id,
+                      });
+                    }
+                  })
+                  .catch(next);
+              })
+              .catch(next);
+          });
+        }
       })
       .catch(next);
   },
@@ -55,29 +63,37 @@ const ChapterController = {
     const chapterList = [];
     Course.findById(req.params.id)
       .then((course) => {
-        course.basicCode.map((chapterId) => {
-          Chapter.findById(chapterId)
-            .then((chapter) => {
-              uploadsFiles
-                .findById(chapter.filename)
-                .then((uploads) => {
-                  chapterList.push({
-                    id: chapter._id,
-                    title: chapter.title,
-                    filename: uploads.filename,
-                  });
-                  if (chapterList.length == course.basicCode.length) {
-                    res.render('admin/chapters/all', {
-                      layout: 'admin',
-                      chapterList: chapterList,
-                      course: 'basic/' + req.params.id,
+        if (course.basicCode.length === 0) {
+          res.render('admin/chapters/all', {
+            layout: 'admin',
+            chapterList: chapterList,
+            course: 'basic/' + req.params.id,
+          });
+        } else {
+          course.basicCode.map((chapterId) => {
+            Chapter.findById(chapterId)
+              .then((chapter) => {
+                uploadsFiles
+                  .findById(chapter.filename)
+                  .then((uploads) => {
+                    chapterList.push({
+                      id: chapter._id,
+                      title: chapter.title,
+                      filename: uploads.filename,
                     });
-                  }
-                })
-                .catch(next);
-            })
-            .catch(next);
-        });
+                    if (chapterList.length == course.basicCode.length) {
+                      res.render('admin/chapters/all', {
+                        layout: 'admin',
+                        chapterList: chapterList,
+                        course: 'basic/' + req.params.id,
+                      });
+                    }
+                  })
+                  .catch(next);
+              })
+              .catch(next);
+          });
+        }
       })
       .catch(next);
   },
@@ -85,29 +101,37 @@ const ChapterController = {
     const chapterList = [];
     Course.findById(req.params.id)
       .then((course) => {
-        course.masterCode.map((chapterId) => {
-          Chapter.findById(chapterId)
-            .then((chapter) => {
-              uploadsFiles
-                .findById(chapter.filename)
-                .then((uploads) => {
-                  chapterList.push({
-                    id: chapter._id,
-                    title: chapter.title,
-                    filename: uploads.filename,
-                  });
-                  if (chapterList.length == course.masterCode.length) {
-                    res.render('admin/chapters/all', {
-                      layout: 'admin',
-                      chapterList: chapterList,
-                      course: 'master/' + req.params.id,
+        if (course.masterCode.length === 0) {
+          res.render('admin/chapters/all', {
+            layout: 'admin',
+            chapterList: chapterList,
+            course: 'master/' + req.params.id,
+          });
+        } else {
+          course.masterCode.map((chapterId) => {
+            Chapter.findById(chapterId)
+              .then((chapter) => {
+                uploadsFiles
+                  .findById(chapter.filename)
+                  .then((uploads) => {
+                    chapterList.push({
+                      id: chapter._id,
+                      title: chapter.title,
+                      filename: uploads.filename,
                     });
-                  }
-                })
-                .catch(next);
-            })
-            .catch(next);
-        });
+                    if (chapterList.length == course.masterCode.length) {
+                      res.render('admin/chapters/all', {
+                        layout: 'admin',
+                        chapterList: chapterList,
+                        course: 'master/' + req.params.id,
+                      });
+                    }
+                  })
+                  .catch(next);
+              })
+              .catch(next);
+          });
+        }
       })
       .catch(next);
   },
@@ -115,29 +139,37 @@ const ChapterController = {
     const chapterList = [];
     Course.findById(req.params.id)
       .then((course) => {
-        course.advancedCode.map((chapterId) => {
-          Chapter.findById(chapterId)
-            .then((chapter) => {
-              uploadsFiles
-                .findById(chapter.filename)
-                .then((uploads) => {
-                  chapterList.push({
-                    id: chapter._id,
-                    title: chapter.title,
-                    filename: uploads.filename,
-                  });
-                  if (chapterList.length == course.advancedCode.length) {
-                    res.render('admin/chapters/all', {
-                      layout: 'admin',
-                      chapterList: chapterList,
-                      course: 'advanced/' + req.params.id,
+        if (course.advancedCode.length === 0) {
+          res.render('admin/chapters/all', {
+            layout: 'admin',
+            chapterList: chapterList,
+            course: 'advanced/' + req.params.id,
+          });
+        } else {
+          course.advancedCode.map((chapterId) => {
+            Chapter.findById(chapterId)
+              .then((chapter) => {
+                uploadsFiles
+                  .findById(chapter.filename)
+                  .then((uploads) => {
+                    chapterList.push({
+                      id: chapter._id,
+                      title: chapter.title,
+                      filename: uploads.filename,
                     });
-                  }
-                })
-                .catch(next);
-            })
-            .catch(next);
-        });
+                    if (chapterList.length == course.advancedCode.length) {
+                      res.render('admin/chapters/all', {
+                        layout: 'admin',
+                        chapterList: chapterList,
+                        course: 'advanced/' + req.params.id,
+                      });
+                    }
+                  })
+                  .catch(next);
+              })
+              .catch(next);
+          });
+        }
       })
       .catch(next);
   },

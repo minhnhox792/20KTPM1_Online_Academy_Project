@@ -19,17 +19,16 @@ const LecturerController = {
   },
   storeAdd: async (req, res, next) => {
     const image = req.file;
-    const formData = req.body;
-    const temp = req.file.path;
-    formData.image = temp.replace(/src\\public/g, '');
-    formData.role = 'Lecturer';
-    formData.username = formData.username.replace(/ /g, '');
     if (!image) {
       return res.render('admin/lecturers/add', {
         layout: 'admin',
         error: 'Image not found',
       });
     }
+    const formData = req.body;
+    formData.image = image.filename;
+    formData.role = 'Lecturer';
+    formData.username = formData.username.replace(/ /g, '');
     const lecturers = await User.find({});
     lecturers.map((lecturer) => {
       if (
@@ -76,9 +75,8 @@ const LecturerController = {
       });
     }
     const formData = req.body;
-    const temp = req.file.path;
     formData.username = formData.username.replace(/ /g, '');
-    formData.image = temp.replace(/src\\public/g, '');
+    formData.image = image.filename;
     formData.updatedAt = Date.now();
     User.updateOne({ _id: req.params.id }, formData)
       .then(() => {
@@ -130,6 +128,20 @@ const LecturerController = {
           .catch(next);
       }
     });
+  },
+  lock: (req, res, next) => {
+    User.updateOne({ _id: req.params.id }, { isDisable: true })
+      .then(() => {
+        res.redirect('back');
+      })
+      .catch(next);
+  },
+  unlock: (req, res, next) => {
+    User.updateOne({ _id: req.params.id }, { isDisable: false })
+      .then(() => {
+        res.redirect('back');
+      })
+      .catch(next);
   },
 };
 

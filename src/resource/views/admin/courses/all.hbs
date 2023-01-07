@@ -22,7 +22,7 @@
       {{#each courses}}
         <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-6 col-sm-6">
           <div class="card">
-            <img class="img-fluid" src="{{this.image}}" alt="">
+            <img class="img-fluid" src="/video/image/{{this.image}}" alt="">
             <div class="card-body">
               <h4>{{this.name}}</h4>
               <ul class="list-group mb-3 list-group-flush">
@@ -63,6 +63,17 @@
                   <i class="fa fa-trash" aria-hidden="true"></i>
                   Delete
                 </a>
+                {{#if this.isDisable}}
+                  <a href="" class="btn btn-primary" data-toggle="modal" data-target="#unlock-course"
+                    data-unlock="{{this._id}}">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                  </a>
+                {{else}}
+                  <a href="" class="btn btn-primary" data-toggle="modal" data-target="#lock-course"
+                    data-lock="{{this._id}}">
+                    <i class="fa fa-unlock" aria-hidden="true"></i>
+                  </a>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -112,6 +123,94 @@
     btnDeteleCourse.onclick = () => {
       deleteForm.action = '/admin/course/' + courseId + '?_method=DELETE';
       deleteForm.submit();
+    };
+  });
+</script>
+
+{{!-- Confirm lock course --}}
+
+<div class="modal" tabindex="-1" id="lock-course">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you want to lock ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to lock this course ?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-lock-course" type="button" class="btn btn-danger">Lock</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Lock Form --}}
+<form name="lock-course-form" method="post"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var courseId = 0;
+    var lockForm = document.forms['lock-course-form'];
+    var btnLockCourse = document.getElementById('btn-lock-course');
+
+    $('#lock-course').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      courseId = button.data('lock');
+
+    });
+
+    btnLockCourse.onclick = () => {
+      lockForm.action = '/admin/course/lock/' + courseId + '?_method=PUT';
+      lockForm.submit();
+    };
+  });
+</script>
+
+{{!-- Confirm unlock course --}}
+
+<div class="modal" tabindex="-1" id="unlock-course">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you want to unlock ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to unlock this course ?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-unlock-course" type="button" class="btn btn-danger">Unlock</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Unlock Form --}}
+<form name="unlock-course-form" method="post"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var courseId = 0;
+    var unlockForm = document.forms['unlock-course-form'];
+    var btnUnlockCourse = document.getElementById('btn-unlock-course');
+
+    $('#unlock-course').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      courseId = button.data('unlock');
+
+    });
+
+    btnUnlockCourse.onclick = () => {
+      unlockForm.action = '/admin/course/unlock/' + courseId + '?_method=PUT';
+      unlockForm.submit();
     };
   });
 </script>

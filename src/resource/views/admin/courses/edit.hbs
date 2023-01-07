@@ -31,7 +31,7 @@
                     <select class="form-control" name="category">
                       {{#each categories}}
                         {{#each this.subCategories}}
-                          <option value="{{this}}-{{../this.category}}" {{#ifEquals ../../course.category this }}
+                          <option value="{{this}}-{{../this.category}}" {{#ifEquals ../../course.subCategory this }}
                             selected {{/ifEquals}}>{{this}} ({{../this.category}})</option>
                         {{/each}}
                       {{/each}}
@@ -47,7 +47,8 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
                     <label class="form-label">Full Description</label>
-                    <textarea id="full-description" class="form-control" rows="5" name="fullDesc">{{{course.fullDesc}}}</textarea>
+                    <textarea id="full-description" class="form-control" rows="5"
+                      name="fullDesc">{{{course.fullDesc}}}</textarea>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -73,10 +74,20 @@
                     <input type="text" class="form-control" name="discount" value="{{course.discount}}">
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-3 col-md-3 col-sm-12">
                   <div class="form-group fallback w-100">
                     <label class="form-label d-block">Course Image</label>
-                    <input type="file" class="dropify" data-default-file="" name="image" accept="image/*" required>
+                    <input type="file" class="dropify" data-default-file="" name="recfile" accept="image/*" required>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                  <div class="form-group fallback w-100">
+                    <label class="form-label d-block">Complete Status</label>
+                    <select name="complete" id="">
+                      <option value="true" {{#ifEquals course.complete true }}selected{{/ifEquals}}>Complete</option>
+                      <option value="false" {{#ifEquals course.complete false }}selected{{/ifEquals}}>Incomplete
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">

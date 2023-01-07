@@ -10,42 +10,40 @@ import moment from 'moment';
 
 const courseController = {
   registerCourse: (req, res) => {
-    let ID=req.params.id 
-    console.log("ID: ", ID)
+    let ID = req.params.id;
+    console.log('ID: ', ID);
     Course.findById(ID, async function (err, docs) {
       if (err) {
-        console.log(err)
-      }
-      else {
-        const top5courses = await Course.find().sort(({ studentList: -1 }))
-          .limit(5)
-        const lec = await User.findOne({ _id: docs.lecturer })
+        console.log(err);
+      } else {
+        const top5courses = await Course.find()
+          .sort({ studentList: -1 })
+          .limit(5);
+        const lec = await User.findOne({ _id: docs.lecturer });
         // console.log(docs.overview)
-        const overview = await Chapter.find({_id:docs.overview})
-        const basicCode = await Chapter.find({_id:docs.basicCode})
-        const advancedCode = await Chapter.find({_id:docs.advancedCode})
-        const masterCode = await Chapter.find({_id:docs.masterCode})
-        const data = req.session.userInfo || []
-        const courseList = await User.findOne({_id:data._id})
-        let isBuy = false
-        try{
+        const overview = await Chapter.find({ _id: docs.overview });
+        const basicCode = await Chapter.find({ _id: docs.basicCode });
+        const advancedCode = await Chapter.find({ _id: docs.advancedCode });
+        const masterCode = await Chapter.find({ _id: docs.masterCode });
+        const data = req.session.userInfo || [];
+        const courseList = await User.findOne({ _id: data._id });
+        let isBuy = false;
+        try {
           for (let cou of courseList.courseList) {
             if (String(cou) === String(req.params.id)) {
-              isBuy = true
+              isBuy = true;
             }
           }
-        } catch{
-          
+        } catch {}
+        let smallDataComment = [];
+        smallDataComment.push(docs.comment[0]);
+        smallDataComment.push(docs.comment[1]);
+        let result_checked = false;
+        if (lec?._id !== null) {
+          result_checked = lec?._id == data._id;
         }
-        let smallDataComment = []
-        smallDataComment.push(docs.comment[0])
-        smallDataComment.push(docs.comment[1])
-        let result_checked = false
-        if(lec?._id !== null){
-          result_checked = (lec?._id == data._id)
-        }
-        console.log(111111, result_checked)
-        res.render("course/course", {
+        console.log(111111, result_checked);
+        res.render('course/course', {
           course: docs,
           course_id: req.params.id,
           smallComment: smallDataComment,
@@ -58,49 +56,49 @@ const courseController = {
           basicCode,
           advancedCode,
           masterCode,
-          checkedLecture: result_checked
+          checkedLecture: result_checked,
         });
       }
     });
   },
-  pathVideo: async(req,res)=>{
-      let navigation=req.query.fileid
-      let filevideo = await uploadsFiles.findOne({_id:navigation})
-      let filename= filevideo.filename
-      return res.redirect('/video/'+filename)
+  pathVideo: async (req, res) => {
+    let navigation = req.query.fileid;
+    let filevideo = await uploadsFiles.findOne({ _id: navigation });
+    let filename = filevideo.filename;
+    return res.redirect('/video/' + filename);
   },
   commentCourse: async (req, res) => {
-    const content = req.body.content || []
-    const course_id = req.query.course_id
-    const rating = req.body.rating || 0
-    const data = req.session.userInfo
+    const content = req.body.content || [];
+    const course_id = req.query.course_id;
+    const rating = req.body.rating || 0;
+    const data = req.session.userInfo;
     const course = await Course.findOne({ _id: course_id });
 
     for (let cou of course.comment) {
       if (String(cou._id) === String(data._id)) {
-        return res.redirect("/course/" + course_id)
+        return res.redirect('/course/' + course_id);
       }
     }
     if (rating !== 0) {
-      const Total = ((course.comment.length * course.numberStudentRate) + (rating - '0')) / (course.comment.length + 1)
+      const Total =
+        (course.comment.length * course.numberStudentRate + (rating - '0')) /
+        (course.comment.length + 1);
       await Course.updateOne(
         { _id: course_id },
         { $set: { numberStudentRate: Total } }
       );
     }
-    course.comment.push(
-      {
-        _id: data._id,
-        name: data.username,
-        content: content,
-        rating: rating,
-      }
-    );
+    course.comment.push({
+      _id: data._id,
+      name: data.username,
+      content: content,
+      rating: rating,
+    });
     const updated = await Course.updateOne(
       { _id: course_id },
       { $set: { comment: course.comment } }
     );
-    return res.redirect("/course/" + course_id)
+    return res.redirect('/course/' + course_id);
   },
   edit: (req, res, next) => {
     Course.findById(req.params.id)
@@ -134,8 +132,7 @@ const courseController = {
         .catch(next);
     }
     const formData = req.body;
-    const temp = req.file.path;
-    formData.image = temp.replace(/src\\public/g, '');
+    formData.image = image.filename;
     formData.updatedAt = Date.now();
     const category = formData.category.split('-');
     formData.subCategory = category[0];
@@ -144,7 +141,7 @@ const courseController = {
       if (course.lecturer == formData.lecturer) {
         Course.updateOne({ _id: req.params.id }, formData)
           .then(() => {
-            res.redirect('/course/'+req.params.id);
+            res.redirect('/course/' + req.params.id);
           })
           .catch(next);
       } else {
@@ -162,7 +159,7 @@ const courseController = {
                       .then(() => {
                         User.updateOne({ _id: lecturer._id }, lecturer)
                           .then(() => {
-                            res.redirect('/course/'+req.params.id);
+                            res.redirect('/course/' + req.params.id);
                           })
                           .catch(next);
                       })
@@ -176,8 +173,8 @@ const courseController = {
       }
     });
   },
-  about: (req, res, next) => { 
-    console.log("IDDDDDDDDDDDD: ", req.params.id)
+  about: (req, res, next) => {
+    console.log('IDDDDDDDDDDDD: ', req.params.id);
     Course.findById(req.params.id)
       .then((course) => {
         course = objectFormat.mongooseToOject(course);
@@ -188,11 +185,11 @@ const courseController = {
         const update = course.updatedAt.toISOString().split('T')[0];
         const updatedAt = moment(update, 'YYYY-MM-DD').format('DD-MM-YYYY');
         course.updatedAt = updatedAt;
-        res.render('course/about', {course: course });
+        res.render('course/about', { course: course });
       })
       .catch(next);
   },
-  teacherAdd:(req,res, next) =>{  
+  teacherAdd: (req, res, next) => {
     Category.find({})
       .then((categories) => {
         User.find({ role: 'Lecturer' })
@@ -200,14 +197,14 @@ const courseController = {
             res.render('course/add', {
               categories: objectFormat.multipleMongooseToOject(categories),
               lecturers: objectFormat.multipleMongooseToOject(lecturers),
-            });  
+            });
           })
           .catch(next);
       })
       .catch(next);
   },
   postAdd: (req, res, next) => {
-    const image = req.file;  
+    const image = req.file;
     if (!image) {
       Course.find({})
         .then((courses) => {
@@ -218,9 +215,9 @@ const courseController = {
           });
         })
         .catch(next);
-    } 
-    const formData = req.body; 
-    const temp = req.file.filename; 
+    }
+    const formData = req.body;
+    const temp = req.file.filename;
     formData.image = temp;
     const category = formData.category.split('-');
     formData.subCategory = category[0];
@@ -231,7 +228,7 @@ const courseController = {
       course
         .save()
         .then(() => {
-        Course.findOne({ lecturer: e._id, isAdd: false })
+          Course.findOne({ lecturer: e._id, isAdd: false })
             .then((course) => {
               course = objectFormat.mongooseToOject(course);
               course.isAdd = true;
@@ -251,5 +248,5 @@ const courseController = {
         .catch(next);
     });
   },
-}
+};
 export default courseController;

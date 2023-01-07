@@ -44,8 +44,7 @@ const CourseController = {
         .catch(next);
     }
     const formData = req.body;
-    const temp = req.file.path;
-    formData.image = temp.replace(/src\\public/g, '');
+    formData.image = image.filename;
     const category = formData.category.split('-');
     formData.subCategory = category[0];
     formData.category = category[1];
@@ -55,7 +54,7 @@ const CourseController = {
       course
         .save()
         .then(() => {
-        Course.findOne({ lecturer: e._id, isAdd: false })
+          Course.findOne({ lecturer: e._id, isAdd: false })
             .then((course) => {
               course = objectFormat.mongooseToOject(course);
               course.isAdd = true;
@@ -109,8 +108,7 @@ const CourseController = {
         .catch(next);
     }
     const formData = req.body;
-    const temp = req.file.path;
-    formData.image = temp.replace(/src\\public/g, '');
+    formData.image = image.filename;
     formData.updatedAt = Date.now();
     const category = formData.category.split('-');
     formData.subCategory = category[0];
@@ -182,6 +180,20 @@ const CourseController = {
           .catch(next);
       });
     });
+  },
+  lock: (req, res, next) => {
+    Course.updateOne({ _id: req.params.id }, { isDisable: true })
+      .then(() => {
+        res.redirect('back');
+      })
+      .catch(next);
+  },
+  unlock: (req, res, next) => {
+    Course.updateOne({ _id: req.params.id }, { isDisable: false })
+      .then(() => {
+        res.redirect('back');
+      })
+      .catch(next);
   },
 };
 

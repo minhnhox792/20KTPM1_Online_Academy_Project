@@ -62,7 +62,7 @@ const chapterController = {
         const chapterList = [];
         Course.findById(req.params.id)
           .then((course) => {
-            if (course.overview.length === 0) {
+            if (course.basicCode.length === 0) {
               res.render('course/all', {
        
                 chapterList: chapterList,
@@ -100,7 +100,7 @@ const chapterController = {
         const chapterList = [];
         Course.findById(req.params.id)
           .then((course) => {
-            if (course.overview.length === 0) {
+            if (course.masterCode.length === 0) {
               res.render('course/all', {
        
                 chapterList: chapterList,
@@ -138,7 +138,7 @@ const chapterController = {
         const chapterList = [];
         Course.findById(req.params.id)
           .then((course) => {
-            if (course.overview.length === 0) {
+            if (course.advancedCode.length === 0) {
               res.render('course/all', {
        
                 chapterList: chapterList,
@@ -365,7 +365,6 @@ const chapterController = {
         });
     },
     imageRender: (req, res, next) => { 
-      console.log("IMAGE RENDERRRRRRRRRRRRRR")
       gfs.find({ filename: req.params.filename }).toArray((err, files) => {
           if (!files[0] || files.length === 0) {
               return res.status(200).json({

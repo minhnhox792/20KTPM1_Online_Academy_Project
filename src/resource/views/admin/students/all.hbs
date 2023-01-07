@@ -34,7 +34,6 @@
                       <tr>
                         <th></th>
                         <th>Username</th>
-                        <th>Gender</th>
                         <th>Education</th>
                         <th>Mobile</th>
                         <th>Email</th>
@@ -44,9 +43,8 @@
                     <tbody>
                       {{#each students}}
                         <tr>
-                          <td><img class="rounded-circle" width="35" src="{{this.image}}" alt=""></td>
+                          <td><img class="rounded-circle" width="35" height="35" src="/video/image/{{this.image}}" alt=""></td>
                           <td>{{this.username}}</td>
-                          <td>{{this.gender}}</td>
                           <td>{{this.education}}</td>
                           <td>{{this.phone}}</td>
                           <td>{{this.email}}</td>
@@ -62,6 +60,17 @@
                                 data-target="#delete-student">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                               </a>
+                              {{#if this.isDisable}}
+                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#unlock-lecturer"
+                                  data-unlock="{{this._id}}">
+                                  <i class="fa fa-lock" aria-hidden="true"></i>
+                                </a>
+                              {{else}}
+                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#lock-lecturer"
+                                  data-lock="{{this._id}}">
+                                  <i class="fa fa-unlock" aria-hidden="true"></i>
+                                </a>
+                              {{/if}}
                             </div>
                           </td>
                         </tr>
@@ -118,6 +127,94 @@
     btnDeteleStudent.onclick = () => {
       deleteForm.action = '/admin/student/' + studentId + '?_method=DELETE';
       deleteForm.submit();
+    };
+  });
+</script>
+
+{{!-- Confirm lock student --}}
+
+<div class="modal" tabindex="-1" id="lock-lecturer">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you want to lock ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to lock this student ?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-lock-lecturer" type="button" class="btn btn-danger">Lock</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Lock Form --}}
+<form name="lock-lecturer-form" method="post"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var studentId = 0;
+    var lockForm = document.forms['lock-lecturer-form'];
+    var btnLockLecturer = document.getElementById('btn-lock-lecturer');
+
+    $('#lock-lecturer').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      studentId = button.data('lock');
+
+    });
+
+    btnLockLecturer.onclick = () => {
+      lockForm.action = '/admin/student/lock/' + studentId + '?_method=PUT';
+      lockForm.submit();
+    };
+  });
+</script>
+
+{{!-- Confirm unlock student --}}
+
+<div class="modal" tabindex="-1" id="unlock-lecturer">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you want to unlock ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to unlock this student ?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-unlock-lecturer" type="button" class="btn btn-danger">Unlock</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Unlock Form --}}
+<form name="unlock-lecturer-form" method="post"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var studentId = 0;
+    var unlockForm = document.forms['unlock-lecturer-form'];
+    var btnUnlockLecturer = document.getElementById('btn-unlock-lecturer');
+
+    $('#unlock-lecturer').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      studentId = button.data('unlock');
+
+    });
+
+    btnUnlockLecturer.onclick = () => {
+      unlockForm.action = '/admin/student/unlock/' + studentId + '?_method=PUT';
+      unlockForm.submit();
     };
   });
 </script>
