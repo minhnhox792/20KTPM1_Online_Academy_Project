@@ -16,6 +16,7 @@ const categoryController = {
       Course.find({category: category, isDisable: false})
       .count()
       .then(numProducts => {
+        
         totalItems= numProducts
         return Course.find({category: category})
         .skip((page - 1) * ITEM_PER_PAGE)
@@ -23,7 +24,9 @@ const categoryController = {
       })
      
       .then(data => {
-
+        data = data.filter((obj) => {
+          return obj.isDisable === false
+        }) 
         res.render("category/viewCourse", {
           data: data,
           active: req.params.id,
@@ -57,7 +60,7 @@ const categoryController = {
         return;
       }
       let totalItems;
-      Course.find({subCategory: subCate})
+      Course.find({subCategory: subCate, isDisable: false})
       .count()
       .then(numProducts => {
         totalItems= numProducts
@@ -67,6 +70,9 @@ const categoryController = {
       })
      
       .then(data => {
+        data = data.filter((obj) => {
+          return obj.isDisable === false
+        }) 
         res.render("category/subCategory", {
           data: data,
           active: req.params.id,
@@ -100,7 +106,7 @@ const categoryController = {
           return;
         }
         let totalItems;
-        Course.find({subCategory: subCate})
+        Course.find({subCategory: subCate, isDisable: false})
         .count()
         .then(numProducts => {
           totalItems= numProducts
@@ -110,6 +116,10 @@ const categoryController = {
         })
        
         .then(data => {
+          data = data.filter((obj) => {
+            return obj.isDisable === false
+          }) 
+        
           res.render("category/subCategory", {
             data: data,
             active: subCate,

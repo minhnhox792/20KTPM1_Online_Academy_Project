@@ -6,97 +6,11 @@
         ></i>
         Categories</div>
       <ul class="list-group category_block">
-        {{!-- {{#ifEquals active "IT"}}
-          <li class="list-group-item active"><a
-              href="http://localhost:3000/category/view/IT"
-              style="color: white;"
-            >IT</a>
-
-            <label
-              class="text-center justify-content-center"
-              style="float: right;
-                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;"
-            >{{this.length}}</label>
-
-          </li>
-        {{else}}
-
-          <li class="list-group-item"><a
-              href="http://localhost:3000/category/view/IT"
-            >IT</a>
-          </li>
-        {{/ifEquals}}
-
-        {{#ifEquals active "Design"}}
-          <li class="list-group-item active"><a
-              href="http://localhost:3000/category/view/Design"
-              style="color: white;"
-            >Design</a>
-            <label
-              class="text-center justify-content-center"
-              style="float: right;
-                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;"
-            >{{this.length}}</label></li>
-        {{else}}
-
-          <li class="list-group-item"><a
-              href="http://localhost:3000/category/view/Design"
-            >Design</a>
-          </li>
-        {{/ifEquals}}
-        {{#ifEquals active "Economic"}}
-          <li class="list-group-item active"><a
-              href="http://localhost:3000/category/view/Economic"
-              style="color: white;"
-            >Economic</a>
-            <label
-              class="text-center justify-content-center"
-              style="float: right;
-                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;"
-            >{{this.length}}</label></li>
-        {{else}}
-
-          <li class="list-group-item"><a
-              href="http://localhost:3000/category/view/Economic"
-            >Economic</a>
-          </li>
-        {{/ifEquals}}
-        {{#ifEquals active "Financial"}}
-          <li class="list-group-item active"><a
-              href="http://localhost:3000/category/view/Financial"
-              style="color: white;"
-            >Financial</a>
-            <label
-              class="text-center justify-content-center"
-              style="float: right;
-                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;"
-            >{{this.length}}</label></li>
-        {{else}}
-          <li class="list-group-item"><a
-              href="http://localhost:3000/category/view/Financial"
-            >Financial</a></li>
-        {{/ifEquals}}
-        {{#ifEquals active "Marketing"}}
-          <li class="list-group-item active"><a
-              href="http://localhost:3000/category/view/Marketing"
-              style="color: white;"
-            >Marketing</a>
-            <label
-              class="text-center justify-content-center"
-              style="float: right;
-                    background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;"
-            >{{this.length}}</label></li>
-        {{else}}
-
-          <li class="list-group-item"><a
-              href="http://localhost:3000/category/view/Marketing"
-            >Marketing</a>
-          </li>
-        {{/ifEquals}} --}}
+       
         {{#each all_category}}
               
              {{#ifEquals ../active this.category}}
-                
+              
                 <li class="list-group-item active"><a
                     href="http://localhost:3000/category/view/{{this.category}}"
                     style="color: white;"
@@ -118,6 +32,7 @@
                   >{{this.category}}</a>
                 </li>
               {{/ifEquals}} 
+            
         {{/each}}
       </ul>
     </div>
@@ -127,13 +42,14 @@
     <div class="row">
 
       {{#each data}}
-
+        <a href="/course/{{this._id}}">
         <div class="col-12 col-md-6 col-lg-4 mt-5">
           <div class="card h-100">
             <img
               class="card-img-top"
               src="{{this.image}}"
               alt="Card image cap"
+               style="height: 300px !important; width: 100%;"
             />
             <div class="card-body">
               <h4 class="card-title"><a
@@ -205,6 +121,7 @@
             </div>
           </div>
         </div>
+        </a>
       {{/each}}
       {{#if (compareZero length)}}
         <div class="col-12">
