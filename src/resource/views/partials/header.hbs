@@ -69,8 +69,11 @@
               <i class="fa fa-user" aria-hidden="true"></i>
               Profile
             </a>
+
+            {{#ifEquals userInfo.role 'Lecturer'}}
             
-             <a class="dropdown-item" href="/user/myCourse">
+            {{else}}
+              <a class="dropdown-item" href="/user/myCourse">
               <i class="fa-solid fa-bookmark" style="color : #146EBE;"></i>
               Watch Purchased Courses
             </a>
@@ -79,9 +82,11 @@
                <span style="margin-left : 18px;">Watch Favorite Courses</span>
           
             </a>
-             <a class="dropdown-item" href="/user/changePassword" style="position: relative;">
-              <i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size: 17px; left:18px; position:absolute;"></i>
+             
 
+            {{/ifEquals}}
+            <a class="dropdown-item" href="/user/changePassword" style="position: relative;">
+              <i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size: 17px; left:18px; position:absolute;"></i>
               <span style="margin-left : 18px;">Change password</span>
             </a>
             <div class="dropdown-divider"></div>

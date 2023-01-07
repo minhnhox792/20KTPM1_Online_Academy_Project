@@ -8,9 +8,9 @@
       <div class="col-12 col-md-4 col-lg-3 col-sm-12 mt-5">
         <a href="/course/{{this._id}}">
           <div class="card">
-            <img class="card-img-top" src={{this.image}} alt="Card image cap"    style="height: 30vh; object-fit: cover;" />
-            <div class="card-body" style="height: 45vh;">
-              <h4 class="card-title" style="height: 15vh;font-weight: 700;font-size: 20px;"><a href="product.html"
+            <img class="card-img-top" src={{this.image}} alt="Card image cap"    style="height: 25vh; object-fit: cover;" />
+            <div class="card-body" style="height: 40vh;">
+              <h4 class="card-title threepoint" style="height: 10vh;font-weight: 700;font-size: 20px;"><a href="product.html"
                   title="View Product" style="font-weight: bold;">{{this.name}}</a></h4>
 
               <p class="card-text text-muted" style="font-size: 17px;">Lecturer: {{this.nameLecturer}}</p>
@@ -32,7 +32,7 @@
                       {{this.rating}}</p>
 
                     <div class="ratings">
-
+                      
                       <i class="fa fa-star rating-color"></i>
 
                     </div>
@@ -199,5 +199,14 @@
   .review-count {
     font-weight: bold;
     font-size: 20px !important;
+  }
+  .threepoint{
+      font-weight: bold;
+      color: #e75e8d;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 350px;
+      height: 1.2em;
+      white-space: nowrap;
   }
 </style>
