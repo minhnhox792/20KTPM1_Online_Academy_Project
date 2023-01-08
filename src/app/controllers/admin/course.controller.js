@@ -96,19 +96,10 @@ const CourseController = {
   },
   storeEdit: (req, res, next) => {
     const image = req.file;
-    if (!image) {
-      Course.find({})
-        .then((courses) => {
-          res.render('admin/courses/all', {
-            layout: 'admin',
-            courses: objectFormat.multipleMongooseToOject(courses),
-            error: 'Image not found',
-          });
-        })
-        .catch(next);
-    }
     const formData = req.body;
-    formData.image = image.filename;
+    if (image) {
+      formData.image = image.filename;
+    }
     formData.updatedAt = Date.now();
     const category = formData.category.split('-');
     formData.subCategory = category[0];

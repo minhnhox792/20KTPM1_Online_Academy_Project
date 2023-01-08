@@ -42,8 +42,8 @@ const courseController = {
         if (lec?._id !== null) {
           result_checked = lec?._id == data._id;
         }
-        if(result_checked===true){
-          isBuy=true;
+        if (result_checked === true) {
+          isBuy = true;
         }
         res.render('course/course', {
           course: docs,
@@ -123,18 +123,12 @@ const courseController = {
   },
   storeEdit: (req, res, next) => {
     const image = req.file;
-    if (!image) {
-      Course.find({})
-        .then((courses) => {
-          res.render('course/all', {
-            courses: objectFormat.multipleMongooseToOject(courses),
-            error: 'Image not found',
-          });
-        })
-        .catch(next);
-    }
     const formData = req.body;
-    formData.image = image.filename;
+    console.log(image)
+    console.log(formData)
+    if (image) {
+      formData.image = image.filename;
+    }
     formData.updatedAt = Date.now();
     const category = formData.category.split('-');
     formData.subCategory = category[0];

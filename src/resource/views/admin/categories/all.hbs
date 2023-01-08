@@ -31,8 +31,16 @@
                   {{#each this.subCategories}}
                     <div class="dropdown-item d-flex justify-content-between">
                       {{this}}
-                      <a href="" data-toggle="modal" data-target="#delete-subcategory" data-sub="{{this}}"
-                        data-cate="{{../this._id}}"><i class="fa fa-remove"></i></a>
+                      <div class="">
+                        <a href="" data-toggle="modal" data-target="#delete-subcategory" data-sub="{{this}}"
+                          data-cate="{{../this._id}}">
+                          <i class="fa fa-remove"></i>
+                        </a>
+                        <a href="" data-toggle="modal" data-target="#edit-subcategory" data-sub="{{this}}"
+                          data-cate="{{../this._id}}">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                      </div>
                     </div>
                   {{/each}}
                 </div>
@@ -270,6 +278,54 @@
     btnDeleteSubCategory.onclick = () => {
       deleteSubCategoryForm.action = '/admin/category/' + categoryId + '/' + subCategoryId + '?_method=DELETE';
       deleteSubCategoryForm.submit();
+    }
+  })
+</script>
+
+<!-- Edit SubCategory -->
+<div class="modal fade" id="edit-subcategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit SubCategory</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="edit-subcategory-form" method="post">
+          <div class="form-group">
+            <label for="subcategory-name" class="col-form-label">SubCategory:</label>
+            <input name="subcategory" type="text" class="form-control" id="subcategory-name" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-edit-subcategory" type="button" class="btn btn-primary">Save change</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="edit-subcategory-form" method="post"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let subCategoryId = 'subcategory';
+    let categoryId = 'category';
+    var btnEditSubCategory = document.getElementById('btn-edit-subcategory');
+    var editSubCategoryForm = document.forms['edit-subcategory-form'];
+
+    $('#edit-subcategory').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      subCategoryId = button.data('sub');
+      categoryId = button.data('cate');
+    });
+
+    btnEditSubCategory.onclick = () => {
+      editSubCategoryForm.action = '/admin/category/' + categoryId + '/' + subCategoryId + '?_method=PUT';
+      editSubCategoryForm.submit();
     }
   })
 </script>

@@ -274,17 +274,32 @@ const ChapterController = {
       .catch(next);
   },
   edit: (req, res, next) => {
-    Chapter.updateOne(
-      { _id: req.params.id },
-      {
-        title: req.body.title,
-        filename: req.file.id,
-      }
-    )
-      .then(() => {
-        res.redirect('back');
-      })
-      .catch(next);
+    const image = req.file;
+    const formData = req.body;
+    if (image) {
+      Chapter.updateOne(
+        { _id: req.params.id },
+        {
+          title: formData.title,
+          filename: image.id,
+        }
+      )
+        .then(() => {
+          res.redirect('back');
+        })
+        .catch(next);
+    } else {
+      Chapter.updateOne(
+        { _id: req.params.id },
+        {
+          title: formData.title,
+        }
+      )
+        .then(() => {
+          res.redirect('back');
+        })
+        .catch(next);
+    }
   },
   deleteOverview: (req, res, next) => {
     Chapter.deleteOne({ _id: req.params.slug })

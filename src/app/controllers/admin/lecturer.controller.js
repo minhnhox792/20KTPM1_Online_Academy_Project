@@ -19,14 +19,10 @@ const LecturerController = {
   },
   storeAdd: async (req, res, next) => {
     const image = req.file;
-    if (!image) {
-      return res.render('admin/lecturers/add', {
-        layout: 'admin',
-        error: 'Image not found',
-      });
-    }
     const formData = req.body;
-    formData.image = image.filename;
+    if (image) {
+      formData.image = image.filename;
+    }
     formData.role = 'Lecturer';
     formData.username = formData.username.replace(/ /g, '');
     const lecturers = await User.find({});
@@ -68,15 +64,11 @@ const LecturerController = {
   },
   storeEdit: async (req, res, next) => {
     const image = req.file;
-    if (!image) {
-      return res.render('admin/lecturers/all', {
-        layout: 'admin',
-        error: 'Image not found',
-      });
-    }
     const formData = req.body;
+    if (image) {
+      formData.image = image.filename;
+    }
     formData.username = formData.username.replace(/ /g, '');
-    formData.image = image.filename;
     formData.updatedAt = Date.now();
     User.updateOne({ _id: req.params.id }, formData)
       .then(() => {

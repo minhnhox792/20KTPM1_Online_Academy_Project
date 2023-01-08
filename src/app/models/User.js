@@ -41,6 +41,7 @@ const User = new Schema(
     education: {
       type: String,
       maxLength: 100,
+      default: '',
     },
     about: {
       type: String,
@@ -48,12 +49,15 @@ const User = new Schema(
     },
     phone: {
       type: String,
+      default: 'None',
     },
     dateOfBirth: {
       type: Date,
+      required: true,
     },
     image: {
       type: String,
+      default: 'default-profile.jpg'
     },
     role: {
       type: String,
@@ -87,11 +91,12 @@ const User = new Schema(
     },
     verified: { type: Boolean, default: false },
     googleId: {
-      type: String, default: ''
-    },
-    facebookId:{
       type: String,
-      default: ''
+      default: '',
+    },
+    facebookId: {
+      type: String,
+      default: '',
     },
     isDisable: {
       type: Boolean,

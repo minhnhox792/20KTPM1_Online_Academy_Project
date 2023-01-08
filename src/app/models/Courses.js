@@ -27,6 +27,7 @@ const Course = new Schema({
   },
   rating: {
     type: Number,
+    default: 0,
   },
   numberStudentRate: {
     type: Number,
@@ -35,14 +36,17 @@ const Course = new Schema({
   shortDesc: {
     type: String,
     maxLength: 400,
+    default: '',
   },
   fullDesc: {
     type: String,
     maxLength: 1000,
+    default: '',
   },
   price: {
     type: Number,
     required: true,
+    default: 0,
   },
   discount: {
     type: Number,
@@ -148,18 +152,18 @@ const Course = new Schema({
     type: Boolean,
     default: false,
   },
-  complete:{
+  complete: {
     type: Boolean,
     default: false,
   },
   subCategory: {
     type: String,
-    default: ''
+    default: '',
   },
-  isDisable:{
+  isDisable: {
     type: Boolean,
     default: false,
-  }
+  },
 });
 
 // Course.plugin(mongoose_delete);

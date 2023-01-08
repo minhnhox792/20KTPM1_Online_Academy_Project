@@ -33,13 +33,22 @@ const CategoryController = {
       });
   },
   edit: (req, res, next) => {
-    Category.updateOne({ _id: req.params.id }, req.body)
-      .then(() => {
-        res.redirect('/admin/category/all');
+    Category.findById(req.params.id)
+      .then((category) => {
+        console.log(req.body);
+        Category.updateOne({ _id: req.params.id }, req.body)
+          .then(() => {
+            Course.updateMany({ category: category.category }, req.body)
+              .then(() => {
+                res.redirect('/admin/category/all');
+              })
+              .catch(next);
+          })
+          .catch(() => {
+            res.redirect('/admin/category/all');
+          });
       })
-      .catch(() => {
-        res.redirect('/admin/category/all');
-      });
+      .catch(next);
   },
   delete: (req, res, next) => {
     let flag = 1;
@@ -51,7 +60,7 @@ const CategoryController = {
             flag = 0;
             Category.find({})
               .then((categories) => {
-                console.log('Hello')
+                console.log('Hello');
                 return res.render('admin/categories/all', {
                   layout: 'admin',
                   categories: objectFormat.multipleMongooseToOject(categories),
@@ -131,6 +140,28 @@ const CategoryController = {
           .catch(next);
       }
     });
+  },
+  editSub: (req, res, next) => {
+    console.log(req.params.id);
+    console.log(req.params.slug);
+    console.log(req.body);
+    Category.findById(req.params.id)
+      .then((category) => {
+        category.subCategories = category.subCategories.map((e) => {
+          return e == req.params.slug ? req.body.subcategory : e;
+        });
+        Category.updateOne({ _id: req.params.id }, category).then(() => {
+          Course.updateMany(
+            { subCategory: req.params.slug },
+            { subCategory: req.body.subcategory }
+          )
+            .then(() => {
+              res.redirect('/admin/category/all');
+            })
+            .catch(next);
+        });
+      })
+      .catch(next);
   },
 };
 

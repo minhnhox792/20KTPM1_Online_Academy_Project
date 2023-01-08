@@ -17,19 +17,19 @@
             <h5 class="card-title">Basic Info</h5>
           </div>
           <div class="card-body">
-            <form action="/admin/student/edit/{{student._id}}?_method=PUT" method="post"
+            <form id="formData" action="/admin/student/edit/{{student._id}}?_method=PUT" method="post"
               enctype="multipart/form-data">
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" value="{{student.username}}" required>
+                    <input id="username" type="text" class="form-control" name="username" value="{{student.username}}" required>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label class="form-label">Fullname</label>
-                    <input type="text" class="form-control" name="fullname" value="{{student.fullname}}" required>
+                    <input id="fullname" type="text" class="form-control" name="fullname" value="{{student.fullname}}" required>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -41,7 +41,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" name="phone" value="{{student.phone}}" required>
+                    <input type="text" class="form-control" name="phone" value="{{student.phone}}">
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -64,14 +64,14 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group">
                     <label class="form-label">Education</label>
-                    <input type="text" class="form-control" name="education" value="{{student.education}}" required>
+                    <input type="text" class="form-control" name="education" value="{{student.education}}">
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="form-group fallback w-100">
                     <label class="form-label d-block">Lecturer Image</label>
                     <input type="file" class="dropify" data-default-file="" name="recfile" accept="image/*"
-                      value="{{student.image}}" required>
+                      value="{{student.image}}">
                   </div>
                 </div>
                 <div class="col-lg-12 col-md-6 col-sm-12">
@@ -96,7 +96,15 @@
 
 <script src="https://cdn.tiny.cloud/1/o3spvyeq6r5oshe6dzh63yc88hs5ct8m2gixynrik46shp7r/tinymce/5/tinymce.min.js"
   referrerpolicy="origin"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" crossorigin="anonymous"></script>
+<script>
+  $('#formData').on('submit', (e) => {
+    if ($('#username').val().length < 6 || $('#username').val().length > 50 || $('#fullname').val().length < 6 || $('#fullname').val().length > 50) {
+      alert('Username/Fullname is out of the range');
+      e.preventDefault();
+    }
+  })
+</script>
 <script>
   tinymce.init({
     selector: '#description',
