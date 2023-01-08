@@ -42,7 +42,9 @@ const courseController = {
         if (lec?._id !== null) {
           result_checked = lec?._id == data._id;
         }
-        console.log(111111, result_checked);
+        if(result_checked===true){
+          isBuy=true;
+        }
         res.render('course/course', {
           course: docs,
           course_id: req.params.id,

@@ -25,6 +25,7 @@ const chapterController = {
         const chapterList = [];
         Course.findById(req.params.id)
           .then((course) => {
+            console.log(course.overview)
             if (course.overview.length === 0) {
               res.render('course/all', {
                 chapterList: chapterList,
@@ -346,7 +347,6 @@ const chapterController = {
             .catch(next);
     },
     video: (req, res, next) => { 
-      console.log("VIDEOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
         gfs.find({ filename: req.params.filename }).toArray((err, files) => {
             if (!files[0] || files.length === 0) {
                 return res.status(200).json({
