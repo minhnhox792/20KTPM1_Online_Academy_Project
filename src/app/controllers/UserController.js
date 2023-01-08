@@ -118,6 +118,7 @@ const userController = {
 
           const url = req.session.retUrl || '/';
           // console.log(url)
+          if(UserInput.role==='Admin') return res.redirect('/admin')
           return res.redirect(url);
         } else {
           return res.render("auth/login", {
@@ -288,8 +289,10 @@ const userController = {
     if (!user) {
       return res.redirect("/user/login");
     }
-    let data = await User.findOne({ _id: user._id });
-
+    console.log({
+      userID: user._id
+    })
+    let data = await User.findOne({ _id: user._id }); 
     const day_format = moment(data.dateOfBirth).format("DD/MM/YYYY").toString();
     const day_joined = moment(data.createdAt).format("DD/MM/YYYY").toString();
     let message = req.flash("error");

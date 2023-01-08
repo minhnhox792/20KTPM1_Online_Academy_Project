@@ -94,7 +94,7 @@
 
 
                     <tr class="clickable " onclick="window.location='/course/{{this._id}}'">
-                      <td class="image"><img src={{this.image}} alt=""></td>
+                      <td class="image"><img src="/video/image/{{this.image}}" alt=""></td>
                       <td class="product">
                         <strong> {{this.name}}</strong>
                         <br>{{this.category}}
@@ -157,30 +157,41 @@
           </a>
         </li>
 
+        {{#if checkpag}}
+        <li class="page-item"><a class="page-link"
+            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}">{{math_add
+            pageNumber -1}}</a></li>
+        <li class="page-item active"><a class="page-link"
+            href="search?searchInput={{dataInput}}&pageNumber={{pageNumber}}">{{pageNumber}}</a>
+        </li>
+        {{else}}
+
         {{#if (math_compare 1 pageNumber) }}
         <li class="page-item"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}">{{math_add pageNumber -1}}</a>
-        </li>
+            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}">{{math_add
+            pageNumber -1}}</a></li>
         <li class="page-item active"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{pageNumber}}">{{pageNumber}}</a></li>
-        <li class="page-item"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}">{{math_add pageNumber 1}}</a>
+            href="search?searchInput={{dataInput}}&pageNumber={{pageNumber}}">{{pageNumber}}</a>
         </li>
         <li class="page-item"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 2}}">{{math_add pageNumber 2}}</a>
-        </li>
+            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}">{{math_add
+            pageNumber 1}}</a></li>
+
         {{else}}
         <li class="page-item active"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=1">1</a>
         </li>
         <li class="page-item "><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=2">2</a></li>
+        {{#if (math_compare 1 countpage) }}
         <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=3">3</a></li>
-        <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=4">4</a></li>
         {{/if}}
-
+        {{/if}}
 
         <a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}"
           aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
+          {{/if}}
+
+
         </a>
         </li>
       </ul>

@@ -36,13 +36,10 @@
 		<a href="/category/view/{{this._id}}">
 		<div class="card radius-15">
 			<div class="card-body text-center" >
-				<div class="p-4 border radius-15"  style="padding-bottom: 50px;">
-					<img style="object-fit:cover" src="https://i.ppy.sh/9e90c7d1d1128eb02a469d86029009b86629bf8b/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f464a4e53693450556341456439716d3f666f726d61743d6a7067" width="110" height="110" class="rounded-circle shadow" alt="">
+				<div class="p-4 border radius-15"  style="padding-bottom: 50px;" id = "pot">
+					<img style="object-fit:cover" src="https://i.ytimg.com/vi/R-cDKTgp7-k/maxresdefault.jpg" width="110" height="110" class="rounded-circle shadow" alt="">
 					<p class="mt-5" style="color: #E75E8D;">{{this._id}}</p>
-					<div class="list-inline contacts-social mt-3 mb-3"> <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i class="bx bxl-facebook"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i class="bx bxl-twitter"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i class="bx bxl-linkedin"></i></a>
-					</div>
+					
 					
 				</div>
 			</div>
@@ -85,5 +82,23 @@
 }
 .bg-warning {
     background-color: #ffc107!important;
+}
+#pot {
+  bottom: 15%;
+  position: absolute;
+  -webkit-animation: linear infinite;
+  -webkit-animation-name: run;
+  -webkit-animation-duration: 5s;
+}
+@-webkit-keyframes run {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 32%;
+  }
+  100% {
+    left: 0;    
+  }
 }
 </style>

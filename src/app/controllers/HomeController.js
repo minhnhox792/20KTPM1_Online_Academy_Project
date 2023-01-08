@@ -7,6 +7,11 @@ const HomeController = {
   index: async (req, res) => {
     // const all_category = await Category.find({})
     let pageNumber=req.query.pageNumber || 1
+    const countPage = Math.floor(await Course.find({isDisable: false}).count()%4)
+    let checkpag= false;
+    if(pageNumber >= countPage){
+      checkpag=true
+    }
     const data_caro = await Course.find({isDisable: false}).skip(pageNumber > 0 ? ((pageNumber - 1) * 4) : 0).limit(4)
    
     const top4 = await Course.find({isDisable: false}).sort(({ viewWeekly: -1 })).limit(4)
@@ -98,6 +103,7 @@ const HomeController = {
             list_topDate2: ultil.getId(list_topDate2),
             list_topDate3: ultil.getId(list_topDate3),
             data_viewWeekly,
+            checkpag,
             topCategory,
             top4,
             pageNumber:pageNumber-"0",

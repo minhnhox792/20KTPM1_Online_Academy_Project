@@ -17,37 +17,16 @@ import nodemailer from "nodemailer";
 import numeral from 'numeral'
 import asyncErrors from 'express-async-errors'
 import passport from 'passport';
-import helpers from './util/helpers.js';
+import helpers from './util/helpers.js'; 
+import publicFolder from './util/publicFolder.js'
+import extensionFolder from './util/extensionFolder.js'
 const hbs = expressHbs.create({});
 const app = express();
 const port = 3000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/admin/lecturer', express.static(path.join(__dirname, 'public')));
-app.use('/admin/lecturer/profile', express.static(path.join(__dirname, 'public')));
-app.use('/admin/lecturer/edit', express.static(path.join(__dirname, 'public')));
 
-app.use('/admin/student', express.static(path.join(__dirname, 'public')));
-app.use('/admin/student/profile', express.static(path.join(__dirname, 'public')));
-app.use('/admin/student/edit', express.static(path.join(__dirname, 'public')));
-
-app.use('/admin/course/about', express.static(path.join(__dirname, 'public')));
-app.use('/admin/course/edit', express.static(path.join(__dirname, 'public')));
-app.use('/admin/course', express.static(path.join(__dirname, 'public')));
-
-app.use('/admin/category', express.static(path.join(__dirname, 'public')));
-app.use('/admin/category/:id', express.static(path.join(__dirname, 'public')));
-
-app.use('/admin/chapter/overview', express.static(path.join(__dirname, 'public')));
-app.use('/admin/chapter/basic', express.static(path.join(__dirname, 'public')));
-app.use('/admin/chapter/master', express.static(path.join(__dirname, 'public')));
-app.use('/admin/chapter/advanced', express.static(path.join(__dirname, 'public')));
-
-app.use('/css', express.static(path.join(__dirname, 'public/assets/css')));
-app.use('/images', express.static(path.join(__dirname, 'public/assets/images'))); 
-app.use('/vendor', express.static(path.join(__dirname, 'public/vendors/vendor-video'))); 
-app.use('/js', express.static(path.join(__dirname, 'assets/js'))); 
+publicFolder(app, path, __dirname)
 app.use(session({  
   secret: 'woot',
   resave: false, 
@@ -56,46 +35,8 @@ dotenv.config();
 
 connect_database();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cookieParser());
-app.use(flash());
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(methodOverride("_method"));
-// app.use(morgan("combined"));
-
-
-app.engine(
-  'hbs',
-  engine({
-    extname: '.hbs',
-    helpers: {
-      sum: (a, b) => a + b,
-      
-    },
-    section: hbs_section(),
-    runtimeOptions: {
-      allowProtoPropertiesByDefault: true,
-      allowProtoMethodsByDefault: true,
-    },
-  }),
-  // expressHbs({
-  //   defaultLayout: "main",
-  //   runtimeOptions: {
-  //     allowProtoPropertiesByDefault: true,
-  //     allowProtoMethodsByDefault: true,
-  //   },
-  // })
-);
-
+extensionFolder(app, path, __dirname)
 helpers(hbs)
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resource', 'views'));
 
 route(app);
 
