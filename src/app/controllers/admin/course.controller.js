@@ -6,14 +6,35 @@ import moment from 'moment';
 
 const CourseController = {
   all: (req, res, next) => {
-    Course.find({})
-      .then((courses) => {
-        res.render('admin/courses/all', {
-          layout: 'admin',
-          courses: objectFormat.multipleMongooseToOject(courses),
-        });
-      })
-      .catch(next);
+    if (JSON.stringify(req.query) === '{}') {
+      Course.find({})
+        .then((courses) => {
+          Category.find({})
+            .then((categories) => {
+              res.render('admin/courses/all', {
+                layout: 'admin',
+                courses: objectFormat.multipleMongooseToOject(courses),
+                categories: objectFormat.multipleMongooseToOject(categories),
+              });
+            })
+            .catch(next);
+        })
+        .catch(next);
+    } else {
+      Course.find({ subCategory: req.query.sub })
+        .then((courses) => {
+          Category.find({})
+            .then((categories) => {
+              res.render('admin/courses/all', {
+                layout: 'admin',
+                courses: objectFormat.multipleMongooseToOject(courses),
+                categories: objectFormat.multipleMongooseToOject(categories),
+              });
+            })
+            .catch(next);
+        })
+        .catch(next);
+    }
   },
   add: async (req, res, next) => {
     Category.find({})
