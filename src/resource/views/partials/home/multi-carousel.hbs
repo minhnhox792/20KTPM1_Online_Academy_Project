@@ -5,18 +5,18 @@
 	body {
 		background: #e2eaef;
 		font-family: "Open Sans", sans-serif;
-	} 
+	}
 
 	.button-primary {
-		    font-size: 16px !important;
-			background-color: transparent;
-			line-height: 32px;
-			padding: 4px 24px;
-			border-radius: 10px; 
-			color: #e75e8d;
-			font-weight: 400;
-			transition: all 0.4s ease;
-	} 
+		font-size: 16px !important;
+		background-color: transparent;
+		line-height: 32px;
+		padding: 4px 24px;
+		border-radius: 10px;
+		color: #e75e8d;
+		font-weight: 400;
+		transition: all 0.4s ease;
+	}
 
 	.button-primary:hover {
 		color: #fff;
@@ -63,7 +63,7 @@
 		background: #fff;
 		border-radius: 6px;
 		text-align: center;
-		position: relative; 
+		position: relative;
 		height: 380px;
 		box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 	}
@@ -245,7 +245,8 @@
 			<div class="col-xl-12">
 
 				<div id={{id}} class="carousel slide" data-ride="carousel" data-interval="0" style="padding: 0">
-				<h4 style="color: #000; text-decoration: none; font-size: 22px; font-weight: 600; padding-bottom: 10px">{{tit}}</h4>
+					<h4 style="color: #000; text-decoration: none; font-size: 22px; font-weight: 600; padding-bottom: 10px">
+						{{tit}}</h4>
 
 					<!-- Carousel indicators -->
 					<ol class="carousel-indicators">
@@ -258,62 +259,69 @@
 					<div class="carousel-inner">
 						<div class="item carousel-item active">
 							<div class="row">
-								{{#each data1}} 
-								<div class="col-sm-10 col-lg-3">
-									<div class="thumb-wrapper" style="border-bottom: 1px solid #E8E8EF">
-										<a href="/course/{{this._id}}">
-											<div class="img-box" style="">
-												<img src="/video/image/{{this.image}}" style="object-fit:cover; width: 100%; height: 160px; border-radius: 4px;" class="img-fluid" alt="">
+								{{#each data1}}
+									<div class="col-sm-10 col-lg-3">
+										<div class="thumb-wrapper" style="border-bottom: 1px solid #E8E8EF">
+											<a href="/course/{{this._id}}">
+												<div class="img-box" style="">
+													<img src="/data/image/{{this.image}}"
+														style="object-fit:cover; width: 100%; height: 160px; border-radius: 4px;" class="img-fluid"
+														alt="">
 
-											</div>
-										</a>
-										<div class="thumb-content">
-											<div class = "text-center justify-content-center">
-												<h5 class="card-title " style="margin-left: 15px;font-weight: bold;color: #e75e8d;; text-overflow: ellipsis;overflow: hidden; text-align: center; padding: 0 15px ;width: 220px; height: 1.2em; white-space: nowrap;">
-                      							{{this.name}}</h5>
-											</div>
-											
-					  						<span style="font-size: 14px; font-weight: 400; opacity: 0.8; color: #000" class = "text-muted">{{this.category}}</span>
-											<br>
-					  						<span style="font-size: 14px; font-weight: 400; font-weight: bold; color:rgb(204, 140, 175)">{{this.nameLecturer}}</span>
-											<div class="star-rating">
-												<div class="list-inline">
-													{{!-- <li>{{this.lecturer}}</li> --}}
-													<li class="list-inline-item" style="font-size: 15px;">
-														{{this.numberStudentRate}}<i class="fa fa-star"></i></li>
 												</div>
-											</div>
-											{{#if (compareZero this.discount)}}
-											<p class="item-price"><strike style="color: #9EA4AD; font-weight: none; ">${{format_number this.price}}</strike>
-														<b style="color: #e75e8d;">${{format_number (cal_discount this.price this.discount)}}</b>
-											</p>
-											
-												
-												
-											{{else}}
-											<b class="item-price" style="font-size: 0.9rem; color: #e75e8d;">{{format_number this.price}}</b>
-											{{/if}}
-											<div class="d-flex justify-content-around" style="margin-top: 0">
-												{{#if ../auth}}
+											</a>
+											<div class="thumb-content">
+												<div class="text-center justify-content-center">
+													<h5 class="card-title "
+														style="margin-left: 15px;font-weight: bold;color: #e75e8d;; text-overflow: ellipsis;overflow: hidden; text-align: center; padding: 0 15px ;width: 220px; height: 1.2em; white-space: nowrap;">
+														{{this.name}}
+													</h5>
+												</div>
 
-												<form action="/user/buyProduct/{{this._id}}" method="post">
-													<a href="javascript:;" onclick="parentNode.submit();"
-														class="button-primary text-muted" style="height: 40px;">Buy</a>
-												</form>
-												<form action="/user/favoriteList/{{this._id}}" method="post">
-													<a href="javascript:;" onclick="parentNode.submit();"
-														class="button-primary text-muted" style="height: 40px;">Like</a>
-												</form>
+												<span style="font-size: 14px; font-weight: 400; opacity: 0.8; color: #000"
+													class="text-muted">{{this.category}}</span>
+												<br>
+												<span
+													style="font-size: 14px; font-weight: 400; font-weight: bold; color:rgb(204, 140, 175)">{{this.nameLecturer}}</span>
+												<div class="star-rating">
+													<div class="list-inline">
+														{{!-- <li>{{this.lecturer}}</li> --}}
+														<li class="list-inline-item" style="font-size: 15px;">
+															{{this.numberStudentRate}}<i class="fa fa-star"></i>
+														</li>
+													</div>
+												</div>
+												{{#if (compareZero this.discount)}}
+													<p class="item-price"><strike style="color: #9EA4AD; font-weight: none; ">${{format_number
+															this.price}}</strike>
+														<b style="color: #e75e8d;">${{format_number (cal_discount this.price this.discount)}}</b>
+													</p>
+
+
+
 												{{else}}
-												<a href="/user/login" class="button-primary"
-													style="height: 40px; border:0;">Buy</a>
-												<a href="user/login" class="button-primary"
-													style="height: 40px; border:0;">Like</a>
+													<b class="item-price"
+														style="font-size: 0.9rem; color: #e75e8d;">{{format_number this.price}}</b>
 												{{/if}}
+												<div class="d-flex justify-content-around" style="margin-top: 0">
+													{{#if ../auth}}
+
+														<form action="/user/buyProduct/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary text-muted"
+																style="height: 40px;">Buy</a>
+														</form>
+														<form action="/user/favoriteList/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary text-muted"
+																style="height: 40px;">Like</a>
+														</form>
+													{{else}}
+														<a href="/user/login" class="button-primary" style="height: 40px; border:0;">Buy</a>
+														<a href="user/login" class="button-primary" style="height: 40px; border:0;">Like</a>
+													{{/if}}
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 								{{/each}}
 
 
@@ -323,122 +331,136 @@
 						<div class="item carousel-item">
 							<div class="row">
 								{{#each data2}}
-								<div class="col-sm-10 col-lg-3">
-									<div class="thumb-wrapper" style="border-bottom: 1px solid #E8E8EF">
-										<a href="/course/{{this._id}}">
-											<div class="img-box" style="">
-												<img src="/video/image/{{this.image}}" style="object-fit:cover; width: 100%; height: 160px; border-radius: 4px;" class="img-fluid" alt="">
+									<div class="col-sm-10 col-lg-3">
+										<div class="thumb-wrapper" style="border-bottom: 1px solid #E8E8EF">
+											<a href="/course/{{this._id}}">
+												<div class="img-box" style="">
+													<img src="/data/image/{{this.image}}"
+														style="object-fit:cover; width: 100%; height: 160px; border-radius: 4px;" class="img-fluid"
+														alt="">
 
-											</div>
-										</a>
-										<div class="thumb-content">
-											<div class = "text-center justify-content-center">
-												<h5 class="card-title " style="margin-left: 15px;font-weight: bold;color: #e75e8d;; text-overflow: ellipsis;overflow: hidden; text-align: center; padding: 0 15px ;width: 220px; height: 1.2em; white-space: nowrap;">
-                      {{this.name}}</h5>
-											</div>
-											
-					  						<span style="font-size: 14px; font-weight: 400; opacity: 0.8; color: #000" class = "text-muted">{{this.category}}</span>
-											<br>
-					  						<span style="font-size: 14px; font-weight: 400; font-weight: bold; color:rgb(204, 140, 175)">{{this.nameLecturer}}</span>
-											<div class="star-rating">
-												<div class="list-inline">
-													{{!-- <li>{{this.lecturer}}</li> --}}
-													<li class="list-inline-item" style="font-size: 15px;">
-														{{this.numberStudentRate}}<i class="fa fa-star"></i></li>
 												</div>
-											</div>
-											{{#if (compareZero this.discount)}}
-											<p class="item-price"><strike style="color: #9EA4AD; font-weight: none; ">${{format_number this.price}}</strike>
-														<b style="color: #e75e8d;">${{format_number (cal_discount this.price this.discount)}}</b>
-											</p>
-											
-												
-												
-											{{else}}
-											<b class="item-price" style="font-size: 0.9rem; color: #e75e8d;">{{format_number this.price}}</b>
-											{{/if}}
-											<div class="d-flex justify-content-around">
-												{{#if ../auth}}
+											</a>
+											<div class="thumb-content">
+												<div class="text-center justify-content-center">
+													<h5 class="card-title "
+														style="margin-left: 15px;font-weight: bold;color: #e75e8d;; text-overflow: ellipsis;overflow: hidden; text-align: center; padding: 0 15px ;width: 220px; height: 1.2em; white-space: nowrap;">
+														{{this.name}}
+													</h5>
+												</div>
 
-												<form action="/user/buyProduct/{{this._id}}" method="post">
-													<a href="javascript:;" onclick="parentNode.submit();"
-														class="button-primary" style="height: 40px;">Buy</a>
-												</form>
-												<form action="/user/favoriteList/{{this._id}}" method="post">
-													<a href="javascript:;" onclick="parentNode.submit();"
-														class="button-primary" style="height: 40px;">Like</a>
-												</form>
+												<span style="font-size: 14px; font-weight: 400; opacity: 0.8; color: #000"
+													class="text-muted">{{this.category}}</span>
+												<br>
+												<span
+													style="font-size: 14px; font-weight: 400; font-weight: bold; color:rgb(204, 140, 175)">{{this.nameLecturer}}</span>
+												<div class="star-rating">
+													<div class="list-inline">
+														{{!-- <li>{{this.lecturer}}</li> --}}
+														<li class="list-inline-item" style="font-size: 15px;">
+															{{this.numberStudentRate}}<i class="fa fa-star"></i>
+														</li>
+													</div>
+												</div>
+												{{#if (compareZero this.discount)}}
+													<p class="item-price"><strike style="color: #9EA4AD; font-weight: none; ">${{format_number
+															this.price}}</strike>
+														<b style="color: #e75e8d;">${{format_number (cal_discount this.price this.discount)}}</b>
+													</p>
+
+
+
 												{{else}}
-												<a href="/user/login" class="button-primary"
-													style="height: 40px; border:0;">Buy</a>
-												<a href="user/login" class="button-primary"
-													style="height: 40px; border:0;">Like</a>
+													<b class="item-price"
+														style="font-size: 0.9rem; color: #e75e8d;">{{format_number this.price}}</b>
 												{{/if}}
+												<div class="d-flex justify-content-around">
+													{{#if ../auth}}
+
+														<form action="/user/buyProduct/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
+																style="height: 40px;">Buy</a>
+														</form>
+														<form action="/user/favoriteList/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
+																style="height: 40px;">Like</a>
+														</form>
+													{{else}}
+														<a href="/user/login" class="button-primary" style="height: 40px; border:0;">Buy</a>
+														<a href="user/login" class="button-primary" style="height: 40px; border:0;">Like</a>
+													{{/if}}
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 								{{/each}}
 							</div>
 						</div>
 						<div class="item carousel-item">
 							<div class="row">
 								{{#each data3}}
-								<div class="col-sm-10 col-lg-3">
-									<div class="thumb-wrapper" style="border-bottom: 1px solid #E8E8EF">
-										<a href="/course/{{this._id}}">
-											<div class="img-box" style="">
-												<img src="/video/image/{{this.image}}" style="object-fit:cover; width: 100%; height: 160px; border-radius: 4px;" class="img-fluid" alt="">
+									<div class="col-sm-10 col-lg-3">
+										<div class="thumb-wrapper" style="border-bottom: 1px solid #E8E8EF">
+											<a href="/course/{{this._id}}">
+												<div class="img-box" style="">
+													<img src="/data/image/{{this.image}}"
+														style="object-fit:cover; width: 100%; height: 160px; border-radius: 4px;" class="img-fluid"
+														alt="">
 
-											</div>
-										</a>
-										<div class="thumb-content">
-											<div class = "text-center justify-content-center">
-												<h5 class="card-title " style="margin-left: 15px;font-weight: bold;color: #e75e8d;; text-overflow: ellipsis;overflow: hidden; text-align: center; padding: 0 15px ;width: 220px; height: 1.2em; white-space: nowrap;">
-                      {{this.name}}</h5>
-											</div>
-											
-					  						<span style="font-size: 14px; font-weight: 400; opacity: 0.8; color: #000" class = "text-muted">{{this.category}}</span>
-											<br>
-					  						<span style="font-size: 14px; font-weight: 400; font-weight: bold; color:rgb(204, 140, 175)">{{this.nameLecturer}}</span>
-											<div class="star-rating">
-												<div class="list-inline">
-													{{!-- <li>{{this.lecturer}}</li> --}}
-													<li class="list-inline-item" style="font-size: 15px;">
-														{{this.numberStudentRate}}<i class="fa fa-star"></i></li>
 												</div>
-											</div>
-											{{#if (compareZero this.discount)}}
-											<p class="item-price"><strike style="color: #9EA4AD; font-weight: none; ">${{format_number this.price}}</strike>
-														<b style="color: #e75e8d;">${{format_number (cal_discount this.price this.discount)}}</b>
-											</p>
-											
-												
-												
-											{{else}}
-											<b class="item-price" style="font-size: 0.9rem; color: #e75e8d;">{{format_number this.price}}</b>
-											{{/if}}
-											<div class="d-flex justify-content-around">
-												{{#if ../auth}}
+											</a>
+											<div class="thumb-content">
+												<div class="text-center justify-content-center">
+													<h5 class="card-title "
+														style="margin-left: 15px;font-weight: bold;color: #e75e8d;; text-overflow: ellipsis;overflow: hidden; text-align: center; padding: 0 15px ;width: 220px; height: 1.2em; white-space: nowrap;">
+														{{this.name}}
+													</h5>
+												</div>
 
-												<form action="/user/buyProduct/{{this._id}}" method="post">
-													<a href="javascript:;" onclick="parentNode.submit();"
-														class="button-primary" style="height: 40px;">Buy</a>
-												</form>
-												<form action="/user/favoriteList/{{this._id}}" method="post">
-													<a href="javascript:;" onclick="parentNode.submit();"
-														class="button-primary" style="height: 40px;">Like</a>
-												</form>
+												<span style="font-size: 14px; font-weight: 400; opacity: 0.8; color: #000"
+													class="text-muted">{{this.category}}</span>
+												<br>
+												<span
+													style="font-size: 14px; font-weight: 400; font-weight: bold; color:rgb(204, 140, 175)">{{this.nameLecturer}}</span>
+												<div class="star-rating">
+													<div class="list-inline">
+														{{!-- <li>{{this.lecturer}}</li> --}}
+														<li class="list-inline-item" style="font-size: 15px;">
+															{{this.numberStudentRate}}<i class="fa fa-star"></i>
+														</li>
+													</div>
+												</div>
+												{{#if (compareZero this.discount)}}
+													<p class="item-price"><strike style="color: #9EA4AD; font-weight: none; ">${{format_number
+															this.price}}</strike>
+														<b style="color: #e75e8d;">${{format_number (cal_discount this.price this.discount)}}</b>
+													</p>
+
+
+
 												{{else}}
-												<a href="/user/login" class="button-primary"
-													style="height: 40px; border:0;">Buy</a>
-												<a href="user/login" class="button-primary"
-													style="height: 40px; border:0;">Like</a>
+													<b class="item-price"
+														style="font-size: 0.9rem; color: #e75e8d;">{{format_number this.price}}</b>
 												{{/if}}
+												<div class="d-flex justify-content-around">
+													{{#if ../auth}}
+
+														<form action="/user/buyProduct/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
+																style="height: 40px;">Buy</a>
+														</form>
+														<form action="/user/favoriteList/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
+																style="height: 40px;">Like</a>
+														</form>
+													{{else}}
+														<a href="/user/login" class="button-primary" style="height: 40px; border:0;">Buy</a>
+														<a href="user/login" class="button-primary" style="height: 40px; border:0;">Like</a>
+													{{/if}}
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 								{{/each}}
 							</div>
 						</div>
@@ -447,7 +469,7 @@
 					<a class="carousel-control-prev" href="#{{id}}" style="margin: auto -7%" data-slide="prev">
 						<i class="fa fa-angle-left"></i>
 					</a>
-					<a class="carousel-control-next" href="#{{id}}" style="margin: auto -7%"  data-slide="next">
+					<a class="carousel-control-next" href="#{{id}}" style="margin: auto -7%" data-slide="next">
 						<i class="fa fa-angle-right"></i>
 					</a>
 				</div>

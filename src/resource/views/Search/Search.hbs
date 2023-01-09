@@ -4,149 +4,149 @@
     {{#if searchData}}
 
 
-    <div class="col-md-12">
-      <div class="grid search">
-        <div class="grid-body">
-          <div class="row">
-            <!-- BEGIN FILTERS -->
-            <div class="col-md-2">
+      <div class="col-md-12">
+        <div class="grid search">
+          <div class="grid-body">
+            <div class="row">
+              <!-- BEGIN FILTERS -->
+              <div class="col-md-2">
 
-              <hr>
-              <form action="search/postCourse" method="post" id="checkbox">
-                <!-- BEGIN FILTER BY CATEGORY -->
-                <h4>By category:</h4>
-                <div class="checkbox">
+                <hr>
+                <form action="search/postCourse" method="post" id="checkbox">
+                  <!-- BEGIN FILTER BY CATEGORY -->
+                  <h4>By category:</h4>
+                  <div class="checkbox">
 
-                  <label><input type="checkbox" id="checkboxname" name="checkboxname"> Name </label><br>
-                  <label><input type="checkbox" id="checkboxcategory" name="checkboxcategory"> Category</label>
+                    <label><input type="checkbox" id="checkboxname" name="checkboxname"> Name </label><br>
+                    <label><input type="checkbox" id="checkboxcategory" name="checkboxcategory"> Category</label>
+
+                  </div>
+
+
+
+                  <!-- END FILTER BY PRICE -->
+              </div>
+              <!-- END FILTERS -->
+              <!-- BEGIN RESULT -->
+              <div class="col-md-10">
+                <hr>
+                <!-- BEGIN SEARCH INPUT -->
+                <div class="input-group">
 
                 </div>
+                <!-- END SEARCH INPUT -->
+                <p>Showing all results matching "{{this.dataInput}}"</p>
 
+                <div class="padding"></div>
 
+                <div class="row">
+                  <!-- BEGIN ORDER RESULT -->
+                  <div class="col-sm-6">
+                    <div class="btn-group">
+                      <div class="dropdown">
+                        <div style="height:80px;width:200px">
+                          <p style="height: 15px;font-size:17px;">Order by</p>
+                          <select aria-label="Default select example" name="orderby" id="orderby"
+                            style="border: 0 !important;height:50px;width:200px">
+                            {{#if orderby}}
+                              {{#ifEquals orderby "0"}}
+                                <option selected value="0">Most Relevant</option>
+                                <option value="numberStudentRate -1">Highest Rating</option>
+                                <option value="price 1">Lowest Price</option>
+                              {{/ifEquals}}
+                              {{#ifEquals orderby "-1"}}
+                                <option value="0">Most Relevant</option>
+                                <option selected value="numberStudentRate -1">Highest Rating</option>
+                                <option value="price 1">Lowest Price</option>
+                              {{/ifEquals}}
+                              {{#ifEquals orderby "1"}}
+                                <option value="0">Most Relevant</option>
+                                <option value="numberStudentRate -1">Highest Rating</option>
+                                <option selected value="price 1">Lowest Price</option>
+                              {{/ifEquals}}
+                            {{else}}
+                              <option selected value="0">Most Relevant</option>
+                              <option value="numberStudentRate -1">Highest Rating</option>
+                              <option value="price 1">Lowest Price</option>
+                            {{/if}}
 
-                <!-- END FILTER BY PRICE -->
-            </div>
-            <!-- END FILTERS -->
-            <!-- BEGIN RESULT -->
-            <div class="col-md-10">
-              <hr>
-              <!-- BEGIN SEARCH INPUT -->
-              <div class="input-group">
-
-              </div>
-              <!-- END SEARCH INPUT -->
-              <p>Showing all results matching "{{this.dataInput}}"</p>
-
-              <div class="padding"></div>
-
-              <div class="row">
-                <!-- BEGIN ORDER RESULT -->
-                <div class="col-sm-6">
-                  <div class="btn-group">
-                    <div class="dropdown">
-                      <div style="height:80px;width:200px">
-                        <p style="height: 15px;font-size:17px;">Order by</p>
-                        <select aria-label="Default select example" name="orderby" id="orderby"
-                          style="border: 0 !important;height:50px;width:200px">
-                          {{#if orderby}}
-                          {{#ifEquals orderby "0"}}
-                          <option selected value="0">Most Relevant</option>
-                          <option value="numberStudentRate -1">Highest Rating</option>
-                          <option value="price 1">Lowest Price</option>
-                          {{/ifEquals}}
-                          {{#ifEquals orderby "-1"}}
-                          <option value="0">Most Relevant</option>
-                          <option selected value="numberStudentRate -1">Highest Rating</option>
-                          <option value="price 1">Lowest Price</option>
-                          {{/ifEquals}}
-                          {{#ifEquals orderby "1"}}
-                          <option value="0">Most Relevant</option>
-                          <option value="numberStudentRate -1">Highest Rating</option>
-                          <option selected value="price 1">Lowest Price</option>
-                          {{/ifEquals}}
-                          {{else}}
-                          <option selected value="0">Most Relevant</option>
-                          <option value="numberStudentRate -1">Highest Rating</option>
-                          <option value="price 1">Lowest Price</option>
-                          {{/if}}
-
-                        </select>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <!-- END ORDER RESULT -->
-                </form>
-                <div class="col-md-6 text-right" style="margin-top:20px ;">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default active"><i class="fa fa-list"></i></button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-th"></i></button>
+                  <!-- END ORDER RESULT -->
+                  </form>
+                  <div class="col-md-6 text-right" style="margin-top:20px ;">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default active"><i class="fa fa-list"></i></button>
+                      <button type="button" class="btn btn-default"><i class="fa fa-th"></i></button>
+                    </div>
                   </div>
                 </div>
+
+                <!-- BEGIN TABLE RESULT -->
+
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <tbody>
+                      {{#each searchData}}
+
+
+                        <tr class="clickable " onclick="window.location='/course/{{this._id}}'">
+                          <td class="image"><img src="/data/image/{{this.image}}" alt=""></td>
+                          <td class="product">
+                            <strong> {{this.name}}</strong>
+                            <br>{{this.category}}
+                            <p style="font-size: 15px;font-weight: 500;margin-bottom:0">{{this.shortDesc}}</p>
+                            <p style="font-size: 15px;font-weight: 500;margin-bottom:0">{{this.nameLecturer}}</p>
+                            <span style="color: #f39c12;">{{this.numberStudentRate}}<i class="fa fa-star"></i></span>
+                            <div class="d-flex">
+                              {{#if (isBestseller this.participant)}}
+                                <div style="background-color: #eceb98; width: 100px; color: #3e3e0d;font-weight: 700"
+                                  class="d-flex justify-content-center">
+                                  Bestseller
+                                </div>
+                              {{/if}}
+                              {{#if (new_course this.createdAt)}}
+                                <div
+                                  style="background-color: #F3CA8C; width: 100px; color: #714511;font-weight: 700;margin-left: 30px;"
+                                  class="d-flex justify-content-center">
+                                  New
+                                </div>
+                              {{/if}}
+                            </div>
+                          </td>
+                          <td style="font-weight: 700;color:red;width:50px">{{format_number this.price}}</td>
+                        </tr>
+                      {{/each}}
+
+                    </tbody>
+                  </table>
+                </div>
+                <!-- END TABLE RESULT -->
+
+                <!-- BEGIN PAGINATION -->
+
+                <!-- END PAGINATION -->
               </div>
-
-              <!-- BEGIN TABLE RESULT -->
-
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <tbody>
-                    {{#each searchData}}
-
-
-                    <tr class="clickable " onclick="window.location='/course/{{this._id}}'">
-                      <td class="image"><img src="/video/image/{{this.image}}" alt=""></td>
-                      <td class="product">
-                        <strong> {{this.name}}</strong>
-                        <br>{{this.category}}
-                        <p style="font-size: 15px;font-weight: 500;margin-bottom:0">{{this.shortDesc}}</p>
-                        <p style="font-size: 15px;font-weight: 500;margin-bottom:0">{{this.nameLecturer}}</p>
-                        <span style="color: #f39c12;">{{this.numberStudentRate}}<i class="fa fa-star"></i></span>
-                        <div class="d-flex">
-                          {{#if (isBestseller this.participant)}}
-                          <div style="background-color: #eceb98; width: 100px; color: #3e3e0d;font-weight: 700"
-                            class="d-flex justify-content-center">
-                            Bestseller
-                          </div>
-                          {{/if}}
-                          {{#if (new_course this.createdAt)}}
-                          <div
-                            style="background-color: #F3CA8C; width: 100px; color: #714511;font-weight: 700;margin-left: 30px;"
-                            class="d-flex justify-content-center">
-                            New
-                          </div>
-                          {{/if}}
-                        </div>
-                      </td>
-                      <td style="font-weight: 700;color:red;width:50px">{{format_number this.price}}</td>
-                    </tr>
-                    {{/each}}
-
-                  </tbody>
-                </table>
-              </div>
-              <!-- END TABLE RESULT -->
-
-              <!-- BEGIN PAGINATION -->
-
-              <!-- END PAGINATION -->
+              <!-- END RESULT -->
             </div>
-            <!-- END RESULT -->
           </div>
         </div>
       </div>
-    </div>
     {{else}}
-    <div class="col-md-12" style="margin-top: 100px;margin-bottom:100px">
-      <div class="grid search">
-        <div class="grid-body">
-          <strong> Sorry, we couldn't find any results for "{{this.dataInput}}" </strong><br>
-          Try adjusting your search.
-          <li>Make sure all words are spelled correctly</li>
-          <li>Try different search terms</li>
-          <li>Try more general search terms</li>
+      <div class="col-md-12" style="margin-top: 100px;margin-bottom:100px">
+        <div class="grid search">
+          <div class="grid-body">
+            <strong> Sorry, we couldn't find any results for "{{this.dataInput}}" </strong><br>
+            Try adjusting your search.
+            <li>Make sure all words are spelled correctly</li>
+            <li>Try different search terms</li>
+            <li>Try more general search terms</li>
+          </div>
         </div>
       </div>
-    </div>
     {{/if}}
     <nav aria-label="Page navigation example" class="d-flex justify-content-center w-100">
       <ul class="pagination">
@@ -158,38 +158,38 @@
         </li>
 
         {{#if checkpag}}
-        <li class="page-item"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}">{{math_add
+          <li class="page-item"><a class="page-link"
+              href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}">{{math_add
             pageNumber -1}}</a></li>
-        <li class="page-item active"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{pageNumber}}">{{pageNumber}}</a>
-        </li>
+          <li class="page-item active"><a class="page-link"
+              href="search?searchInput={{dataInput}}&pageNumber={{pageNumber}}">{{pageNumber}}</a>
+          </li>
         {{else}}
 
-        {{#if (math_compare 1 pageNumber) }}
-        <li class="page-item"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}">{{math_add
+          {{#if (math_compare 1 pageNumber) }}
+            <li class="page-item"><a class="page-link"
+                href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber -1}}">{{math_add
             pageNumber -1}}</a></li>
-        <li class="page-item active"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{pageNumber}}">{{pageNumber}}</a>
-        </li>
-        <li class="page-item"><a class="page-link"
-            href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}">{{math_add
+            <li class="page-item active"><a class="page-link"
+                href="search?searchInput={{dataInput}}&pageNumber={{pageNumber}}">{{pageNumber}}</a>
+            </li>
+            <li class="page-item"><a class="page-link"
+                href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}">{{math_add
             pageNumber 1}}</a></li>
 
-        {{else}}
-        <li class="page-item active"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=1">1</a>
-        </li>
-        <li class="page-item "><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=2">2</a></li>
-        {{#if (math_compare 1 countpage) }}
-        <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=3">3</a></li>
-        {{/if}}
-        {{/if}}
-
-        <a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}"
-          aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
+          {{else}}
+            <li class="page-item active"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=1">1</a>
+            </li>
+            <li class="page-item "><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=2">2</a></li>
+            {{#if (math_compare 1 countpage) }}
+              <li class="page-item"><a class="page-link" href="search?searchInput={{dataInput}}&pageNumber=3">3</a></li>
+            {{/if}}
           {{/if}}
+
+          <a class="page-link" href="search?searchInput={{dataInput}}&pageNumber={{math_add pageNumber 1}}"
+            aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        {{/if}}
 
 
         </a>

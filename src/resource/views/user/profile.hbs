@@ -20,7 +20,7 @@
                       <div class="d-flex justify-content-center align-items-center rounded"
                         style="height: 140px; background-color: rgb(233, 236, 239);">
                         <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
-                          <img src="/video/image/{{data.image}}" alt="" style="height: 140px; width: 140px;">
+                          <img src="/data/image/{{data.image}}" alt="" style="height: 140px; width: 140px;">
                         </span>
                       </div>
                     </div>
@@ -155,7 +155,7 @@
                           <a href="/course/{{this._id}}">
                             <div style="height: 10rem">
 
-                              <img src="/video/image/{{this.image}}" class="card-img-top" style="height: 10rem"
+                              <img src="/data/image/{{this.image}}" class="card-img-top" style="height: 10rem"
                                 alt="...">
                             </div>
                           </a>
@@ -171,7 +171,8 @@
                               <br>
                               <li
                                 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;list-style: none;color: gray; font-size: 16px">
-                                {{this.shortDesc}}</li>
+                                {{this.shortDesc}}
+                              </li>
                               <li class="list-inline-item" style="font-size: 15px; color: #747D89;">
                                 {{this.numberStudentRate}}<i class="fa fa-star" style="color: #FFC000;"></i>
                               </li>

@@ -118,7 +118,7 @@
 
   .shortDescription {
     display: -webkit-box;
-    
+
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -136,7 +136,7 @@
           <a href="/course/{{this._id}}">
             <div style="height: 13rem">
 
-              <img src="/video/image/{{this.image}}" class="card-img-top" style="height: 13rem" alt="...">
+              <img src="/data/image/{{this.image}}" class="card-img-top" style="height: 13rem" alt="...">
             </div>
           </a>
           <div class="card-body" style="text-align: center;">
@@ -162,7 +162,7 @@
 
 
               {{else}}
-                
+
                 <b class="item-price" style="font-size: 1.1rem; color: #e75e8d;">{{format_number this.price}}</b>
               {{/if}}
             </div>

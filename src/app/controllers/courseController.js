@@ -67,7 +67,7 @@ const courseController = {
     let navigation = req.query.fileid;
     let filevideo = await uploadsFiles.findOne({ _id: navigation });
     let filename = filevideo.filename;
-    return res.redirect('/video/' + filename);
+    return res.redirect('/data/video/' + filename);
   },
   commentCourse: async (req, res) => {
     const content = req.body.content || [];
