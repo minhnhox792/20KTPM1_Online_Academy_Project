@@ -294,7 +294,6 @@
   function hoverFunc(event) {
     const category = event.target.innerText 
     const categoryLevel2 = document.querySelector('.dropdown-submenu')
-  
     fetch(`http://localhost:3000/user/requestCourse?category=${category}`, {
          method: 'GET',  
          mode: 'cors', 

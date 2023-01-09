@@ -92,7 +92,7 @@ const HomeController = {
       )
       .then(database =>{
         if(database.length != 0){
-
+          console.log(database.length)
           const topCategory = database.sort((a, b) => b.totalBuy - a.totalBuy).slice(0,5)
     
           return res.render('home', {
