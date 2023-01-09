@@ -1,38 +1,31 @@
 <div class="row">
   <div class="col-6 col-sm-3 col-lg-3 mt-5">
     <div class="card bg-light mb-3">
-      <div class="card-header bg-primary text-white text-uppercase"><i
-          class="fa fa-list"
-        ></i>
-        {{nameCategory}}</div>
+      <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
+        {{nameCategory}}
+      </div>
       <ul class="list-group category_block">
         {{#each all_category}}
-             {{#ifEquals ../active this}}
-                
-                <li class="list-group-item active"><a
-                    href="http://localhost:3000/category/subCategory/{{this}}"
-                    style="color: white;"
-                  >{{this}}</a>
-                  <label
-                    class="text-center justify-content-center"
-                    style="float: right;
-                          background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;"
-                  >{{../length}}</label>
-                  <a href="/category/view/{{../nameCategory}}">
-                      <i class="fa-sharp fa-solid fa-backward" style="color: white" id ="back"></i>
-                  </a> 
+          {{#ifEquals ../active this}}
 
-                  </li>
-                  
-                 
-                  
-                {{else}}
+            <li class="list-group-item active"><a href="http://localhost:3000/category/subCategory/{{this}}"
+                style="color: white;">{{this}}</a>
+              <label class="text-center justify-content-center"
+                style="float: right;
+                          background-color: #D34836; color:#ffffff; font-weight: bold; border-radius: 20px; width: 30px; height: 30px;">{{../length}}</label>
+              <a href="/category/view/{{../nameCategory}}">
+                <i class="fa-sharp fa-solid fa-backward" style="color: white" id="back"></i>
+              </a>
 
-                <li class="list-group-item"><a
-                    href="http://localhost:3000/category/subCategory/{{this}}"
-                  >{{this}}</a>
-                </li>
-              {{/ifEquals}} 
+            </li>
+
+
+
+        {{else}}
+
+          <li class="list-group-item"><a href="http://localhost:3000/category/subCategory/{{this}}">{{this}}</a>
+          </li>
+          {{/ifEquals}}
         {{/each}}
       </ul>
     </div>
@@ -43,78 +36,58 @@
 
       {{#each data}}
         <a href="/course/{{this._id}}">
-        <div class="col-12 col-md-6 col-lg-4 mt-5">
-          <div class="card h-100">
-            <div style="height: 300px;">
-            <img
-              class="card-img-top"
-              src="/video/image/{{this.image}}"
-              alt="Card image cap"
-              style="height: 300px; width: 100%;"
-            />
-            </div>
-            <div class="card-body">
-              <h4 class="card-title"><a
-                  href="product.html"
-                  title="View Product"
-                  style="font-weight: bold;"
-                >{{this.name}}</a></h4>
-              <p class="card-text text-muted">Lecturer: {{this.nameLecturer}}</p>
-              <p class="card-text text-muted">Category: {{this.category}}</p>
-              <div class="d-flex">
-                <div
-                  class="d-flex justify-content-around"
-                  style="justify-content: space-between !important; width: 100%;"
-                >
-                  <div class="d-flex">
-                    <p
-                      class="font-weight-bold"
-                      style="color: #B4690E; margin-right: 5px; padding-top: 2px;"
-                    >{{this.rating}}</p>
-
-                    <div class="ratings">
-
-                      <i class="fa fa-star rating-color"></i>
-
-                    </div>
-                    <h5
-                      class="review-count text-muted"
-                      style="padding-top: 5px;"
-                    >({{format_typeNumber this.numberStudentRate}})</h5>
-                  </div>
-
-                  <div class="d-flex">
-                    <p style="font-weight: bold; ">{{format_number this.price}}
-                      <del
-                        class="text-muted"
-                        style="color: white; font-size: 14px;"
-                      >{{format_number this.discount}}</del>
-                    </p>
-                  </div>
-                </div>
-
+          <div class="col-12 col-md-6 col-lg-4 mt-5">
+            <div class="card h-100">
+              <div style="height: 300px;">
+                <img class="card-img-top" src="/video/image/{{this.image}}" alt="Card image cap"
+                  style="height: 300px; width: 100%;" />
               </div>
-              <div class="row">
-                <div class="col">
-                  <p
-                    class="btn btn-danger btn-block"
-                    style="font-weight: bold; background-color: #e75e8d"
-                  >Like
-                  </p>
+              <div class="card-body">
+                <h4 class="card-title" style="font-weight: bold; text-overflow: ellipsis; overflow: hidden;  white-space: nowrap; max-width: 100%;">
+                  <a href="product.html" title="View Product"
+                    style="font-weight: bold; text-overflow: ellipsis; overflow: hidden;  white-space: nowrap; max-width: 100%;">{{this.name}}
+                  </a>
+                </h4>
+                <p class="card-text text-muted">Lecturer: {{this.nameLecturer}}</p>
+                <p class="card-text text-muted">Category: {{this.category}}</p>
+                <div class="d-flex">
+                  <div class="d-flex justify-content-around"
+                    style="justify-content: space-between !important; width: 100%;">
+                    <div class="d-flex">
+                      <p class="font-weight-bold" style="color: #B4690E; margin-right: 5px; padding-top: 2px;">
+                        {{this.rating}}</p>
+
+                      <div class="ratings">
+
+                        <i class="fa fa-star rating-color"></i>
+
+                      </div>
+                      <h5 class="review-count text-muted" style="padding-top: 5px;">({{format_typeNumber
+                        this.numberStudentRate}})</h5>
+                    </div>
+
+                    <div class="d-flex">
+                      <p style="font-weight: bold; ">{{format_number this.price}}
+                        <del class="text-muted"
+                          style="color: white; font-size: 14px;">{{format_number this.discount}}</del>
+                      </p>
+                    </div>
+                  </div>
 
                 </div>
-                <div class="col">
-                  <a
-                    href="#"
-                    class="btn btn-success btn-block"
-                    id="Btbuy"
-                    style="font-weight: bold;"
-                  >Buy</a>
+                <div class="row">
+                  <div class="col">
+                    <p class="btn btn-danger btn-block" style="font-weight: bold; background-color: #e75e8d">Like
+                    </p>
+
+                  </div>
+                  <div class="col">
+                    <a href="#" class="btn btn-success btn-block" id="Btbuy" style="font-weight: bold;">Buy</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </a>
       {{/each}}
       {{#if (compareZero length)}}
@@ -126,54 +99,36 @@
 
                 <li class="page-item">
                   <a class="page-link" href="/category/view/{{this.active}}?page={{previousPage}}" tabindex="-1"><i
-                      class="fa fa-angle-left"
-                    ></i></a>
+                      class="fa fa-angle-left"></i></a>
                 </li>
               {{/if}}
 
               {{#if hasPreviousPage}}
-                <li
-                  class="page-item"
-                  style="margin-left: 10px; font-weight: bold; border-radius: 2px;"
-                ><a
-                    class="page-link"
-                    href="/category/view/{{this.active}}?page={{previousPage}}"
-                  >{{previousPage}}</a></li>
-               
+                <li class="page-item" style="margin-left: 10px; font-weight: bold; border-radius: 2px;"><a
+                    class="page-link" href="/category/view/{{this.active}}?page={{previousPage}}">{{previousPage}}</a>
+                </li>
+
               {{/if}}
-             
-              <li
-                class="page-item active"
-                style="margin-left: 10px; font-weight: bold;"
-              >
-                <a
-                  class="page-link"
-                  href="/category/view/{{this.active}}?page={{this.currentPage}}"
-                >{{this.currentPage}}<span class="sr-only">(current)</span></a>
+
+              <li class="page-item active" style="margin-left: 10px; font-weight: bold;">
+                <a class="page-link"
+                  href="/category/view/{{this.active}}?page={{this.currentPage}}">{{this.currentPage}}<span
+                    class="sr-only">(current)</span></a>
               </li>
               {{#if hasNextPage}}
-                <li
-                  class="page-item"
-                  style="margin-left: 10px; font-weight: bold; border-radius: 2px;"
-                ><a
-                    class="page-link"
-                    href="/category/view/{{this.active}}?page={{nextPage}}"
-                  >{{nextPage}}</a></li>
+                <li class="page-item" style="margin-left: 10px; font-weight: bold; border-radius: 2px;"><a
+                    class="page-link" href="/category/view/{{this.active}}?page={{nextPage}}">{{nextPage}}</a></li>
                 {{! <li class="page-item" style="margin-left: 10px; font-weight: bold; border-radius: 2px;">
                             <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
                         </li> }}
               {{/if}}
               {{#if (comparePage currentPage lastPage)}}
-                <li
-                  class="page-item"
-                  style="margin-left: 10px; font-weight: bold; border-radius: 2px;"
-                >
+                <li class="page-item" style="margin-left: 10px; font-weight: bold; border-radius: 2px;">
                   <a class="page-link" href="/category/view/{{this.active}}?page={{nextPage}}"><i
-                      class="fa fa-angle-right"
-                    ></i></a>
+                      class="fa fa-angle-right"></i></a>
                 </li>
               {{/if}}
-              
+
             </ul>
           </nav>
         </div>
@@ -185,23 +140,98 @@
 </div>
 
 <style>
-  #back:hover{
+  #back:hover {
     color: black !important;
   }
-  .bloc_left_price { color: #c01508; text-align: center; font-weight: bold;
-  font-size: 150%; } .category_block li:hover { background-color: #007bff; }
-  .category_block li:hover a { color: #ffffff; } .category_block li a { color:
-  #343a40; } .add_to_cart_block .price { color: #c01508; text-align: center;
-  font-weight: bold; font-size: 200%; margin-bottom: 0; } .add_to_cart_block
-  .price_discounted { color: #343a40; text-align: center; text-decoration:
-  line-through; font-size: 140%; } .product_rassurance { padding: 10px;
-  margin-top: 15px; background: #ffffff; border: 1px solid #6c757d; color:
-  #6c757d; } .product_rassurance .list-inline { margin-bottom: 0;
-  text-transform: uppercase; text-align: center; } .product_rassurance
-  .list-inline li:hover { color: #343a40; } .reviews_product .fa-star { color:
-  gold; } .pagination { margin-top: 20px; } footer { background: #343a40;
-  padding: 40px; } footer a { color: #f8f9fa !important } .ratings {
-  margin-right: 10px; } .ratings i { color: #cecece; } .rating-color { color:
-  #fbc634 !important; } .review-count { font-weight: bold; font-size: 20px
-  !important; }
+
+  .bloc_left_price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+  }
+
+  .category_block li:hover {
+    background-color: #007bff;
+  }
+
+  .category_block li:hover a {
+    color: #ffffff;
+  }
+
+  .category_block li a {
+    color:
+      #343a40;
+  }
+
+  .add_to_cart_block .price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
+  }
+
+  .add_to_cart_block .price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration:
+      line-through;
+    font-size: 140%;
+  }
+
+  .product_rassurance {
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color:
+      #6c757d;
+  }
+
+  .product_rassurance .list-inline {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .product_rassurance .list-inline li:hover {
+    color: #343a40;
+  }
+
+  .reviews_product .fa-star {
+    color:
+      gold;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+
+  footer {
+    background: #343a40;
+    padding: 40px;
+  }
+
+  footer a {
+    color: #f8f9fa !important
+  }
+
+  .ratings {
+    margin-right: 10px;
+  }
+
+  .ratings i {
+    color: #cecece;
+  }
+
+  .rating-color {
+    color:
+      #fbc634 !important;
+  }
+
+  .review-count {
+    font-weight: bold;
+    font-size: 20px !important;
+  }
 </style>
