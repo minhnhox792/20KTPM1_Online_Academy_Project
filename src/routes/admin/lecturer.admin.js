@@ -7,41 +7,41 @@ const router = express.Router();
 
 router.delete(
   '/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   lecturerController.delete
 );
-router.get('/all', authMiddleWare.isAuthenticated, lecturerController.all);
-router.get('/add', authMiddleWare.isAuthenticated, lecturerController.add);
+router.get('/all', authMiddleWare.isAuthenticatedAdmin, lecturerController.all);
+router.get('/add', authMiddleWare.isAuthenticatedAdmin, lecturerController.add);
 router.post(
   '/add',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   upload,
   lecturerController.storeAdd
 );
 router.get(
   '/edit/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   lecturerController.edit
 );
 router.put(
   '/edit/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   upload,
   lecturerController.storeEdit
 );
 router.get(
   '/profile/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   lecturerController.profile
 );
 router.put(
   '/lock/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   lecturerController.lock
 );
 router.put(
   '/unlock/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   lecturerController.unlock
 );
 

@@ -5,31 +5,31 @@ import authMiddleWare from '../../app/controllers/middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.delete('/:id', authMiddleWare.isAuthenticated, studentController.delete);
-router.get('/all', authMiddleWare.isAuthenticated, studentController.all);
-router.get('/add', authMiddleWare.isAuthenticated, studentController.add);
+router.delete('/:id', authMiddleWare.isAuthenticatedAdmin, studentController.delete);
+router.get('/all', authMiddleWare.isAuthenticatedAdmin, studentController.all);
+router.get('/add', authMiddleWare.isAuthenticatedAdmin, studentController.add);
 router.post(
   '/add',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   upload,
   studentController.storeAdd
 );
-router.get('/edit/:id', authMiddleWare.isAuthenticated, studentController.edit);
+router.get('/edit/:id', authMiddleWare.isAuthenticatedAdmin, studentController.edit);
 router.put(
   '/edit/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   upload,
   studentController.storeEdit
 );
 router.get(
   '/profile/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   studentController.profile
 );
-router.put('/lock/:id', authMiddleWare.isAuthenticated, studentController.lock);
+router.put('/lock/:id', authMiddleWare.isAuthenticatedAdmin, studentController.lock);
 router.put(
   '/unlock/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   studentController.unlock
 );
 

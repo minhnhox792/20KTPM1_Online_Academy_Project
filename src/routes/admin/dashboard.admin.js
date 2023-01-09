@@ -4,7 +4,7 @@ import authMiddleWare from '../../app/controllers/middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', authMiddleWare.isAuthenticated, dashboardController.index);
+router.get('/', authMiddleWare.isAuthenticatedAdmin, dashboardController.index);
 router.post('/logout', dashboardController.logout);
 
 export default router;

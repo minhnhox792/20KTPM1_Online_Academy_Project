@@ -4,27 +4,27 @@ import authMiddleWare from '../../app/controllers/middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/all', authMiddleWare.isAuthenticated, categoryController.all);
-router.post('/all', authMiddleWare.isAuthenticated, categoryController.add);
+router.get('/all', authMiddleWare.isAuthenticatedAdmin, categoryController.all);
+router.post('/all', authMiddleWare.isAuthenticatedAdmin, categoryController.add);
 router.put(
   '/edit/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   categoryController.edit
 );
 router.delete(
   '/:id',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   categoryController.delete
 );
-router.post('/:id', authMiddleWare.isAuthenticated, categoryController.addSub);
+router.post('/:id', authMiddleWare.isAuthenticatedAdmin, categoryController.addSub);
 router.delete(
   '/:id/:slug',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   categoryController.deleteSub
 );
 router.put(
   '/:id/:slug',
-  authMiddleWare.isAuthenticated,
+  authMiddleWare.isAuthenticatedAdmin,
   categoryController.editSub
 );
 
