@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" 
+<nav class="navbar navbar-expand-lg navbar-light"
   style="box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; width: 100%; background-color: #F5F6FD !important">
   <a class="navbar-brand" href="/"><i class="fa-solid fa-house"
       style="color: #F082AC; padding-right: 10px;"></i>Academic</a>
@@ -16,90 +16,96 @@
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Categories
         </a>
-        <div class="dropdown-menu IT-Menu form-control" aria-labelledby="navbarDropdown"
-          style="height: 594px; width: 200px; position:absolute; right: 50px;">
+        <ul class="dropdown-menu IT-Menu form-control" aria-labelledby="navbarDropdown"
+          style="height: fit-content; width: fit-content; position:absolute; right: 50px;">
           {{#each all_category_header}}
-          <div class = "d-flex " style="width: 100%;" id = "hover" onmouseover="hoverFunc(event)" >
-            <a class="dropdown-item"  href="/category/view/{{this.category}}" style="font-weight: bold; width: 90%;" id = "btn-hover">
-              {{this.category}} 
-            </a>
-           
-          
-           <i class="fa-sharp fa-solid fa-angle-right" style="float: right; padding-right: 7px; width: 10%; padding-top: 7px;"></i>
-          </div>
+            <li class="d-flex " tabindex="-1" style="width: 100%;" id="hover" onmouseover="hoverFunc(event)">
+              <a class="dropdown-item" href="/category/view/{{this.category}}" style="font-weight: bold; width: 90%;"
+                id="btn-hover">
+                {{this.category}}
+              </a>
+
+
+              <i class="fa-sharp fa-solid fa-angle-right"
+                style="float: right; padding-right: 7px; width: 10%; padding-top: 7px;"></i>
+                
+            </li>
           {{/each}}
           <ul class="dropdown-menu dropdown-submenu menu-responsive"
-              style="height: 594px; width: 200px; border: 1px solid #CED4DA; color: black">
-          
-          </ul>
-           
-         
-         
+            style="height: 300px; width: fit-content; border: 1px solid #CED4DA; color: black">
 
-        </div>
+          </ul>
+
+
+
+
+        </ul>
 
       </li>
 
     </ul>
 
     <form class="form-inline my-2 my-lg-0 d-flex" style="width: 800px;" method="get" action="/search">
-    
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="searchInput"  aria-label="Search" style="width: 600px">
-      <button class="button-1" type="submit" role="button" style="margin-left: 10px;"><i class="fa fa-search"></i></button>
+
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="searchInput" aria-label="Search"
+        style="width: 600px">
+      <button class="button-1" type="submit" role="button" style="margin-left: 10px;"><i
+          class="fa fa-search"></i></button>
     </form>
     <ul class="navbar-nav">
 
       {{#ifEquals this.auth false}}
-      <li class="nav-item active" style="margin-right: 30px;" id = "btn">
-        <a href="/user/login"class="button-1" role="button">Login</a>
+        <li class="nav-item active" style="margin-right: 30px;" id="btn">
+          <a href="/user/login" class="button-1" role="button">Login</a>
 
-      </li>
-      <li class="nav-item active">
-        <a href="/user/register" class="button-1" role="button">Register</a>
-
-      </li>
-      {{else}}
-    
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-            Welcome, <b style="font-family: Times New Roman;">{{userInfo.fullname}}</b>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="/user/profile">
-              <i class="fa fa-user" aria-hidden="true"></i>
-              Profile
-            </a>
-
-            {{#ifEquals userInfo.role 'Lecturer'}}
-             <a class="dropdown-item" href="/course/teacherAdd">
-              <i class="fa-solid fa-plus" style="color : #146EBE;"></i>
-              Add new course
-            </a>
-            {{else}}
-              <a class="dropdown-item" href="/user/myCourse">
-              <i class="fa-solid fa-bookmark" style="color : #146EBE;"></i>
-              Watch Purchased Courses
-            </a>
-             <a class="dropdown-item" href="/user/myFavoriteList" style="position: relative;">
-              <i class="fa-solid fa-heart" aria-hidden="true" style="color: red; left:22px; position:absolute; margin-top:2px;"></i>
-               <span style="margin-left : 18px;">Watch Favorite Courses</span>
-          
-            </a>
-             
-
-            {{/ifEquals}}
-            <a class="dropdown-item" href="/user/changePassword" style="position: relative;">
-              <i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size: 17px; left:18px; position:absolute;"></i>
-              <span style="margin-left : 18px;">Change password</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <form id="frmlogout" action="/user/logout" method="post"></form>
-            <a class="dropdown-item" href="javascript: $('#frmlogout').submit()">
-              <i class="fa fa-sign-out" aria-hidden="true"></i>
-              Logout
-            </a>
-          </div>
         </li>
+        <li class="nav-item active">
+          <a href="/user/register" class="button-1" role="button">Register</a>
+
+        </li>
+        {{else}}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+              Welcome, <b style="font-family: Times New Roman;">{{userInfo.fullname}}</b>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="/user/profile">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                Profile
+              </a>
+
+              {{#ifEquals userInfo.role 'Lecturer'}}
+                <a class="dropdown-item" href="/course/teacherAdd">
+                  <i class="fa-solid fa-plus" style="color : #146EBE;"></i>
+                  Add new course
+                </a>
+                {{else}}
+                  <a class="dropdown-item" href="/user/myCourse">
+                    <i class="fa-solid fa-bookmark" style="color : #146EBE;"></i>
+                    Watch Purchased Courses
+                  </a>
+                  <a class="dropdown-item" href="/user/myFavoriteList" style="position: relative;">
+                    <i class="fa-solid fa-heart" aria-hidden="true"
+                      style="color: red; left:22px; position:absolute; margin-top:2px;"></i>
+                    <span style="margin-left : 18px;">Watch Favorite Courses</span>
+
+                  </a>
+
+
+              {{/ifEquals}}
+              <a class="dropdown-item" href="/user/changePassword" style="position: relative;">
+                <i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size: 17px; left:18px; position:absolute;"></i>
+                <span style="margin-left : 18px;">Change password</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <form id="frmlogout" action="/user/logout" method="post"></form>
+              <a class="dropdown-item" href="javascript: $('#frmlogout').submit()">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                Logout
+              </a>
+            </div>
+          </li>
       {{/ifEquals}}
 
 
@@ -108,74 +114,77 @@
   </div>
 </nav>
 <style>
+  /* CSS */
+  #btn-hover:active {
+    background-color: #146EBE !important;
+  }
 
+  #hover:active {
+    background-color: #146EBE !important;
+  }
 
-/* CSS */
-#btn-hover:active{
-  background-color:  #146EBE !important;
-}
-#hover:active{
-  background-color: #146EBE !important;
-}
-.button-1 {
-  background-color: #e75e8d;
-  border-radius: 8px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  height: 40px;
-  line-height: 20px;
-  list-style: none;
-  margin: 0;
-  outline: none;
-  padding: 10px 16px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: color 100ms;
-  vertical-align: baseline;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
+  .button-1 {
+    background-color: #e75e8d;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
 
-.button-1:hover{
-  background-color: #eec8d6;
-  border-radius: 8px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #e94e84;
-  cursor: pointer;
-  display: inline-block;
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  height: 40px;
-  line-height: 20px;
-  list-style: none;
-  margin: 0;
-  outline: none;
-  padding: 10px 16px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: color 100ms;
-  vertical-align: baseline;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-.button-1:focus {
-  background-color: #F082AC;
-}
+  .button-1:hover {
+    background-color: #eec8d6;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #e94e84;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .button-1:focus {
+    background-color: #F082AC;
+  }
+
   #hover:hover {
     background-color: #E9ECEF;
   }
+
   .list-group-item {
     width: 100%;
   }
@@ -219,13 +228,15 @@
   .hover-list:hover {
     background-color: #E9ECEF;
   }
-  .hover-list:active{
-    background-color:  #146EBE !important;
-    color:white !important;
+
+  .hover-list:active {
+    background-color: #146EBE !important;
+    color: white !important;
   }
-   .hover-list-mobile:active{
-    background-color:  #146EBE !important;
-    color:white !important;
+
+  .hover-list-mobile:active {
+    background-color: #146EBE !important;
+    color: white !important;
   }
 
   .hover-list-mobile:hover {
@@ -289,32 +300,36 @@
   }
 </style>
 <script>
-  
+
 
   function hoverFunc(event) {
-    const category = event.target.innerText 
+    const category = event.target.innerText
     const categoryLevel2 = document.querySelector('.dropdown-submenu')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a10d3a9df1099dff5f4d296433cb903a0bd839f
     fetch(`http://localhost:3000/user/requestCourse?category=${category}`, {
-         method: 'GET',  
-         mode: 'cors', 
-      })
+      method: 'GET',
+      mode: 'cors',
+    })
       .then((res) => res.json())
-      .then(data => { 
-        const htmls =  data?.subCategories.map((item) => { 
+      .then(data => {
+        const htmls = data?.subCategories.map((item) => {
           return `
             <li class="dropdown-menu-item" style="border-left: 1px solid #CED4DA;">
               <a class="dropdown-item hover-list" href="/category/subCategory/${item}" style="font-weight: bold; color:black;">${item}
               </a>
             </li>
         `
-        }).join('')         
+        }).join('')
         if (htmls) categoryLevel2.innerHTML = htmls
-      }) 
+      })
 
-}
+  }
 
 
-        
+
 
 </script>
 

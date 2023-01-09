@@ -60,7 +60,6 @@ const CategoryController = {
             flag = 0;
             Category.find({})
               .then((categories) => {
-                console.log('Hello');
                 return res.render('admin/categories/all', {
                   layout: 'admin',
                   categories: objectFormat.multipleMongooseToOject(categories),

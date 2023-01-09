@@ -50,6 +50,7 @@ const LecturerController = {
       .catch(next);
   },
   edit: (req, res, next) => {
+    console.log(req.params.id)
     User.findById(req.params.id)
       .then((lecturer) => {
         lecturer = objectFormat.mongooseToOject(lecturer);
@@ -69,7 +70,6 @@ const LecturerController = {
       formData.image = image.filename;
     }
     formData.username = formData.username.replace(/ /g, '');
-    formData.updatedAt = Date.now();
     User.updateOne({ _id: req.params.id }, formData)
       .then(() => {
         res.redirect('/admin/lecturer/all');

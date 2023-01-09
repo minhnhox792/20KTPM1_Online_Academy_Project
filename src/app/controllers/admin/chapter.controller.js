@@ -376,8 +376,6 @@ const ChapterController = {
         'Transfer-encoding': 'chunked',
         'Content-Length': files[0].length,
       });
-      console.log(gfs);
-      console.log(files);
       gfs.openDownloadStreamByName(req.params.filename).pipe(res);
     });
   },

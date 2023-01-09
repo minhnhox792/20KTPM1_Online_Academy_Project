@@ -37,6 +37,7 @@ const User = new Schema(
     gender: {
       type: String,
       enum: ['Male', 'Female'],
+      default: 'Male',
     },
     education: {
       type: String,
@@ -53,10 +54,11 @@ const User = new Schema(
     },
     dateOfBirth: {
       type: Date,
+      default: new Date(),
     },
     image: {
       type: String,
-      default: 'default-profile.jpg'
+      default: 'default-profile.jpg',
     },
     role: {
       type: String,

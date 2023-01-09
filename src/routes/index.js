@@ -36,7 +36,7 @@ export default function (app) {
     app.use('/category', categoryRouter);
     app.use('/error', errorRouter);
     app.use('/search', searchRouter);
-    app.use('/video', chapterRouter);
+    app.use('/data', chapterRouter);
 
     app.use((req, res, next) => {
       return res.render('error/404', {
