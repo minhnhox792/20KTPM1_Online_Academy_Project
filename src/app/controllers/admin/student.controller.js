@@ -69,7 +69,6 @@ const StudentController = {
       formData.image = image.filename;
     }
     formData.username = formData.username.replace(/ /g, '');
-    formData.updateAt = Date.now();
     User.updateOne({ _id: req.params.id }, formData)
       .then(() => {
         res.redirect('/admin/student/all');

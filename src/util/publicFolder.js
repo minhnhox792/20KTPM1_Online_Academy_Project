@@ -4,6 +4,9 @@ import express from 'express';
 
 export default function(app, path, __dirname) {
 app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/admin', express.static(path.join(__dirname, 'public')));
+app.use('/admin/profile', express.static(path.join(__dirname, 'public')));
+
 app.use('/admin/lecturer', express.static(path.join(__dirname, 'public')));
 app.use('/admin/lecturer/profile', express.static(path.join(__dirname, 'public')));
 app.use('/admin/lecturer/edit', express.static(path.join(__dirname, 'public')));

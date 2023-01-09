@@ -7,15 +7,15 @@
   {{/if}}
   <div class="container-fluid">
     <div class="row page-titles mx-0 d-flex justify-content-between align-items-center">
-      <div class="col-sm-4 p-md-0">
+      <div class="col-sm-9 p-md-0">
         <div class="welcome-text">
           <h4>All Courses</h4>
         </div>
       </div>
-      <div class="col-sm-4 p-md-0">
+      <div class="col-sm-3 p-md-0 d-flex justify-content-between">
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-            Category
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            Filter
           </button>
           <div class="dropdown-menu">
             {{#each categories}}
@@ -25,11 +25,11 @@
             {{/each}}
           </div>
         </div>
+        <a href="/admin/course/add" class="btn btn-outline-primary">
+          <i class="fa fa-plus"></i>
+          Add course
+        </a>
       </div>
-      <a href="/admin/course/add" class="btn btn-outline-primary">
-        <i class="fa fa-plus"></i>
-        Add course
-      </a>
     </div>
 
     <div class="row" id="myCourse">
@@ -39,7 +39,7 @@
             <div style="height: 200px;">
               <img class="img-fluid" src="/video/image/{{this.image}}" alt="" style="height: 200px; width: 100%;">
             </div>
-            <div class=" card-body">
+            <div class="card-body">
               <h4 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{this.name}}</h4>
               <ul class="list-group mb-3 list-group-flush">
                 <li class="list-group-item px-0 border-top-0 d-flex justify-content-between">

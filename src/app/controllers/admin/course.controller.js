@@ -121,7 +121,6 @@ const CourseController = {
     if (image) {
       formData.image = image.filename;
     }
-    formData.updatedAt = Date.now();
     const category = formData.category.split('-');
     formData.subCategory = category[0];
     formData.category = category[1];
