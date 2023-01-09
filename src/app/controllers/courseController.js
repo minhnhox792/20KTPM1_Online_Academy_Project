@@ -92,7 +92,8 @@ const courseController = {
     }
     course.comment.push({
       _id: data._id,
-      name: data.username,
+      name: data.fullname,
+      image:data.image,
       content: content,
       rating: rating,
     });

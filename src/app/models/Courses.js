@@ -132,6 +132,10 @@ const Course = new Schema({
           type: ObjectId,
           ref: 'User',
         },
+        image: {
+          type: String,
+          maxLength: 100,
+        },
         name: {
           type: String,
           maxLength: 100,

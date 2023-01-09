@@ -17,7 +17,7 @@ export default function (app) {
     if (typeof req.session.auth === 'undefined') {
       req.session.auth = false;
     }
-    if (req.session.auth === false && req.headers.referer!=="http://localhost:3000/user/login"&& req.headers.referer!=="http://localhost:3000/user/verifyOTP" ) {
+    if (req.session.auth === false && req.headers.referer!=="http://localhost:3000/user/login"&& req.headers.referer!=="http://localhost:3000/user/verifyOTP"&&req.headers.referer!=="http://localhost:3000/user/register" ) {
       req.session.retUrl =  req.headers.referer;
     }
     res.locals.auth = req.session.auth;
