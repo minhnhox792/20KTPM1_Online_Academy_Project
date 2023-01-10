@@ -11,11 +11,17 @@ const CourseController = {
         .then((courses) => {
           Category.find({})
             .then((categories) => {
-              res.render('admin/courses/all', {
-                layout: 'admin',
-                courses: objectFormat.multipleMongooseToOject(courses),
-                categories: objectFormat.multipleMongooseToOject(categories),
-              });
+              User.find({ role: 'Lecturer' })
+                .then((lecturers) => {
+                  res.render('admin/courses/all', {
+                    layout: 'admin',
+                    courses: objectFormat.multipleMongooseToOject(courses),
+                    categories:
+                      objectFormat.multipleMongooseToOject(categories),
+                    lecturers: objectFormat.multipleMongooseToOject(lecturers),
+                  });
+                })
+                .catch(next);
             })
             .catch(next);
         })
@@ -26,26 +32,60 @@ const CourseController = {
           .then((courses) => {
             Category.find({})
               .then((categories) => {
-                res.render('admin/courses/all', {
-                  layout: 'admin',
-                  courses: objectFormat.multipleMongooseToOject(courses),
-                  categories: objectFormat.multipleMongooseToOject(categories),
-                });
+                User.find({ role: 'Lecturer' })
+                  .then((lecturers) => {
+                    res.render('admin/courses/all', {
+                      layout: 'admin',
+                      courses: objectFormat.multipleMongooseToOject(courses),
+                      categories:
+                        objectFormat.multipleMongooseToOject(categories),
+                      lecturers:
+                        objectFormat.multipleMongooseToOject(lecturers),
+                    });
+                  })
+                  .catch(next);
               })
               .catch(next);
           })
           .catch(next);
-      }
-      if (req.query.cate != null) {
+      } else if (req.query.cate != null) {
         Course.find({ category: req.query.cate })
           .then((courses) => {
             Category.find({})
               .then((categories) => {
-                res.render('admin/courses/all', {
-                  layout: 'admin',
-                  courses: objectFormat.multipleMongooseToOject(courses),
-                  categories: objectFormat.multipleMongooseToOject(categories),
-                });
+                User.find({ role: 'Lecturer' })
+                  .then((lecturers) => {
+                    res.render('admin/courses/all', {
+                      layout: 'admin',
+                      courses: objectFormat.multipleMongooseToOject(courses),
+                      categories:
+                        objectFormat.multipleMongooseToOject(categories),
+                      lecturers:
+                        objectFormat.multipleMongooseToOject(lecturers),
+                    });
+                  })
+                  .catch(next);
+              })
+              .catch(next);
+          })
+          .catch(next);
+      } else if (req.query.lect != null) {
+        Course.find({ lecturer: req.query.lect })
+          .then((courses) => {
+            Category.find({})
+              .then((categories) => {
+                User.find({ role: 'Lecturer' })
+                  .then((lecturers) => {
+                    res.render('admin/courses/all', {
+                      layout: 'admin',
+                      courses: objectFormat.multipleMongooseToOject(courses),
+                      categories:
+                        objectFormat.multipleMongooseToOject(categories),
+                      lecturers:
+                        objectFormat.multipleMongooseToOject(lecturers),
+                    });
+                  })
+                  .catch(next);
               })
               .catch(next);
           })

@@ -7,16 +7,16 @@
   {{/if}}
   <div class="container-fluid">
     <div class="row page-titles mx-0 d-flex justify-content-between align-items-center">
-      <div class="col-sm-9 p-md-0">
+      <div class="col-sm-6 p-md-0">
         <div class="welcome-text">
           <h4>All Courses</h4>
         </div>
       </div>
-      <div class="col-sm-3 p-md-0 d-flex justify-content-between">
+      <div class="col-sm-6 p-md-0 d-flex justify-content-between">
         <div class="dropdown">
           <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
             aria-expanded="false">
-            Filter
+            Category
           </button>
           <div class="dropdown-menu">
             {{#each categories}}
@@ -29,11 +29,22 @@
         <div class="dropdown">
           <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
             aria-expanded="false">
-            Filter
+            MainCategory
           </button>
           <div class="dropdown-menu">
             {{#each categories}}
               <a class="dropdown-item" href="/admin/course/all?cate={{this.category}}">{{this.category}}</a>
+            {{/each}}
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-expanded="false">
+            Lecturer
+          </button>
+          <div class="dropdown-menu">
+            {{#each lecturers}}
+              <a class="dropdown-item" href="/admin/course/all?lect={{this._id}}">{{this.fullname}}</a>
             {{/each}}
           </div>
         </div>
