@@ -222,6 +222,13 @@ const userController = {
             );
             return res.redirect("register");
           } else {
+            if(req.body.password.length < 6 || req.body.password > 50){
+              req.flash(
+                "error",
+                "Please enter password with length from 6 to 50 characters !."
+              );
+              return res.redirect("register");
+            }
             if (req.body.password !== req.body.passwordConfirmation) {
               req.flash(
                 "error",
