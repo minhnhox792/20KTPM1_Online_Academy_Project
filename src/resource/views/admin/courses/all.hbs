@@ -26,6 +26,17 @@
             {{/each}}
           </div>
         </div>
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-expanded="false">
+            Filter
+          </button>
+          <div class="dropdown-menu">
+            {{#each categories}}
+              <a class="dropdown-item" href="/admin/course/all?cate={{this.category}}">{{this.category}}</a>
+            {{/each}}
+          </div>
+        </div>
         <a href="/admin/course/add" class="btn btn-outline-primary">
           <i class="fa fa-plus"></i>
           Add course

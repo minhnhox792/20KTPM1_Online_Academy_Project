@@ -21,19 +21,36 @@ const CourseController = {
         })
         .catch(next);
     } else {
-      Course.find({ subCategory: req.query.sub })
-        .then((courses) => {
-          Category.find({})
-            .then((categories) => {
-              res.render('admin/courses/all', {
-                layout: 'admin',
-                courses: objectFormat.multipleMongooseToOject(courses),
-                categories: objectFormat.multipleMongooseToOject(categories),
-              });
-            })
-            .catch(next);
-        })
-        .catch(next);
+      if (req.query.sub != null) {
+        Course.find({ subCategory: req.query.sub })
+          .then((courses) => {
+            Category.find({})
+              .then((categories) => {
+                res.render('admin/courses/all', {
+                  layout: 'admin',
+                  courses: objectFormat.multipleMongooseToOject(courses),
+                  categories: objectFormat.multipleMongooseToOject(categories),
+                });
+              })
+              .catch(next);
+          })
+          .catch(next);
+      }
+      if (req.query.cate != null) {
+        Course.find({ category: req.query.cate })
+          .then((courses) => {
+            Category.find({})
+              .then((categories) => {
+                res.render('admin/courses/all', {
+                  layout: 'admin',
+                  courses: objectFormat.multipleMongooseToOject(courses),
+                  categories: objectFormat.multipleMongooseToOject(categories),
+                });
+              })
+              .catch(next);
+          })
+          .catch(next);
+      }
     }
   },
   add: async (req, res, next) => {
