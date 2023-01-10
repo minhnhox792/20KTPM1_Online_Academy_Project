@@ -39,7 +39,7 @@
     "mongoose-delete": "^0.5.4",
     "mongoose-slug-generator": "^1.0.4",
     "multer": "^1.4.4",
-    "multer-gridfs-storage": "^5.0.2",
+    "multer-gridfs-storage": "github:habur/multer-gridfs-storage",
     "node-sass": "^8.0.0",
     "nodemailer": "^6.8.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
