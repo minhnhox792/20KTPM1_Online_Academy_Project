@@ -28,7 +28,7 @@
 
               <i class="fa-sharp fa-solid fa-angle-right"
                 style="float: right; padding-right: 7px; width: 10%; padding-top: 7px;"></i>
-                
+
             </li>
           {{/each}}
           <ul class="dropdown-menu dropdown-submenu menu-responsive"
@@ -305,10 +305,6 @@
   function hoverFunc(event) {
     const category = event.target.innerText
     const categoryLevel2 = document.querySelector('.dropdown-submenu')
-<<<<<<< HEAD
-=======
-
->>>>>>> 7a10d3a9df1099dff5f4d296433cb903a0bd839f
     fetch(`http://localhost:3000/user/requestCourse?category=${category}`, {
       method: 'GET',
       mode: 'cors',
