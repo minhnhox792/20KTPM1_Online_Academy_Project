@@ -26,7 +26,7 @@
             <div class="card-body">
               <h5>{{this.title}}</h5>
               <div class="list-group mb-3 list-group-flush">
-                <a class="btn btn-outline-primary" href="/video/video/{{this.filename}}">
+                <a class="btn btn-outline-primary" href="/data/video/{{this.filename}}">
                   Play Video
                 </a>
               </div>
@@ -90,7 +90,7 @@
       courseId = button.data('add');
     })
     btnAddChapter.onclick = () => {
-      addChapterForm.action = '/video/' + courseId;
+      addChapterForm.action = '/data/' + courseId;
       addChapterForm.submit();
     }
   })
@@ -136,7 +136,7 @@
       chapterId = button.data('edit');
     })
     btnEditChapter.onclick = () => {
-      editChapterForm.action = '/video/' + chapterId + '?_method=PUT';
+      editChapterForm.action = '/data/' + chapterId + '?_method=PUT';
       editChapterForm.submit();
     }
   })
@@ -181,7 +181,7 @@
 
     });
     btnDeleteChapter.onclick = () => {
-      deleteChapterForm.action = '/video/' + courseId + '/' + chapterId + '?_method=DELETE';
+      deleteChapterForm.action = '/data/' + courseId + '/' + chapterId + '?_method=DELETE';
       deleteChapterForm.submit();
     }
   })
