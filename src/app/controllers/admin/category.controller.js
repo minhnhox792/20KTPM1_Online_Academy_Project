@@ -55,12 +55,12 @@ const CategoryController = {
     Category.findById(req.params.id).then((category) => {
       Course.find({}).then((courses) => {
         courses = objectFormat.multipleMongooseToOject(courses);
-        courses.map((course) => {
-          if (course.category == category.category) {
+        for (let i = 0; i < courses.length; i++) {
+          if (courses[i].category == category.category) {
             flag = 0;
-            Category.find({})
+            return Category.find({})
               .then((categories) => {
-                return res.render('admin/categories/all', {
+                res.render('admin/categories/all', {
                   layout: 'admin',
                   categories: objectFormat.multipleMongooseToOject(categories),
                   error: 'This category is used. Can not delete',
@@ -68,7 +68,7 @@ const CategoryController = {
               })
               .catch(next);
           }
-        });
+        }
         if (flag == 1) {
           Category.deleteOne({ _id: req.params.id })
             .then(() => {
@@ -107,12 +107,12 @@ const CategoryController = {
     let flag = 1;
     Course.find({}).then((courses) => {
       courses = objectFormat.multipleMongooseToOject(courses);
-      courses.map((course) => {
-        if (course.subCategory == req.params.slug) {
+      for (let i = 0; i < courses.length; i++) {
+        if (courses[i].subCategory == req.params.slug) {
           flag = 0;
-          Category.find({})
+          return Category.find({})
             .then((categories) => {
-              return res.render('admin/categories/all', {
+              res.render('admin/categories/all', {
                 layout: 'admin',
                 categories: objectFormat.multipleMongooseToOject(categories),
                 error: 'This category is used. Can not delete',
@@ -120,7 +120,7 @@ const CategoryController = {
             })
             .catch(next);
         }
-      });
+      }
       if (flag == 1) {
         Category.findById(req.params.id)
           .then((category) => {
