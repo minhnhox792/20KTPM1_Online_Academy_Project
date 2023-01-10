@@ -25,20 +25,20 @@
 
 
 
-<div class="container">
-	<div  class = "text-center justify-content-center">
+<div class="container-fluid" style="width: 80%;">
+	<div  class = "text-center justify-content-center" style="margin-bottom: 50px;">
 		<p class="mt-5" style="font-size: 25px;">Top categories in previous week</p>
 	</div>
 
 <div class="row">
     {{#each data}}
-	<div class="col col-lg-4 col-md-6 col-sm-12 h-100">
+	<div class="col" style="height: 50vh;" >
 		<a href="/category/view/{{this._id}}">
 		<div class="card radius-15">
 			<div class="card-body text-center" >
 				<div class="p-4 border radius-15"  style="padding-bottom: 50px;" id = "pot">
-					<img style="object-fit:cover" src="https://i.ytimg.com/vi/R-cDKTgp7-k/maxresdefault.jpg" width="110" height="110" class="rounded-circle shadow" alt="">
-					<p class="mt-5" style="color: #E75E8D;">{{this._id}}</p>
+					<img style="object-fit:cover" src="https://i.ytimg.com/vi/R-cDKTgp7-k/maxresdefault.jpg" width="100" height="100" class="rounded-circle shadow" alt="">
+					<p class="mt-5" style="color: #E75E8D;font-size:20px">{{this._id}}</p>
 					
 					
 				</div>
@@ -88,14 +88,14 @@
   position: absolute;
   -webkit-animation: linear infinite;
   -webkit-animation-name: run;
-  -webkit-animation-duration: 5s;
+  -webkit-animation-duration: 3s;
 }
 @-webkit-keyframes run {
   0% {
     left: 0;
   }
   50% {
-    left: 32%;
+    left:50%;
   }
   100% {
     left: 0;    

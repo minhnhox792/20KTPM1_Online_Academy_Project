@@ -24,6 +24,7 @@ export default function (passport) {
       async function  (accessToken, refreshToken, profile, cb) { 
         process.nextTick(function () {
         if (profile.id) {
+
           User.findOne({ facebookId : profile.id  })
           .then((existingUser) => {
             console.log("Goooooooo")
@@ -37,6 +38,7 @@ export default function (passport) {
               User.findOne({email: profile.emails[0].value})
             .then((existEmail) => {
               if(existEmail){
+                console.log(profile.emails[0].value)
                 console.log('11111111111')
                 return cb(null, profile)
               }

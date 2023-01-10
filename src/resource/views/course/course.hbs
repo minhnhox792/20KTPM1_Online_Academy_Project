@@ -72,36 +72,36 @@
                       <div class="main-border-button">
 
                         {{#ifEquals auth true}}
-                          {{#ifEquals userdata.role 'Student'}}
-                            {{#if isBuy}}
-                              <div class="main-border-button">
-                                <a href="" style="pointer-events: none;">You purchased this course</a>
-                              </div>
-                            {{else}}
-                              <form action="http://localhost:3000/user/buyProduct/{{course._id}}" method="post">
-                                <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
-                                  style="height: 6vh;">Buy Now</a>
-                              </form>
-                            {{/if}}
-                            {{else}}
-                              {{#if checkedLecture}}
-                                <div class="d-flex">
-                                  <form action="http://localhost:3000/course/edit/{{course._id}}" method="put">
-                                    <a href="javascript:;" onclick="parentNode.submit();" style="height: 5vh;">Edit</a>
-                                  </form>
+                        {{#ifEquals userdata.role 'Student'}}
+                        {{#if isBuy}}
+                        <div class="main-border-button">
+                          <a href="" style="pointer-events: none;">You purchased this course</a>
+                        </div>
+                        {{else}}
+                        <form action="http://localhost:3000/user/buyProduct/{{course._id}}" method="post">
+                          <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
+                            style="height: 6vh;">Buy Now</a>
+                        </form>
+                        {{/if}}
+                        {{else}}
+                        {{#if checkedLecture}}
+                        <div class="d-flex">
+                          <form action="http://localhost:3000/course/edit/{{course._id}}" method="put">
+                            <a href="javascript:;" onclick="parentNode.submit();" style="height: 5vh;">Edit</a>
+                          </form>
 
-                                  <a href="/course/about/{{course._id}}" style="margin-left: 7px; height: 5vh;">Upload
-                                    Video</a>
+                          <a href="/course/about/{{course._id}}" style="margin-left: 7px; height: 5vh;">Upload
+                            Video</a>
 
-                                </div>
-                                {{!-- <form action="http://localhost:3000/edit/{{course._id}}" method="put">
+                        </div>
+                        {{!-- <form action="http://localhost:3000/edit/{{course._id}}" method="put">
                           <a href="javascript:;" onclick="parentNode.submit();" style="height: 5vh;">Edit</a>
                         </form> --}}
 
-                              {{/if}}
-                          {{/ifEquals}}
-                          {{else}}
-                            <a href="/user/login" class="btn btn-primary " style="height: 6vh;">Buy Now</a>
+                        {{/if}}
+                        {{/ifEquals}}
+                        {{else}}
+                        <a href="/user/login" class="btn btn-primary " style="height: 6vh;">Buy Now</a>
                         {{/ifEquals}}
 
                       </div>
@@ -114,9 +114,9 @@
                     <ul>
                       <li>Rating:
                         {{#ifEquals course.numberStudentRate 0}}
-                          <span>None<i class="fa fa-star"></i></span>
-                          {{else}}
-                            <span>{{course.numberStudentRate}}<i class="fa fa-star"></i></span>
+                        <span>None<i class="fa fa-star"></i></span>
+                        {{else}}
+                        <span>{{course.numberStudentRate}}<i class="fa fa-star"></i></span>
                         {{/ifEquals}}
                       </li>
                       <li>Participants: <span>{{partcipantd}}</span></li>
@@ -125,9 +125,9 @@
                       <li>Status:
                         <span>
                           {{#if course.complete}}
-                            Complete
+                          Complete
                           {{else}}
-                            Incomplete
+                          Incomplete
                           {{/if}}
                         </span>
                       </li>
@@ -155,14 +155,14 @@
                               </thead>
                               <tbody>
                                 {{#each overview}}
-                                  <tr>
-                                    <td>{{this.title}}</td>
-                                    <td style="width: 20px;"><a href="/course/pathVideo?fileid={{this.filename}}">
-                                        <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
-                                        </i>
-                                      </a>
-                                    </td>
-                                  </tr>
+                                <tr>
+                                  <td>{{this.title}}</td>
+                                  <td style="width: 20px;"><a href="/course/pathVideo?fileid={{this.filename}}">
+                                      <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
+                                      </i>
+                                    </a>
+                                  </td>
+                                </tr>
                                 {{/each}}
                               </tbody>
                             </table>
@@ -185,19 +185,20 @@
                               </thead>
                               <tbody>
                                 {{#each basicCode}}
-                                  <tr>
-                                    <td>{{this.title}}</td>
-                                    <td style="width: 20px;">
-                                      {{#if ../isBuy}}
-                                        <a href="/course/pathVideo?fileid={{this.filename}}">
+                                <tr>
+                                  <td>{{this.title}}</td>
+                                  <td style="width: 20px;">
+                                    {{#if ../isBuy}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}">
                                       {{else}}
-                                        <a href="/course/pathVideo?fileid={{this.filename}}"
-                                          style="pointer-events: none;">
-                                      {{/if}}
+                                      <a href="/course/pathVideo?fileid={{this.filename}}"
+                                        style="pointer-events: none;">
+                                        {{/if}}
 
-                                      <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px"></i></a>
-                                    </td>
-                                  </tr>
+                                        <i class="fa-solid fa-circle-play"
+                                          style="color: #e75e8d;font-size:40px"></i></a>
+                                  </td>
+                                </tr>
                                 {{/each}}
 
                               </tbody>
@@ -221,23 +222,22 @@
                               </thead>
                               <tbody>
                                 {{#each masterCode}}
-                                  <tr>
-                                    <td>{{this.title}}</td>
-                                    <td style="width: 20px;">
-                                      {{#if ../isBuy}}
-                                        <a href="/course/pathVideo?fileid={{this.filename}}">
-                                          <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
-                                          </i>
-                                        </a>
-                                      {{else}}
-                                        <a href="/course/pathVideo?fileid={{this.filename}}"
-                                          style="pointer-events: none;">
-                                          <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
-                                          </i>
-                                        </a>
-                                      {{/if}}
-                                    </td>
-                                  </tr>
+                                <tr>
+                                  <td>{{this.title}}</td>
+                                  <td style="width: 20px;">
+                                    {{#if ../isBuy}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}">
+                                      <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
+                                      </i>
+                                    </a>
+                                    {{else}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}" style="pointer-events: none;">
+                                      <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
+                                      </i>
+                                    </a>
+                                    {{/if}}
+                                  </td>
+                                </tr>
                                 {{/each}}
 
                               </tbody>
@@ -261,24 +261,23 @@
                               </thead>
                               <tbody>
                                 {{#each advancedCode}}
-                                  <tr>
-                                    <td>{{this.title}}</td>
-                                    <td style="width: 20px;">
-                                      {{#if ../isBuy}}
-                                        <a href="/course/pathVideo?fileid={{this.filename}}">
-                                          <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
-                                          </i>
-                                        </a>
-                                      {{else}}
-                                        <a href="/course/pathVideo?fileid={{this.filename}}"
-                                          style="pointer-events: none;">
-                                          <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
-                                          </i>
-                                        </a>
-                                      {{/if}}
+                                <tr>
+                                  <td>{{this.title}}</td>
+                                  <td style="width: 20px;">
+                                    {{#if ../isBuy}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}">
+                                      <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
+                                      </i>
+                                    </a>
+                                    {{else}}
+                                    <a href="/course/pathVideo?fileid={{this.filename}}" style="pointer-events: none;">
+                                      <i class="fa-solid fa-circle-play" style="color: #e75e8d;font-size:40px">
+                                      </i>
+                                    </a>
+                                    {{/if}}
 
-                                    </td>
-                                  </tr>
+                                  </td>
+                                </tr>
                                 {{/each}}
 
                               </tbody>
@@ -332,27 +331,27 @@
                 </div>
                 <div class="row">
                   {{#each top5courses}}
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="item card-body" style="height: 300px; ">
-                        <a href="/course/{{this._id}}">
-                          <div class="">
-                            <img src="/data/image/{{this.image}}" style="border-radius: 23px;height:15vh">
-                          </div>
-                        </a>
-                        <br>
-                        <h4 style="color: #e75e8d;height:40px;font-weight:600; text-align: center;">
-                          {{this.name}}
-                        </h4>
-                        <div class="down-content d-flex justify-content-between">
-                          <h4 style="font-weight: 700;"> {{format_number price}}</h4>
-                          {{#ifEquals this.numberStudentRate 0}}
-
-                  {{else}}
-                    <span>{{this.numberStudentRate}} <i class="fa fa-star"></i></span>
-                          {{/ifEquals}}
+                  <div class="col">
+                    <div class="item card-body" style="height: 30vh;">
+                      <a href="/course/{{this._id}}">
+                        <div class="">
+                          <img src="/data/image/{{this.image}}" style="border-radius: 23px;height:15vh">
                         </div>
+                      </a>
+                      <br>
+                      <h4 style="color: #e75e8d;height:40px;font-weight:600; text-align: center;">
+                        {{this.name}}
+                      </h4>
+                      <div class="down-content d-flex justify-content-between">
+                        <h4 style="font-weight: 700;"> {{format_number price}}</h4>
+                        {{#ifEquals this.numberStudentRate 0}}
+
+                        {{else}}
+                        <span>{{this.numberStudentRate}} <i class="fa fa-star"></i></span>
+                        {{/ifEquals}}
                       </div>
                     </div>
+                  </div>
                   {{/each}}
 
                 </div>
@@ -389,29 +388,29 @@
                 <div>
                   <div class="row">
                     {{#each smallComment}}
-                      {{#if this.name}}
-                        <div class="col-sm-5 col-md-6" style="margin-top: 10px;">
-                          <div class="clips">
-                            <div class="content" style="margin: 30px;">
-                              <div class="d-flex">
-                                <img src="/data/image/{{this.image}}" style="height: 30px;width: 30px;"
-                                  class="rounded-circle mt-2">
-                                <div style="margin-left: 30px;">
-                                  <li>{{this.name}}</li>
-                                  {{#ifEquals this.rating 0}}
-                                    <li>None<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
-                      {{else}}
-                        <li>{{this.rating}}<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
-                                  {{/ifEquals}}
-                                </div>
-                              </div>
-                              <div class="comment-student" style="margin: 10px;">
-                                <li>{{this.content}}</li>
-                              </div>
+                    {{#if this.name}}
+                    <div class="col-sm-5 col-md-6" style="margin-top: 10px;">
+                      <div class="clips">
+                        <div class="content" style="margin: 30px;">
+                          <div class="d-flex">
+                            <img src="/data/image/{{this.image}}" style="height: 30px;width: 30px;"
+                              class="rounded-circle mt-2">
+                            <div style="margin-left: 30px;">
+                              <li>{{this.name}}</li>
+                              {{#ifEquals this.rating 0}}
+                              <li>None<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
+                              {{else}}
+                              <li>{{this.rating}}<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
+                              {{/ifEquals}}
                             </div>
                           </div>
+                          <div class="comment-student" style="margin: 10px;">
+                            <li>{{this.content}}</li>
+                          </div>
                         </div>
-                      {{/if}}
+                      </div>
+                    </div>
+                    {{/if}}
                     {{/each}}
                   </div>
                 </div>
@@ -427,29 +426,29 @@
                       <div class="row">
                         <h3 style="color:#e75e8d;margin: 20px;">Comment Of Student</h3>
                         {{#each course.comment}}
-                          {{#if this.name}}
-                            <div class="col-sm-5 col-md-6">
-                              <div class="clips">
-                                <div class="content" style="margin: 30px;">
-                                  <div class="d-flex">
-                                    <img src="/data/image/{{this.image}}" style="height: 30px;width: 30px;"
-                                      class="rounded-circle mt-2">
-                                    <div style="margin-left: 30px;">
-                                      <li>{{this.name}}</li>
-                                      {{#ifEquals this.rating 0}}
-                                        <li>None<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
-                          {{else}}
-                            <li>{{this.rating}}<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
-                                      {{/ifEquals}}
-                                    </div>
-                                  </div>
-                                  <div class="comment-student" style="margin: 10px;">
-                                    <li>{{this.content}}</li>
-                                  </div>
+                        {{#if this.name}}
+                        <div class="col-sm-5 col-md-6">
+                          <div class="clips">
+                            <div class="content" style="margin: 30px;">
+                              <div class="d-flex">
+                                <img src="/data/image/{{this.image}}" style="height: 30px;width: 30px;"
+                                  class="rounded-circle mt-2">
+                                <div style="margin-left: 30px;">
+                                  <li>{{this.name}}</li>
+                                  {{#ifEquals this.rating 0}}
+                                  <li>None<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
+                                  {{else}}
+                                  <li>{{this.rating}}<i class="fa fa-star" style="color: #e75e8d;"></i> </li>
+                                  {{/ifEquals}}
                                 </div>
                               </div>
+                              <div class="comment-student" style="margin: 10px;">
+                                <li>{{this.content}}</li>
+                              </div>
                             </div>
-                          {{/if}}
+                          </div>
+                        </div>
+                        {{/if}}
                         {{/each}}
                       </div>
                     </div>
@@ -457,42 +456,41 @@
                 </div>
 
                 {{#if isBuy}}
-                  {{!-- Start comment --}}
-                  <div class="d-flex justify-content-center">
-                    <div class="card w-100">
-                      {{userdata.fullname}}
-                      <div class="row">
-                        <div class="col-2">
-                          <img src="/data/image/{{userdata.image}}" style="height: 70px;width: 70px;"
-                            class="rounded-circle mt-2">
-                        </div>
-                        <div class="col-10">
-                          <div class="comment-box ml-2">
-                            <form id="regis" method="post" action="/course/comment?course_id={{course_id}}">
-                              <div class="rating">
-                                <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-                                <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
-                                <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-                                <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-                                <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                {{!-- Start comment --}}
+                <div class="d-flex justify-content-center">
+                  <div class="card w-100">
+                    {{userdata.fullname}}
+                    <div class="row">
+                      <div class="col-2">
+                        <img src="/data/image/{{userdata.image}}" style="height: 70px;width: 70px;"
+                          class="rounded-circle mt-2">
+                      </div>
+                      <div class="col-10">
+                        <div class="comment-box ml-2">
+                          <form id="regis" method="post" action="/course/comment?course_id={{course_id}}">
+                            <div class="rating">
+                              <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                              <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+                              <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                              <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                              <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                            </div>
+                            <div class="comment-area">
+                              <textarea class="form-control" type="text " placeholder="what is your view?"
+                                name="content" rows="4"></textarea>
+                              <div class="d-flex justify-content-center" style="margin-top: 20px;">
+                                <button type="submit" class="btn btn-outline-primary">Send</button>
                               </div>
-                              <div class="comment-area">
-                                <textarea class="form-control" type="text " placeholder="what is your view?"
-                                  name="content" rows="4"></textarea>
-                                <div class="d-flex justify-content-center" style="margin-top: 20px;">
-                                  <button type="submit" class="btn btn-outline-primary">Send</button>
+                            </div>
+                          </form>
+                          <div class="comment-btns mt-2">
+                            <div class="row">
+                              <div class="col-6">
+                                <div class="pull-left">
                                 </div>
                               </div>
-                            </form>
-                            <div class="comment-btns mt-2">
-                              <div class="row">
-                                <div class="col-6">
-                                  <div class="pull-left">
-                                  </div>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                  <div class="">
-                                  </div>
+                              <div class="d-flex justify-content-center">
+                                <div class="">
                                 </div>
                               </div>
                             </div>
@@ -501,7 +499,8 @@
                       </div>
                     </div>
                   </div>
-                  {{!-- END COmment --}}
+                </div>
+                {{!-- END COmment --}}
                 {{/if}}
               </div>
             </div>

@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        "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",
+        "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",
     },
   })
 );
@@ -41,7 +41,11 @@ const userController = {
 
       const id_user = req.session.userInfo._id;
       const result = await User.findOne({ _id: id_user });
+      if (data.current.length < 6 || data.current > 50) {
+        req.flash("error", "Please input a password has 6-50 characters !");
 
+        return res.redirect("/user/changePassword");
+      }
       bcrypt.compare(req.body.current, result.password, (err, dt) => {
         if (err) {
           throw new Error("Failed");
@@ -206,6 +210,13 @@ const userController = {
         errorMessage: errors.array()[0].msg,
       });
     }
+    if(req.body.fullname.length < 6){
+      req.flash(
+        "error",
+        "Please enter fullname with length from 6 to 50 characters !."
+      );
+      return res.redirect("register");
+    }
     User.findOne({ username: req.body.username }).then((result) => {
       if (result !== null) {
         req.flash(
@@ -222,7 +233,7 @@ const userController = {
             );
             return res.redirect("register");
           } else {
-            if(req.body.password.length < 6 || req.body.password > 50){
+            if(req.body.password.length < 6 || req.body.password.length > 50){
               req.flash(
                 "error",
                 "Please enter password with length from 6 to 50 characters !."
@@ -241,7 +252,7 @@ const userController = {
             }
             const otp = Math.floor(1000 + Math.random() * 9000);
             const info_mail = {
-              from: "dangminh7122002@gmail.com",
+              from: "nighlord13082002@gmail.com",
               to: req.body.email,
               subject: "Verify Your Email",
               html: `<h2>Your OTP number is:</h2>
@@ -645,7 +656,7 @@ const userController = {
 
       const hashPass = bcrypt.hashSync(new_password, salt);
       const info_mail = {
-        from: "dangminh7122002@gmail.com",
+        from: "nighlord13082002@gmail.com",
         to: req.body.email,
         subject: "Reset Your Password",
         html: `<h2>Your new password is:</h2>
