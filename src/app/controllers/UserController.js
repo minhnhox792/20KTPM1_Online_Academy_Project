@@ -11,13 +11,15 @@ import moment from "moment";
 import Course from "../models/Courses.js";
 import randomstring from"randomstring"
 import Category from '../models/Category.js'
-const ITEM_PER_PAGE = 4;
+const ITEM_PER_PAGE = 4; 
+dotenv.config();
+
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        process.env.OTP,
+       process.env.OTP,
     },
   })
 );
@@ -93,7 +95,7 @@ const userController = {
     });
   },
 
-  handlLogin: async (req, res) => {
+  handlLogin: async (req, res) => { 
     try {
       if (!req.body.username || !req.body.password) {
         return res.render("auth/login", {
@@ -257,8 +259,9 @@ const userController = {
               hashPass = bcrypt.hashSync(req.body.password, salt);
             }
             const otp = Math.floor(1000 + Math.random() * 9000);
+            console.log(11111, process.env.sendGridAccount, process.env.OTP)
             const info_mail = {
-              from: "nighlord13082002@gmail.com",
+              from: process.env.sendGridAccount,
               to: req.body.email,
               subject: "Verify Your Email",
               html: `<h2>Your OTP number is:</h2>
@@ -661,8 +664,9 @@ const userController = {
       const salt = bcrypt.genSaltSync(10);
 
       const hashPass = bcrypt.hashSync(new_password, salt);
+      console.log(111111,process.env.sendGridAccount)
       const info_mail = {
-        from: "nighlord13082002@gmail.com",
+        from: process.env.sendGridAccount,
         to: req.body.email,
         subject: "Reset Your Password",
         html: `<h2>Your new password is:</h2>
