@@ -1,4 +1,5 @@
 import User from '../../models/User.js';
+import Course from '../../models/Courses.js';
 import objectFormat from '../../../util/mongoose.js';
 import moment from 'moment';
 import bcrypt from 'bcryptjs';
@@ -50,7 +51,6 @@ const LecturerController = {
       .catch(next);
   },
   edit: (req, res, next) => {
-    console.log(req.params.id)
     User.findById(req.params.id)
       .then((lecturer) => {
         lecturer = objectFormat.mongooseToOject(lecturer);
@@ -124,14 +124,22 @@ const LecturerController = {
   lock: (req, res, next) => {
     User.updateOne({ _id: req.params.id }, { isDisable: true })
       .then(() => {
-        res.redirect('back');
+        Course.updateMany({ lecturer: req.params.id }, { isDisable: true })
+          .then(() => {
+            res.redirect('back');
+          })
+          .catch(next);
       })
       .catch(next);
   },
   unlock: (req, res, next) => {
     User.updateOne({ _id: req.params.id }, { isDisable: false })
       .then(() => {
-        res.redirect('back');
+        Course.updateMany({ lecturer: req.params.id }, { isDisable: false })
+          .then(() => {
+            res.redirect('back');
+          })
+          .catch(next);
       })
       .catch(next);
   },
