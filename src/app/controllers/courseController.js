@@ -11,7 +11,6 @@ import moment from 'moment';
 const courseController = {
   registerCourse: (req, res) => {
     let ID = req.params.id;
-    console.log('ID: ', ID);
     Course.findById(ID, async function (err, docs) {
       if (err) {
         console.log(err);
@@ -83,13 +82,13 @@ const courseController = {
     }
     if (rating !== 0) {
     let   amount=course.numberStudentRate+1
+    console.log("amount"+amount)
       const Total =
-        (course.comment.length * course.rating + (rating - '0')) /
-        (course.comment.length + 1);
+        (course.numberStudentRate * course.rating + (rating - '0')) /
+        (course.numberStudentRate + 1);
       await Course.updateOne(
         { _id: course_id },
-        { $set: { rating: Total } },
-        {$set:{numberStudentRate:amount}},
+        { $set: { rating: Total,numberStudentRate:amount } },
       );
     }
     course.comment.push({
@@ -127,8 +126,7 @@ const courseController = {
   storeEdit: (req, res, next) => {
     const image = req.file;
     const formData = req.body;
-    console.log(image)
-    console.log(formData)
+
     if (image) {
       formData.image = image.filename;
     }
@@ -173,7 +171,6 @@ const courseController = {
     });
   },
   about: (req, res, next) => {
-    console.log('IDDDDDDDDDDDD: ', req.params.id);
     Course.findById(req.params.id)
       .then((course) => {
         course = objectFormat.mongooseToOject(course);

@@ -124,11 +124,8 @@
                         {{#ifEquals course.rating 0}}
                         <span>None<i class="fa fa-star"></i></span>
                         {{else}}
-                        <span>{{course.rating}}<i class="fa fa-star"></i></span>
+                        <span>{{course.rating}}<i class="fa fa-star"></i>({{course.numberStudentRate}})</span>
                         {{/ifEquals}}
-                      </li>
-                      <li>Number students rated:
-                        <span>{{course.numberStudentRate}}</span>
                       </li>
                       <li>Participants: <span>{{partcipantd}}</span></li>
                       <li>Last updated: <span>{{format_date course.updatedAt}}</span></li>
@@ -309,7 +306,7 @@
               <div class="clips">
                 <div class="col-lg-12">
                   <div class="heading-section">
-                    <h4><em style="color: black;text-decoration: none;">Description</em></h4>
+                    <h4 style="margin-bottom: 10px"><em style="color: black;text-decoration: none;">Description</em></h4>
                   </div>
                 </div>
                 <div class="col-lg-12">
@@ -395,7 +392,7 @@
               </div>
               {{!-- End intro --}}
               <div>
-                <code style="font-size: 30px;">COMMENT</code>
+                <code style="font-size: 30px;">COMMENT({{course.comment.length}})</code>
                 <div>
                   <div class="row">
                     {{#each smallComment}}
@@ -561,7 +558,7 @@
     instructorShowMoreBtn.style.display = 'none'
   }
   const showLessInstructorContent = () => {
-    instructorParaphraph.style.height = '10%'
+    instructorParaphraph.style.height = '50px'
     instructorParaphraph.classList.add('show')
     instructorShowLessBtn.style.display = 'none'
     instructorShowMoreBtn.style.display = 'inline-block'
@@ -620,7 +617,7 @@
 
   .instructor-paraphraph {
     overflow: hidden;
-    height: 150px
+    height: 50px
   }
 
   .instructor-paraphraph.show {
@@ -631,11 +628,11 @@
     display: none;
   }
   .shortDescription {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+        display: -webkit-box;
+   -webkit-line-clamp: 1;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
   }
   body {
     height: 100%

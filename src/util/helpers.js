@@ -35,7 +35,7 @@ export default function helpers(hbs) {
     return num1 < num2;
   });
   hbs.handlebars.registerHelper("isBestseller", function (num1) {
-    return num1 > 10;
+    return num1 > 3;
   });
   hbs.handlebars.registerHelper("new_course", function (data) {
     const currentDate = new Date()  

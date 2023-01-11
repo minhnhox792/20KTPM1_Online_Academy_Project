@@ -13,13 +13,13 @@
 		line-height: 32px;
 		padding: 4px 24px;
 		border-radius: 10px;
-		color: #e75e8d;
+		color: #e75e8d !important;
 		font-weight: 400;
 		transition: all 0.4s ease;
 	}
 
 	.button-primary:hover {
-		color: #fff;
+		color: #fff !important;
 		background-color: #e75e8d;
 	}
 
@@ -309,15 +309,15 @@
 
 														<form action="/user/buyProduct/{{this._id}}" method="post">
 															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary text-muted"
-																style="height: 40px;">Buy</a>
+																style="height: 40px; padding: 10px 20px">Buy</a>
 														</form>
 														<form action="/user/favoriteList/{{this._id}}" method="post">
 															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary text-muted"
-																style="height: 40px;">Like</a>
+																style="height: 40px; padding: 10px 20px">Like</a>
 														</form>
 													{{else}}
-														<a href="/user/login" class="button-primary" style="height: 40px; border:0;">Buy</a>
-														<a href="user/login" class="button-primary" style="height: 40px; border:0;">Like</a>
+														<a href="/user/login" class="button-primary text-muted" style="height: 40px; border:0; ">Buy</a>
+														<a href="user/login" class="button-primary text-muted" style="height: 40px; border:0;">Like</a>
 													{{/if}}
 												</div>
 											</div>
@@ -447,11 +447,11 @@
 
 														<form action="/user/buyProduct/{{this._id}}" method="post">
 															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
-																style="height: 40px;">Buy</a>
+																style="height: 40px; padding: 10px 20px !important">Buy</a>
 														</form>
 														<form action="/user/favoriteList/{{this._id}}" method="post">
 															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
-																style="height: 40px;">Like</a>
+																style="height: 40px; padding: 10px 20px !important">Like</a>
 														</form>
 													{{else}}
 														<a href="/user/login" class="button-primary" style="height: 40px; border:0;">Buy</a>

@@ -268,6 +268,7 @@ const userController = {
               <br><h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
               <h3>Please back to verify tab and enter this OTP number into verify input !</h3>`,
             };
+            console.log(info_mail)
             transporter.sendMail(info_mail).then((mess) => {
               if (!mess) {
                 return;
@@ -297,7 +298,7 @@ const userController = {
                 const session_username = req.body.username;
                 req.session.userOTP = session_username;
 
-                // user.save();
+                user.save();
                 UserOTP.deleteMany({ username: session_username }).then(() => {
                   otp_info.save();
                 });

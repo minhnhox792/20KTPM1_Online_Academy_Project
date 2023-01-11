@@ -106,7 +106,7 @@
     line-height: 32px;
     padding: 4px 24px;
     border-radius: 10px;
-    color: #e75e8d;
+    color: #e75e8d !important;
     font-weight: 400;
     transition: all 0.4s ease;
   }
@@ -168,19 +168,20 @@
             </div>
             <div class="d-flex justify-content-around" style="height: 2rem">
 
-              {{#if ../auth}}
-                <form action="/user/buyProduct/{{this._id}}" method="post">
-                  <a href="javascript:;" onclick="parentNode.submit();" class="button-primary "
-                    style="height: 40px; border:0;">Buy</a>
-                </form>
-                <form action="/user/favoriteList/{{this._id}}" method="post">
-                  <a href="javascript:;" onclick="parentNode.submit();" class="button-primary "
-                    style="height: 40px; border:0;">Like</a>
-                </form>
-              {{else}}
-                <a href="/user/login" class="button-primary " style="height: 40px; border:0;">Buy</a>
-                <a href="user/login" class="button-primary " style="height: 40px; border:0;">Like</a>
-              {{/if}}
+             {{#if ../auth}}
+
+														<form action="/user/buyProduct/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
+																style="height: 40px; padding: 10px 20px !important">Buy</a>
+														</form>
+														<form action="/user/favoriteList/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
+																style="height: 40px; padding: 10px 20px !important">Like</a>
+														</form>
+													{{else}}
+														<a href="/user/login" class="button-primary" style="height: 40px; border:0;">Buy</a>
+														<a href="user/login" class="button-primary" style="height: 40px; border:0;">Like</a>
+													{{/if}}
 
             </div>
           </div>

@@ -305,18 +305,18 @@
 											<div class="d-flex justify-content-around">
 												{{#if ../auth}}
 
-													<form action="/user/buyProduct/{{this._id}}" method="post">
-														<a href="javascript:;" onclick="parentNode.submit();" class="button-primary text-muted"
-															style="height: 40px;">Buy</a>
-													</form>
-													<form action="/user/favoriteList/{{this._id}}" method="post">
-														<a href="javascript:;" onclick="parentNode.submit();" class="button-primary text-muted"
-															style="height: 40px;">Like</a>
-													</form>
-												{{else}}
-													<a href="/user/login" class="button-primary" style="height: 40px; border:0;">Buy</a>
-													<a href="user/login" class="button-primary" style="height: 40px; border:0;">Like</a>
-												{{/if}}
+														<form action="/user/buyProduct/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
+																style="height: 40px; padding: 10px 20px !important">Buy</a>
+														</form>
+														<form action="/user/favoriteList/{{this._id}}" method="post">
+															<a href="javascript:;" onclick="parentNode.submit();" class="button-primary"
+																style="height: 40px; padding: 10px 20px !important">Like</a>
+														</form>
+													{{else}}
+														<a href="/user/login" class="button-primary" style="height: 40px; border:0;">Buy</a>
+														<a href="user/login" class="button-primary" style="height: 40px; border:0;">Like</a>
+													{{/if}}
 											</div>
 										</div>
 									</div>
