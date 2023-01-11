@@ -82,12 +82,14 @@ const courseController = {
       }
     }
     if (rating !== 0) {
+    let   amount=course.numberStudentRate+1
       const Total =
-        (course.comment.length * course.numberStudentRate + (rating - '0')) /
+        (course.comment.length * course.rating + (rating - '0')) /
         (course.comment.length + 1);
       await Course.updateOne(
         { _id: course_id },
-        { $set: { numberStudentRate: Total } }
+        { $set: { rating: Total } },
+        {$set:{numberStudentRate:amount}},
       );
     }
     course.comment.push({

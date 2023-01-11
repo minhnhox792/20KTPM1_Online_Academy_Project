@@ -2,7 +2,7 @@
     publish = "/"
     functions = "src"
 [functions]
-    [src.index]
+    [src]
         included_files = ["src/*"]
 [[redirects]]
     from = "/"

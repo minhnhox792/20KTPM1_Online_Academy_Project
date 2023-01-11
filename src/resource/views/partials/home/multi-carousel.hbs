@@ -287,7 +287,8 @@
 													<div class="list-inline">
 														{{!-- <li>{{this.lecturer}}</li> --}}
 														<li class="list-inline-item" style="font-size: 15px;">
-															{{this.numberStudentRate}}<i class="fa fa-star"></i>
+															{{this.rating}}<i class="fa fa-star"></i>
+															 ({{this.numberStudentRate}})
 														</li>
 													</div>
 												</div>
@@ -358,7 +359,8 @@
 													<div class="list-inline">
 														{{!-- <li>{{this.lecturer}}</li> --}}
 														<li class="list-inline-item" style="font-size: 15px;">
-															{{this.numberStudentRate}}<i class="fa fa-star"></i>
+															{{this.rating}}<i class="fa fa-star"></i>
+															 ({{this.numberStudentRate}})
 														</li>
 													</div>
 												</div>
@@ -367,9 +369,6 @@
 															this.price}}</strike>
 														<b style="color: #e75e8d;">${{format_number (cal_discount this.price this.discount)}}</b>
 													</p>
-
-
-
 												{{else}}
 													<b class="item-price"
 														style="font-size: 0.9rem; color: #e75e8d;">{{format_number this.price}}</b>
@@ -426,7 +425,8 @@
 													<div class="list-inline">
 														{{!-- <li>{{this.lecturer}}</li> --}}
 														<li class="list-inline-item" style="font-size: 15px;">
-															{{this.numberStudentRate}}<i class="fa fa-star"></i>
+															{{this.rating}}<i class="fa fa-star"></i>
+															 ({{this.numberStudentRate}})
 														</li>
 													</div>
 												</div>
