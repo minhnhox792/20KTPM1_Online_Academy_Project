@@ -72,7 +72,7 @@
                       {{#if (compareZero this.discount)}}
                         <p style="font-weight: bold; ">{{format_number this.price}}
                           <del class="text-muted"
-                            style="color: white; font-size: 14px;">{{format_number this.discount}}</del>
+                            style="color: white; font-size: 14px;">{{format_number (cal_discount this.price this.discount)}}</del>
                         </p>
                       {{else}}
 

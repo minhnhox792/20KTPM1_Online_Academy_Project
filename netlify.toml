@@ -4,3 +4,7 @@
 [functions]
     [src.index]
         included_files = ["src/*"]
+[[redirects]]
+    from = "/"
+    to = "/.netlify/functions/"
+    status = 200
