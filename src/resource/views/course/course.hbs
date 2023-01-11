@@ -44,10 +44,10 @@
                     <div
                       style="border-top-left-radius: 23px;border-top-right-radius:23px ;height: 25vh;background-color: white;">
                       <img src="/data/image/{{course.image}}" alt=""
-                        style="border-top-left-radius: 23px;border-top-right-radius:23px">
+                        style="border-top-left-radius: 23px;border-top-right-radius:23px;object-fit:fill;height:25vh">
                     </div>
-                    <div class="main-info header-text d-flex justify-content-center"
-                      style="background-color: #e75e8d;border-bottom-left-radius:23px;border-bottom-right-radius: 23px;">
+                    <div class="main-info header-text d-flex justify-content-center align-items-center"
+                      style="background-color: #e75e8d;border-bottom-left-radius:23px;border-bottom-right-radius: 23px;height:10vh;">
                       <p class="item-price" style="margin-top: 10px;"> <b
                           style="color: black;font-size: 32px;">{{format_number (cal_discount course.price
                           course.discount)}}</b>
@@ -80,7 +80,7 @@
                         {{else}}
                         <form action="http://localhost:3000/user/buyProduct/{{course._id}}" method="post">
                           <a href="javascript:;" onclick="parentNode.submit();" class="btn btn-primary "
-                            style="height: 6vh;">Buy Now</a>
+                            style="display:flex; align-items:center; ;">Buy Now</a>
                         </form>
                         {{/if}}
                         {{else}}
@@ -332,14 +332,14 @@
                 <div class="row">
                   {{#each top5courses}}
                   <div class="col">
-                    <div class="item card-body" style="height: 30vh;">
+                    <div class="item card-body" style="">
                       <a href="/course/{{this._id}}">
                         <div class="">
-                          <img src="/data/image/{{this.image}}" style="border-radius: 23px;height:15vh">
+                          <img src="/data/image/{{this.image}}" style="border-radius: 23px;height:15vh;">
                         </div>
                       </a>
                       <br>
-                      <h4 style="color: #e75e8d;height:40px;font-weight:600; text-align: center;">
+                      <h4 style="color: #e75e8d;height:5vh;font-weight:600;width: 100%;" class="shortDescription">
                         {{this.name}}
                       </h4>
                       <div class="down-content d-flex justify-content-between">
@@ -619,7 +619,13 @@
   .show-less-btn {
     display: none;
   }
-
+  .shortDescription {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   body {
     height: 100%
   }

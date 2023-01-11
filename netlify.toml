@@ -1,0 +1,10 @@
+[build]
+    publish = "site"
+    functions = "src"
+[functions]
+    [src]
+        included_files = ["src/*"]
+[[redirects]]
+    from = "/hello"
+    to = "/.netlify/functions/hello"
+    status = 200

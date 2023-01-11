@@ -101,13 +101,19 @@ const userController = {
           err_mess: "Username or Password is empty !!!",
         });
       }
-
+      
       const UserInput = await User.findOne({ username: req.body.username });
       if (!UserInput)
         return res.render("auth/login", {
           layout: false,
           err_mess: "Invalid Username or Password !!!",
         });
+        if(UserInput.isDisable === false){
+          return res.render("auth/login", {
+            layout: false,
+            err_mess: "Your account is locked !!!",
+          });
+        }
       bcrypt.compare(req.body.password, UserInput.password, (err, data) => {
         if (err) throw err;
 

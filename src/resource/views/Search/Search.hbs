@@ -100,7 +100,10 @@
                             <br>{{this.category}}
                             <p style="font-size: 15px;font-weight: 500;margin-bottom:0">{{this.shortDesc}}</p>
                             <p style="font-size: 15px;font-weight: 500;margin-bottom:0">{{this.nameLecturer}}</p>
+                            {{#ifEquals this.numberStudentRate "0"}}
+                              {{else}}
                             <span style="color: #f39c12;">{{this.numberStudentRate}}<i class="fa fa-star"></i></span>
+                            {{/ifEquals }}
                             <div class="d-flex">
                               {{#if (isBestseller this.participant)}}
                                 <div style="background-color: #eceb98; width: 100px; color: #3e3e0d;font-weight: 700"
@@ -148,6 +151,8 @@
         </div>
       </div>
     {{/if}}
+    {{#ifEquals countPage '0'}}
+    {{else}}
     <nav aria-label="Page navigation example" class="d-flex justify-content-center w-100">
       <ul class="pagination">
         <li class="page-item">
@@ -196,6 +201,7 @@
         </li>
       </ul>
     </nav>
+    {{/ifEquals}}
     <!-- END SEARCH RESULT -->
   </div>
 </div>

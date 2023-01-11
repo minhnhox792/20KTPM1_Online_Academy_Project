@@ -72,7 +72,6 @@ const searchController = {
             if (pageNumber > countPage) {
                 checkpag = true
             }
-            console
             return res.render("Search/Search", {
                 dataInput,
                 searchData,
