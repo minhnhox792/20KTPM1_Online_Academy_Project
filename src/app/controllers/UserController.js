@@ -108,7 +108,7 @@ const userController = {
           layout: false,
           err_mess: "Invalid Username or Password !!!",
         });
-        if(UserInput.isDisable === false){
+        if(UserInput.isDisable === true){
           return res.render("auth/login", {
             layout: false,
             err_mess: "Your account is locked !!!",
