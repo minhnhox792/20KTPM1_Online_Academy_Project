@@ -120,7 +120,19 @@
                               {{/if}}
                             </div>
                           </td>
-                          <td style="font-weight: 700;color:red;width:50px">{{format_number this.price}}</td>
+                          {{#if (compareZero this.discount)}}
+                              <td class="item-price"><strike style="color: #9EA4AD; font-weight: none;">{{format_number
+                              this.price}}</strike>
+                                <b style="color: red;">{{format_number (cal_discount this.price this.discount)}}</b>
+                              </td>
+
+
+                            {{else}}
+
+                               <td style="font-weight: 700;color:red;width:50px">{{format_number this.price}}</td>
+                            {{/if}}
+                        
+                          {{!-- <td style="font-weight: 700;color:red;width:50px">{{format_number this.price}}</td> --}}
                         </tr>
                       {{/each}}
 
