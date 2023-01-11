@@ -1,5 +1,5 @@
 [build]
-    publish = "site"
+    publish = "/"
     functions = "src"
 [functions]
     [src.index]
