@@ -22,7 +22,7 @@ import publicFolder from './util/publicFolder.js'
 import extensionFolder from './util/extensionFolder.js'
 const hbs = expressHbs.create({});
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

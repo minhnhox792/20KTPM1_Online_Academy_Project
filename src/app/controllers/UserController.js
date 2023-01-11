@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        "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",
+        process.env.OTP,
     },
   })
 );
@@ -294,7 +294,7 @@ const userController = {
                 const session_username = req.body.username;
                 req.session.userOTP = session_username;
 
-                user.save();
+                // user.save();
                 UserOTP.deleteMany({ username: session_username }).then(() => {
                   otp_info.save();
                 });

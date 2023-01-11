@@ -46,21 +46,21 @@
                       <img src="/data/image/{{course.image}}" alt=""
                         style="border-top-left-radius: 23px;border-top-right-radius:23px;object-fit:fill;height:25vh">
                     </div>
-                    <div class="main-info header-text d-flex justify-content-center align-items-center"
+                    <div class="main-info header-text d-flex justify-content-center align-items-center text-center"
                       style="background-color: #e75e8d;border-bottom-left-radius:23px;border-bottom-right-radius: 23px;height:10vh;">
                       {{#if (compareZero course.discount)}}
-                        <p class="item-price"><strike style="color: #9EA4AD; font-weight: none;">{{format_number
-                        course.price}}</strike>
-                          <b style="color: #e75e8d;">{{format_number (cal_discount course.price course.discount)}}</b>
-                        </p>
-                      {{else}}
-                        <b class="item-price" style="font-size: 1.1rem; color: white;">{{format_number course.price}}</b>
-                      {{/if}}
-                      {{!-- <p class="item-price" style="margin-top: 10px;"> <b
+                       <p class="item-price" style="margin-top: 10px;"> <b
                           style="color: black;font-size: 32px;">{{format_number (cal_discount course.price
                           course.discount)}}</b>
                         <strike style="color: black;font-size: 20px;">{{format_number course.price}}</strike>
-                      </p> --}}
+                      </p> 
+                      {{else}}
+                       <p class="item-price" style="margin-top: 10px;"><b
+                          style="color: black;font-size: 32px;">{{format_number course.price}}</b>
+                        
+                      </p> 
+                      {{/if}}
+                      
                     </div>
                   </div>
                   <div class="col-lg-4 align-self-center">
